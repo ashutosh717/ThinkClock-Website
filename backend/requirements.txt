@@ -1,0 +1,10 @@
+alembic
+black
+email-validator
+fastapi
+psycopg[binary]
+pydantic
+python-dotenv
+ruff
+sqlalchemy
+uvicorn[standard]
