@@ -36,10 +36,10 @@ export default function TechnologyPage() {
           <AnimatedSection>
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">Technology</p>
             <h1 className="mt-4 max-w-3xl font-display text-5xl leading-tight text-[var(--paper)] sm:text-6xl">
-              Signal-first battery diagnostics
+              BatteryScope-C — signal-first battery diagnostics
             </h1>
             <p className="mt-5 max-w-3xl text-lg text-[var(--graphite-on-dark)]">
-              The platform combines instrument data and model interpretation so engineering teams can answer the practical question: which cells are safe to deploy, recover, or retire.
+              BatteryScope-C combines three non-invasive spectroscopic modalities with AI-driven digital twin modelling to deliver a complete battery health assessment in seconds — without opening, damaging, or interrupting production flow.
             </p>
           </AnimatedSection>
         </div>
@@ -74,12 +74,12 @@ export default function TechnologyPage() {
       <AnimatedSection className="bg-[var(--ink)] px-4 py-24 sm:px-6" animation="fade-up">
         <div className="mx-auto w-full max-w-6xl">
           <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-[var(--signal)]/5 to-transparent p-10 text-center">
-            <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">Application</p>
+            <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">BatteryScope-C Platform</p>
             <h2 className="mt-4 font-display text-3xl leading-tight text-[var(--paper)] sm:text-4xl">
-              Three modalities, one operational question
+              Three modalities, one platform — full health assessment in seconds
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[var(--graphite-on-dark)]">
-              No single technique tells the full story. EIS captures bulk resistance shifts, acoustic catches physical deformation, RF enables high-throughput screening. Together, they build a battery health profile no single metric can.
+              No single technique tells the full story. EIS captures bulk resistance shifts, acoustic catches physical deformation, RF enables high-throughput screening. BatteryScope-C fuses all three with AI and digital twin models to deliver a complete battery health profile no single metric can — in seconds, not hours.
             </p>
             <Link
               href="/contact"

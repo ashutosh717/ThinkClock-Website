@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/marketing/animated-section";
+import { PhaseJourney } from "@/components/about/phase-journey";
 import Link from "next/link";
 
 const leaders = [
@@ -33,14 +34,16 @@ const milestones = [
 export default function AboutPage() {
   return (
     <main>
+      {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-[var(--ink)] px-4 py-24 sm:px-6">
         <div className="pointer-events-none absolute inset-0 opacity-30" aria-hidden="true">
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--copper)]/20 blur-3xl" />
+          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/20 blur-3xl" />
+          <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-[var(--copper)]/20 blur-3xl" />
         </div>
         <div className="relative mx-auto w-full max-w-6xl">
           <AnimatedSection>
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">About ThinkClock</p>
-            <h1 className="mt-4 max-w-3xl font-display text-5xl leading-tight text-[var(--paper)] sm:text-6xl">
+            <h1 className="mt-4 max-w-4xl font-display text-5xl leading-tight text-[var(--paper)] sm:text-6xl">
               Innovate UK-backed battery intelligence grounded in lab reality.
             </h1>
             <p className="mt-5 max-w-3xl text-lg text-[var(--graphite-on-dark)]">
@@ -50,6 +53,58 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Phase Journey ── */}
+      <PhaseJourney />
+
+      {/* ── Why BatteryScope-C ── */}
+      <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6" animation="fade-up">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">Why BatteryScope-C Matters</p>
+            <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">
+              Complete battery health assessment in <span className="text-[var(--copper)]">seconds</span>.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-[var(--graphite)]">
+              Traditional battery testing methods can take hours — or even days — using charge/discharge cyclers.
+              BatteryScope-C delivers a complete battery health assessment in seconds using our proprietary
+              combination of non-invasive technologies.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Non-invasive Spectroscopy", desc: "Proprietary multi-modal signal injection and response analysis without opening or damaging cells." },
+              { title: "AI & Machine Learning", desc: "Models trained on thousands of cell measurements to predict state-of-health with high accuracy." },
+              { title: "Digital Twin Modelling", desc: "Virtual cell models that mirror real-time internal state for predictive diagnostics." },
+              { title: "Advanced Battery Analytics", desc: "Comprehensive degradation pathway identification and remaining-useful-life estimation." },
+            ].map((item, i) => (
+              <AnimatedSection
+                key={item.title}
+                as="div"
+                animation="fade-up"
+                stagger
+                staggerIndex={i}
+                className="rounded-xl border border-[var(--graphite)]/20 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--ink)] font-mono text-sm text-[var(--signal)]">
+                  0{i + 1}
+                </div>
+                <h3 className="mt-4 font-display text-lg">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--graphite)]">{item.desc}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-12 max-w-2xl rounded-xl border border-[var(--copper)]/20 bg-gradient-to-br from-[var(--copper)]/5 to-transparent p-6 text-center">
+            <p className="text-sm leading-7 text-[var(--graphite)]">
+              We can assess the internal health of battery cells{' '}
+              <strong className="text-[var(--ink)]">without opening them, damaging them, or interrupting production flow</strong>.
+            </p>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* ── Leadership ── */}
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6" animation="fade-up">
         <div className="mx-auto w-full max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
@@ -78,6 +133,7 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
+      {/* ── Milestones ── */}
       <AnimatedSection className="bg-[var(--ink)] px-4 py-24 sm:px-6" animation="fade-up">
         <div className="mx-auto w-full max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
@@ -106,6 +162,7 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
+      {/* ── CTA ── */}
       <AnimatedSection className="bg-[var(--paper)] px-4 py-20 text-[var(--ink)] sm:px-6" animation="scale-in">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 rounded-2xl border border-[var(--copper)]/20 bg-gradient-to-br from-[var(--copper)]/5 to-transparent p-10 md:flex-row md:items-center md:justify-between">
           <div>

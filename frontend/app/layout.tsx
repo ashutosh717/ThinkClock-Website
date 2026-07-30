@@ -5,6 +5,7 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
+import { AiAssistant } from "@/components/marketing/ai-assistant";
 import "./globals.css";
 
 const bodySans = IBM_Plex_Sans({
@@ -45,6 +46,7 @@ export default function RootLayout({
           <QueryProvider>
             <SiteHeader />
             <main className="flex-1">{children}</main>
+            <AiAssistant />
             <SiteFooter />
           </QueryProvider>
         </ThemeProvider>

@@ -29,10 +29,10 @@ const stats = [
 ];
 
 const process = [
-  { step: "01", title: "Configure", desc: "Set your target voltage, capacity, and chemistry requirements." },
-  { step: "02", title: "Analyze", desc: "Lab-grade EIS, acoustic, and RF spectroscopy reveals true cell state." },
-  { step: "03", title: "Match", desc: "Inventory is cross-referenced against your operational profile." },
-  { step: "04", title: "Deploy", desc: "Matched cells with traceable SoH data go into your pack or fleet." },
+  { step: "01", title: "Scan", desc: "Non-invasive spectroscopy — EIS, acoustic, and RF — captures the cell's full signal profile in seconds." },
+  { step: "02", title: "Model", desc: "AI and digital twin models map raw signals to internal state, degradation pathways, and remaining useful life." },
+  { step: "03", title: "Assess", desc: "A clear health report — SoH, safety risk, and repurposing potential — without opening or damaging the cell." },
+  { step: "04", title: "Decide", desc: "Deploy, recover, or retire — with traceable data that supports warranty, second-life, and compliance decisions." },
 ];
 
 export default function MarketingHome() {
@@ -40,7 +40,7 @@ export default function MarketingHome() {
     <main>
       <NyquistHero
         title="Battery health is invisible until you measure the signal."
-        subtitle="ThinkClock combines lab instrumentation and physics-aware analytics to turn impedance, acoustic, and RF traces into clear operational decisions."
+        subtitle="BatteryScope-C combines lab instrumentation and physics-aware analytics to turn impedance, acoustic, and RF traces into clear operational decisions — in seconds, not hours."
       />
 
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6">
@@ -97,8 +97,8 @@ export default function MarketingHome() {
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6" animation="fade-up">
         <div className="mx-auto w-full max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">Process</p>
-            <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">From spectroscopy trace to field action.</h2>
+            <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">How It Works</p>
+            <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">From spectroscopy trace to operational decision — in seconds.</h2>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-4">
             {process.map((item, i) => (

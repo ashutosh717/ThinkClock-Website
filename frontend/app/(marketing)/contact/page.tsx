@@ -21,7 +21,7 @@ export default function ContactPage() {
               Tell us what battery decision is blocking you.
             </h1>
             <p className="mt-4 text-[var(--graphite-on-dark)]">
-              Share your fleet, cell-store, or prototyping challenge and we will route you to the right BatteryScope or CellScope team.
+              Share your fleet, cell-store, or prototyping challenge and we will route you to the right BatteryScope-C or CellScope team.
             </p>
             <div className="mt-10 space-y-4">
               {contactInfo.map((info) => (
