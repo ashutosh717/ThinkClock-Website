@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 const faqs = [
   { q: "What does ThinkClock do?", a: "We build battery diagnostics that make invisible cell health measurable — using EIS, acoustic, and RF spectroscopy." },
@@ -21,43 +21,11 @@ function findAnswer(input: string): string {
 }
 
 export function AiAssistant() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
-  const [pos, setPos] = useState({ x: 0, y: 100 });
-  const dragRef = useRef({ dragging: false, startX: 0, startY: 0, origX: 0, origY: 0 });
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setPos({ x: 16, y: window.innerHeight - 220 });
-  }, []);
-
-  const clamp = (x: number, y: number) => ({
-    x: Math.max(8, Math.min(x, window.innerWidth - 300)),
-    y: Math.max(8, Math.min(y, window.innerHeight - 100)),
-  });
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragRef.current.dragging = true;
-    dragRef.current.startX = e.clientX;
-    dragRef.current.startY = e.clientY;
-    dragRef.current.origX = pos.x;
-    dragRef.current.origY = pos.y;
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!dragRef.current.dragging) return;
-    setPos(clamp(
-      dragRef.current.origX + (e.clientX - dragRef.current.startX),
-      dragRef.current.origY + (e.clientY - dragRef.current.startY),
-    ));
-  };
-
-  const onPointerUp = () => {
-    dragRef.current.dragging = false;
-  };
 
   const handleAsk = (faq: typeof faqs[0]) => {
     setAnswer(faq.a);
@@ -74,8 +42,12 @@ export function AiAssistant() {
 
   return (
     <div
+      data-ai-assistant-root
       className="fixed z-50 select-none"
-      style={{ left: pos.x, top: pos.y }}
+      style={{
+        left: 16,
+        bottom: 16,
+      }}
     >
       {!open ? (
         <button
@@ -95,11 +67,7 @@ export function AiAssistant() {
       ) : (
         <div className="w-80 overflow-hidden rounded-2xl border border-white/20 bg-[var(--ink)]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
           <div
-            className="flex cursor-grab items-center justify-between border-b border-white/10 px-4 py-3 active:cursor-grabbing"
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
+            className="flex items-center justify-between border-b border-white/10 px-4 py-3"
           >
             <div className="flex items-center gap-2">
               <div className="h-7 w-7 overflow-hidden rounded-full">

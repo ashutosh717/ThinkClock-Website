@@ -105,7 +105,6 @@ export function NyquistHero({ title, subtitle }: NyquistHeroProps) {
 
   const statusIdx = scrollProgress < 0.33 ? 0 : scrollProgress < 0.66 ? 1 : 2;
   const statusLabels = ["Sensing", "Modelling", "Analytics"];
-  const statusColors = ["var(--signal)", "var(--copper)", "var(--signal)"];
 
   const glowX = 15 + mousePos.x * 15;
   const glowY = 15 + mousePos.y * 15;

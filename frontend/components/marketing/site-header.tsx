@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import thinkclockIcon from "@/images/thinkclock_logo.png";
 
 const links = [
@@ -14,8 +15,14 @@ const links = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,9 +69,19 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-md px-3 py-1.5 text-sm text-[var(--graphite-on-dark)] transition-all hover:bg-white/5 hover:text-[var(--signal)]"
+                className={`relative rounded-md px-3 py-1.5 text-sm transition-all ${
+                  isActive(link.href)
+                    ? "text-[var(--paper)]"
+                    : "text-[var(--graphite-on-dark)] hover:bg-white/5 hover:text-[var(--signal)]"
+                }`}
               >
                 {link.label}
+                {isActive(link.href) && (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-2 bottom-0 left-2 h-[2px] rounded-full bg-[var(--signal)] shadow-[0_0_10px_rgba(90,230,215,0.9)]"
+                  />
+                )}
               </Link>
             ))}
             <Link
