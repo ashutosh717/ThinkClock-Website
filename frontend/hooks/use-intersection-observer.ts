@@ -11,7 +11,7 @@ interface UseIntersectionObserverOptions {
 export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
   options: UseIntersectionObserverOptions = {},
 ): [RefObject<T | null>, boolean] {
-  const { threshold = 0.1, rootMargin = "0px 0px -80px 0px", triggerOnce = true } = options;
+  const { threshold = 0.01, rootMargin = "0px 0px 100px 0px", triggerOnce = true } = options;
   const ref = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -19,9 +19,21 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
     const element = ref.current;
     if (!element) return;
 
+    // Check if element is already in viewport on mount (prevents blank sections on SSR/hydration)
+    const rect = element.getBoundingClientRect();
+    if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) + 100) {
+      queueMicrotask(() => setIsVisible(true));
+      if (triggerOnce) return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      queueMicrotask(() => setIsVisible(true));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
           setIsVisible(true);
           if (triggerOnce) {
             observer.unobserve(element);
@@ -39,3 +51,4 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
 
   return [ref, isVisible];
 }
+
