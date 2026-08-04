@@ -32,7 +32,9 @@ export function VideoSequenceHero() {
   const [sequenceState, setSequenceState] = useState<SequenceState>("idle");
   const [currentStageIdx, setCurrentStageIdx] = useState(0);
   const [loadedCount, setLoadedCount] = useState(0);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const [blurAmount, setBlurAmount] = useState(0);
 
   const openScrollY = useRef(0);
@@ -58,7 +60,7 @@ export function VideoSequenceHero() {
       }
 
       // Calculate dynamic blur effect when video is open
-      if (containerRef.current) {
+      if (isInView && containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const winH = window.innerHeight;
         const elementCenter = rect.top + rect.height / 2;
@@ -76,13 +78,11 @@ export function VideoSequenceHero() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen]);
+  }, [isOpen, isInView]);
 
   // Check prefers-reduced-motion
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
     const handleChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
@@ -96,8 +96,10 @@ export function VideoSequenceHero() {
   // Transition from loading to playing
   useEffect(() => {
     if (isOpen && sequenceState === "loading" && loadedCount >= 1) {
-      setSequenceState("playing");
-      setCurrentStageIdx(0);
+      queueMicrotask(() => {
+        setSequenceState("playing");
+        setCurrentStageIdx(0);
+      });
     }
   }, [isOpen, sequenceState, loadedCount]);
 
