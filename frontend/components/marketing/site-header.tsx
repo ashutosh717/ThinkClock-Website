@@ -46,7 +46,7 @@ export function SiteHeader() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <div className="flex w-full items-center justify-between px-6 py-3 sm:px-12 lg:px-16">
           <Link href="/" className="group flex items-center gap-2 transition-all duration-300 hover:scale-[1.02]">
             <Image
               src={thinkclockIcon}

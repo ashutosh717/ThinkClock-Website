@@ -139,7 +139,7 @@ export function NyquistHero({ title, subtitle }: NyquistHeroProps) {
         />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div className="relative mx-auto grid w-full gap-12 px-6 sm:px-12 lg:px-16 xl:px-24 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <div style={{ opacity: contentOpacity, transform: `translateY(${scrollProgress * 20}px)` }}>
           <p className="font-mono text-xs tracking-[0.18em] text-[var(--signal)] uppercase">
             ThinkClock Battery Labs

@@ -75,7 +75,7 @@ export function PhaseJourney() {
 
         <div className="relative mt-20 space-y-28">
           {/* vertical connector line */}
-          <div className="pointer-events-none absolute top-12 bottom-12 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-[var(--signal)]/40 via-[var(--copper)]/30 to-transparent md:block" />
+          <div className="pointer-events-none absolute top-6 bottom-6 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-[var(--signal)]/40 via-[var(--copper)]/30 to-transparent md:block" />
 
           {phases.map((phase, i) => {
             const isLeft = i % 2 === 0;
@@ -84,7 +84,7 @@ export function PhaseJourney() {
                 {/* step number badge */}
                 <AnimatedSection
                   animation="scale-in"
-                  className="absolute left-1/2 top-0 z-10 hidden -translate-x-1/2 md:flex"
+                  className="absolute left-1/2 top-4 z-10 hidden -translate-x-1/2 md:flex"
                   delay={i * 100}
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--signal)] bg-[var(--ink)] font-mono text-sm font-bold text-[var(--signal)] shadow-lg shadow-[var(--signal)]/20">
@@ -92,23 +92,19 @@ export function PhaseJourney() {
                   </div>
                 </AnimatedSection>
 
-                <div
-                  className={`mt-6 flex flex-col items-center gap-8 md:mt-0 md:flex-row ${
-                    isLeft ? "" : "md:flex-row-reverse"
-                  }`}
-                >
+                <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-16">
                   {/* image */}
                   <AnimatedSection
                     animation={isLeft ? "fade-right" : "fade-left"}
                     delay={i * 100}
-                    className={`w-full ${i >= 2 ? "md:w-1/3" : "md:w-2/5"}`}
+                    className={`w-full ${isLeft ? "md:order-1" : "md:order-2"}`}
                   >
-                    <div className="group relative overflow-hidden rounded-2xl border border-[var(--graphite)]/25 bg-black/30 shadow-xl shadow-black/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[var(--signal)]/10">
+                    <div className="group relative mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-[var(--graphite)]/25 bg-black/30 shadow-xl shadow-black/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[var(--signal)]/10">
                       <Image
                         src={phase.image}
                         alt={phase.title}
                         className="h-auto w-full object-cover transition-all duration-700 group-hover:scale-[1.02]"
-                        sizes="(max-width: 768px) 100vw, 40vw"
+                        sizes="(max-width: 768px) 100vw, 450px"
                       />
                       <div className="absolute inset-0 rounded-2xl ring-1 ring-white/5 ring-inset" />
                     </div>
@@ -118,7 +114,7 @@ export function PhaseJourney() {
                   <AnimatedSection
                     animation={isLeft ? "fade-left" : "fade-right"}
                     delay={i * 100 + 100}
-                    className={`w-full ${i >= 2 ? "md:w-2/3" : "md:w-3/5"}`}
+                    className={`w-full ${isLeft ? "md:order-2" : "md:order-1"}`}
                   >
                     <div className="space-y-4">
                       <p className="font-mono text-xs tracking-[0.16em] text-[var(--copper)] uppercase">

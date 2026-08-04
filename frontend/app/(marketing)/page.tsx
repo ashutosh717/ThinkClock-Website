@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { VideoSequenceHero } from "@/components/marketing/video-sequence-hero";
 import { NyquistHero } from "@/components/marketing/nyquist-hero";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 
@@ -38,13 +39,15 @@ const process = [
 export default function MarketingHome() {
   return (
     <main>
+      <VideoSequenceHero />
+
       <NyquistHero
         title="Battery health is invisible until you measure the signal."
         subtitle="BatteryScope-C combines lab instrumentation and physics-aware analytics to turn impedance, acoustic, and RF traces into clear operational decisions — in seconds, not hours."
       />
 
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full px-6 sm:px-12 lg:px-16 xl:px-24">
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">Products</p>
             <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">Diagnostics that speak data, not marketing.</h2>
@@ -71,7 +74,7 @@ export default function MarketingHome() {
       </AnimatedSection>
 
       <AnimatedSection className="bg-[var(--ink)] px-4 py-24 sm:px-6" animation="fade-up">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full px-6 sm:px-12 lg:px-16 xl:px-24">
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">By the numbers</p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-[var(--paper)] sm:text-5xl">Measurable impact in battery intelligence.</h2>
@@ -95,7 +98,7 @@ export default function MarketingHome() {
       </AnimatedSection>
 
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6" animation="fade-up">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full px-6 sm:px-12 lg:px-16 xl:px-24">
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--signal)] uppercase">How It Works</p>
             <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">From spectroscopy trace to operational decision — in seconds.</h2>
@@ -125,7 +128,7 @@ export default function MarketingHome() {
       </AnimatedSection>
 
       <AnimatedSection className="bg-[var(--ink)] px-4 py-20 sm:px-6" animation="scale-in">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 rounded-2xl border border-[var(--signal)]/25 bg-gradient-to-br from-[var(--signal)]/5 to-transparent p-10 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex w-full w-full px-6 sm:px-12 lg:px-16 xl:px-24 flex-col gap-6 rounded-2xl border border-[var(--signal)]/25 bg-gradient-to-br from-[var(--signal)]/5 to-transparent p-10 md:flex-row md:items-center md:justify-between">
           <div>
             <h3 className="font-display text-3xl text-[var(--paper)]">Ready to see what your cells are saying?</h3>
             <p className="mt-2 max-w-xl text-[var(--graphite-on-dark)]">
