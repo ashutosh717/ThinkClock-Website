@@ -1,8 +1,8 @@
-import Link from "next/link";
 
 import { VideoSequenceHero } from "@/components/marketing/video-sequence-hero";
 import { NyquistHero } from "@/components/marketing/nyquist-hero";
 import { AnimatedSection } from "@/components/marketing/animated-section";
+import { SendButton } from "@/components/ui/send-button";
 
 const features = [
   {
@@ -135,15 +135,7 @@ export default function MarketingHome() {
               Request a demo to map your battery data, testing cadence, and warranty risk profile.
             </p>
           </div>
-          <Link
-            href="/contact"
-            className="inline-flex shrink-0 items-center gap-2 rounded-md bg-[var(--signal)] px-6 py-3 font-semibold text-[var(--ink)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--signal)]/25"
-          >
-            Request a demo
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+          <SendButton href="/contact" label="Request a demo" />
         </div>
       </AnimatedSection>
     </main>

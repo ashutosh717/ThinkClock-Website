@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { AiAssistant } from "@/components/marketing/ai-assistant";
+import { StarBackground } from "@/components/marketing/star-background";
 import "./globals.css";
 
 const bodySans = IBM_Plex_Sans({
@@ -41,7 +42,8 @@ export default function RootLayout({
       lang="en"
       className={`${bodySans.variable} ${display.variable} ${dataMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--ink)] text-[var(--paper)]">
+      <body className="min-h-full flex flex-col bg-transparent text-[var(--paper)] relative">
+        <StarBackground />
         <ThemeProvider>
           <QueryProvider>
             <SiteHeader />

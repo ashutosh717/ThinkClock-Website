@@ -1,5 +1,6 @@
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import Link from "next/link";
+import { ApplyButton } from "@/components/ui/apply-button";
 
 const openRoles = [
   {
@@ -93,15 +94,7 @@ export default function CareersPage() {
                       </span>
                     </div>
                   </div>
-                  <Link
-                    href="#"
-                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-[var(--copper)] px-4 py-2 text-sm font-semibold text-[var(--paper)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--copper)]/25"
-                  >
-                    Apply
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
+                  <ApplyButton href="#" label="Apply" />
                 </div>
               </AnimatedSection>
             ))}

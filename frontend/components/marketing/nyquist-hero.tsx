@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SendButton } from "@/components/ui/send-button";
 
 type NyquistHeroProps = {
   title: string;
@@ -151,15 +152,7 @@ export function NyquistHero({ title, subtitle }: NyquistHeroProps) {
             {subtitle}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-md bg-[var(--signal)] px-6 py-3 font-semibold text-[var(--ink)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--signal)]/25"
-            >
-              Request a demo
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+            <SendButton href="/contact" label="Request a demo" />
             <a
               href="/technology"
               className="inline-flex items-center gap-2 rounded-md border border-[var(--graphite)]/50 px-6 py-3 font-medium text-[var(--paper)] transition-all hover:border-[var(--signal)]/50 hover:text-[var(--signal)]"

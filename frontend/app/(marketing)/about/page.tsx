@@ -1,6 +1,7 @@
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { PhaseJourney } from "@/components/about/phase-journey";
-import Link from "next/link";
+import { SendButton } from "@/components/ui/send-button";
+import { AnimatedDivider } from "@/components/ui/animated-divider";
 
 const leaders = [
   {
@@ -53,6 +54,9 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Animated Divider Line ── */}
+      <AnimatedDivider label="DEVELOPMENT ROADMAP" />
+
       {/* ── Phase Journey ── */}
       <PhaseJourney />
 
@@ -103,6 +107,9 @@ export default function AboutPage() {
           </div>
         </div>
       </AnimatedSection>
+
+      {/* ── Animated Divider Line ── */}
+      <AnimatedDivider label="LEADERSHIP & VISION" />
 
       {/* ── Leadership ── */}
       <AnimatedSection className="bg-[var(--paper)] px-4 py-24 text-[var(--ink)] sm:px-6" animation="fade-up">
@@ -169,15 +176,7 @@ export default function AboutPage() {
             <h3 className="font-display text-3xl">Join the team shaping battery diagnostics.</h3>
             <p className="mt-2 max-w-xl text-[var(--graphite)]">We are hiring across engineering, lab operations, and battery science.</p>
           </div>
-          <Link
-            href="/careers"
-            className="inline-flex shrink-0 items-center gap-2 rounded-md bg-[var(--copper)] px-6 py-3 font-semibold text-[var(--paper)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--copper)]/25"
-          >
-            View open roles
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+          <SendButton href="/careers" label="View open roles" />
         </div>
       </AnimatedSection>
     </main>

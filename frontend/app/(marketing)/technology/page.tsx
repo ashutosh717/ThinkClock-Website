@@ -1,5 +1,6 @@
 import { AnimatedSection } from "@/components/marketing/animated-section";
-import Link from "next/link";
+import { SendButton } from "@/components/ui/send-button";
+
 
 const stack = [
   {
@@ -81,15 +82,7 @@ export default function TechnologyPage() {
             <p className="mx-auto mt-4 max-w-2xl text-[var(--graphite-on-dark)]">
               No single technique tells the full story. EIS captures bulk resistance shifts, acoustic catches physical deformation, RF enables high-throughput screening. BatteryScope-C fuses all three with AI and digital twin models to deliver a complete battery health profile no single metric can — in seconds, not hours.
             </p>
-            <Link
-              href="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-md bg-[var(--signal)] px-6 py-3 font-semibold text-[var(--ink)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--signal)]/25"
-            >
-              Discuss your application
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+            <SendButton href="/contact" label="Discuss your application" className="mt-8" />
           </div>
         </div>
       </AnimatedSection>

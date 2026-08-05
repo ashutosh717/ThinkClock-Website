@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import thinkclockIcon from "@/images/thinkclock_logo.png";
 
+import { FaqButton } from "@/components/ui/faq-button";
+
 const links = [
   { href: "/", label: "Home" },
   { href: "/technology", label: "Technology" },
   { href: "/about", label: "About" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {
@@ -64,24 +67,18 @@ export function SiteHeader() {
             </div>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-1 md:flex">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-4 md:flex">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative rounded-md px-3 py-1.5 text-sm transition-all ${
+                className={`nav-link-hover text-sm font-medium transition-all ${
                   isActive(link.href)
-                    ? "text-[var(--paper)]"
-                    : "text-[var(--graphite-on-dark)] hover:bg-white/5 hover:text-[var(--signal)]"
+                    ? "is-active text-[var(--paper)] font-semibold"
+                    : "text-[var(--graphite-on-dark)] hover:text-[var(--signal)]"
                 }`}
               >
-                {link.label}
-                {isActive(link.href) && (
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-2 bottom-0 left-2 h-[2px] rounded-full bg-[var(--signal)] shadow-[0_0_10px_rgba(90,230,215,0.9)]"
-                  />
-                )}
+                <span className="py-0.5">{link.label}</span>
               </Link>
             ))}
             <Link
@@ -90,6 +87,7 @@ export function SiteHeader() {
             >
               Cell Store
             </Link>
+            <FaqButton className="ml-2" />
             <div className="ml-4 flex items-center gap-1.5 border-l border-[var(--graphite)]/30 pl-4">
               <a
                 href="https://www.linkedin.com/company/thinkclock"
