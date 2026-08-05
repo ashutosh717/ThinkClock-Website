@@ -21,11 +21,14 @@ export function StarBackground() {
   } | null>(null);
 
   useEffect(() => {
-    setStarShadows({
-      small: generateStars(250),
-      medium: generateStars(100),
-      large: generateStars(40),
+    const frame = requestAnimationFrame(() => {
+      setStarShadows({
+        small: generateStars(250),
+        medium: generateStars(100),
+        large: generateStars(40),
+      });
     });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (!starShadows) return null;
