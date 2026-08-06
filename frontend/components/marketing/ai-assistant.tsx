@@ -9,7 +9,7 @@ const faqs = [
   { q: "Where are you based?", a: "UK-based, Innovate UK-backed R&D lab." },
 ];
 
-const fallback = "Great question! Please contact us at hello@thinkclock.com and our team will get back to you with the details.";
+const fallback = "Great question! Please contact us at contact@thinkclock.com and our team will get back to you with the details.";
 
 function findAnswer(input: string): string {
   const q = input.toLowerCase();

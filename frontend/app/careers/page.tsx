@@ -41,12 +41,12 @@ export default function CareersPage() {
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--copper)]/20 blur-3xl" />
         </div>
         <div className="relative mx-auto w-full max-w-6xl">
-          <AnimatedSection>
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
             <p className="font-mono text-xs tracking-[0.16em] text-[var(--copper)] uppercase">Careers</p>
-            <h1 className="mt-4 max-w-3xl font-display text-5xl leading-tight text-[var(--paper)] sm:text-6xl">
+            <h1 className="mt-4 font-display text-5xl leading-tight text-[var(--paper)] sm:text-6xl">
               Build the future of battery diagnostics.
             </h1>
-            <p className="mt-5 max-w-3xl text-lg text-[var(--graphite-on-dark)]">
+            <p className="mt-5 text-lg text-[var(--graphite-on-dark)]">
               We are looking for engineers, scientists, and operators who want to make battery health measurable, predictable, and actionable.
             </p>
           </AnimatedSection>

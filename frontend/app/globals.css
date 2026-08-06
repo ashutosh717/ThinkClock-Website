@@ -682,6 +682,21 @@
   background-color: transparent;
 }
 
+/* Soft micro-feather gradient edge transition for light paper sections */
+.bg-\[var\(--paper\)\] {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(245, 246, 244, 0.85) 10px,
+    var(--paper) 20px,
+    var(--paper) calc(100% - 20px),
+    rgba(245, 246, 244, 0.85) calc(100% - 10px),
+    transparent 100%
+  ) !important;
+}
+
+
+
 /* ─── Animated Arrow Apply Button (uiverse) ─── */
 .apply-animated-btn {
   position: relative;
@@ -854,6 +869,20 @@
   top: 46px;
   opacity: 1;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
 
 
 

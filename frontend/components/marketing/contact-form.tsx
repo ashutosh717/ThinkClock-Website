@@ -48,7 +48,7 @@ export function ContactForm() {
         setStatus("error");
         setStatusMessage(
           payload?.error?.message ??
-            "Request failed. Please email hello@thinkclock.com directly.",
+            "Request failed. Please email contact@thinkclock.com directly.",
         );
         return;
       }
