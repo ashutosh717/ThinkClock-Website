@@ -20,6 +20,77 @@ function findAnswer(input: string): string {
   return fallback;
 }
 
+function ThinkClockLoader({ size = "h-22 w-22", isHeader = false }: { size?: string; isHeader?: boolean }) {
+  // Outer evolving micro-dots (clockwise)
+  const outerParticles = [
+    { angle: 0, radius: isHeader ? 12 : 36, size: isHeader ? "w-1 h-1" : "w-1.5 h-1.5", delay: "0s", color: "bg-[#00f2fe]" },
+    { angle: 45, radius: isHeader ? 14 : 39, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "0.4s", color: "bg-[#38bdf8]" },
+    { angle: 90, radius: isHeader ? 11 : 34, size: isHeader ? "w-1 h-1" : "w-1.5 h-1.5", delay: "0.8s", color: "bg-[#e087ff]" },
+    { angle: 135, radius: isHeader ? 15 : 40, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "1.2s", color: "bg-[#5ce1c9]" },
+    { angle: 180, radius: isHeader ? 12 : 37, size: isHeader ? "w-1 h-1" : "w-1.5 h-1.5", delay: "1.6s", color: "bg-[#00e5ff]" },
+    { angle: 225, radius: isHeader ? 14 : 40, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "2.0s", color: "bg-[#ff7043]" },
+    { angle: 270, radius: isHeader ? 11 : 35, size: isHeader ? "w-1 h-1" : "w-1.5 h-1.5", delay: "2.4s", color: "bg-[#3b82f6]" },
+    { angle: 315, radius: isHeader ? 15 : 41, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "2.8s", color: "bg-[#a7f3d0]" },
+  ];
+
+  // Inner evolving micro-dots (counter-clockwise)
+  const innerParticles = [
+    { angle: 20, radius: isHeader ? 8 : 26, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "0.2s", color: "bg-[#00f2fe]" },
+    { angle: 80, radius: isHeader ? 9 : 28, size: isHeader ? "w-0.5 h-0.5" : "w-0.5 h-0.5", delay: "0.6s", color: "bg-[#5ce1c9]" },
+    { angle: 140, radius: isHeader ? 7 : 24, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "1.0s", color: "bg-[#ff7043]" },
+    { angle: 200, radius: isHeader ? 9 : 29, size: isHeader ? "w-0.5 h-0.5" : "w-0.5 h-0.5", delay: "1.4s", color: "bg-[#38bdf8]" },
+    { angle: 260, radius: isHeader ? 8 : 25, size: isHeader ? "w-0.5 h-0.5" : "w-1 h-1", delay: "1.8s", color: "bg-[#e087ff]" },
+    { angle: 320, radius: isHeader ? 9 : 27, size: isHeader ? "w-0.5 h-0.5" : "w-0.5 h-0.5", delay: "2.2s", color: "bg-[#00e5ff]" },
+  ];
+
+  return (
+    <div className={`relative flex items-center justify-center ${size} select-none transition-transform duration-300 hover:scale-110`}>
+      {/* Outer Evolving Bubble Ring (Clockwise) */}
+      <div className="absolute inset-0 animate-[spin_8s_linear_infinite]">
+        {outerParticles.map((p, i) => {
+          const rad = (p.angle * Math.PI) / 180;
+          const x = Math.cos(rad) * p.radius;
+          const y = Math.sin(rad) * p.radius;
+          return (
+            <div
+              key={`outer-${i}`}
+              className={`absolute rounded-full ${p.size} ${p.color} shadow-[0_0_10px_rgba(255,255,255,0.9)] ai-bubble-particle`}
+              style={{
+                top: `calc(50% + ${y}px - ${isHeader ? 2 : 3}px)`,
+                left: `calc(50% + ${x}px - ${isHeader ? 2 : 3}px)`,
+                animationDelay: p.delay,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* Inner Evolving Bubble Ring (Counter-Clockwise) */}
+      <div className="absolute inset-0 animate-spin-reverse">
+        {innerParticles.map((p, i) => {
+          const rad = (p.angle * Math.PI) / 180;
+          const x = Math.cos(rad) * p.radius;
+          const y = Math.sin(rad) * p.radius;
+          return (
+            <div
+              key={`inner-${i}`}
+              className={`absolute rounded-full ${p.size} ${p.color} shadow-[0_0_8px_rgba(255,255,255,0.9)] ai-bubble-particle`}
+              style={{
+                top: `calc(50% + ${y}px - ${isHeader ? 1 : 2}px)`,
+                left: `calc(50% + ${x}px - ${isHeader ? 1 : 2}px)`,
+                animationDelay: p.delay,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* High-Visibility Dynamic Color-Shifting Core */}
+      <div className={`relative z-10 rounded-full ai-dynamic-core ${isHeader ? "h-4 w-4" : "h-11 w-11"} shadow-[0_0_12px_rgba(92,225,201,0.4)]`} />
+    </div>
+  );
+}
+
 export function AiAssistant() {
   const [open, setOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
@@ -50,28 +121,37 @@ export function AiAssistant() {
       }}
     >
       {!open ? (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-white/30 bg-black/40 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-[var(--signal)]/70 hover:shadow-[var(--signal)]/20"
-        >
-          <video
-            src="/Ai.mp4"
-            muted
-            loop
-            playsInline
-            autoPlay
-            className="h-full w-full object-cover"
-          />
-        </button>
+        <div className="group relative flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex items-center justify-center transition-all duration-300 hover:scale-110"
+            aria-label="Open ThinkClock AI Assistant"
+          >
+            <ThinkClockLoader size="h-22 w-22" />
+          </button>
+
+          {/* Aesthetic Hover Popup Badge */}
+          <div className="pointer-events-none absolute left-24 whitespace-nowrap rounded-xl border border-white/20 bg-[var(--ink)]/95 px-3.5 py-2 shadow-2xl backdrop-blur-2xl opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--signal)] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--signal)]" />
+              </span>
+              <span className="font-display text-xs font-semibold tracking-wide bg-gradient-to-r from-[#5ce1c9] via-[#60a5fa] to-[#c084fc] bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(92,225,201,0.4)]">
+                How may I assist you today?
+              </span>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="w-80 overflow-hidden rounded-2xl border border-white/20 bg-[var(--ink)]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
           <div
             className="flex items-center justify-between border-b border-white/10 px-4 py-3"
           >
             <div className="flex items-center gap-2">
-              <div className="h-7 w-7 overflow-hidden rounded-full">
-                <video src="/Ai.mp4" muted loop playsInline autoPlay className="h-full w-full object-cover" />
+              <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full">
+                <ThinkClockLoader size="h-7 w-7" isHeader />
               </div>
               <span className="text-sm font-medium text-white">Ask about ThinkClock</span>
             </div>

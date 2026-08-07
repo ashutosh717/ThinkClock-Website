@@ -35,7 +35,7 @@ const partners = [
     logo: zipboltImg,
   },
   {
-    name: "British High Commission",
+    name: "British High Commission in India",
     logo: bhcImg,
   },
 ];
@@ -45,7 +45,7 @@ const duplicatedPartners = [...partners, ...partners, ...partners, ...partners];
 
 export function PartnerMarquee() {
   return (
-    <div className="relative w-full overflow-hidden py-10 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+    <div className="relative w-full overflow-hidden pt-16 pb-12 [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
       {/* Infinite Scrolling Track */}
       <div className="flex w-max animate-marquee space-x-6 hover:[animation-play-state:paused] items-center">
         {duplicatedPartners.map((partner, index) => (
@@ -53,6 +53,15 @@ export function PartnerMarquee() {
             key={`${partner.name}-${index}`}
             className="group relative flex h-24 w-60 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white px-2 py-1 shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-[var(--signal)] hover:shadow-[0_0_30px_rgba(92,225,201,0.4)]"
           >
+            {/* Hover Tooltip displaying actual Partner Name */}
+            <div className="pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-xl border border-white/20 bg-[var(--ink)]/95 px-3.5 py-1.5 shadow-2xl backdrop-blur-2xl opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 z-30">
+              <span className="font-display text-xs font-semibold tracking-wide text-white">
+                {partner.name}
+              </span>
+              {/* Tooltip Arrow */}
+              <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 h-2 w-2 rotate-45 border-r border-b border-white/20 bg-[var(--ink)]/95" />
+            </div>
+
             <div className="relative h-[88px] w-[220px] transition-transform duration-300 group-hover:scale-105">
               <Image
                 src={partner.logo}
