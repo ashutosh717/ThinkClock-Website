@@ -12,6 +12,7 @@ import phase4Img from "@/images/Phase4.png";
 
 interface Phase {
   id: number;
+  phaseLabel: string;
   title: string;
   date: string;
   tagline: string;
@@ -25,7 +26,8 @@ interface Phase {
 const phases: Phase[] = [
   {
     id: 1,
-    title: "Phase 1 — Proof of Concept",
+    phaseLabel: "Phase 1 :",
+    title: "Proof of Concept",
     date: "June 2025",
     tagline: "Handmade lab unit validating core non-invasive spectroscopic technology.",
     image: phase1Img,
@@ -40,7 +42,8 @@ const phases: Phase[] = [
   },
   {
     id: 2,
-    title: "Phase 2 — Portable Prototype",
+    phaseLabel: "Phase 2 :",
+    title: "Portable Prototype",
     date: "November 2025",
     tagline: "Refined portable system for field demonstrations and early customer engagements.",
     image: phase2Img,
@@ -55,7 +58,8 @@ const phases: Phase[] = [
   },
   {
     id: 3,
-    title: "Phase 3 — Manufactured Unit",
+    phaseLabel: "Phase 3 :",
+    title: "Manufactured Unit",
     date: "April 2026",
     tagline: "Production-ready system supporting 21700 cells with live partner validation.",
     image: phase3Img,
@@ -70,7 +74,8 @@ const phases: Phase[] = [
   },
   {
     id: 4,
-    title: "Phase 4 — Automated System",
+    phaseLabel: "Phase 4 :",
+    title: "Automated System",
     date: "Target: Q3 2026",
     tagline: "Fully automated, inline, hands-free diagnostics integrated into production workflows.",
     image: phase4Img,
@@ -78,7 +83,7 @@ const phases: Phase[] = [
     accentGlow: "rgba(255, 58, 92, 0.4)",
     threshold: 0.86,
     details: [
-      "Next milestone — a fully automated inline diagnostic system",
+      "Next milestone: a fully automated inline diagnostic system",
       "Hands-free operation integrated directly into battery production lines",
       "What is showcased today is the evolving concept as we progress toward full industrial design",
     ],
@@ -107,11 +112,10 @@ function PhaseItem({
 
   return (
     <div className="relative">
-      {/* Scroll-tied Milestone Badge on the Curvy Road */}
+      {/* Scroll-tied Milestone Badge on the Center Road Line */}
       <motion.div
-        className="absolute top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:flex"
+        className="absolute top-1/2 left-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:flex"
         style={{
-          left: index % 2 === 0 ? "56.25%" : "43.75%",
           scale: pinScale,
           opacity: cardOpacity,
         }}
@@ -147,7 +151,7 @@ function PhaseItem({
           >
             <Image
               src={phase.image}
-              alt={phase.title}
+              alt={`${phase.phaseLabel} ${phase.title}`}
               className="h-auto w-full rounded-xl object-cover transition-all duration-700 group-hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 450px"
             />
@@ -183,9 +187,14 @@ function PhaseItem({
               </span>
             </div>
 
-            <h3 className="font-display text-3xl leading-tight text-[var(--paper)] sm:text-4xl">
-              {phase.title}
-            </h3>
+            <div className="space-y-1">
+              <div className="font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
+                {phase.phaseLabel}
+              </div>
+              <h3 className="font-display text-3xl leading-tight text-[var(--paper)] sm:text-4xl">
+                {phase.title}
+              </h3>
+            </div>
 
             <p className="text-base leading-relaxed text-[var(--graphite-on-dark)]">
               {phase.tagline}
@@ -247,77 +256,58 @@ export function PhaseJourney() {
             Our Development Journey
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[var(--graphite-on-dark)]">
-            Four phases of engineering — each building on the last — toward a complete non-invasive battery diagnostic platform.
+            Four phases of engineering building toward a complete non-invasive battery diagnostic platform.
           </p>
         </div>
 
-        {/* Winding 3D Road Section */}
+        {/* Winding Road Section */}
         <div className="relative mt-20">
-          {/* SVG Animated Road Track (Desktop & Tablet) */}
+          {/* Central Animated Road Track (Desktop & Tablet) */}
           <div className="pointer-events-none absolute inset-0 hidden h-full w-full justify-center md:flex">
             <svg
               className="h-full w-full max-w-4xl"
               viewBox="0 0 800 1600"
               fill="none"
+              xmlns="http://www.w3.org/2000/svg"
               preserveAspectRatio="none"
             >
-              {/* Outer Dark Asphalt Road */}
+              {/* Dark Backing Glow Path */}
               <path
-                d="M 400 0 C 470 200, 330 600, 400 800 C 470 1000, 330 1400, 400 1600"
-                stroke="#121824"
-                strokeWidth="36"
+                d="M 400,40 L 400,1560"
+                stroke="rgba(255,255,255,0.12)"
+                strokeWidth="16"
                 strokeLinecap="round"
               />
-
-              {/* Glowing Road Outline */}
-              <path
-                d="M 400 0 C 470 200, 330 600, 400 800 C 470 1000, 330 1400, 400 1600"
-                stroke="rgba(255, 255, 255, 0.12)"
-                strokeWidth="38"
-                strokeLinecap="round"
-              />
-
-              {/* Center Dashed Line Base */}
-              <path
-                d="M 400 0 C 470 200, 330 600, 400 800 C 470 1000, 330 1400, 400 1600"
-                stroke="rgba(255, 255, 255, 0.2)"
-                strokeWidth="4"
-                strokeDasharray="14 14"
-                strokeLinecap="round"
-              />
-
-              {/* Scroll-Animated Center Glowing Beam */}
+              {/* Outer Glowing Track */}
               <motion.path
-                d="M 400 0 C 470 200, 330 600, 400 800 C 470 1000, 330 1400, 400 1600"
-                stroke="url(#roadGlowGradient)"
-                strokeWidth="6"
+                d="M 400,40 L 400,1560"
+                stroke="url(#roadGradient)"
+                strokeWidth="8"
                 strokeLinecap="round"
-                className="drop-shadow-[0_0_12px_rgba(92,225,201,0.8)]"
-                style={{
-                  pathLength,
-                }}
+                style={{ pathLength }}
+              />
+              {/* Inner Laser Core */}
+              <motion.path
+                d="M 400,40 L 400,1560"
+                stroke="#5ce1c9"
+                strokeWidth="4"
+                strokeLinecap="round"
+                style={{ pathLength }}
               />
 
               <defs>
-                <linearGradient
-                  id="roadGlowGradient"
-                  x1="400"
-                  y1="0"
-                  x2="400"
-                  y2="1600"
-                  gradientUnits="userSpaceOnUse"
-                >
+                <linearGradient id="roadGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stopColor="#ffe53b" />
-                  <stop offset="30%" stopColor="#5ce1c9" />
-                  <stop offset="65%" stopColor="#c97a4a" />
+                  <stop offset="35%" stopColor="#5ce1c9" />
+                  <stop offset="70%" stopColor="#c97a4a" />
                   <stop offset="100%" stopColor="#ff3a5c" />
                 </linearGradient>
               </defs>
             </svg>
           </div>
 
-          {/* Phase Cards Grid along the Road */}
-          <div className="relative space-y-28 md:space-y-36">
+          {/* Phase Cards Grid */}
+          <div className="space-y-24 md:space-y-36">
             {phases.map((phase, index) => (
               <PhaseItem
                 key={phase.id}

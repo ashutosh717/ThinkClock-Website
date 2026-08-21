@@ -57,7 +57,7 @@ export function StarBackground() {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("resize", handleResize);
 
-    const particleCount = Math.min(Math.floor((width * height) / 8000), 160);
+    const particleCount = Math.min(Math.floor((width * height) / 35000), 35);
     let particles: Particle[] = [];
 
     const colors = [
@@ -70,15 +70,15 @@ export function StarBackground() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = Math.random() * 2 + 0.8;
+        const size = Math.random() * 1.4 + 0.6;
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: -Math.random() * 0.4 - 0.1, // Slow upward ambient drift
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: -Math.random() * 0.25 - 0.05, // Slow upward ambient drift
           size,
           color,
-          alpha: Math.random() * 0.6 + 0.3,
+          alpha: Math.random() * 0.4 + 0.15,
         });
       }
     }

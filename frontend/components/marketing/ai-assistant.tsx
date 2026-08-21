@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 
 const faqs = [
-  { q: "What does ThinkClock do?", a: "We build battery diagnostics that make invisible cell health measurable — using EIS, acoustic, and RF spectroscopy." },
+  { q: "What does ThinkClock do?", a: "We build battery diagnostics that make invisible cell health measurable: using EIS, acoustic, and RF spectroscopy." },
   { q: "Who is the CEO?", a: "Babu Devnarayan leads ThinkClock Battery Labs." },
   { q: "What products do you offer?", a: "BatteryScope for fleet health monitoring, CellScope for portable diagnostics, and Digital Twinning services." },
   { q: "Where are you based?", a: "UK-based, Innovate UK-backed R&D lab." },

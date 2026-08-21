@@ -199,6 +199,25 @@
     50% { opacity: 1; transform: scale(1); }
   }
 
+  @keyframes star-pulse-glow {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+      filter: drop-shadow(0 0 2px rgba(201, 122, 74, 0.3));
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.22);
+      filter: drop-shadow(0 0 8px rgba(201, 122, 74, 0.95)) drop-shadow(0 0 14px rgba(92, 225, 201, 0.4));
+    }
+  }
+
+  .star-glow-pulse {
+    display: inline-block;
+    animation: star-pulse-glow 2.4s ease-in-out infinite;
+    will-change: transform, opacity, filter;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .nyquist-path {
       animation: none;

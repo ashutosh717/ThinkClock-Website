@@ -3,103 +3,177 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const faqs = [
+export interface FaqItem {
+  id: number;
+  category: "Overview" | "Products" | "Technology" | "Deployment";
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
   {
     id: 1,
+    category: "Overview",
     question: "What is ThinkClock Battery Labs?",
-    answer: "ThinkClock Battery Labs is a deep-tech battery intelligence company based in the UK. We combine physics-aware digital twins, Electrochemical Impedance Spectroscopy (EIS), acoustic, and RF traces to predict battery degradation, safety risks, and remaining useful life in seconds.",
+    answer: "ThinkClock Battery Labs is an R&D-driven organization focused on Battery Health Analytics. Supported and funded by Innovate UK, we combine non-invasive spectroscopy, digital twins, AI, and machine learning to deliver complete battery cell health signatures in seconds without disassembly or charge-discharge cycling.",
   },
   {
     id: 2,
-    question: "What is BatteryScope-C and how does it work?",
-    answer: "BatteryScope-C is our cloud-native battery diagnostics platform. It ingests multi-spectral impedance, thermal, and electrical traces from EV fleets, lab cycling stations, and energy storage systems to deliver real-time State-of-Health (SoH) metrics and physical defect mapping.",
+    category: "Products",
+    question: "What is the difference between BatteryScope-C Manual and Automated?",
+    answer: "BatteryScope-C Manual is a bench-deployable, operator-led unit ideal for lab QC sampling, pilot grading, and second-life evaluation (1,920 cells/8-hr shift). BatteryScope-C Automated integrates directly into production or recycling lines with automated cell input, autonomous testing, and smart multi-channel sorting by State-of-Health (2,880 cells/8-hr shift).",
   },
   {
     id: 3,
-    question: "What is CellScope portable instrumentation?",
-    answer: "CellScope is our proprietary, high-speed hardware unit engineered for field triage and lab screening. It enables battery technicians and engineers to execute non-invasive spectroscopy on battery cells and modules without opening or damaging the pack.",
+    category: "Products",
+    question: "What is BatteryScope-P and how does it scale cell diagnostics to packs?",
+    answer: "BatteryScope-P scales cell-level spectroscopic intelligence up to pack-level architectures. It helps EV OEMs, ESS integrators, and fleet operators understand how cell-to-cell variability translates into overall pack performance, lifetime degradation, and cascade safety risks.",
   },
   {
     id: 4,
-    question: "How accurate are ThinkClock's health and safety predictions?",
-    answer: "Our physics-informed AI models achieve over 99.2% accuracy in State-of-Health estimation and early lithium plating detection—reducing traditional laboratory testing cycles from weeks down to seconds.",
+    category: "Technology",
+    question: "Why is non-invasive spectroscopy superior to traditional battery cycling?",
+    answer: "Traditional battery cyclers require hours or days of charge-discharge cycling, consuming high energy and sacrificing precious cycle life just to measure health. BatteryScope delivers a full 75-second diagnostic report assessing State of Health (SoH), self-discharge, DCIR, predictive Remaining Useful Life (RUL), and internal micro-faults with zero cycle loss and zero damage.",
   },
   {
     id: 5,
-    question: "Can ThinkClock integrate with existing BMS and cloud platforms?",
-    answer: "Yes. ThinkClock provides RESTful APIs, Python SDKs, and CAN-bus gateway modules designed to integrate seamlessly into OEM battery management systems, test bench software, and fleet cloud telemetry pipelines.",
+    category: "Technology",
+    question: "What cell form factors and chemistries does BatteryScope support?",
+    answer: "Out of the box, BatteryScope-C supports profiling and grading of LG 21700 cylindrical cells with flexible clamping. It can be rapidly trained for 18650 and other cylindrical or prismatic form factors across LFP, NMC, solid-state, and sodium-ion chemistries.",
   },
   {
     id: 6,
-    question: "Who uses ThinkClock's battery diagnostic solutions?",
-    answer: "ThinkClock serves EV manufacturers (OEMs), battery cell gigafactories, grid energy storage operators, fleet operators, and second-life battery repurposing facilities across Europe and global markets.",
+    category: "Technology",
+    question: "What specific metrics and health signatures are measured during a test?",
+    answer: "Each 75-second test measures State of Health (SoH), predicted self-discharge rate, internal resistance (DCIR), predictive Remaining Useful Life (RUL), proprietary cell health spectroscopic fingerprints, and micro-fault indicators (detecting internal short circuits and electrolyte leaks).",
+  },
+  {
+    id: 7,
+    category: "Deployment",
+    question: "Is BatteryScope-C ready for commercial customer deployment today?",
+    answer: "Yes. BatteryScope-C Manual is a fully manufactured, production-ready diagnostic unit: not a lab prototype. Units can be deployed out-of-the-box for QA sampling, pilot-scale grading, and second-life battery triage.",
+  },
+  {
+    id: 8,
+    category: "Deployment",
+    question: "Does ThinkClock offer Hardware-as-a-Service (HaaS) options?",
+    answer: "Yes. In addition to direct hardware purchase, ThinkClock provides flexible Hardware-as-a-Service (HaaS) delivery models with low upfront cost, making lab-grade spectroscopy accessible for teams expanding their diagnostics capabilities.",
+  },
+  {
+    id: 9,
+    category: "Technology",
+    question: "How accurate are ThinkClock's health and degradation models?",
+    answer: "Our physics-informed digital twin AI models achieve over 99% accuracy in State-of-Health estimation and early fault detection: reducing laboratory characterization timelines from weeks down to seconds.",
+  },
+  {
+    id: 10,
+    category: "Deployment",
+    question: "Can BatteryScope integrate with existing factory software and BMS systems?",
+    answer: "Yes. BatteryScope comes fully connected with Wi-Fi, Ethernet, and HDMI readiness, alongside integrated software that auto-captures test values, generates reports, and streams data via RESTful APIs and CAN-bus telemetry.",
+  },
+  {
+    id: 11,
+    category: "Overview",
+    question: "Where are ThinkClock's R&D facilities and global offices located?",
+    answer: "ThinkClock operates an R&D Laboratory in Bengaluru, India (Sarjapur Road) and UK Headquarters in New Malden, United Kingdom (Kingspark Business Centre).",
+  },
+  {
+    id: 12,
+    category: "Deployment",
+    question: "How can my team request a live BatteryScope demonstration or trial?",
+    answer: "You can request a demo by contacting our engineering team at bdc@thinkclock.com (India) or ajith@thinkclock.com (UK), or by using our online contact request form.",
   },
 ];
 
+const categories = ["All", "Overview", "Products", "Technology", "Deployment"] as const;
+
 export function FaqAccordion() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [openId, setOpenId] = useState<number | null>(1);
 
-  const toggle = (id: number) => {
+  const filteredFaqs =
+    selectedCategory === "All"
+      ? faqs
+      : faqs.filter((faq) => faq.category === selectedCategory);
+
+  const toggleFaq = (id: number) => {
     setOpenId(openId === id ? null : id);
   };
 
   return (
-    <div className="space-y-4">
-      {faqs.map((faq) => {
-        const isOpen = openId === faq.id;
-        return (
-          <div
-            key={faq.id}
-            className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-              isOpen
-                ? "border-[var(--signal)]/50 bg-[var(--signal)]/5 shadow-xl shadow-[var(--signal)]/10"
-                : "border-[var(--graphite)]/30 bg-white/5 hover:border-[var(--copper)]/40"
-            }`}
-          >
+    <div className="w-full">
+      {/* Category Pills */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5">
+        {categories.map((cat) => {
+          const isActive = selectedCategory === cat;
+          return (
             <button
-              type="button"
-              onClick={() => toggle(faq.id)}
-              className="flex w-full items-center justify-between p-6 text-left transition-colors focus:outline-none"
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`rounded-full px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                isActive
+                  ? "bg-[var(--signal)] text-[var(--ink)] shadow-lg shadow-[var(--signal)]/20"
+                  : "border border-white/10 bg-white/5 text-[var(--paper)] hover:border-[var(--signal)]/40 hover:bg-white/10"
+              }`}
             >
-              <span className="font-display text-lg font-semibold text-[var(--paper)]">
-                {faq.question}
-              </span>
-              <span
-                className={`ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                  isOpen
-                    ? "rotate-180 bg-[var(--signal)] text-[var(--ink)]"
-                    : "bg-white/10 text-[var(--graphite-on-dark)]"
-                }`}
-              >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              {cat}
             </button>
+          );
+        })}
+      </div>
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+      {/* Accordion List */}
+      <div className="mt-10 space-y-4">
+        {filteredFaqs.map((faq) => {
+          const isOpen = openId === faq.id;
+          return (
+            <div
+              key={faq.id}
+              className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                isOpen
+                  ? "border-[var(--signal)]/50 bg-white/10 shadow-xl shadow-[var(--signal)]/5"
+                  : "border-white/10 bg-white/5 hover:border-white/20"
+              }`}
+            >
+              <button
+                onClick={() => toggleFaq(faq.id)}
+                className="flex w-full items-center justify-between p-6 text-left"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="rounded-full bg-[var(--copper)]/15 px-3 py-1 font-mono text-[11px] font-bold text-[var(--copper)] uppercase tracking-wider">
+                    {faq.category}
+                  </span>
+                  <h3 className="font-display text-lg font-bold text-[var(--paper)] sm:text-xl">
+                    {faq.question}
+                  </h3>
+                </div>
+                <div
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-lg transition-transform duration-300 ${
+                    isOpen ? "rotate-180 bg-[var(--signal)] text-[var(--ink)]" : "text-[var(--paper)]"
+                  }`}
                 >
-                  <div className="px-6 pb-6 pt-0 text-[var(--graphite-on-dark)] leading-relaxed text-sm">
-                    <motion.p
-                      initial={{ y: 8, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                    >
+                  ↓
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <div className="border-t border-white/10 px-6 pb-6 pt-4 text-base leading-relaxed text-[var(--graphite-on-dark)]">
                       {faq.answer}
-                    </motion.p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

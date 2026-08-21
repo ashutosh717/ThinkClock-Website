@@ -10,11 +10,11 @@ import { FaqButton } from "@/components/ui/faq-button";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/technology", label: "Technology" },
   { href: "/about", label: "About" },
+  { href: "/products", label: "Products" },
+  { href: "/technology", label: "Technology" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
-  { href: "/faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {
@@ -58,36 +58,36 @@ export function SiteHeader() {
               priority
             />
             <div className="flex flex-col">
-              <span className="font-display text-sm leading-tight text-[var(--paper)] transition-all duration-300 group-hover:text-[var(--signal)]">
+              <span className="font-display text-base font-bold leading-tight text-[var(--paper)] transition-all duration-300 group-hover:text-[var(--signal)]">
                 ThinkClock Battery Labs
               </span>
-              <span className="font-mono text-xs leading-tight text-[var(--copper)]">
+              <span className="font-mono text-xs font-semibold leading-tight text-[var(--copper)]">
                 Sensing, Modelling, Analytics
               </span>
             </div>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-4 md:flex">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-5 md:flex">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link-hover text-sm font-medium transition-all ${
+                className={`nav-link-hover text-[15px] font-medium transition-all ${
                   isActive(link.href)
-                    ? "is-active text-[var(--paper)] font-semibold"
+                    ? "is-active text-[var(--paper)] font-bold"
                     : "text-[var(--graphite-on-dark)] hover:text-[var(--signal)]"
                 }`}
               >
                 <span className="py-0.5">{link.label}</span>
               </Link>
             ))}
+            <FaqButton className="ml-1" />
             <Link
               href="/marketplace"
               className="ml-2 rounded-md bg-[var(--signal)] px-3 py-1.5 text-sm font-semibold text-[var(--ink)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--signal)]/25"
             >
               Cell Store
             </Link>
-            <FaqButton className="ml-2" />
             <div className="ml-4 flex items-center gap-1.5 border-l border-[var(--graphite)]/30 pl-4">
               <a
                 href="https://www.linkedin.com/company/thinkclock"
