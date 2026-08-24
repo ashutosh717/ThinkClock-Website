@@ -39,7 +39,7 @@ const homeProductPreviews = [
     tagline: "Battery characteristics in seconds. Not hours.",
     desc: "Production-ready diagnostic unit supporting LG 21700 profiling with 75-second comprehensive reports and zero cycle loss.",
     throughput: "1,920 cells / shift",
-    link: "/products",
+    link: "/products?tab=manual#product-detail",
   },
   {
     title: "BatteryScope-C Automated",
@@ -47,7 +47,7 @@ const homeProductPreviews = [
     tagline: "Everything the manual unit does: now at production speed.",
     desc: "Autonomous cell feeding, automated 6-channel testing, and smart sorting by SoH & capacity for gigafactories.",
     throughput: "2,880 cells / shift",
-    link: "/products",
+    link: "/products?tab=automated#product-detail",
   },
   {
     title: "BatteryScope-P",
@@ -55,7 +55,7 @@ const homeProductPreviews = [
     tagline: "Pack-level insight, built on cell-level truth.",
     desc: "Extends non-invasive spectroscopy & digital twin AI to map cell-to-cell variability into pack performance & safety.",
     throughput: "Pack Diagnostics",
-    link: "/products",
+    link: "/products?tab=pack#product-detail",
   },
 ];
 

@@ -43,6 +43,24 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${bodySans.variable} ${display.variable} ${dataMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var saved = localStorage.getItem('thinkclock-theme');
+                if (saved === 'dark') {
+                  document.documentElement.classList.remove('light');
+                } else {
+                  document.documentElement.classList.add('light');
+                }
+              } catch (e) {
+                document.documentElement.classList.add('light');
+              }
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-transparent text-[var(--paper)] relative">
         <StarBackground />
         <ThemeProvider>

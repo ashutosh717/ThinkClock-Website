@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { SendButton } from "@/components/ui/send-button";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 
@@ -131,52 +132,58 @@ const products: Product[] = [
       },
       {
         name: "Micro-fault detection",
-        desc: "Early fault isolation (internal shorts & electrolyte leaks)",
+        desc: "Automated rejection of cells with internal micro-anomalies",
         inDevelopment: true,
       },
     ],
     specs: [
-      "Automated cell input: cells load and feed into the system automatically, eliminating manual handling and operator error",
-      "Automated cell testing: fully automated test cycles run without intervention, delivering consistent, repeatable results at speed",
-      "Smart sorting channels: automatically sorts cells across multiple channels by State of Health and capacity range",
-      "6-channel testing carried forward from manual unit, at inline speed",
-      "All BatteryScope-C Manual diagnostics retained: full suite of testing, reporting, and connectivity features",
-      "Mobile: designed to move with your operation, portable and ready to deploy",
+      "Supported cell format: LG 21700 (expandable to other cylindrical formats on request)",
+      "Continuous inline testing: automated cell feed and extraction with zero operator touch",
+      "Multi-channel sorting: cells are automatically binned by grade, SoH, or custom criteria",
+      "Real-time MES / SCADA integration: live telemetry streamed to factory control systems",
+      "Non-destructive: every tested cell is ready for pack assembly with zero capacity loss",
+      "Scalable architecture: multi-unit modular arrays for higher-throughput Gigafactory lines",
+      "Integrated calibration: self-verifying sensors ensure consistent measurement accuracy",
     ],
     whyItWins: [
-      "Purpose-built for pack manufacturers and gigafactories running large-scale operations",
-      "Fully autonomous: no per-cell operator required, removing labor from the loop",
-      "Continuous grading, logging, and fault isolation: built-in traceability for every single cell",
+      "100% cell coverage: test every cell on the line, not just statistical samples",
+      "Zero-latency sorting: instant classification without off-line holding areas",
+      "Eliminates operator variability: consistent, repeatable characterisation 24/7",
+      "Accelerates pack assembly: pre-graded, matched cells enter modules immediately",
     ],
     bestFor: [
-      "Cell pack manufacturers",
-      "Gigafactory sorting lines",
-      "High-volume second-life cell recyclers",
-      "Contract manufacturers",
+      "Gigafactories & cell manufacturers",
+      "High-volume battery pack assemblers",
+      "Large-scale second-life repurposing facilities",
+      "Automated battery recycling lines",
     ],
-    ctaHeadline: "For manufacturers scaling volume",
+    ctaHeadline: "For manufacturing & high-throughput operations",
     ctaText: "Ready to move from 1,920 to 2,880+ cells a shift? Talk to us about BatteryScope-C Automated.",
   },
   {
     id: "pack",
     name: "BatteryScope-P",
-    badge: "Pack-Level Intelligence",
+    badge: "Pack-Level Intelligence, Built on Cell-Level Truth",
     tagline: "Pack-level insight, built on cell-level truth.",
     narrative:
-      "A pack is more than the sum of its cells: BatteryScope-P is where cell-level diagnostics scale up into pack-level intelligence. Built on the same non-invasive spectroscopy, digital twin, AI, and machine learning foundation as the rest of the BatteryScope family, BatteryScope-P is designed to help you understand how cell-to-cell variability translates into real pack performance, life, and safety.",
+      "BatteryScope-P extends non-invasive diagnostics beyond individual cells to complete modules and battery packs. By combining multi-physics spectroscopy with AI-driven digital twin models, BatteryScope-P evaluates pack-level health, identifies weak or degrading cells within an assembled pack, and predicts remaining pack life: without taking the pack apart.",
     throughput: null,
     measures: [
       {
-        name: "Pack-Level Health Index",
-        desc: "Composite health score derived from aggregated cell spectroscopy",
+        name: "Pack-level SoH",
+        desc: "Overall pack health assessment without teardown or extensive discharge testing",
       },
       {
-        name: "Cell-to-cell balance",
-        desc: "Identifies weak, outlier, or diverging cells within assembled packs",
+        name: "Cell-to-cell variation mapping",
+        desc: "Identifies outlier cells that limit total pack performance",
       },
       {
-        name: "Thermal risk profiling",
-        desc: "Early warning for thermal runaway risk from cell imbalance",
+        name: "Module-level impedance profiling",
+        desc: "Characterizes interconnects, busbars, and cell group resistances",
+      },
+      {
+        name: "Thermal & electrochemical anomaly detection",
+        desc: "Early warning for hot spots and localized accelerated aging",
       },
       {
         name: "Pack degradation prediction",
@@ -205,12 +212,21 @@ const products: Product[] = [
   },
 ];
 
-export function ProductsNarrative() {
-  const [activeTab, setActiveTab] = useState<string>("manual");
+function ProductsNarrativeContent() {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const initialTab =
+    tabParam === "manual" || tabParam === "automated" || tabParam === "pack"
+      ? tabParam
+      : "manual";
+
+  const [selectedTab, setSelectedTab] = useState<string | null>(null);
+
+  const activeTab = selectedTab ?? initialTab;
   const activeProduct = products.find((p) => p.id === activeTab) || products[0];
 
   return (
-    <div className="w-full">
+    <div id="product-detail" className="w-full scroll-mt-28">
       {/* Product Selector Tabs */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {products.map((prod) => {
@@ -218,7 +234,7 @@ export function ProductsNarrative() {
           return (
             <button
               key={prod.id}
-              onClick={() => setActiveTab(prod.id)}
+              onClick={() => setSelectedTab(prod.id)}
               className={`group flex items-center gap-3 rounded-[10px] border p-4 text-left transition-all duration-300 ${
                 isActive
                   ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-lg shadow-[var(--signal)]/10"
@@ -395,5 +411,13 @@ export function ProductsNarrative() {
         </div>
       </div>
     </div>
+  );
+}
+
+export function ProductsNarrative() {
+  return (
+    <Suspense fallback={<div className="min-h-[400px] w-full animate-pulse rounded-[14px] bg-[var(--card)]" />}>
+      <ProductsNarrativeContent />
+    </Suspense>
   );
 }

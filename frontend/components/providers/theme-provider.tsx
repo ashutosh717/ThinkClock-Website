@@ -13,11 +13,10 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark";
+    if (typeof window === "undefined") return "light";
     const saved = localStorage.getItem("thinkclock-theme") as Theme | null;
-    if (saved === "light" || saved === "dark") return saved;
-    if (window.matchMedia("(prefers-color-scheme: light)").matches) return "light";
-    return "dark";
+    if (saved === "dark" || saved === "light") return saved;
+    return "light"; // Default on first open is Light mode
   });
 
   useEffect(() => {
@@ -30,7 +29,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("thinkclock-theme", theme);
   }, [theme]);
 
-  const toggle = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggle = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
@@ -42,7 +43,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
-    return { theme: "dark" as Theme, toggle: () => {} };
+    return { theme: "light" as Theme, toggle: () => {} };
   }
   return context;
 }

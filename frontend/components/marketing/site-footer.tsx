@@ -7,9 +7,9 @@ const footerLinks = [
     title: "Products",
     links: [
       { href: "/products", label: "Overview" },
-      { href: "/products", label: "BatteryScope-C Manual" },
-      { href: "/products", label: "BatteryScope-C Automated" },
-      { href: "/products", label: "BatteryScope-P" },
+      { href: "/products?tab=manual#product-detail", label: "BatteryScope-C Manual" },
+      { href: "/products?tab=automated#product-detail", label: "BatteryScope-C Automated" },
+      { href: "/products?tab=pack#product-detail", label: "BatteryScope-P" },
       // { href: "/marketplace", label: "Cell Store" }, // Hidden as requested
     ],
   },
