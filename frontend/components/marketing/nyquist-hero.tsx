@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { SendButton } from "@/components/ui/send-button";
 
 type NyquistHeroProps = {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
 };
 
 const P_SENSING = "M45,290 C130,85 270,70 360,205 C412,278 458,285 515,290";
@@ -43,129 +43,102 @@ function interpolatePath(t: number): string {
   return result.trim();
 }
 
-export function NyquistHero({ title, subtitle }: NyquistHeroProps) {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragRotate, setDragRotate] = useState({ x: 0, y: 0 });
-  const dragStart = useRef({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
+export function NyquistHero({
+  title = "Battery Characterization in Seconds. Not Hours.",
+  subtitle = "Supported and funded by Innovate UK. Non-invasive spectroscopy, digital twins, and AI machine learning delivering total battery cell health signatures in 75 seconds without cycle loss.",
+}: NyquistHeroProps) {
+  const [slider, setSlider] = useState(0.5);
+  const [tiltX, setTiltX] = useState(0);
+  const [tiltY, setTiltY] = useState(0);
+  const [svgParallaxY, setSvgParallaxY] = useState(0);
+  const isDragging = useRef(false);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+  const activeStageLabel =
+    slider < 0.33 ? "SENSING" : slider < 0.66 ? "MODELLING" : "ANALYTICS";
+
+  const activeStageValue =
+    slider < 0.33
+      ? "Multi-Physics Spectroscopy (EIS + Acoustic + RF)"
+      : slider < 0.66
+      ? "Digital Twin State Estimation & Degradation AI"
+      : "Predictive SoH, RUL, Micro-Fault Diagnostics";
 
   useEffect(() => {
-    let frameId = 0;
-    const tick = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const winH = window.innerHeight;
-      const progress = Math.max(0, Math.min(1, (winH - rect.top) / (winH + rect.height)));
-      setScrollProgress(progress);
-      frameId = requestAnimationFrame(tick);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setSvgParallaxY(scrollY * 0.05);
     };
-    frameId = requestAnimationFrame(tick);
 
-    const onMouseMove = (e: MouseEvent) => {
-      if (!svgRef.current) return;
-      const rect = svgRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      setMousePos({ x, y });
-    };
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener("mousemove", onMouseMove);
-    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (!pathRef.current) return;
-    const d = interpolatePath(scrollProgress);
-    pathRef.current.setAttribute("d", d);
-  }, [scrollProgress]);
-
   const handlePointerDown = (e: React.PointerEvent) => {
-    setIsDragging(true);
-    dragStart.current = { x: e.clientX, y: e.clientY };
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    isDragging.current = true;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging) return;
-    const dx = (e.clientX - dragStart.current.x) * 0.3;
-    const dy = (e.clientY - dragStart.current.y) * 0.3;
-    setDragRotate({ x: dy, y: dx });
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left - rect.width / 2;
+    const mouseY = e.clientY - rect.top - rect.height / 2;
+
+    const rotY = (mouseX / (rect.width / 2)) * 3;
+    const rotX = -(mouseY / (rect.height / 2)) * 3;
+    setTiltX(rotY);
+    setTiltY(rotX);
+
+    if (isDragging.current && svgRef.current) {
+      const svgRect = svgRef.current.getBoundingClientRect();
+      const relativeX = e.clientX - svgRect.left;
+      const progress = Math.max(0, Math.min(1, relativeX / svgRect.width));
+      setSlider(progress);
+    }
   };
 
   const handlePointerUp = () => {
-    setIsDragging(false);
-    setDragRotate({ x: 0, y: 0 });
+    isDragging.current = false;
+    setTiltX(0);
+    setTiltY(0);
   };
 
-  const statusIdx = scrollProgress < 0.33 ? 0 : scrollProgress < 0.66 ? 1 : 2;
-  const statusLabels = ["Sensing", "Modelling", "Analytics"];
-
-  const glowX = 15 + mousePos.x * 15;
-  const glowY = 15 + mousePos.y * 15;
-  const parallaxOffset = scrollProgress * 40;
-  const contentOpacity = Math.max(0, 1 - scrollProgress * 0.4);
-  const svgParallaxY = scrollProgress * 30;
-
-  const tiltX = (mousePos.x - 0.5) * 6 + dragRotate.y;
-  const tiltY = (mousePos.y - 0.5) * -6 + dragRotate.x;
+  const dPath = interpolatePath(slider);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen overflow-hidden bg-[var(--ink)] px-4 pb-20 pt-20 sm:px-6 sm:pt-28"
-    >
-      <div className="pointer-events-none absolute inset-0 opacity-50" aria-hidden="true">
-        <div
-          className="absolute h-80 w-80 rounded-full bg-[var(--signal)]/20 blur-3xl transition-transform duration-1000 ease-out"
-          style={{
-            left: `${glowX}%`,
-            top: `${glowY}%`,
-            transform: `translate(-50%, calc(-50% - ${parallaxOffset * 0.3}px))`,
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-[var(--copper)]/15 blur-3xl"
-          style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
-        />
-        <div
-          className="absolute top-1/4 right-[10%] h-48 w-48 rounded-full bg-[var(--signal)]/5 blur-3xl"
-          style={{ transform: `translateY(${-parallaxOffset * 0.2}px)` }}
-        />
-      </div>
+    <section className="relative overflow-hidden bg-transparent px-6 py-20 sm:px-12 lg:px-16 lg:py-28">
+      <div className="mx-auto grid w-full max-w-[1400px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
+            <span className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+              Quantum Battery Observatory
+            </span>
+          </div>
 
-      <div className="relative mx-auto grid w-full gap-12 px-6 sm:px-12 lg:px-16 xl:px-24 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-        <div style={{ opacity: contentOpacity, transform: `translateY(${scrollProgress * 20}px)` }}>
-          <p className="font-mono text-xs tracking-[0.18em] text-[var(--signal)] uppercase">
-            ThinkClock Battery Labs
-          </p>
-          <h1 className="mt-4 max-w-2xl font-display text-4xl leading-tight text-[var(--paper)] sm:text-6xl">
+          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.12] text-[var(--paper)] sm:text-5xl lg:text-6xl">
             {title}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-[var(--graphite-on-dark)] sm:text-lg">
+
+          <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
             {subtitle}
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <SendButton href="/contact" label="Request a demo" />
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <SendButton href="/contact" label="Book a BatteryScope Demo" />
             <a
               href="/technology"
-              className="inline-flex items-center gap-2 rounded-md border border-[var(--graphite)]/50 px-6 py-3 font-medium text-[var(--paper)] transition-all hover:border-[var(--signal)]/50 hover:text-[var(--signal)]"
+              className="inline-flex items-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
             >
-              How it works
+              How It Works →
             </a>
           </div>
         </div>
 
         <div
-          className="rounded-2xl border border-[var(--graphite)]/40 bg-black/30 p-4 shadow-2xl shadow-black/40 backdrop-blur-sm transition-all duration-1000 ease-out cursor-grab active:cursor-grabbing select-none"
+          className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-2xl backdrop-blur-md transition-all duration-1000 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60"
           style={{
-            transform: `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(${svgParallaxY}px)`,
+            transform: `perspective(1200px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(${svgParallaxY}px)`,
           }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -180,95 +153,78 @@ export function NyquistHero({ title, subtitle }: NyquistHeroProps) {
             aria-label="Animated signal trace"
           >
             <defs>
-              <linearGradient id="nyq" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id="nyquistGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="var(--signal)" />
+                <stop offset="50%" stopColor="#14b8a6" />
                 <stop offset="100%" stopColor="var(--copper)" />
               </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
-            <rect x="0" y="0" width="540" height="340" fill="transparent" />
-            <g stroke="rgba(91,102,99,0.35)" strokeWidth="1">
-              <line x1="45" y1="290" x2="515" y2="290" />
-              <line x1="45" y1="290" x2="45" y2="35" />
-            </g>
-            {["Sensing", "Modelling", "Analytics"].map((label, i) => (
-              <text
-                key={label}
-                x={45 + (i + 1) * 120}
-                y="310"
-                textAnchor="middle"
-                className="font-mono text-[9px]"
-                fill="rgba(91,102,99,0.5)"
-              >
-                {label}
-              </text>
-            ))}
-            <text x="30" y="160" textAnchor="middle" transform="rotate(-90, 30, 160)" className="font-mono text-[9px]" fill="rgba(91,102,99,0.4)">
-              Signal
-            </text>
-            {[1, 2, 3].map((i) => (
-              <line
-                key={i}
-                x1="45"
-                y1={290 - i * 50}
-                x2="55"
-                y2={290 - i * 50}
-                stroke="rgba(91,102,99,0.25)"
-                strokeWidth="1"
-              />
-            ))}
-            {[1, 2, 3].map((i) => (
-              <line
-                key={i + 3}
-                x1={45 + i * 120}
-                y1="290"
-                x2={45 + i * 120}
-                y2="282"
-                stroke="rgba(91,102,99,0.25)"
-                strokeWidth="1"
-              />
-            ))}
-            <path
-              ref={pathRef}
-              d={P_SENSING}
-              fill="none"
-              stroke="url(#nyq)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              filter="url(#glow)"
-            />
-            <circle cx="45" cy="290" r="4" fill="var(--signal)">
-              <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-          <div className="mt-2 flex items-center justify-between">
-            <p className="font-mono text-xs text-[var(--graphite-on-dark)]">
-              Signal trace &mdash; scroll to degrade
-            </p>
-            <span
-              className="font-mono text-[10px] transition-colors duration-500"
-              style={{ color: `var(--${statusIdx === 1 ? "copper" : "signal"})` }}
-            >
-              {statusLabels[statusIdx]}
-            </span>
-          </div>
-        </div>
-      </div>
 
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-500"
-        style={{ opacity: 1 - scrollProgress }}
-      >
-        <div className="flex animate-bounce flex-col items-center gap-1 opacity-40">
-          <svg className="h-4 w-4 text-[var(--graphite-on-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            {/* Grid Lines */}
+            {[60, 120, 180, 240, 300].map((y) => (
+              <line
+                key={y}
+                x1="40"
+                y1={y}
+                x2="515"
+                y2={y}
+                stroke="var(--graphite)"
+                strokeOpacity="0.2"
+                strokeDasharray="4 4"
+              />
+            ))}
+            {[120, 220, 320, 420].map((x) => (
+              <line
+                key={x}
+                x1={x}
+                y1="40"
+                x2={x}
+                y2="300"
+                stroke="var(--graphite)"
+                strokeOpacity="0.2"
+                strokeDasharray="4 4"
+              />
+            ))}
+
+            {/* Axis Labels */}
+            <text x="45" y="325" fill="var(--graphite-on-dark)" fontSize="10" fontFamily="var(--font-mono)">
+              0.1 Hz
+            </text>
+            <text x="250" y="325" fill="var(--graphite-on-dark)" fontSize="10" fontFamily="var(--font-mono)">
+              1 kHz
+            </text>
+            <text x="460" y="325" fill="var(--graphite-on-dark)" fontSize="10" fontFamily="var(--font-mono)">
+              10 kHz
+            </text>
+
+            {/* Interactive Nyquist Curve */}
+            <path
+              d={dPath}
+              fill="none"
+              stroke="url(#nyquistGradient)"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+            />
           </svg>
+
+          {/* Controls & Active Readout */}
+          <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+            <div className="flex items-center justify-between font-mono text-xs text-[var(--graphite-on-dark)]">
+              <span className="font-semibold text-[var(--signal)]">{activeStageLabel}</span>
+              <span className="font-semibold text-[var(--paper)]">{activeStageValue}</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={slider}
+              onChange={(e) => setSlider(parseFloat(e.target.value))}
+              className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-[var(--secondary)] accent-[var(--signal)] focus:outline-none"
+              aria-label="Spectroscopy frequency slider"
+            />
+          </div>
         </div>
       </div>
     </section>

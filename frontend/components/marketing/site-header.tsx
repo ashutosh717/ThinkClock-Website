@@ -2,11 +2,47 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import thinkclockIcon from "@/images/thinkclock_logo.png";
 
 import { FaqButton } from "@/components/ui/faq-button";
+import { useTheme } from "@/components/providers/theme-provider";
+
+const emptySubscribe = () => () => {};
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+function ThemeToggleButton() {
+  const { theme, toggle } = useTheme();
+  const mounted = useMounted();
+
+  if (!mounted) {
+    return (
+      <div className="ml-2 inline-block h-[1.8em] w-[3.2em] rounded-[30px] border border-[rgba(91,102,99,0.35)] bg-[var(--secondary)]" />
+    );
+  }
+
+  return (
+    <label
+      className="theme-switch ml-2"
+      title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+    >
+      <input
+        type="checkbox"
+        checked={theme === "dark"}
+        onChange={toggle}
+        aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      />
+      <span className="theme-slider" />
+    </label>
+  );
+}
 
 const links = [
   { href: "/", label: "Home" },
@@ -50,45 +86,47 @@ export function SiteHeader() {
         }`}
       >
         <div className="flex w-full items-center justify-between px-6 py-3 sm:px-12 lg:px-16">
-          <Link href="/" className="group flex items-center gap-2 transition-all duration-300 hover:scale-[1.02]">
+          <Link href="/" className="group flex items-center gap-3.5 sm:gap-4 transition-all duration-300 hover:scale-[1.02]">
             <Image
               src={thinkclockIcon}
               alt="ThinkClock"
-              className="h-10 w-10 rounded-lg object-cover transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[var(--signal)]/30"
+              className="h-14 sm:h-16 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
               priority
             />
             <div className="flex flex-col">
-              <span className="font-display text-base font-bold leading-tight text-[var(--paper)] transition-all duration-300 group-hover:text-[var(--signal)]">
+              <span className="font-display text-xl sm:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] transition-colors duration-300 group-hover:text-[var(--signal)]">
                 ThinkClock Battery Labs
               </span>
-              <span className="font-mono text-xs font-semibold leading-tight text-[var(--copper)]">
+              <span className="font-mono text-xs sm:text-[13px] font-semibold leading-tight text-[var(--copper)]">
                 Sensing, Modelling, Analytics
               </span>
             </div>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-5 md:flex">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-2 md:flex">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link-hover text-[15px] font-medium transition-all ${
+                className={`text-xs font-semibold tracking-wide transition-all rounded-[6px] px-3 py-1.5 ${
                   isActive(link.href)
-                    ? "is-active text-[var(--paper)] font-bold"
-                    : "text-[var(--graphite-on-dark)] hover:text-[var(--signal)]"
+                    ? "bg-[var(--secondary)] text-[var(--signal)] border border-[rgba(91,102,99,0.45)]"
+                    : "text-[var(--graphite-on-dark)] hover:text-[var(--paper)] hover:bg-white/5"
                 }`}
               >
-                <span className="py-0.5">{link.label}</span>
+                <span>{link.label}</span>
               </Link>
             ))}
             <FaqButton className="ml-1" />
+            {/* Cell Store link hidden as requested
             <Link
               href="/marketplace"
-              className="ml-2 rounded-md bg-[var(--signal)] px-3 py-1.5 text-sm font-semibold text-[var(--ink)] transition-all hover:brightness-110 hover:shadow-lg hover:shadow-[var(--signal)]/25"
+              className="ml-2 rounded-[6px] border border-[var(--signal)] bg-[var(--signal)] px-3.5 py-1.5 font-sans text-xs font-bold uppercase tracking-wider text-[var(--ink)] transition-all hover:bg-[#48ceb7] hover:shadow-[0_0_15px_rgba(92,225,201,0.25)]"
             >
               Cell Store
             </Link>
-            <div className="ml-4 flex items-center gap-1.5 border-l border-[var(--graphite)]/30 pl-4">
+            */}
+            <div className="ml-3 flex items-center gap-1 border-l border-[rgba(91,102,99,0.35)] pl-3">
               <a
                 href="https://www.linkedin.com/company/thinkclock"
                 target="_blank"
@@ -111,6 +149,7 @@ export function SiteHeader() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
+              <ThemeToggleButton />
             </div>
           </nav>
 
@@ -146,6 +185,7 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
+            {/* Cell Store link hidden as requested
             <Link
               href="/marketplace"
               onClick={() => setMobileOpen(false)}
@@ -153,6 +193,11 @@ export function SiteHeader() {
             >
               Cell Store
             </Link>
+            */}
+            <div className="mt-4 pt-4 border-t border-[rgba(91,102,99,0.35)] flex items-center justify-center gap-3">
+              <span className="font-mono text-xs text-[var(--graphite-on-dark)] uppercase">Theme:</span>
+              <ThemeToggleButton />
+            </div>
           </nav>
         </div>
       )}

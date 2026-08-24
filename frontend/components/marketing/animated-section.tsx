@@ -17,16 +17,16 @@ interface AnimatedSectionProps {
 }
 
 const animationClasses: Record<AnimationVariant, string> = {
-  "fade-up": "translate-y-6",
-  "fade-left": "-translate-x-6",
-  "fade-right": "translate-x-6",
-  "scale-in": "scale-[0.96]",
+  "fade-up": "translate-y-10 scale-[0.98]",
+  "fade-left": "-translate-x-10 scale-[0.98]",
+  "fade-right": "translate-x-10 scale-[0.98]",
+  "scale-in": "scale-[0.94]",
 };
 
 const visibleClasses: Record<AnimationVariant, string> = {
-  "fade-up": "translate-y-0 opacity-100",
-  "fade-left": "translate-x-0 opacity-100",
-  "fade-right": "translate-x-0 opacity-100",
+  "fade-up": "translate-y-0 scale-100 opacity-100",
+  "fade-left": "translate-x-0 scale-100 opacity-100",
+  "fade-right": "translate-x-0 scale-100 opacity-100",
   "scale-in": "scale-100 opacity-100",
 };
 
@@ -39,15 +39,18 @@ export function AnimatedSection({
   stagger = false,
   staggerIndex = 0,
 }: AnimatedSectionProps) {
-  const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.08 });
+  const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: "0px 0px -30px 0px",
+  });
 
-  const baseDelay = delay + (stagger ? staggerIndex * 120 : 0);
+  const baseDelay = delay + (stagger ? staggerIndex * 150 : 0);
 
   return (
     <Tag
       ref={ref}
       className={cn(
-        "opacity-0 transition-all duration-700 ease-out will-change-transform",
+        "opacity-0 transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]",
         animationClasses[animation],
         isVisible && visibleClasses[animation],
         className,

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AlertTriangle, Clock, FileQuestion } from "lucide-react";
-import { VideoSequenceHero } from "@/components/marketing/video-sequence-hero";
 import { NyquistHero } from "@/components/marketing/nyquist-hero";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { SendButton } from "@/components/ui/send-button";
@@ -9,7 +8,6 @@ const trustStats = [
   { value: "75 Seconds", label: "Full battery diagnostic report per run" },
   { value: "6 Channels", label: "Simultaneous cylindrical cell testing" },
   { value: "2,880 Cells", label: "Per 8-hr shift (Automated unit throughput)" },
-  { value: "Innovate UK", label: "Supported & funded innovation agency" },
   { value: "0 Cycle Loss", label: "Non-invasive zero damage testing" },
 ];
 
@@ -71,63 +69,62 @@ const credibilityTimeline = [
 export default function MarketingHome() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
-      {/* Video Sequence Hero */}
-      <VideoSequenceHero />
-
-      {/* Nyquist Narrative Hero */}
+      {/* ── 1. Nyquist Interactive Hero ── */}
       <NyquistHero
-        title="Battery Characteristics in Seconds. Not Hours."
-        subtitle="Every battery pack is only as good as its weakest cell. ThinkClock Battery Labs builds diagnostic tools that let Gigafactories, pack manufacturers, resellers, and recyclers see inside every cell in seconds, with lab-grade accuracy and zero cycle loss."
+        title="Battery Characteristics in Seconds — Not Hours."
+        subtitle="Every battery pack is only as good as its weakest cell — and today, most manufacturers still can't see which cell that is until it's too late. ThinkClock Battery Labs builds the diagnostic tools that let Gigafactories, battery pack manufacturers, resellers, and recyclers see inside every cell, in seconds, with lab-grade accuracy — no charge-discharge cycling required."
       />
 
-      {/* Opening Narrative & Trust Bar */}
-      <AnimatedSection className="bg-[var(--ink)] px-6 py-20 sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto max-w-5xl text-center">
-          <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
-            Brand Story
-          </span>
-          <p className="mt-4 font-display text-2xl font-bold leading-relaxed text-[var(--paper)] sm:text-3xl">
-            Batteries don&apos;t fail randomly. They fail because of what we don&apos;t measure.
-          </p>
-          <p className="mt-5 text-lg leading-relaxed text-[var(--graphite-on-dark)] sm:text-xl">
-            A pack built from mismatched, under-graded, or silently degraded cells is a pack that underperforms, ages early, or (worse) becomes a safety risk. ThinkClock exists to close that blind spot. We use non-invasive spectroscopy, digital twins, AI, and machine learning to read the internal state of a cell without disassembly, without damage, and without a single charge-discharge cycle.
-          </p>
-        </div>
-
-        {/* Trust & Credibility Stat Bar */}
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {trustStats.map((stat, i) => (
-            <AnimatedSection
-              key={stat.value}
-              as="div"
-              animation="fade-up"
-              stagger
-              staggerIndex={i}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-md"
-            >
-              <p className="font-mono text-3xl font-bold text-[var(--signal)] sm:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{stat.label}</p>
-            </AnimatedSection>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      {/* The Problem We Solve */}
-      <AnimatedSection className="bg-white/5 px-6 py-28 sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mx-auto max-w-4xl text-center">
-            <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
-              Problem & Positioning
+      {/* ── 2. Opening Brand Story & Trust Stats Bar ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-4xl text-center" animation="fade-up">
+            <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              Brand Story
             </span>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-5xl lg:text-6xl text-[var(--paper)]">
+            <p className="mt-3 font-display text-2xl font-bold leading-snug text-[var(--paper)] sm:text-3xl lg:text-4xl">
+              Batteries don&apos;t fail randomly. They fail because of what we don&apos;t measure.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg">
+              A pack built from mismatched, under-graded, or silently degraded cells is a pack that underperforms, ages early, or — worse — becomes a safety risk. ThinkClock exists to close that blind spot. We&apos;re an R&amp;D-driven organization focused on Battery Health Analytics, using non-invasive spectroscopy, digital twins, AI, and machine learning to read the internal state of a cell — without disassembly, without damage, and without a single charge-discharge cycle. The result is BatteryScope: a complete cell health signature delivered in seconds, not the hours or days traditional testing demands.
+            </p>
+          </AnimatedSection>
+
+          {/* Trust Stat Grid */}
+          <div className="mt-8 sm:mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {trustStats.map((stat, i) => (
+              <AnimatedSection
+                key={stat.value}
+                as="div"
+                animation="fade-up"
+                stagger
+                staggerIndex={i}
+                className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 text-center shadow-lg transition-all duration-300 hover:border-[var(--signal)]/50"
+              >
+                <p className="font-mono text-2xl font-bold text-[var(--signal)] sm:text-3xl">{stat.value}</p>
+                <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{stat.label}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. Problem & Positioning ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-4xl text-center" animation="fade-up">
+            <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              Problem &amp; Positioning
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-5xl text-[var(--paper)]">
               Sorting cells shouldn&apos;t be a bottleneck or a guess.
             </h2>
-            <p className="mt-5 text-lg text-[var(--graphite-on-dark)] sm:text-xl">
+            <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
               Manufacturers today are stuck choosing between slow testing, missing defects, or risking early pack failure.
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
+          <div className="mt-8 sm:mt-10 grid gap-6 md:grid-cols-3">
             {problemComparisons.map((item, i) => (
               <AnimatedSection
                 key={item.method}
@@ -135,50 +132,54 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-3xl border border-red-500/20 bg-red-950/10 p-8 sm:p-10 transition-all duration-300 hover:border-red-500/40"
+                className="group rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-red-500/50"
               >
                 <div
-                  className="flex h-14 w-14 items-center justify-center rounded-2xl border border-red-500/30 bg-red-500/10 shadow-lg transition-transform duration-300 group-hover:scale-110"
+                  className="flex h-12 w-12 items-center justify-center rounded-[10px] border shadow-sm transition-transform duration-300 group-hover:scale-105"
+                  style={{
+                    borderColor: `${item.color}40`,
+                    backgroundColor: `${item.color}15`,
+                  }}
                 >
-                  <item.Icon className="h-7 w-7 stroke-[2]" style={{ color: item.color }} />
+                  <item.Icon className="h-6 w-6 stroke-[2.2]" style={{ color: item.color }} />
                 </div>
-                <h3 className="mt-6 font-display text-2xl font-bold text-red-200">{item.method}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-red-300/80">{item.cost}</p>
+                <h3 className="mt-5 font-display text-xl font-bold text-[var(--paper)]">{item.method}</h3>
+                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{item.cost}</p>
               </AnimatedSection>
             ))}
           </div>
 
           {/* ThinkClock's Answer Banner */}
-          <div className="mt-12 rounded-3xl border border-[var(--signal)]/30 bg-gradient-to-r from-[var(--signal)]/15 via-[var(--signal)]/5 to-transparent p-8 sm:p-12">
+          <AnimatedSection animation="fade-up" delay={200} className="mt-8 sm:mt-10 rounded-[14px] border border-[var(--signal)]/40 bg-[var(--card)] p-6 sm:p-10 shadow-xl">
             <span className="font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
               ThinkClock&apos;s Answer: BatteryScope
             </span>
-            <h3 className="mt-3 font-display text-3xl font-bold sm:text-4xl text-[var(--paper)]">
+            <h3 className="mt-2.5 font-display text-2xl font-bold sm:text-3xl text-[var(--paper)]">
               Non-invasive spectroscopy + AI digital twins = lab-grade health in seconds.
             </h3>
-            <p className="mt-4 max-w-4xl text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg">
+            <p className="mt-3.5 max-w-4xl text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
               Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* Products Preview Section */}
-      <AnimatedSection className="px-6 py-28 sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mx-auto max-w-3xl text-center">
+      {/* ── 4. Product Ecosystem ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
               Product Ecosystem
             </span>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-5xl text-[var(--paper)]">
+            <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-5xl text-[var(--paper)]">
               The BatteryScope Diagnostic Family
             </h2>
             <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
               From lab benchtop testing to Gigafactory inline sorting and pack-level intelligence.
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 sm:mt-10 grid gap-8 md:grid-cols-3">
             {homeProductPreviews.map((prod, i) => (
               <AnimatedSection
                 key={prod.title}
@@ -186,19 +187,19 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group flex flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--signal)]/40 hover:shadow-2xl hover:shadow-[var(--signal)]/10"
+                className="group flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/40 hover:shadow-2xl hover:shadow-[var(--signal)]/10"
               >
                 <div>
                   <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">{prod.badge}</span>
                   <h3 className="mt-3 font-display text-2xl font-bold text-[var(--paper)]">{prod.title}</h3>
-                  <p className="mt-2 font-display text-base italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
-                  <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
+                  <p className="mt-2 font-display text-sm italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
+                  <p className="mt-3.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
                 </div>
-                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-                  <span className="font-mono text-sm font-bold text-[var(--paper)]">{prod.throughput}</span>
+                <div className="mt-8 pt-6 border-t border-[var(--border)] flex items-center justify-between">
+                  <span className="font-mono text-xs sm:text-sm font-bold text-[var(--paper)]">{prod.throughput}</span>
                   <Link
                     href={prod.link}
-                    className="font-mono text-sm font-semibold text-[var(--signal)] transition-colors hover:text-white"
+                    className="font-mono text-xs sm:text-sm font-semibold text-[var(--signal)] transition-colors hover:text-[var(--paper)]"
                   >
                     View Specs →
                   </Link>
@@ -207,28 +208,28 @@ export default function MarketingHome() {
             ))}
           </div>
 
-          <div className="mt-14 text-center">
+          <AnimatedSection animation="fade-up" delay={250} className="mt-10 sm:mt-12 flex justify-center">
             <SendButton href="/products" label="Explore Detailed Product Specs" />
-          </div>
+          </AnimatedSection>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* Credibility Timeline Section */}
-      <AnimatedSection className="bg-white/5 px-6 py-28 sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mx-auto max-w-3xl text-center">
+      {/* ── 5. Credibility Timeline ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
               Credibility Timeline
             </span>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-5xl text-[var(--paper)]">
+            <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-5xl text-[var(--paper)]">
               From Proof of Concept to Production: Built in the Open
             </h2>
             <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
               Iterating from lab prototype to manufactured, customer-deployable diagnostic systems in under a year.
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-4">
+          <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {credibilityTimeline.map((step, i) => (
               <AnimatedSection
                 key={step.phase}
@@ -236,36 +237,38 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="rounded-2xl border border-white/10 bg-[var(--ink)] p-7"
+                className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40"
               >
                 <span className="font-mono text-xs font-semibold text-[var(--signal)]">{step.phase}</span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-[var(--paper)]">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{step.desc}</p>
+                <h3 className="mt-3 font-display text-xl font-bold text-[var(--paper)]">{step.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{step.desc}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* Innovate UK Funded Company Story */}
-      <AnimatedSection className="px-6 py-24 sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-8 rounded-3xl border border-[var(--signal)]/30 bg-gradient-to-br from-[var(--signal)]/10 to-transparent p-10 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-4xl">
-            <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">
-              Backed by Innovate UK
-            </span>
-            <h3 className="mt-3 font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
-              ThinkClock Battery Labs
-            </h3>
-            <p className="mt-4 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg">
-              An R&D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy, digital twins, AI, and machine learning. Supported and funded by Innovate UK, the UK&apos;s national innovation agency.
-            </p>
-          </div>
-          <div className="shrink-0">
-            <SendButton href="/contact" label="Book a BatteryScope Demo" />
-          </div>
+      {/* ── 6. Backed by Innovate UK CTA Banner ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection animation="fade-up" className="mx-auto flex max-w-[1400px] flex-col gap-8 rounded-[14px] border border-[var(--signal)]/40 bg-[var(--card)] p-8 sm:p-12 shadow-2xl lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">
+                Backed by Innovate UK
+              </span>
+              <h3 className="mt-2 font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
+                ThinkClock Battery Labs
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-[var(--graphite-on-dark)]">
+                An R&D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy, digital twins, AI, and machine learning. Supported and funded by Innovate UK, the UK&apos;s national innovation agency.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <SendButton href="/contact" label="Book a BatteryScope Demo" />
+            </div>
+          </AnimatedSection>
         </div>
-      </AnimatedSection>
+      </section>
     </main>
   );
 }

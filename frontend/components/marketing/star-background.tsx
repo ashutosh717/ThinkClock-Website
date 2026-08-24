@@ -9,7 +9,9 @@ interface Particle {
   vy: number;
   size: number;
   color: string;
+  baseAlpha: number;
   alpha: number;
+  twinkleSpeed: number;
 }
 
 export function StarBackground() {
@@ -57,82 +59,147 @@ export function StarBackground() {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("resize", handleResize);
 
-    const particleCount = Math.min(Math.floor((width * height) / 35000), 35);
+    const particleCount = Math.min(Math.floor((width * height) / 30000), 48);
     let particles: Particle[] = [];
 
-    const colors = [
+    const colorsDark = [
       "255, 255, 255", // Crisp White
       "92, 225, 201",  // Brand Cyan (#5ce1c9)
       "201, 122, 74",  // Brand Copper (#c97a4a)
+      "140, 235, 215", // Bright Mint
+    ];
+
+    const colorsLight = [
+      "13, 148, 136",  // Vibrant Signal Teal (#0d9488)
+      "194, 65, 12",   // Warm Hardware Copper (#c2410c)
+      "15, 118, 110",  // Deep Cyan Teal (#0f766e)
+      "30, 41, 38",    // Deep Obsidian Charcoal (#1e2926)
     ];
 
     function initParticles() {
       particles = [];
+      const isLight = document.documentElement.classList.contains("light");
+      const currentColors = isLight ? colorsLight : colorsDark;
+
       for (let i = 0; i < particleCount; i++) {
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = Math.random() * 1.4 + 0.6;
+        const color = currentColors[Math.floor(Math.random() * currentColors.length)];
+        const size = isLight ? Math.random() * 0.8 + 0.6 : Math.random() * 0.8 + 0.5;
+        const baseAlpha = isLight ? Math.random() * 0.35 + 0.3 : Math.random() * 0.4 + 0.2;
+
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.2,
-          vy: -Math.random() * 0.25 - 0.05, // Slow upward ambient drift
+          vy: -Math.random() * 0.25 - 0.05,
           size,
           color,
-          alpha: Math.random() * 0.4 + 0.15,
+          baseAlpha,
+          alpha: baseAlpha,
+          twinkleSpeed: Math.random() * 0.02 + 0.008,
         });
       }
     }
 
     initParticles();
 
+    // Listen to theme class changes on <html> to update particle colors immediately
+    const themeObserver = new MutationObserver(() => {
+      initParticles();
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    let time = 0;
+
     function render() {
       if (!ctx) return;
-      // Smooth mouse interpolation
+      time += 0.02;
+
       mouse.x += (mouse.targetX - mouse.x) * 0.15;
       mouse.y += (mouse.targetY - mouse.y) * 0.15;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Draw background space gradient
-      const bgGradient = ctx.createRadialGradient(
-        width / 2,
-        height,
-        10,
-        width / 2,
-        height / 2,
-        Math.max(width, height)
-      );
-      bgGradient.addColorStop(0, "#1b2735");
-      bgGradient.addColorStop(1, "#090a0f");
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, width, height);
+      const isLight = document.documentElement.classList.contains("light");
 
-      // Draw mouse cursor illumination aura
-      if (mouse.active) {
-        const auraGradient = ctx.createRadialGradient(
-          mouse.x,
-          mouse.y,
-          0,
-          mouse.x,
-          mouse.y,
-          180
+      if (isLight) {
+        // Light laboratory background gradient
+        const bgGradient = ctx.createRadialGradient(
+          width / 2,
+          height,
+          10,
+          width / 2,
+          height / 2,
+          Math.max(width, height)
         );
-        auraGradient.addColorStop(0, "rgba(92, 225, 201, 0.12)");
-        auraGradient.addColorStop(0.5, "rgba(201, 122, 74, 0.05)");
-        auraGradient.addColorStop(1, "rgba(9, 10, 15, 0)");
-        ctx.fillStyle = auraGradient;
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 180, 0, Math.PI * 2);
-        ctx.fill();
+        bgGradient.addColorStop(0, "#f8faf8");
+        bgGradient.addColorStop(1, "#f2f4f1");
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, width, height);
+
+        if (mouse.active) {
+          const auraGradient = ctx.createRadialGradient(
+            mouse.x,
+            mouse.y,
+            0,
+            mouse.x,
+            mouse.y,
+            200
+          );
+          auraGradient.addColorStop(0, "rgba(13, 148, 136, 0.14)");
+          auraGradient.addColorStop(0.5, "rgba(194, 65, 12, 0.06)");
+          auraGradient.addColorStop(1, "rgba(242, 244, 241, 0)");
+          ctx.fillStyle = auraGradient;
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, 200, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else {
+        // Dark space observatory background gradient
+        const bgGradient = ctx.createRadialGradient(
+          width / 2,
+          height,
+          10,
+          width / 2,
+          height / 2,
+          Math.max(width, height)
+        );
+        bgGradient.addColorStop(0, "#0e1514");
+        bgGradient.addColorStop(1, "#0b0f0e");
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(0, 0, width, height);
+
+        if (mouse.active) {
+          const auraGradient = ctx.createRadialGradient(
+            mouse.x,
+            mouse.y,
+            0,
+            mouse.x,
+            mouse.y,
+            200
+          );
+          auraGradient.addColorStop(0, "rgba(92, 225, 201, 0.18)");
+          auraGradient.addColorStop(0.5, "rgba(201, 122, 74, 0.08)");
+          auraGradient.addColorStop(1, "rgba(9, 10, 15, 0)");
+          ctx.fillStyle = auraGradient;
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, 200, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
-      // Update and draw particles
       const maxDistance = 140;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Antigravity mouse repulsion physics
+        // Twinkle oscillation
+        p.alpha = p.baseAlpha + Math.sin(time + i * 1.5) * 0.18;
+        if (p.alpha < 0.1) p.alpha = 0.1;
+        if (p.alpha > 0.95) p.alpha = 0.95;
+
         if (mouse.active) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
@@ -141,27 +208,31 @@ export function StarBackground() {
           if (dist < maxDistance) {
             const force = (maxDistance - dist) / maxDistance;
             const angle = Math.atan2(dy, dx);
-            p.x -= Math.cos(angle) * force * 3.5;
-            p.y -= Math.sin(angle) * force * 3.5;
+            p.x -= Math.cos(angle) * force * 1.8;
+            p.y -= Math.sin(angle) * force * 1.8;
           }
         }
 
-        // Ambient movement
         p.x += p.vx;
         p.y += p.vy;
 
-        // Screen boundary wrapping
         if (p.y < -10) p.y = height + 10;
         if (p.y > height + 10) p.y = -10;
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
 
-        // Render particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-        ctx.shadowBlur = p.size > 2 ? 8 : 0;
-        ctx.shadowColor = `rgba(${p.color}, 0.8)`;
+
+        if (isLight) {
+          ctx.shadowBlur = 2;
+          ctx.shadowColor = `rgba(${p.color}, 0.25)`;
+        } else {
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = `rgba(${p.color}, 0.6)`;
+        }
+
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -172,6 +243,7 @@ export function StarBackground() {
     render();
 
     return () => {
+      themeObserver.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);

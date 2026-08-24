@@ -10,6 +10,7 @@ interface SendButtonProps {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
+  variant?: "default" | "lab";
 }
 
 const PlaneIcon = () => (
@@ -64,7 +65,7 @@ export function SendButton({
 
     if (href) {
       e.preventDefault();
-      // Exact moment plane flight reaches right edge (850ms)
+      // Moment flight completes takeoff
       setTimeout(() => {
         router.push(href);
       }, 850);

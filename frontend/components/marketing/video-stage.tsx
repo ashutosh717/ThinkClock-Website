@@ -55,7 +55,7 @@ export function VideoStage({
   return (
     <div
       data-stage-id={stageId}
-      className={`absolute inset-0 h-full w-full transition-opacity duration-1500 cubic-bezier(0.4, 0, 0.2, 1) ${
+      className={`absolute inset-0 h-full w-full transition-opacity duration-400 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
         isActive ? "pointer-events-auto opacity-100 z-10" : "pointer-events-none opacity-0 z-0"
       }`}
     >

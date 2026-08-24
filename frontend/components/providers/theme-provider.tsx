@@ -12,7 +12,13 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    const saved = localStorage.getItem("thinkclock-theme") as Theme | null;
+    if (saved === "light" || saved === "dark") return saved;
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) return "light";
+    return "dark";
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -21,6 +27,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } else {
       root.classList.remove("light");
     }
+    localStorage.setItem("thinkclock-theme", theme);
   }, [theme]);
 
   const toggle = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -34,6 +41,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
+  if (!context) {
+    return { theme: "dark" as Theme, toggle: () => {} };
+  }
   return context;
 }

@@ -9,7 +9,7 @@ interface ApplyButtonProps {
 
 export function ApplyButton({
   label = "Apply",
-  href = "#",
+  href = "mailto:careers@thinkclock.com",
   onClick,
   className = "",
 }: ApplyButtonProps) {

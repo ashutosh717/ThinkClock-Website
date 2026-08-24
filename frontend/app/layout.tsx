@@ -40,6 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bodySans.variable} ${display.variable} ${dataMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-transparent text-[var(--paper)] relative">
@@ -47,7 +48,7 @@ export default function RootLayout({
         <ThemeProvider>
           <QueryProvider>
             <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <div className="flex-1 flex flex-col">{children}</div>
             <AiAssistant />
             <SiteFooter />
           </QueryProvider>

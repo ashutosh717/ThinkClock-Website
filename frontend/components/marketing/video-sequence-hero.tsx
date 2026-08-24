@@ -130,18 +130,12 @@ export function VideoSequenceHero() {
     <section
       ref={containerRef}
       aria-label="Cinematic Battery Diagnostics Sequence"
-      className="relative w-full overflow-hidden bg-[var(--ink)] pt-24 pb-8 sm:pt-28 sm:pb-12"
+      className="relative w-full overflow-hidden bg-[var(--ink)] pt-2 pb-8 sm:pt-4 sm:pb-12"
     >
-      {/* Dynamic Background Glowing Aura Field (No Border, Ambient Backlight Glow) */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute left-1/2 top-1/2 h-[45rem] w-[80vw] max-w-[1400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[var(--signal)]/30 via-cyan-400/20 to-[var(--copper)]/30 blur-[140px] animate-pulse" />
-      </div>
-
-      {/* Increased Container Size (max-w-[1400px] for full-fledged wide video canvas) */}
-      <div className="relative mx-auto w-full max-w-[1400px] px-4 sm:px-6">
+      <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
         <AnimatePresence mode="wait">
           {!isOpen ? (
-            /* Collapsed State: Glowing Trigger Button explaining what is inside */
+            /* Collapsed State: Laboratory Telemetry Trigger Control */
             <motion.div
               key="trigger-button"
               initial={{ opacity: 0, y: 10 }}
@@ -152,21 +146,23 @@ export function VideoSequenceHero() {
             >
               <button
                 onClick={handleOpen}
-                className="group relative inline-flex items-center gap-4 rounded-full border border-[var(--signal)]/60 bg-gradient-to-r from-[var(--signal)]/15 via-cyan-950/40 to-[var(--copper)]/15 px-8 py-4 shadow-[0_0_40px_rgba(92,225,201,0.35)] backdrop-blur-xl transition-all duration-500 hover:scale-[1.03] hover:border-[var(--signal)] hover:shadow-[0_0_65px_rgba(92,225,201,0.6)] focus:outline-none"
+                aria-expanded={isOpen}
+                aria-controls="telemetry-video-canvas"
+                className="group relative inline-flex items-center gap-4 rounded-[10px] border border-[var(--border)] bg-[var(--card)] px-6 py-3.5 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/70 hover:shadow-[0_0_25px_rgba(92,225,201,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--signal)]/50"
               >
                 {/* Glowing Play Icon Badge */}
-                <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/40 transition-transform duration-300 group-hover:scale-110">
-                  <svg className="ml-0.5 h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-[var(--signal)] text-[var(--ink)] shadow-md transition-transform duration-300 group-hover:scale-105">
+                  <svg className="ml-0.5 h-4 w-4 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </span>
 
                 {/* Button Text & Subtitle */}
                 <div className="flex flex-col text-left">
-                  <span className="font-display text-sm font-semibold tracking-wide text-white group-hover:text-[var(--signal)] sm:text-base">
+                  <span className="font-display text-xs font-semibold tracking-wide text-[var(--paper)] group-hover:text-[var(--signal)] sm:text-sm">
                     Explore Diagnostic Telemetry Sequence
                   </span>
-                  <span className="font-mono text-xs text-[var(--graphite-on-dark)]">
+                  <span className="font-mono text-[11px] text-[var(--graphite-on-dark)]">
                     EIS, Acoustic &amp; RF Multi-Modal Characterization
                   </span>
                 </div>
@@ -194,7 +190,7 @@ export function VideoSequenceHero() {
             >
               {/* Borderless Video Canvas with Ambient Background Aura Shadow */}
               <div
-                className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-[0_0_80px_20px_rgba(92,225,201,0.25)] transition-all duration-400 ease-out"
+                className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-black border border-[rgba(91,102,99,0.45)] shadow-2xl shadow-black/80 transition-all duration-400 ease-out"
                 style={{
                   filter: `blur(${blurAmount}px)`,
                   transition: "filter 0.4s ease-out",

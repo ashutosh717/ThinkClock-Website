@@ -1,92 +1,96 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatedSection } from "@/components/marketing/animated-section";
 import { SendButton } from "@/components/ui/send-button";
+import { AnimatedSection } from "@/components/marketing/animated-section";
 
-export interface ProductData {
-  id: "manual" | "automated" | "pack";
+interface Measure {
+  name: string;
+  desc: string;
+  inDevelopment?: boolean;
+}
+
+interface Product {
+  id: string;
   name: string;
   badge: string;
   tagline: string;
   narrative: string;
-  throughput?: {
+  throughput: {
     rate: string;
     shiftTotal: string;
     details: string;
-  };
-  measures?: Array<{
-    name: string;
-    desc: string;
-    inDevelopment?: boolean;
-  }>;
+  } | null;
+  measures: Measure[];
   specs: string[];
   whyItWins: string[];
   bestFor: string[];
-  ctaText: string;
   ctaHeadline: string;
+  ctaText: string;
 }
 
-export const productsData: ProductData[] = [
+const products: Product[] = [
   {
     id: "manual",
     name: "BatteryScope-C Manual",
     badge: "Bench-Deployable, Operator-Led",
     tagline: "Battery characteristics in seconds. Not hours.",
     narrative:
-      "BatteryScope-C Manual is a fully manufactured, production-ready diagnostic unit: not a prototype. Out of the box, it supports profiling and grading of LG 21700 cylindrical cells, and can be rapidly trained for 18650 and other cylindrical and prismatic formats. An operator places the cell, initiates the scan, and receives a complete diagnostic profile in seconds: no cycling, no prolonged setup, no specialist knowledge required.",
+      "BatteryScope-C Manual is a bench-deployable diagnostic unit built for testing labs, QA teams, and development environments. It characterizes cylindrical cells in seconds using non-invasive multi-physics spectroscopy, replacing hours of charge-discharge cycling with an instant, comprehensive health signature.",
     throughput: {
-      rate: "6 cells / minute",
+      rate: "4 cells / minute",
       shiftTotal: "1,920 cells",
-      details: "per 8-hour shift (21700 cells)",
+      details: "per 8-hour shift (manual operation, 21700 cells)",
     },
     measures: [
       {
         name: "State of Health (SoH)",
-        desc: "Accurate SoH reading without charge-discharge cycling",
+        desc: "Accurate SoH read in seconds without full charge-discharge cycles",
       },
       {
         name: "Self-discharge rate",
-        desc: "Predicted without waiting days for results",
+        desc: "Predicted self-discharge behavior without days of open-circuit storage",
       },
       {
         name: "Internal resistance (DCIR)",
-        desc: "Measured non-invasively in seconds",
+        desc: "True internal resistance measured non-invasively",
       },
       {
         name: "Remaining Useful Life (RUL)",
-        desc: "Predictive RUL for second-life decisions and grading",
+        desc: "Predictive lifetime projection from a single diagnostic sweep",
       },
       {
         name: "Cell health signatures",
-        desc: "A proprietary spectroscopic fingerprint unique to BatteryScope",
+        desc: "Complete multi-modal spectroscopic fingerprint of cell condition",
         inDevelopment: true,
       },
       {
         name: "Micro-fault detection",
-        desc: "Detects internal short circuits and electrolyte leaks",
+        desc: "Early detection of internal short circuits and electrolyte leaks",
         inDevelopment: true,
       },
     ],
     specs: [
-      "Six-channel testing: 6 cylindrical cells tested simultaneously without compromising accuracy",
-      "75-second full battery report: complete, comprehensive analysis per run",
-      "Adjustable cell compatibility: flexible clamping fits a wide range of cylindrical cell sizes",
-      "Fully connected: Wi-Fi, Ethernet, and HDMI ready for seamless integration",
-      "Integrated reporting software: auto-captures test values and generates reports instantly",
-      "Durable protective casing: portable 'pickup-and-go' mobility for stable testing anywhere",
-      "HaaS delivery available: low upfront cost options",
+      "Supported cell format: LG 21700 supported today (rapidly adaptable for 18650 and other cylindrical formats)",
+      "Non-destructive testing: zero cycle loss, no degradation during characterisation",
+      "Six-channel simultaneous testing: test up to 6 cells concurrently",
+      "Fast report generation: full diagnostic report in 75 seconds",
+      "Operator-friendly UI: simple load-and-test workflow with real-time pass/fail indicators",
+      "Connectivity: export data to CSV, connect to MES/QMS via API",
+      "Dimensions: benchtop footprint, easily moved between workstations",
+      "Power: standard 230V AC supply",
     ],
     whyItWins: [
-      "Fully manufactured, customer-deployable today: not a lab prototype",
-      "No cycling required, so zero cycle life is lost to testing",
-      "Low barrier to entry for teams not yet ready to automate",
+      "Replaces hours of slow cycler testing with seconds-fast multi-physics diagnostics",
+      "No cell damage: tested cells go directly into production or shipping, zero loss",
+      "Catches degradation and micro-faults that standard OCV/IR checks completely miss",
+      "Low capital cost compared to large multi-channel cycler banks",
     ],
     bestFor: [
-      "Lab testing",
-      "QC sampling",
-      "Second-life battery evaluation",
-      "Pilot-scale grading",
+      "Battery pack QA / incoming inspection",
+      "R&D and characterisation labs",
+      "Second-life battery grading",
+      "Warranty claim verification",
     ],
     ctaHeadline: "For labs & QA teams",
     ctaText: "See what's really inside your cells in 75 seconds. Book a BatteryScope-C Manual demo.",
@@ -160,6 +164,25 @@ export const productsData: ProductData[] = [
     tagline: "Pack-level insight, built on cell-level truth.",
     narrative:
       "A pack is more than the sum of its cells: BatteryScope-P is where cell-level diagnostics scale up into pack-level intelligence. Built on the same non-invasive spectroscopy, digital twin, AI, and machine learning foundation as the rest of the BatteryScope family, BatteryScope-P is designed to help you understand how cell-to-cell variability translates into real pack performance, life, and safety.",
+    throughput: null,
+    measures: [
+      {
+        name: "Pack-Level Health Index",
+        desc: "Composite health score derived from aggregated cell spectroscopy",
+      },
+      {
+        name: "Cell-to-cell balance",
+        desc: "Identifies weak, outlier, or diverging cells within assembled packs",
+      },
+      {
+        name: "Thermal risk profiling",
+        desc: "Early warning for thermal runaway risk from cell imbalance",
+      },
+      {
+        name: "Pack degradation prediction",
+        desc: "AI digital twin model predicting remaining pack life under load",
+      },
+    ],
     specs: [
       "Pack-level spectroscopic intelligence scaling cell diagnostics to multi-module packs",
       "Physics-aware digital twin modelling mapping cell-to-cell variability to total pack life",
@@ -172,42 +195,43 @@ export const productsData: ProductData[] = [
       "Supports warranty claim verification and second-life pack grading",
     ],
     bestFor: [
-      "Pack integrators",
+      "Pack Integrators",
       "EV and ESS OEMs",
       "Fleet operators",
+      "Second-life pack aggregators",
     ],
-    ctaHeadline: "For pack integrators & OEMs",
-    ctaText: "From cell health to pack performance: ask us about BatteryScope-P.",
+    ctaHeadline: "For pack builders & integrators",
+    ctaText: "Bring cell-level certainty to your pack designs. Contact us to explore BatteryScope-P.",
   },
 ];
 
-export function ProductsNarrative({ initialSelected = "manual" }: { initialSelected?: "manual" | "automated" | "pack" }) {
-  const [selectedId, setSelectedId] = useState<"manual" | "automated" | "pack">(initialSelected);
-  const activeProduct = productsData.find((p) => p.id === selectedId) || productsData[0];
+export function ProductsNarrative() {
+  const [activeTab, setActiveTab] = useState<string>("manual");
+  const activeProduct = products.find((p) => p.id === activeTab) || products[0];
 
   return (
     <div className="w-full">
-      {/* Product Selection Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        {productsData.map((prod) => {
-          const isActive = prod.id === selectedId;
+      {/* Product Selector Tabs */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {products.map((prod) => {
+          const isActive = prod.id === activeTab;
           return (
             <button
               key={prod.id}
-              onClick={() => setSelectedId(prod.id)}
-              className={`group flex items-center gap-3.5 rounded-2xl border px-6 py-4 text-left transition-all duration-300 ${
+              onClick={() => setActiveTab(prod.id)}
+              className={`group flex items-center gap-3 rounded-[10px] border p-4 text-left transition-all duration-300 ${
                 isActive
-                  ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-xl shadow-[var(--signal)]/10"
-                  : "border-[var(--graphite)]/30 bg-white/5 hover:border-[var(--signal)]/40 hover:bg-white/10"
+                  ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-lg shadow-[var(--signal)]/10"
+                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--signal)]/40"
               }`}
             >
               <div
-                className={`flex h-3.5 w-3.5 rounded-full transition-all ${
+                className={`flex h-3 w-3 rounded-full transition-all ${
                   isActive ? "bg-[var(--signal)] ring-4 ring-[var(--signal)]/20" : "bg-[var(--graphite)]"
                 }`}
               />
               <div>
-                <div className={`font-display text-lg font-bold transition-colors ${isActive ? "text-[var(--paper)]" : "text-[var(--graphite-on-dark)] group-hover:text-[var(--paper)]"}`}>
+                <div className={`font-display text-base font-bold transition-colors ${isActive ? "text-[var(--paper)]" : "text-[var(--graphite-on-dark)] group-hover:text-[var(--paper)]"}`}>
                   {prod.name}
                 </div>
                 <div className="font-mono text-xs font-semibold text-[var(--copper)]">{prod.badge}</div>
@@ -217,135 +241,159 @@ export function ProductsNarrative({ initialSelected = "manual" }: { initialSelec
         })}
       </div>
 
-      {/* Selected Product Detail Panel */}
-      <AnimatedSection key={activeProduct.id} className="mt-12" animation="fade-up">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl sm:p-12">
-          {/* Header & Tagline */}
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+      {/* Selected Product Detail Panel with granular step-by-step cascades */}
+      <div key={activeProduct.id} className="mt-8 sm:mt-10">
+        <div className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 shadow-2xl">
+          
+          {/* 1. Header & Tagline & Throughput */}
+          <AnimatedSection animation="fade-up" className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
-              <span className="inline-block rounded-full bg-[var(--signal)]/15 px-4 py-1.5 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
+              <span className="inline-block rounded-[6px] border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
                 {activeProduct.badge}
               </span>
-              <h3 className="mt-4 font-display text-4xl font-bold text-[var(--paper)] sm:text-5xl">
+              <h3 className="mt-4 font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
                 {activeProduct.name}
               </h3>
-              <p className="mt-3 font-display text-xl italic text-[var(--copper)]">
+              <p className="mt-2 font-display text-lg italic text-[var(--copper)]">
                 &ldquo;{activeProduct.tagline}&rdquo;
               </p>
-              <p className="mt-5 text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+              <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
                 {activeProduct.narrative}
               </p>
             </div>
 
             {/* Throughput Card if available */}
             {activeProduct.throughput && (
-              <div className="shrink-0 rounded-2xl border border-[var(--signal)]/30 bg-[var(--ink)] p-8 text-center shadow-2xl shadow-black/50 lg:w-80">
-                <span className="font-mono text-xs font-semibold tracking-wider text-[var(--signal)] uppercase">Indicative Throughput</span>
-                <div className="mt-3 font-mono text-4xl font-bold text-[var(--signal)] sm:text-5xl">
+              <div className="shrink-0 rounded-[10px] border border-[var(--signal)]/40 bg-[var(--secondary)] p-6 text-center shadow-xl lg:w-72">
+                <span className="font-mono text-[11px] font-semibold tracking-wider text-[var(--signal)] uppercase">Indicative Throughput</span>
+                <div className="mt-2 font-mono text-3xl font-bold text-[var(--signal)] sm:text-4xl">
                   {activeProduct.throughput.shiftTotal}
                 </div>
-                <div className="mt-2 font-mono text-base font-semibold text-[var(--paper)]">
+                <div className="mt-1.5 font-mono text-sm font-semibold text-[var(--paper)]">
                   {activeProduct.throughput.rate}
                 </div>
-                <div className="mt-1 text-sm text-[var(--graphite-on-dark)]">
+                <div className="mt-1 font-mono text-xs text-[var(--graphite-on-dark)]">
                   {activeProduct.throughput.details}
                 </div>
               </div>
             )}
-          </div>
+          </AnimatedSection>
 
-          {/* Diagnostics Section (What it measures) */}
+          {/* 2. Diagnostics Section (What it measures: one by one cards) */}
           {activeProduct.measures && activeProduct.measures.length > 0 && (
-            <div className="mt-12 border-t border-white/10 pt-10">
-              <h4 className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
-                What it measures: a complete health signature in seconds
-              </h4>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {activeProduct.measures.map((m) => (
-                  <div
+            <div className="mt-8 border-t border-[var(--border)] pt-6">
+              <AnimatedSection animation="fade-up">
+                <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                  What it measures: a complete health signature in seconds
+                </h4>
+              </AnimatedSection>
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {activeProduct.measures.map((m, i) => (
+                  <AnimatedSection
                     key={m.name}
-                    className="rounded-2xl border border-white/10 bg-[var(--ink)]/90 p-5 transition-all duration-300 hover:border-[var(--signal)]/40 hover:shadow-lg"
+                    as="div"
+                    animation="fade-up"
+                    stagger
+                    staggerIndex={i}
+                    className="rounded-[10px] border border-[var(--border)] bg-[var(--secondary)] p-5 shadow-sm transition-all duration-300 hover:border-[var(--signal)]/40"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-display text-base font-bold text-[var(--paper)]">{m.name}</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-display text-sm font-bold text-[var(--paper)]">{m.name}</span>
                       {m.inDevelopment && (
-                        <span className="rounded bg-[var(--copper)]/20 px-2.5 py-1 font-mono text-[11px] font-semibold text-[var(--copper)]">
+                        <span className="rounded-[4px] border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--copper)]">
                           *In development
                         </span>
                       )}
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{m.desc}</p>
-                  </div>
+                    <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)]">{m.desc}</p>
+                  </AnimatedSection>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Specs & Features Grid */}
-          <div className="mt-12 border-t border-white/10 pt-10">
-            <h4 className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
-              Key Specs & Features
-            </h4>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {/* 3. Specs & Features Grid (one by one items) */}
+          <div className="mt-8 border-t border-[var(--border)] pt-6">
+            <AnimatedSection animation="fade-up">
+              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                Key Specs &amp; Features
+              </h4>
+            </AnimatedSection>
+
+            <div className="mt-5 grid gap-3.5 sm:grid-cols-2">
               {activeProduct.specs.map((spec, i) => (
-                <div key={i} className="flex items-start gap-3.5 rounded-xl bg-black/30 p-4 text-sm leading-relaxed text-[var(--paper)]">
-                  <span className="mt-0.5 font-bold text-[var(--signal)]">✔</span>
+                <AnimatedSection
+                  key={i}
+                  as="div"
+                  animation="fade-up"
+                  stagger
+                  staggerIndex={i}
+                  className="flex items-start gap-3 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] p-3.5 text-xs leading-relaxed text-[var(--paper)] shadow-sm sm:text-sm"
+                >
+                  <span className="mt-0.5 font-bold text-[var(--signal)] shrink-0">✔</span>
                   <span>{spec}</span>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
 
-          {/* Why It Wins & Best For */}
-          <div className="mt-10 grid gap-8 border-t border-white/10 pt-10 lg:grid-cols-2">
-            <div>
-              <h4 className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+          {/* 4. Why It Wins & Best For */}
+          <div className="mt-8 grid gap-8 border-t border-[var(--border)] pt-6 lg:grid-cols-2">
+            <AnimatedSection animation="fade-up">
+              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
                 Why it wins customers
               </h4>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-2.5">
                 {activeProduct.whyItWins.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-[var(--graphite-on-dark)]">
-                    <span
-                      className="star-glow-pulse text-[var(--copper)] text-base select-none shrink-0"
-                      style={{ animationDelay: `${i * 0.4}s` }}
-                    >
-                      ✦
-                    </span>
+                  <AnimatedSection
+                    key={i}
+                    as="div"
+                    animation="fade-up"
+                    stagger
+                    staggerIndex={i}
+                    className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]"
+                  >
+                    <span className="text-[var(--copper)] text-sm select-none shrink-0 mt-0.5">✦</span>
                     <span>{item}</span>
-                  </li>
+                  </AnimatedSection>
                 ))}
               </ul>
-            </div>
+            </AnimatedSection>
 
-            <div>
-              <h4 className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+            <AnimatedSection animation="fade-up" delay={100}>
+              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
                 Best For
               </h4>
-              <div className="mt-4 flex flex-wrap gap-2.5">
-                {activeProduct.bestFor.map((item) => (
-                  <span
+              <div className="mt-4 flex flex-wrap gap-2">
+                {activeProduct.bestFor.map((item, i) => (
+                  <AnimatedSection
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 font-mono text-xs font-semibold text-[var(--paper)]"
+                    as="div"
+                    animation="fade-up"
+                    stagger
+                    staggerIndex={i}
+                    className="rounded-[6px] border border-[var(--border)] bg-[var(--secondary)] px-3 py-1.5 font-mono text-xs font-semibold text-[var(--paper)]"
                   >
                     {item}
-                  </span>
+                  </AnimatedSection>
                 ))}
               </div>
-            </div>
+            </AnimatedSection>
           </div>
 
-          {/* Product CTA Strip */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-6 rounded-2xl border border-[var(--signal)]/30 bg-gradient-to-r from-[var(--signal)]/15 to-transparent p-8 sm:flex-row">
+          {/* 5. Product CTA Strip */}
+          <AnimatedSection animation="fade-up" delay={200} className="mt-8 flex flex-col items-center justify-between gap-6 rounded-[10px] border border-[var(--signal)]/30 bg-[var(--secondary)] p-6 sm:flex-row">
             <div>
               <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase">{activeProduct.ctaHeadline}</span>
-              <p className="mt-2 font-display text-lg text-[var(--paper)] font-semibold">
+              <p className="mt-1.5 font-display text-base text-[var(--paper)] font-semibold">
                 {activeProduct.ctaText}
               </p>
             </div>
             <SendButton href="/contact" label="Get Started" />
-          </div>
+          </AnimatedSection>
         </div>
-      </AnimatedSection>
+      </div>
     </div>
   );
 }

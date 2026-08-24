@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { SendButton } from "@/components/ui/send-button";
 
 const CHEMISTRIES = {
   LFP: { label: "LFP", voltage: 3.2, color: "#5CE1C9", text: "Safe, long cycle life" },
@@ -55,16 +56,16 @@ export function CellConfigurator() {
 
   return (
     <>
-      <div className="rounded-2xl border border-[var(--graphite)]/35 bg-[#0f1413] p-6">
-        <h2 className="font-display text-2xl text-[var(--paper)]">Battery Pack Builder</h2>
-        <p className="mt-2 text-sm text-[var(--graphite-on-dark)]">
+      <div className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-xl">
+        <h2 className="font-display text-2xl font-bold text-[var(--paper)]">Battery Pack Builder</h2>
+        <p className="mt-1.5 text-sm text-[var(--graphite-on-dark)]">
           Select pack voltage, capacity, chemistry, and cell format.
         </p>
 
         <div className="mt-6 space-y-6">
           <fieldset>
-            <legend className="mb-2 font-mono text-xs tracking-[0.12em] text-[var(--signal)] uppercase">
-              Pack Voltage
+            <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+              Pack Voltage Target
             </legend>
             <div className="flex flex-wrap gap-2">
               {PACK_VOLTAGES.map((v) => (
@@ -72,10 +73,10 @@ export function CellConfigurator() {
                   key={v}
                   type="button"
                   onClick={() => setPackVoltage(v)}
-                  className={`rounded-md px-3 py-1.5 text-sm font-mono transition ${
+                  className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packVoltage === v
-                      ? "bg-[var(--signal)] text-[var(--ink)]"
-                      : "border border-[var(--graphite)]/55 text-[var(--paper)] hover:border-[var(--signal)]/60"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                      : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
                   {v}V
@@ -85,8 +86,8 @@ export function CellConfigurator() {
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 font-mono text-xs tracking-[0.12em] text-[var(--signal)] uppercase">
-              Pack Capacity
+            <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+              Pack Capacity Target
             </legend>
             <div className="flex flex-wrap gap-2">
               {PACK_CAPACITIES.map((c) => (
@@ -94,10 +95,10 @@ export function CellConfigurator() {
                   key={c}
                   type="button"
                   onClick={() => setPackCapacity(c)}
-                  className={`rounded-md px-3 py-1.5 text-sm font-mono transition ${
+                  className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packCapacity === c
-                      ? "bg-[var(--signal)] text-[var(--ink)]"
-                      : "border border-[var(--graphite)]/55 text-[var(--paper)] hover:border-[var(--signal)]/60"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                      : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
                   {c}Ah
@@ -107,97 +108,106 @@ export function CellConfigurator() {
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 font-mono text-xs tracking-[0.12em] text-[var(--signal)] uppercase">
+            <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               Battery Chemistry
             </legend>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-2.5">
               {(Object.entries(CHEMISTRIES) as [Chemistry, (typeof CHEMISTRIES)[Chemistry]][]).map(([key, val]) => (
                 <button
                   key={key}
                   type="button"
                   onClick={() => setChemistry(key)}
-                  className={`rounded-md px-2 py-2 text-center text-sm transition ${
+                  className={`rounded-[6px] px-3 py-2 text-center text-xs transition-all ${
                     chemistry === key
-                      ? "bg-[var(--signal)] text-[var(--ink)]"
-                      : "border border-[var(--graphite)]/55 text-[var(--paper)] hover:border-[var(--signal)]/60"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20 font-bold"
+                      : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
                   <span className="font-semibold">{val.label}</span>
-                  <span className="ml-1 font-mono text-xs opacity-70">{val.voltage}V</span>
+                  <span className="ml-1 font-mono text-[11px] opacity-80">{val.voltage}V</span>
                 </button>
               ))}
             </div>
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 font-mono text-xs tracking-[0.12em] text-[var(--signal)] uppercase">
-              Cell Type
+            <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+              Cell Format
             </legend>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-2.5">
               {(Object.entries(CELL_TYPES) as [CellType, (typeof CELL_TYPES)[CellType]][]).map(([key, val]) => (
                 <button
                   key={key}
                   type="button"
                   onClick={() => setCellType(key)}
-                  className={`rounded-md px-2 py-2 text-center text-sm transition ${
+                  className={`rounded-[6px] px-3 py-2 text-center text-xs transition-all ${
                     cellType === key
-                      ? "bg-[var(--signal)] text-[var(--ink)]"
-                      : "border border-[var(--graphite)]/55 text-[var(--paper)] hover:border-[var(--signal)]/60"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20 font-bold"
+                      : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
                   <span className="font-semibold">{val.label}</span>
-                  <span className="ml-1 font-mono text-xs opacity-70">{val.capacity}Ah</span>
+                  <span className="ml-1 font-mono text-[11px] opacity-80">{val.capacity}Ah</span>
                 </button>
               ))}
             </div>
           </fieldset>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setTabOpen(true)}
-          className="mt-6 w-full rounded-md bg-[var(--signal)] px-5 py-2.5 font-semibold text-[var(--ink)] transition hover:brightness-95"
-        >
-          Procure your cell
-        </button>
+        <div className="mt-8 pt-4 border-t border-[var(--border)] flex justify-end">
+          <SendButton
+            type="button"
+            onClick={() => setTabOpen(true)}
+            label="Procure your cell specification"
+            variant="lab"
+          />
+        </div>
       </div>
 
-      {/* ── Modal ── */}
+      {/* ── Modal Specification Dialog ── */}
       {tabOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center sm:items-center">
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setTabOpen(false)} />
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-md" onClick={() => setTabOpen(false)} aria-hidden="true" />
 
           <div
             ref={panelRef}
-            className="relative z-10 mx-4 mt-16 max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--graphite)]/35 bg-[#0f1413] p-6 shadow-2xl sm:mt-0"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pack-spec-title"
+            className="relative z-10 mx-4 mt-16 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-2xl sm:mt-0"
           >
             <button
               type="button"
               onClick={() => setTabOpen(false)}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--graphite)]/40 text-[var(--graphite-on-dark)] transition hover:border-[var(--signal)] hover:text-[var(--signal)]"
+              aria-label="Close specification dialog"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-[6px] border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
             >
               ✕
             </button>
 
-            <h2 className="font-display text-2xl text-[var(--paper)]">Pack Specification</h2>
-            <p className="mt-1 text-sm text-[var(--graphite-on-dark)]">Review your configuration and cell count.</p>
+            <h2 id="pack-spec-title" className="font-display text-2xl font-bold text-[var(--paper)]">
+              Pack Specification Summary
+            </h2>
+            <p className="mt-1 text-xs text-[var(--graphite-on-dark)] sm:text-sm">
+              Review generated series/parallel configuration and cell counts.
+            </p>
 
-            <div className="mt-6 grid grid-cols-2 gap-4 rounded-xl border border-[var(--graphite)]/25 bg-black/20 p-4 sm:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 rounded-[10px] border border-[var(--border)] bg-[var(--ink)] p-4 sm:grid-cols-4">
               <div>
-                <p className="font-mono text-[10px] tracking-[0.12em] text-[var(--signal)] uppercase">Pack Voltage</p>
-                <p className="font-display text-2xl text-[var(--paper)]">{packVoltage}V</p>
+                <p className="font-mono text-[10px] font-semibold tracking-wider text-[var(--signal)] uppercase">Pack Voltage</p>
+                <p className="font-mono text-xl font-bold text-[var(--paper)]">{packVoltage}V</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-[0.12em] text-[var(--signal)] uppercase">Pack Capacity</p>
-                <p className="font-display text-2xl text-[var(--paper)]">{packCapacity}Ah</p>
+                <p className="font-mono text-[10px] font-semibold tracking-wider text-[var(--signal)] uppercase">Pack Capacity</p>
+                <p className="font-mono text-xl font-bold text-[var(--paper)]">{packCapacity}Ah</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-[0.12em] text-[var(--signal)] uppercase">Chemistry</p>
-                <p className="font-display text-2xl text-[var(--paper)]">{CHEMISTRIES[chemistry].label}</p>
+                <p className="font-mono text-[10px] font-semibold tracking-wider text-[var(--signal)] uppercase">Chemistry</p>
+                <p className="font-mono text-xl font-bold text-[var(--paper)]">{CHEMISTRIES[chemistry].label}</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-[0.12em] text-[var(--signal)] uppercase">Cell Type</p>
-                <p className="font-display text-2xl capitalize text-[var(--paper)]">{cellType}</p>
+                <p className="font-mono text-[10px] font-semibold tracking-wider text-[var(--signal)] uppercase">Cell Format</p>
+                <p className="font-mono text-xl font-bold capitalize text-[var(--paper)]">{cellType}</p>
               </div>
             </div>
 
@@ -208,22 +218,26 @@ export function CellConfigurator() {
               <Stat label="Energy" value={`${(totalEnergyWh / 1000).toFixed(1)} kWh`} />
             </div>
 
-            <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm text-[var(--graphite-on-dark)]">
-              <span>Cell: {cellVoltage}V &middot; {cellCapacity}Ah</span>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs text-[var(--graphite-on-dark)]">
+              <span>Cell Rating: {cellVoltage}V &middot; {cellCapacity}Ah</span>
               <span>
-                Pack: {actualVoltage}V &middot; {actualCapacity}Ah
+                Actual Pack Output: {actualVoltage}V &middot; {actualCapacity}Ah
               </span>
             </div>
 
             {/* ── Pack Layout Visualization ── */}
-            <div className="mt-5 rounded-xl border border-[var(--graphite)]/25 bg-black/20 p-4">
+            <div className="mt-5 rounded-[10px] border border-[var(--border)] bg-[var(--ink)] p-4">
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="font-display text-base text-[var(--paper)]">Pack Layout</h3>
-                <span className="font-mono text-xs text-[var(--graphite-on-dark)]">
+                <h3 className="font-display text-sm font-bold text-[var(--paper)]">Grid Schematic</h3>
+                <span className="font-mono text-xs font-semibold text-[var(--signal)]">
                   {seriesCount}S × {parallelCount}P = {totalCells.toLocaleString()} cells
                 </span>
               </div>
               <BatteryPackGrid series={seriesCount} parallel={parallelCount} chemistry={chemistry} />
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <SendButton href="/contact" label="Request Pack Quote" variant="lab" />
             </div>
           </div>
         </div>
@@ -236,9 +250,9 @@ export function CellConfigurator() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg bg-[#eef2ef] px-3 py-2">
-      <p className="font-mono text-[10px] tracking-[0.12em] text-[var(--graphite)] uppercase">{label}</p>
-      <p className="font-display text-xl text-[var(--ink)]">{value}</p>
+    <div className="rounded-[6px] border border-[var(--border)] bg-[var(--ink)] px-3.5 py-2.5">
+      <p className="font-mono text-[10px] font-semibold tracking-wider text-[var(--signal)] uppercase">{label}</p>
+      <p className="font-mono text-lg font-bold text-[var(--paper)]">{value}</p>
     </div>
   );
 }
@@ -298,7 +312,7 @@ function BatteryPackGrid({
   const gap = 8;
 
   if (series === 0 || parallel === 0) {
-    return <p className="text-sm text-[var(--graphite-on-dark)]">Select values to see the pack layout.</p>;
+    return <p className="text-xs font-mono text-[var(--graphite-on-dark)]">Select values to see the pack layout.</p>;
   }
 
   return (

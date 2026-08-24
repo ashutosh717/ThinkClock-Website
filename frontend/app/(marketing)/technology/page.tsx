@@ -100,22 +100,6 @@ const labCapabilities = [
   },
 ];
 
-const secondLifeCells = [
-  {
-    type: "Cylindrical Cells",
-    formats: ["18650", "21700"],
-    soh: "Tested > 80% SoH",
-    desc: "Internally tested, certified, and ready for immediate dispatch.",
-    Icon: BatteryCharging,
-  },
-  {
-    type: "Prismatic Cells",
-    formats: ["80Ah", "100Ah", "105Ah", "150Ah"],
-    soh: "Tested > 80% SoH",
-    desc: "High-capacity modules graded for second-life energy storage.",
-    Icon: Zap,
-  },
-];
 
 const supportingPlatforms = [
   {
@@ -148,38 +132,51 @@ export default function TechnologyPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-6 py-28 sm:px-12 lg:px-16 xl:px-24">
-        <div className="pointer-events-none absolute inset-0 opacity-30" aria-hidden="true">
-          <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/20 blur-3xl" />
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+        <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
+          <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
+          <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
         </div>
-        <div className="relative mx-auto w-full max-w-6xl">
+        <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
-              Technology Platform
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-bold leading-tight text-[var(--paper)] sm:text-5xl lg:text-6xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
+              <span className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                Technology Platform
+              </span>
+            </div>
+            <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
               BatteryScope-C: Signal-First Battery Diagnostics
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--graphite-on-dark)] sm:text-xl">
-              BatteryScope-C combines non-invasive spectroscopy (EIS, acoustic, and RF) with AI-driven digital twin modelling to deliver a complete battery health assessment in 75 seconds: without opening, damaging, or interrupting production flow.
+            <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+              BatteryScope-C combines non-invasive spectroscopy (EIS, acoustic, and RF) with AI-driven digital twin modelling to deliver a complete battery health assessment in <span className="font-mono font-semibold text-[var(--paper)]">75 seconds</span>: without opening, damaging, or interrupting production flow.
             </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <SendButton href="/contact" label="Discuss Your Application" />
+              <a
+                href="/products"
+                className="inline-flex items-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
+              >
+                Explore Product Ecosystem →
+              </a>
+            </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* ── 2. Core Capabilities ── */}
-      <section className="bg-[var(--paper)] px-6 py-28 text-[var(--ink)] sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto w-full max-w-7xl">
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               Core Capabilities
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--ink)] sm:text-5xl">
-              Precision battery diagnostics in 75 seconds.
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+              Precision battery diagnostics in <span className="font-mono text-[var(--signal)]">75 seconds</span>.
             </h2>
           </AnimatedSection>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {coreCapabilities.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -187,98 +184,95 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group cursor-default rounded-3xl border border-[var(--graphite)]/25 bg-white p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10"
+                className="group rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
               >
                 <div className="flex items-center justify-between">
                   <div
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-110"
+                    className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] transition-transform duration-300 group-hover:scale-105"
                     style={{
-                      backgroundColor: `${item.color}15`,
-                      borderColor: `${item.color}35`,
+                      borderColor: `${item.color}45`,
                     }}
                   >
-                    <item.Icon className="h-6 w-6 stroke-[2]" style={{ color: item.color }} />
+                    <item.Icon className="h-5 w-5 stroke-[2]" style={{ color: item.color }} />
                   </div>
-                  <span className="rounded-full bg-[var(--paper)] px-3 py-1 font-mono text-xs font-bold tracking-wider text-[var(--graphite)] uppercase">
+                  <span className="rounded-[6px] border border-[var(--border)] bg-[var(--ink)] px-2.5 py-1 font-mono text-[10px] font-semibold tracking-wider text-[var(--graphite-on-dark)] uppercase">
                     {item.badge}
                   </span>
                 </div>
-                <h3 className="mt-6 font-display text-xl font-bold leading-snug text-[var(--ink)]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--graphite)]">{item.desc}</p>
+                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-[var(--paper)]">{item.title}</h3>
+                <p className="mt-2.5 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{item.desc}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 3. Diagnostic Signature Metrics (From Narrative Document) ── */}
-      <AnimatedSection className="bg-white/5 px-6 py-28 text-[var(--paper)] sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+      {/* ── 3. Diagnostic Signature Metrics ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
               Health Signature Modalities
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-5xl">
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Complete Cell Diagnostic Profile in Seconds
             </h2>
-            <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
+            <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
               Six key health metrics captured during every run without a single charge-discharge cycle.
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {diagnosticSignatureMetrics.map((metric) => (
               <div
                 key={metric.name}
-                className="rounded-3xl border border-white/10 bg-[var(--ink)] p-8 backdrop-blur-xl transition-all duration-300 hover:border-[var(--signal)]/40 hover:shadow-xl"
+                className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-xl font-bold text-[var(--paper)]">{metric.name}</span>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="font-display text-base font-bold text-[var(--paper)]">{metric.name}</h3>
                   <span
-                    className={`rounded-full px-3 py-1 font-mono text-xs font-semibold ${
-                      metric.status === "Active"
-                        ? "bg-[var(--signal)]/15 text-[var(--signal)] border border-[var(--signal)]/30"
-                        : "bg-[var(--copper)]/15 text-[var(--copper)] border border-[var(--copper)]/30"
-                    }`}
+                    className={`rounded-[6px] px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider ${metric.status === "Active"
+                      ? "border border-[var(--signal)]/40 bg-[var(--signal)]/10 text-[var(--signal)]"
+                      : "border border-[var(--copper)]/40 bg-[var(--copper)]/10 text-[var(--copper)]"
+                      }`}
                   >
                     {metric.status}
                   </span>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{metric.desc}</p>
+                <p className="mt-3 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{metric.desc}</p>
               </div>
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
       {/* ── 4. Chemistries Supported ── */}
-      <section className="bg-[var(--paper)] px-6 py-24 text-[var(--ink)] sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto w-full max-w-7xl">
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
               Chemistry Versatility
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--ink)] sm:text-5xl">
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Next-Gen Diagnostics Across Chemistries
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 sm:mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {chemistryFormFactors.map((item) => (
               <div
                 key={item.chemistry}
-                className="group flex items-center gap-4 rounded-2xl border border-[var(--graphite)]/20 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group flex items-center gap-4 rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-5 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/60"
               >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-110 shrink-0"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] transition-transform duration-300 group-hover:scale-105"
                   style={{
-                    backgroundColor: `${item.color}15`,
-                    borderColor: `${item.color}35`,
+                    borderColor: `${item.color}45`,
                   }}
                 >
-                  <item.Icon className="h-6 w-6 stroke-[2]" style={{ color: item.color }} />
+                  <item.Icon className="h-5 w-5 stroke-[2]" style={{ color: item.color }} />
                 </div>
-                <span className="font-display text-base font-bold text-[var(--ink)]">{item.chemistry}</span>
+                <span className="font-mono text-xs font-semibold text-[var(--paper)]">{item.chemistry}</span>
               </div>
             ))}
           </div>
@@ -286,18 +280,18 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 5. Laboratory Services & Infrastructure ── */}
-      <AnimatedSection className="bg-[var(--ink)] px-6 py-28 text-[var(--paper)] sm:px-12 lg:px-16 xl:px-24" animation="fade-up">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               R&D & Lab Infrastructure
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-5xl">
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Advanced laboratory services & testing infrastructure.
             </h2>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {labCapabilities.map((lab, i) => (
               <AnimatedSection
                 key={lab.title}
@@ -305,86 +299,37 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl transition-all duration-300 hover:border-[var(--signal)]/40"
+                className="group rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
               >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 transition-transform duration-300 group-hover:scale-110"
+                  className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] transition-transform duration-300 group-hover:scale-105"
                   style={{
-                    backgroundColor: `${lab.color}15`,
-                    borderColor: `${lab.color}35`,
+                    borderColor: `${lab.color}45`,
                   }}
                 >
-                  <lab.Icon className="h-6 w-6 stroke-[2]" style={{ color: lab.color }} />
+                  <lab.Icon className="h-5 w-5 stroke-[2]" style={{ color: lab.color }} />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-bold text-[var(--paper)]">{lab.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{lab.desc}</p>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ── 6. Second-Life Certified Battery Sales ── */}
-      <section className="bg-[var(--paper)] px-6 py-28 text-[var(--ink)] sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto w-full max-w-7xl">
-          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
-              Certified Second-Life Supply
-            </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--ink)] sm:text-5xl">
-              Internally tested & certified cells (&gt; 80% SoH).
-            </h2>
-          </AnimatedSection>
-
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
-            {secondLifeCells.map((cell, i) => (
-              <AnimatedSection
-                key={cell.type}
-                as="div"
-                animation="fade-up"
-                stagger
-                staggerIndex={i}
-                className="group rounded-3xl border border-[var(--graphite)]/20 bg-white p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--signal)]/15 border border-[var(--signal)]/30">
-                    <cell.Icon className="h-7 w-7 text-[var(--signal)] stroke-[2]" />
-                  </div>
-                  <span className="rounded-full bg-emerald-100 px-3.5 py-1.5 font-mono text-xs font-bold text-emerald-800 uppercase">
-                    {cell.soh}
-                  </span>
-                </div>
-                <h3 className="mt-6 font-display text-2xl font-bold text-[var(--ink)]">{cell.type}</h3>
-                <p className="mt-3 text-base leading-relaxed text-[var(--graphite)]">{cell.desc}</p>
-                <div className="mt-6 flex flex-wrap gap-2.5">
-                  {cell.formats.map((f) => (
-                    <span
-                      key={f}
-                      className="rounded-xl bg-[var(--paper)] px-4 py-2 font-mono text-xs font-bold text-[var(--ink)]"
-                    >
-                      {f}
-                    </span>
-                  ))}
-                </div>
+                <h3 className="mt-5 font-display text-lg font-bold leading-snug text-[var(--paper)]">{lab.title}</h3>
+                <p className="mt-2.5 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{lab.desc}</p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 7. Supporting Platforms ── */}
-      <AnimatedSection className="bg-[var(--ink)] px-6 py-28 text-[var(--paper)] sm:px-12 lg:px-16 xl:px-24" animation="fade-up">
-        <div className="mx-auto w-full max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+      {/* ── 6. Supporting Platforms ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               Supporting Platforms
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-5xl">
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Benchmarking database & CellScope e-waste portal.
             </h2>
-          </div>
+          </AnimatedSection>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
+          <div className="mt-8 sm:mt-10 grid gap-8 md:grid-cols-2">
             {supportingPlatforms.map((platform, i) => (
               <AnimatedSection
                 key={platform.name}
@@ -392,62 +337,64 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-3xl border border-white/10 bg-white/5 p-8 sm:p-10 backdrop-blur-xl transition-all duration-500 hover:border-[var(--signal)]/40 hover:bg-white/10"
+                className="group rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-8 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--signal)]/10 border border-[var(--signal)]/30 transition-transform duration-300 group-hover:scale-110">
-                    <platform.Icon className="h-7 w-7 text-[var(--signal)] stroke-[2]" />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[8px] border border-[var(--signal)]/30 bg-[var(--signal)]/10 transition-transform duration-300 group-hover:scale-105">
+                    <platform.Icon className="h-6 w-6 text-[var(--signal)] stroke-[2]" />
                   </div>
                   <div>
                     <span className="font-mono text-xs font-semibold tracking-wider text-[var(--copper)] uppercase">
                       {platform.role}
                     </span>
-                    <h3 className="font-display text-2xl font-bold text-[var(--paper)]">{platform.name}</h3>
+                    <h3 className="font-display text-xl font-bold text-[var(--paper)]">{platform.name}</h3>
                   </div>
                 </div>
-                <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-5 text-sm leading-relaxed text-[var(--graphite-on-dark)]">
                   {platform.desc}
                 </p>
               </AnimatedSection>
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* ── 8. Applications ── */}
-      <section className="bg-[var(--paper)] px-6 py-28 text-[var(--ink)] sm:px-12 lg:px-16 xl:px-24">
-        <div className="mx-auto w-full max-w-7xl">
+      {/* ── 7. Target Ecosystem & Call to Action ── */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
               Target Ecosystem
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--ink)] sm:text-5xl">
+            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Built for the entire battery value chain.
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-[var(--graphite)]">
+            <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
               Serves battery developers, researchers, product teams, cell OEMs, battery pack manufacturers, fleet operators, recyclers, system integrators, and financial partners.
             </p>
           </AnimatedSection>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-3.5">
+          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
             {applications.map((app) => (
               <span
                 key={app}
-                className="rounded-full border border-[var(--graphite)]/20 bg-white px-6 py-3 font-sans text-base font-semibold text-[var(--ink)] shadow-sm transition-all duration-300 hover:border-[var(--copper)] hover:shadow-md"
+                className="rounded-[6px] border border-[var(--border)] bg-[var(--card)] px-4 py-2 font-mono text-xs font-semibold text-[var(--paper)] shadow-sm transition-all duration-300 hover:border-[var(--signal)] hover:text-[var(--signal)]"
               >
                 {app}
               </span>
             ))}
           </div>
 
-          <div className="mx-auto mt-20 max-w-4xl rounded-3xl border border-[var(--copper)]/30 bg-gradient-to-br from-[var(--copper)]/10 via-[var(--paper)] to-transparent p-10 sm:p-12 text-center shadow-lg">
-            <h3 className="font-display text-2xl font-bold text-[var(--ink)] sm:text-3xl lg:text-4xl">
+          <div className="mx-auto mt-12 sm:mt-14 max-w-4xl rounded-[14px] border border-[var(--signal)]/40 bg-[var(--card)] p-8 sm:p-12 text-center shadow-2xl">
+            <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
               Ready to evaluate BatteryScope-C for your program?
             </h3>
-            <p className="mt-4 text-base text-[var(--graphite)]">
+            <p className="mt-4 text-sm text-[var(--graphite-on-dark)] sm:text-base">
               Connect with our engineering team to discuss EIS, acoustic, and RF integration.
             </p>
-            <SendButton href="/contact" label="Discuss your application" className="mt-8" />
+            <div className="mt-8 flex justify-center">
+              <SendButton href="/contact" label="Discuss your application" variant="lab" />
+            </div>
           </div>
         </div>
       </section>

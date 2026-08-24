@@ -103,17 +103,17 @@ export function FaqAccordion() {
   return (
     <div className="w-full">
       {/* Category Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {categories.map((cat) => {
           const isActive = selectedCategory === cat;
           return (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+              className={`rounded-[6px] px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                 isActive
-                  ? "bg-[var(--signal)] text-[var(--ink)] shadow-lg shadow-[var(--signal)]/20"
-                  : "border border-white/10 bg-white/5 text-[var(--paper)] hover:border-[var(--signal)]/40 hover:bg-white/10"
+                  ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                  : "border border-[var(--border)] bg-[var(--card)] text-[var(--paper)] hover:border-[var(--signal)]/40"
               }`}
             >
               {cat}
@@ -123,33 +123,36 @@ export function FaqAccordion() {
       </div>
 
       {/* Accordion List */}
-      <div className="mt-10 space-y-4">
+      <div className="mt-8 space-y-3.5">
         {filteredFaqs.map((faq) => {
           const isOpen = openId === faq.id;
+          const contentId = `faq-answer-${faq.id}`;
           return (
             <div
               key={faq.id}
-              className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+              className={`overflow-hidden rounded-[10px] border transition-all duration-300 ${
                 isOpen
-                  ? "border-[var(--signal)]/50 bg-white/10 shadow-xl shadow-[var(--signal)]/5"
-                  : "border-white/10 bg-white/5 hover:border-white/20"
+                  ? "border-[var(--signal)]/60 bg-[var(--card)] shadow-xl"
+                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--signal)]/30"
               }`}
             >
               <button
                 onClick={() => toggleFaq(faq.id)}
-                className="flex w-full items-center justify-between p-6 text-left"
+                aria-expanded={isOpen}
+                aria-controls={contentId}
+                className="flex w-full items-center justify-between p-5 text-left focus:outline-none focus:ring-1 focus:ring-[var(--signal)]"
               >
-                <div className="flex items-center gap-4">
-                  <span className="rounded-full bg-[var(--copper)]/15 px-3 py-1 font-mono text-[11px] font-bold text-[var(--copper)] uppercase tracking-wider">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="rounded-[4px] border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--copper)] uppercase tracking-wider">
                     {faq.category}
                   </span>
-                  <h3 className="font-display text-lg font-bold text-[var(--paper)] sm:text-xl">
+                  <h3 className="font-display text-base font-bold text-[var(--paper)] sm:text-lg">
                     {faq.question}
                   </h3>
                 </div>
                 <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-lg transition-transform duration-300 ${
-                    isOpen ? "rotate-180 bg-[var(--signal)] text-[var(--ink)]" : "text-[var(--paper)]"
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] border border-[var(--border)] text-sm transition-transform duration-300 ${
+                    isOpen ? "rotate-180 bg-[var(--signal)] text-[var(--ink)] border-[var(--signal)]" : "text-[var(--paper)] bg-[var(--secondary)]"
                   }`}
                 >
                   ↓
@@ -159,12 +162,13 @@ export function FaqAccordion() {
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
+                    id={contentId}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <div className="border-t border-white/10 px-6 pb-6 pt-4 text-base leading-relaxed text-[var(--graphite-on-dark)]">
+                    <div className="border-t border-[var(--border)] px-5 pb-5 pt-3.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">
                       {faq.answer}
                     </div>
                   </motion.div>
