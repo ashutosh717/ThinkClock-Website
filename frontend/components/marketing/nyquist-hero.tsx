@@ -61,7 +61,7 @@ export function NyquistHero({
     slider < 0.33
       ? "Multi-Physics Spectroscopy (EIS + Acoustic + RF)"
       : slider < 0.66
-      ? "Digital Twin State Estimation & Degradation AI"
+      ? "Digital Twin State Estimation & AI"
       : "Predictive SoH, RUL, Micro-Fault Diagnostics";
 
   useEffect(() => {
@@ -106,8 +106,8 @@ export function NyquistHero({
   const dPath = interpolatePath(slider);
 
   return (
-    <section className="relative overflow-hidden bg-transparent px-6 py-20 sm:px-12 lg:px-16 lg:py-28">
-      <div className="mx-auto grid w-full max-w-[1400px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section className="relative overflow-hidden bg-transparent px-4 pt-24 pb-14 sm:px-8 sm:pt-28 sm:pb-20 lg:px-16 lg:py-28">
+      <div className="mx-auto grid w-full max-w-[1400px] items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
@@ -116,19 +116,19 @@ export function NyquistHero({
             </span>
           </div>
 
-          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.12] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 sm:mt-5 font-display text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.12] text-[var(--paper)]">
             {title}
           </h1>
 
-          <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-lg lg:text-xl leading-relaxed text-[var(--graphite-on-dark)]">
             {subtitle}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <SendButton href="/contact" label="Book a BatteryScope Demo" />
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4">
+            <SendButton href="/contact" label="Book a BatteryScope Demo" className="w-full sm:w-auto text-center" />
             <a
               href="/technology"
-              className="inline-flex items-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
+              className="inline-flex items-center justify-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)] text-center"
             >
               How It Works →
             </a>
@@ -136,7 +136,7 @@ export function NyquistHero({
         </div>
 
         <div
-          className="rounded-[12px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-2xl backdrop-blur-md transition-all duration-1000 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60"
+          className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl backdrop-blur-md transition-all duration-1000 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60 touch-pan-y"
           style={{
             transform: `perspective(1200px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(${svgParallaxY}px)`,
           }}
@@ -209,9 +209,9 @@ export function NyquistHero({
 
           {/* Controls & Active Readout */}
           <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
-            <div className="flex items-center justify-between font-mono text-xs text-[var(--graphite-on-dark)]">
-              <span className="font-semibold text-[var(--signal)]">{activeStageLabel}</span>
-              <span className="font-semibold text-[var(--paper)]">{activeStageValue}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 font-mono text-xs text-[var(--graphite-on-dark)]">
+              <span className="font-semibold text-[var(--signal)] shrink-0">{activeStageLabel}</span>
+              <span className="font-semibold text-[var(--paper)] text-[11px] sm:text-xs truncate">{activeStageValue}</span>
             </div>
 
             <input
@@ -221,7 +221,7 @@ export function NyquistHero({
               step="0.01"
               value={slider}
               onChange={(e) => setSlider(parseFloat(e.target.value))}
-              className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-[var(--secondary)] accent-[var(--signal)] focus:outline-none"
+              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-[var(--secondary)] accent-[var(--signal)] focus:outline-none touch-none"
               aria-label="Spectroscopy frequency slider"
             />
           </div>

@@ -99,7 +99,7 @@ export default function ProductsPage() {
           </AnimatedSection>
 
           <div className="mt-8 sm:mt-10 overflow-x-auto rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl">
-            <table className="w-full text-left font-sans text-xs sm:text-sm">
+            <table className="w-full min-w-[640px] text-left font-sans text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-[var(--border)] text-[var(--signal)] font-mono text-xs uppercase tracking-wider">
                   <th className="py-3.5 px-4">Feature / Spec</th>

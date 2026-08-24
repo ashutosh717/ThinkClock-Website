@@ -247,7 +247,7 @@ export default function AboutPage() {
           </div>
 
           {/* Bottom 3 Photos Grid */}
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {companyGallery.slice(2, 5).map((item, i) => (
               <AnimatedSection
                 key={item.title}

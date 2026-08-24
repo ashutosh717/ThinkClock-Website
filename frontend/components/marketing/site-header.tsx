@@ -24,13 +24,13 @@ function ThemeToggleButton() {
 
   if (!mounted) {
     return (
-      <div className="ml-2 inline-block h-[1.8em] w-[3.2em] rounded-[30px] border border-[rgba(91,102,99,0.35)] bg-[var(--secondary)]" />
+      <div className="inline-block h-[1.8em] w-[3.2em] rounded-[30px] border border-[rgba(91,102,99,0.35)] bg-[var(--secondary)]" />
     );
   }
 
   return (
     <label
-      className="theme-switch ml-2"
+      className="theme-switch"
       title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
     >
       <input
@@ -85,25 +85,26 @@ export function SiteHeader() {
             : "bg-transparent"
         }`}
       >
-        <div className="flex w-full items-center justify-between px-6 py-3 sm:px-12 lg:px-16">
-          <Link href="/" className="group flex items-center gap-3.5 sm:gap-4 transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex w-full items-center justify-between px-4 py-2.5 sm:px-8 sm:py-3 lg:px-16">
+          <Link href="/" className="group flex items-center gap-2.5 sm:gap-4 transition-all duration-300 hover:scale-[1.02] max-w-[75%] sm:max-w-none">
             <Image
               src={thinkclockIcon}
               alt="ThinkClock"
-              className="h-14 sm:h-16 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+              className="h-10 sm:h-14 lg:h-16 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
               priority
             />
-            <div className="flex flex-col">
-              <span className="font-display text-xl sm:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] transition-colors duration-300 group-hover:text-[var(--signal)]">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display text-base sm:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] truncate transition-colors duration-300 group-hover:text-[var(--signal)]">
                 ThinkClock Battery Labs
               </span>
-              <span className="font-mono text-xs sm:text-[13px] font-semibold leading-tight text-[var(--copper)]">
+              <span className="font-mono text-[10px] sm:text-xs lg:text-[13px] font-semibold leading-tight text-[var(--copper)] truncate">
                 Sensing, Modelling, Analytics
               </span>
             </div>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-2 md:flex">
+          {/* Desktop & Tablet Navigation */}
+          <nav aria-label="Primary navigation" className="hidden items-center gap-1.5 lg:flex lg:gap-2">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -118,15 +119,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <FaqButton className="ml-1" />
-            {/* Cell Store link hidden as requested
-            <Link
-              href="/marketplace"
-              className="ml-2 rounded-[6px] border border-[var(--signal)] bg-[var(--signal)] px-3.5 py-1.5 font-sans text-xs font-bold uppercase tracking-wider text-[var(--ink)] transition-all hover:bg-[#48ceb7] hover:shadow-[0_0_15px_rgba(92,225,201,0.25)]"
-            >
-              Cell Store
-            </Link>
-            */}
-            <div className="ml-3 flex items-center gap-1 border-l border-[rgba(91,102,99,0.35)] pl-3">
+            <div className="ml-2.5 flex items-center gap-1.5 border-l border-[rgba(91,102,99,0.35)] pl-2.5">
               <a
                 href="https://www.linkedin.com/company/thinkclock"
                 target="_blank"
@@ -149,54 +142,82 @@ export function SiteHeader() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
-              <ThemeToggleButton />
+              <div className="ml-1">
+                <ThemeToggleButton />
+              </div>
             </div>
           </nav>
 
-          <button
-            type="button"
-            className="relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            <span
-              className={`block h-px w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`}
-            />
-            <span
-              className={`block h-px w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`block h-px w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`}
-            />
-          </button>
+          {/* Mobile & Tablet Hamburger Button */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggleButton />
+            <button
+              type="button"
+              className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-[8px] border border-[var(--border)] bg-[var(--card)] p-2 transition-colors hover:border-[var(--signal)]"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              <span
+                className={`block h-0.5 w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "translate-y-[5px] rotate-45" : ""}`}
+              />
+              <span
+                className={`block h-0.5 w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block h-0.5 w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "-translate-y-[5px] -rotate-45" : ""}`}
+              />
+            </button>
+          </div>
         </div>
       </header>
 
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col bg-[var(--ink)]/98 backdrop-blur-2xl md:hidden">
-          <nav className="flex flex-1 flex-col items-center justify-center gap-6" aria-label="Mobile navigation">
+        <div className="fixed inset-0 z-40 flex flex-col bg-[var(--ink)]/98 backdrop-blur-2xl lg:hidden">
+          <nav className="flex flex-1 flex-col items-center justify-center gap-5 px-6 pt-16 pb-8" aria-label="Mobile navigation">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-display text-3xl text-[var(--paper)] transition-colors hover:text-[var(--signal)]"
+                className={`font-display text-2xl font-bold transition-colors ${
+                  isActive(link.href) ? "text-[var(--signal)]" : "text-[var(--paper)] hover:text-[var(--signal)]"
+                }`}
               >
                 {link.label}
               </Link>
             ))}
-            {/* Cell Store link hidden as requested
             <Link
-              href="/marketplace"
+              href="/faq"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 rounded-md bg-[var(--signal)] px-8 py-3 font-display text-xl font-semibold text-[var(--ink)]"
+              className="font-display text-2xl font-bold text-[var(--paper)] transition-colors hover:text-[var(--signal)]"
             >
-              Cell Store
+              FAQ
             </Link>
-            */}
-            <div className="mt-4 pt-4 border-t border-[rgba(91,102,99,0.35)] flex items-center justify-center gap-3">
-              <span className="font-mono text-xs text-[var(--graphite-on-dark)] uppercase">Theme:</span>
-              <ThemeToggleButton />
+
+            <div className="mt-6 flex items-center gap-4 pt-6 border-t border-[var(--border)] w-full max-w-xs justify-center">
+              <a
+                href="https://www.linkedin.com/company/thinkclock"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[var(--border)] bg-[var(--card)] text-[var(--paper)] transition-colors hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                aria-label="LinkedIn"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              <a
+                href="https://x.com/thinkclock"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-[var(--border)] bg-[var(--card)] text-[var(--paper)] transition-colors hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                aria-label="X / Twitter"
+              >
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
             </div>
           </nav>
         </div>

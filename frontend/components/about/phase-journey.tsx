@@ -167,7 +167,7 @@ function PhaseItem({
           className={`w-full ${isLeft ? "md:order-2 md:pl-12 lg:pl-16" : "md:order-1 md:pr-12 lg:pr-16"}`}
         >
           <div
-            className="space-y-4 rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-8 shadow-xl transition-all duration-500 hover:border-[var(--signal)]/50"
+            className="space-y-3 sm:space-y-4 rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-5 sm:p-8 shadow-xl transition-all duration-500 hover:border-[var(--signal)]/50"
             style={{
               borderLeftColor: phase.pinColorLight,
               borderLeftWidth: "5px",
