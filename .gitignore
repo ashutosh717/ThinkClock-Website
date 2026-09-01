@@ -16,9 +16,9 @@ backend/.env
 backend/.env.*
 !backend/.env.example
 
-# media / large videos
-*.mp4
+# media / unused videos
+frontend/videos/
+frontend/public/videos/THINKCLOCK.mp4
+frontend/public/videos/thinkclock-1.mp4
 *.mov
 *.avi
-frontend/videos/
-frontend/public/videos/
