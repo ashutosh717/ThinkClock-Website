@@ -16,6 +16,9 @@ backend/.env
 backend/.env.*
 !backend/.env.example
 
-**/__pycache__/
-*.py[cod]
-.DS_Store
+# media / large videos
+*.mp4
+*.mov
+*.avi
+frontend/videos/
+frontend/public/videos/

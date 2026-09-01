@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { AlertTriangle, Clock, FileQuestion } from "lucide-react";
-import { NyquistHero } from "@/components/marketing/nyquist-hero";
+import { HeroVideo } from "@/components/marketing/hero-video";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { SendButton } from "@/components/ui/send-button";
 
 const trustStats = [
   { value: "75 Seconds", label: "Full battery diagnostic report per run" },
-  { value: "6 Channels", label: "Simultaneous cylindrical cell testing" },
+  { value: "1,920 Cells", label: "Per 8-hr shift (Manual unit throughput)" },
   { value: "2,880 Cells", label: "Per 8-hr shift (Automated unit throughput)" },
   { value: "0 Cycle Loss", label: "Non-invasive zero damage testing" },
 ];
@@ -69,11 +69,8 @@ const credibilityTimeline = [
 export default function MarketingHome() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
-      {/* ── 1. Nyquist Interactive Hero ── */}
-      <NyquistHero
-        title="Battery Characteristics in Seconds — Not Hours."
-        subtitle="Every battery pack is only as good as its weakest cell — and today, most manufacturers still can't see which cell that is until it's too late. ThinkClock Battery Labs builds the diagnostic tools that let Gigafactories, battery pack manufacturers, resellers, and recyclers see inside every cell, in seconds, with lab-grade accuracy — no charge-discharge cycling required."
-      />
+      {/* ── 1. Full-Width Video Hero ── */}
+      <HeroVideo videoSrc="/videos/THINKCLOCKv2.mp4" />
 
       {/* ── 2. Opening Brand Story & Trust Stats Bar ── */}
       <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">

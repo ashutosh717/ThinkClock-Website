@@ -138,16 +138,20 @@
   .bg-\[var\(--ink\)\] {
     background-color: transparent !important;
   }
-  html {
-    @apply font-sans;
+  html, body, button, input, select, textarea {
+    font-family: var(--font-display), var(--font-body), sans-serif;
   }
 
   .font-display {
     font-family: var(--font-display), sans-serif;
   }
 
+  .font-sans {
+    font-family: var(--font-body), var(--font-display), sans-serif;
+  }
+
   .font-mono {
-    font-family: var(--font-data), monospace;
+    font-family: var(--font-data), var(--font-display), sans-serif;
   }
 
   .nyquist-path {
@@ -226,6 +230,15 @@
       opacity: 1;
       transform: scale(1.22);
       filter: drop-shadow(0 0 8px rgba(201, 122, 74, 0.95)) drop-shadow(0 0 14px rgba(92, 225, 201, 0.4));
+    }
+  }
+
+  @keyframes scale-up4 {
+    20% {
+      transform: scaleY(1.5);
+    }
+    40% {
+      transform: scaleY(1);
     }
   }
 

@@ -2,8 +2,12 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import benchtopImg from "@/images/UNITS/Benchtop.png";
+import automatedImg from "@/images/UNITS/Automated.jpg";
 import { SendButton } from "@/components/ui/send-button";
 import { AnimatedSection } from "@/components/marketing/animated-section";
+import { Layers } from "lucide-react";
 
 interface Measure {
   name: string;
@@ -228,42 +232,98 @@ function ProductsNarrativeContent() {
   return (
     <div id="product-detail" className="w-full scroll-mt-28">
       {/* Product Selector Tabs */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {products.map((prod) => {
           const isActive = prod.id === activeTab;
+          const thumbImg =
+            prod.id === "manual"
+              ? benchtopImg
+              : prod.id === "automated"
+              ? automatedImg
+              : null; // NO image for BatteryScope-P!
+
           return (
             <button
               key={prod.id}
               onClick={() => setSelectedTab(prod.id)}
-              className={`group flex items-center gap-3 rounded-[10px] border p-4 text-left transition-all duration-300 ${
+              className={`group relative flex flex-col justify-between rounded-[12px] border p-4 text-left transition-all duration-300 ${
                 isActive
-                  ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-lg shadow-[var(--signal)]/10"
-                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--signal)]/40"
+                  ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-xl shadow-[var(--signal)]/15 scale-[1.02]"
+                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--copper)]/60 hover:bg-[var(--secondary)]"
               }`}
             >
-              <div
-                className={`flex h-3 w-3 rounded-full transition-all ${
-                  isActive ? "bg-[var(--signal)] ring-4 ring-[var(--signal)]/20" : "bg-[var(--graphite)]"
-                }`}
-              />
-              <div>
-                <div className={`font-display text-base font-bold transition-colors ${isActive ? "text-[var(--paper)]" : "text-[var(--graphite-on-dark)] group-hover:text-[var(--paper)]"}`}>
-                  {prod.name}
+              {/* Top Row: Active Indicator / Glowing "CLICK TO VIEW" loader button */}
+              <div className="flex items-center justify-between w-full mb-3">
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`h-3 w-3 rounded-full transition-all ${
+                      isActive
+                        ? "bg-[var(--signal)] ring-4 ring-[var(--signal)]/25 animate-pulse"
+                        : "bg-[var(--graphite)]"
+                    }`}
+                  />
+                  <span className="font-mono text-[10px] font-bold tracking-wider text-[var(--copper)] uppercase">
+                    {prod.badge.split(",")[0]}
+                  </span>
                 </div>
-                <div className="font-mono text-xs font-semibold text-[var(--copper)]">{prod.badge}</div>
+
+                {!isActive && (
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--copper)]/70 bg-[var(--copper)]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[var(--copper)] shadow-[0_0_14px_rgba(201,122,74,0.45)]">
+                    <div className="flex items-center gap-0.5 h-3">
+                      <span className="w-[3px] h-[8px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite]" />
+                      <span className="w-[3px] h-[12px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite_0.25s]" />
+                      <span className="w-[3px] h-[8px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite_0.5s]" />
+                    </div>
+                    <span>CLICK TO VIEW</span>
+                  </div>
+                )}
+
+                {isActive && (
+                  <span className="rounded-full bg-[var(--signal)]/20 px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--signal)]">
+                    ACTIVE VIEW
+                  </span>
+                )}
+              </div>
+
+              {/* Main Tab Content with Crisp Uncropped Hardware Thumbnail Image */}
+              <div className="flex items-center gap-3 w-full">
+                {thumbImg ? (
+                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-white dark:bg-[#111716] p-1 shadow-sm">
+                    <Image
+                      src={thumbImg}
+                      alt={prod.name}
+                      fill
+                      sizes="80px"
+                      className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[var(--copper)]/40 bg-[var(--copper)]/10 text-[var(--copper)] shadow-sm">
+                    <Layers className="h-6 w-6" />
+                  </div>
+                )}
+
+                <div className="min-w-0">
+                  <div className={`font-display text-sm sm:text-base font-bold truncate transition-colors ${isActive ? "text-[var(--paper)]" : "text-[var(--graphite-on-dark)] group-hover:text-[var(--paper)]"}`}>
+                    {prod.name}
+                  </div>
+                  <div className="font-mono text-[11px] font-semibold text-[var(--copper)] truncate">
+                    {prod.badge}
+                  </div>
+                </div>
               </div>
             </button>
           );
         })}
       </div>
 
-      {/* Selected Product Detail Panel with granular step-by-step cascades */}
+      {/* Selected Product Detail Panel */}
       <div key={activeProduct.id} className="mt-8 sm:mt-10">
         <div className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 shadow-2xl">
           
-          {/* 1. Header & Tagline & Throughput */}
+          {/* 1. Header & System Image & Indicative Throughput directly below Narrative */}
           <AnimatedSection animation="fade-up" className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-3xl">
+            <div className={activeProduct.id !== "pack" ? "max-w-2xl" : "w-full"}>
               <span className="inline-block rounded-[6px] border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
                 {activeProduct.badge}
               </span>
@@ -276,26 +336,47 @@ function ProductsNarrativeContent() {
               <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
                 {activeProduct.narrative}
               </p>
+
+              {/* BIG & BOLD Indicative Throughput directly below the description */}
+              {activeProduct.throughput && (
+                <div className="mt-6 rounded-[12px] border border-[var(--signal)]/40 bg-[var(--secondary)] p-6 shadow-xl">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[var(--signal)] uppercase">
+                    INDICATIVE THROUGHPUT
+                  </span>
+                  <div className="mt-3 flex flex-wrap items-baseline gap-3">
+                    <div className="font-mono text-4xl font-extrabold text-[var(--signal)] sm:text-5xl lg:text-6xl tracking-tight">
+                      {activeProduct.throughput.shiftTotal}
+                    </div>
+                    <div className="font-mono text-lg font-bold text-[var(--paper)] sm:text-xl">
+                      {activeProduct.throughput.rate}
+                    </div>
+                  </div>
+                  <div className="mt-2 font-mono text-xs sm:text-sm text-[var(--graphite-on-dark)]">
+                    {activeProduct.throughput.details}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Throughput Card if available */}
-            {activeProduct.throughput && (
-              <div className="shrink-0 rounded-[10px] border border-[var(--signal)]/40 bg-[var(--secondary)] p-6 text-center shadow-xl lg:w-72">
-                <span className="font-mono text-[11px] font-semibold tracking-wider text-[var(--signal)] uppercase">Indicative Throughput</span>
-                <div className="mt-2 font-mono text-3xl font-bold text-[var(--signal)] sm:text-4xl">
-                  {activeProduct.throughput.shiftTotal}
-                </div>
-                <div className="mt-1.5 font-mono text-sm font-semibold text-[var(--paper)]">
-                  {activeProduct.throughput.rate}
-                </div>
-                <div className="mt-1 font-mono text-xs text-[var(--graphite-on-dark)]">
-                  {activeProduct.throughput.details}
+            {/* 100% FULLY VISIBLE UNCROPPED SYSTEM HARDWARE IMAGE (Manual & Automated ONLY) */}
+            {activeProduct.id !== "pack" && (
+              <div className="relative h-72 sm:h-80 lg:h-96 w-full sm:w-80 lg:w-96 shrink-0 overflow-hidden rounded-[14px] border border-[var(--border)] bg-white dark:bg-[#111716] p-3 shadow-2xl group">
+                <Image
+                  src={activeProduct.id === "manual" ? benchtopImg : automatedImg}
+                  alt={activeProduct.name}
+                  fill
+                  sizes="400px"
+                  className="object-contain p-2 rounded-[10px] transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute bottom-3 left-3 rounded-full border border-white/20 bg-black/80 px-3.5 py-1 font-mono text-xs font-bold text-white backdrop-blur-md shadow-md">
+                  {activeProduct.id === "manual" ? "Phase 3 Unit" : "Phase 4 Inline System"}
                 </div>
               </div>
             )}
           </AnimatedSection>
 
-          {/* 2. Diagnostics Section (What it measures: one by one cards) */}
+          {/* 2. Diagnostics Section (What it measures) */}
           {activeProduct.measures && activeProduct.measures.length > 0 && (
             <div className="mt-8 border-t border-[var(--border)] pt-6">
               <AnimatedSection animation="fade-up">
@@ -329,7 +410,7 @@ function ProductsNarrativeContent() {
             </div>
           )}
 
-          {/* 3. Specs & Features Grid (one by one items) */}
+          {/* 3. Specs & Features Grid */}
           <div className="mt-8 border-t border-[var(--border)] pt-6">
             <AnimatedSection animation="fade-up">
               <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Award, Microscope, Sparkles } from "lucide-react";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { PhaseJourney } from "@/components/about/phase-journey";
+import { InteractiveBookGallery } from "@/components/about/interactive-book-gallery";
 import { SendButton } from "@/components/ui/send-button";
 
 import babuImg from "@/images/Leadership/babu.jpeg";
@@ -215,67 +216,10 @@ export default function AboutPage() {
             </p>
           </AnimatedSection>
 
-          {/* Top 2 Featured Photos */}
-          <div className="grid gap-6 md:grid-cols-2">
-            {companyGallery.slice(0, 2).map((item, i) => (
-              <AnimatedSection
-                key={item.title}
-                as="article"
-                animation="fade-up"
-                stagger
-                staggerIndex={i}
-                className="group flex flex-col overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--card)] shadow-xl transition-all duration-500 hover:border-[var(--signal)]/60 hover:shadow-2xl"
-              >
-                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-[var(--secondary)]">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute top-3.5 left-3.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 font-mono text-[11px] font-semibold text-white backdrop-blur-md">
-                    {item.tag}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-bold text-[var(--paper)]">{item.title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          {/* Bottom 3 Photos Grid */}
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {companyGallery.slice(2, 5).map((item, i) => (
-              <AnimatedSection
-                key={item.title}
-                as="article"
-                animation="fade-up"
-                stagger
-                staggerIndex={i + 2}
-                className="group flex flex-col overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--card)] shadow-xl transition-all duration-500 hover:border-[var(--copper)]/60 hover:shadow-2xl"
-              >
-                <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-[var(--secondary)]">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute top-3.5 left-3.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 font-mono text-[11px] font-semibold text-white backdrop-blur-md">
-                    {item.tag}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-display text-lg font-bold text-[var(--paper)]">{item.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+          {/* Interactive 3D Book Gallery */}
+          <AnimatedSection animation="fade-up" className="mt-4">
+            <InteractiveBookGallery items={companyGallery} />
+          </AnimatedSection>
         </div>
       </section>
 

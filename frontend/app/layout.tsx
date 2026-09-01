@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
+import { Bai_Jamjuree } from "next/font/google";
 
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -9,22 +9,22 @@ import { AiAssistant } from "@/components/marketing/ai-assistant";
 import { StarBackground } from "@/components/marketing/star-background";
 import "./globals.css";
 
-const bodySans = IBM_Plex_Sans({
+const bodySans = Bai_Jamjuree({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const display = Space_Grotesk({
+const display = Bai_Jamjuree({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const dataMono = IBM_Plex_Mono({
+const dataMono = Bai_Jamjuree({
   variable: "--font-data",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
