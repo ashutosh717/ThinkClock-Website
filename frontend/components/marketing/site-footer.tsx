@@ -10,7 +10,6 @@ const footerLinks = [
       { href: "/products?tab=manual#product-detail", label: "BatteryScope-C Manual" },
       { href: "/products?tab=automated#product-detail", label: "BatteryScope-C Automated" },
       { href: "/products?tab=pack#product-detail", label: "BatteryScope-P" },
-      // { href: "/marketplace", label: "Cell Store" }, // Hidden as requested
     ],
   },
   {
@@ -27,32 +26,32 @@ const footerLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--card)] text-[var(--paper)]">
-      <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16 py-14 sm:py-16">
+    <footer className="border-t border-[var(--border)] bg-[var(--card)] text-[var(--paper)] backdrop-blur-xl">
+      <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16 py-10 sm:py-12">
         {/* ── Top Grid: Brand | Products | Company | Locations ── */}
-        <div className="grid gap-10 sm:gap-12 sm:grid-cols-2 lg:grid-cols-12">
+        <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-12">
 
           {/* Brand & Mission — wider column */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4">
+            <Link href="/" className="inline-flex items-center gap-3 sm:gap-3.5 transition-transform hover:scale-[1.02]">
               <Image
                 src={thinkclockIcon}
                 alt="ThinkClock"
-                className="h-14 sm:h-16 w-auto object-contain shrink-0"
+                className="h-12 sm:h-14 w-auto object-contain shrink-0"
               />
               <div className="flex flex-col">
-                <span className="font-display text-xl sm:text-2xl leading-tight text-[var(--paper)] font-bold tracking-tight">
+                <span className="font-display text-lg sm:text-xl leading-tight text-[var(--paper)] font-bold tracking-tight">
                   ThinkClock Battery Labs
                 </span>
-                <span className="font-mono text-xs sm:text-[13px] leading-tight text-[var(--copper)] font-semibold">
+                <span className="font-mono text-[11px] sm:text-xs leading-tight text-[var(--copper)] font-semibold mt-0.5">
                   Sensing, Modelling, Analytics
                 </span>
               </div>
             </Link>
-            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[var(--graphite-on-dark)]">
+            <p className="mt-3.5 max-w-sm text-[13px] leading-relaxed text-[var(--graphite-on-dark)]">
               Battery Characterization in Seconds. Not Hours. Innovate UK-backed R&D organization focused on non-invasive spectroscopy, digital twins, and AI battery diagnostics.
             </p>
-            <div className="mt-5 space-y-1.5">
+            <div className="mt-4 space-y-1.5">
               <a
                 href="mailto:contact@thinkclock.com"
                 className="flex items-center gap-2 font-mono text-xs font-medium text-[var(--graphite-on-dark)] transition-colors hover:text-[var(--signal)]"
@@ -86,10 +85,10 @@ export function SiteFooter() {
           {/* Nav Groups — 2 columns each take 2 cols on lg */}
           {footerLinks.map((group) => (
             <div key={group.title} className="lg:col-span-2">
-              <h4 className="mb-4 font-mono text-[11px] tracking-[0.18em] text-[var(--signal)] uppercase font-semibold">
+              <h4 className="mb-3.5 font-mono text-[11px] tracking-[0.2em] text-[var(--signal)] uppercase font-semibold">
                 {group.title}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link
@@ -106,14 +105,14 @@ export function SiteFooter() {
 
           {/* Locations — wider column */}
           <div className="lg:col-span-4">
-            <h4 className="mb-4 font-mono text-[11px] tracking-[0.18em] text-[var(--signal)] uppercase font-semibold">
+            <h4 className="mb-3.5 font-mono text-[11px] tracking-[0.2em] text-[var(--signal)] uppercase font-semibold">
               Global Locations
             </h4>
-            <div className="space-y-5">
+            <div className="space-y-4">
               {/* India HQ */}
               <div>
                 <span className="font-display text-[13px] font-bold text-[var(--paper)]">India HQ:</span>
-                <p className="mt-1 text-[12px] leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-0.5 text-[12px] leading-relaxed text-[var(--graphite-on-dark)]">
                   ThinkClock Battery Labs Pvt Ltd<br />
                   3rd floor, Confident Square Mall, Unit-301,<br />
                   Varthur–Sarjapur Rd, Dommasandra,<br />
@@ -133,7 +132,7 @@ export function SiteFooter() {
               {/* UK Office */}
               <div>
                 <span className="font-display text-[13px] font-bold text-[var(--paper)]">UK Office:</span>
-                <p className="mt-1 text-[12px] leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-0.5 text-[12px] leading-relaxed text-[var(--graphite-on-dark)]">
                   ThinkClock Ltd.<br />
                   Unit 100, Kingspark Business Centre,<br />
                   Kingston Rd, New Malden KT3 3ST,<br />
@@ -154,11 +153,11 @@ export function SiteFooter() {
         </div>
 
         {/* ── Bottom Bar ── */}
-        <div className="mt-12 border-t border-[var(--border)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-10 border-t border-[var(--border)] pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-[11px] text-[var(--graphite-on-dark)]">
             ThinkClock Battery Labs &copy; {new Date().getFullYear()} · Sensing, Modelling, Analytics
           </p>
-          <div className="flex gap-6">
+          <div className="flex gap-5">
             <Link href="/privacy" className="font-mono text-[11px] text-[var(--graphite-on-dark)] hover:text-[var(--signal)] transition-colors">
               Privacy Policy
             </Link>

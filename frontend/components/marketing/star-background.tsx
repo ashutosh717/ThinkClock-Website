@@ -166,8 +166,8 @@ export function StarBackground() {
           height / 2,
           Math.max(width, height)
         );
-        bgGradient.addColorStop(0, "#0e1514");
-        bgGradient.addColorStop(1, "#0b0f0e");
+        bgGradient.addColorStop(0, "#050807");
+        bgGradient.addColorStop(1, "#010302");
         ctx.fillStyle = bgGradient;
         ctx.fillRect(0, 0, width, height);
 

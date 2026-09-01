@@ -193,7 +193,7 @@ export default function AboutPage() {
                     <act.Icon className="h-6 w-6 stroke-[2]" style={{ color: act.color }} />
                   </div>
                   <h3 className="mt-5 font-display text-xl font-bold leading-snug text-[var(--paper)]">{act.title}</h3>
-                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{act.desc}</p>
+                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{act.desc}</p>
                 </div>
               </AnimatedSection>
             ))}

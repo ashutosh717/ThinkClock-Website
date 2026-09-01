@@ -156,7 +156,7 @@ export default function ProductsPage() {
                     <item.Icon className="h-6 w-6 stroke-[2.2]" style={{ color: item.color }} />
                   </div>
                   <h3 className="mt-5 font-display text-lg font-bold text-[var(--paper)]">{item.title}</h3>
-                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
+                  <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}

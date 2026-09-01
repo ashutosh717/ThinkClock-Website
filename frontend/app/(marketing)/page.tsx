@@ -99,7 +99,7 @@ export default function MarketingHome() {
                 className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 text-center shadow-lg transition-all duration-300 hover:border-[var(--signal)]/50"
               >
                 <p className="font-mono text-2xl font-bold text-[var(--signal)] sm:text-3xl">{stat.value}</p>
-                <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{stat.label}</p>
+                <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{stat.label}</p>
               </AnimatedSection>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default function MarketingHome() {
                   <item.Icon className="h-6 w-6 stroke-[2.2]" style={{ color: item.color }} />
                 </div>
                 <h3 className="mt-5 font-display text-xl font-bold text-[var(--paper)]">{item.method}</h3>
-                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{item.cost}</p>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.cost}</p>
               </AnimatedSection>
             ))}
           </div>
@@ -154,7 +154,7 @@ export default function MarketingHome() {
             <h3 className="mt-2.5 font-display text-2xl font-bold sm:text-3xl text-[var(--paper)]">
               Non-invasive spectroscopy + AI digital twins = lab-grade health in seconds.
             </h3>
-            <p className="mt-3.5 max-w-4xl text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
+            <p className="mt-3.5 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
               Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
             </p>
           </AnimatedSection>
@@ -190,7 +190,7 @@ export default function MarketingHome() {
                   <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">{prod.badge}</span>
                   <h3 className="mt-3 font-display text-2xl font-bold text-[var(--paper)]">{prod.title}</h3>
                   <p className="mt-2 font-display text-sm italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
-                  <p className="mt-3.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
+                  <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
                 </div>
                 <div className="mt-8 pt-6 border-t border-[var(--border)] flex items-center justify-between">
                   <span className="font-mono text-xs sm:text-sm font-bold text-[var(--paper)]">{prod.throughput}</span>
@@ -238,7 +238,7 @@ export default function MarketingHome() {
               >
                 <span className="font-mono text-xs font-semibold text-[var(--signal)]">{step.phase}</span>
                 <h3 className="mt-3 font-display text-xl font-bold text-[var(--paper)]">{step.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)] sm:text-sm">{step.desc}</p>
+                <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{step.desc}</p>
               </AnimatedSection>
             ))}
           </div>

@@ -49,31 +49,31 @@
 }
 
 :root {
-  --ink: #0b0f0e;
+  --ink: #030504;
   --signal: #5ce1c9;
-  --copper: #c97a4a;
-  --copper-ink: #8b4f2d;
-  --paper: #f2f4f1;
-  --graphite: #5b6663;
-  --graphite-on-dark: #a8b4b0;
-  --alert: #e8574a;
+  --copper: #f97316;
+  --copper-ink: #fdba74;
+  --paper: #ffffff;
+  --graphite: #a1ada9;
+  --graphite-on-dark: #e0e7e5;
+  --alert: #f87171;
   --background: var(--ink);
   --foreground: var(--paper);
-  --card: #111716;
+  --card: #0a0f0d;
   --card-foreground: var(--paper);
-  --popover: #111716;
+  --popover: #0a0f0d;
   --popover-foreground: var(--paper);
   --primary: var(--signal);
   --primary-foreground: var(--ink);
-  --secondary: #1b2523;
+  --secondary: #0e1513;
   --secondary-foreground: var(--paper);
-  --muted: #1b2523;
+  --muted: #0e1513;
   --muted-foreground: var(--graphite);
   --accent: var(--copper);
   --accent-foreground: var(--paper);
   --destructive: var(--alert);
-  --border: rgb(91 102 99 / 45%);
-  --input: rgb(91 102 99 / 45%);
+  --border: rgb(255 255 255 / 13%);
+  --input: rgb(255 255 255 / 15%);
   --ring: var(--signal);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -81,14 +81,28 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: #0f1413;
+  --sidebar: #050807;
   --sidebar-foreground: var(--paper);
   --sidebar-primary: var(--signal);
   --sidebar-primary-foreground: var(--ink);
   --sidebar-accent: var(--copper);
   --sidebar-accent-foreground: var(--paper);
-  --sidebar-border: rgb(91 102 99 / 45%);
+  --sidebar-border: rgb(255 255 255 / 13%);
   --sidebar-ring: var(--signal);
+}
+
+/* Dark Mode Premium Glassmorphic Card Styling */
+:root:not(.light) [class*="bg-\\[var\\(--card\\)\\]"],
+:root:not(.light) .bg-card {
+  background-color: rgba(10, 15, 13, 0.82) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.09);
+}
+
+:root:not(.light) [class*="bg-\\[var\\(--card\\)\\]"]:hover,
+:root:not(.light) .bg-card:hover {
+  box-shadow: 0 16px 40px -5px rgba(0, 0, 0, 0.85), 0 0 25px -2px rgba(92, 225, 201, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
 }
 
 .light {
