@@ -7,7 +7,7 @@ import benchtopImg from "@/images/UNITS/Benchtop.png";
 import automatedImg from "@/images/UNITS/Automated.jpg";
 import { SendButton } from "@/components/ui/send-button";
 import { AnimatedSection } from "@/components/marketing/animated-section";
-import { Layers } from "lucide-react";
+import { Layers, ArrowUpRight } from "lucide-react";
 
 interface Measure {
   name: string;
@@ -232,85 +232,76 @@ function ProductsNarrativeContent() {
   return (
     <div id="product-detail" className="w-full scroll-mt-28">
       {/* Product Selector Tabs */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
         {products.map((prod) => {
           const isActive = prod.id === activeTab;
-          const thumbImg =
+          const badgeDetails =
             prod.id === "manual"
-              ? benchtopImg
+              ? {
+                  tag: "BENCHTOP QC",
+                  badgeColor: "border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400",
+                  metric: "1,920 Cells / Shift",
+                  desc: "Operator-led multi-channel unit for lab characterization & incoming QC.",
+                }
               : prod.id === "automated"
-              ? automatedImg
-              : null; // NO image for BatteryScope-P!
+              ? {
+                  tag: "INLINE GIGAFACTORY",
+                  badgeColor: "border-amber-500/30 bg-amber-50 text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-400",
+                  metric: "2,880 Cells / Shift",
+                  desc: "Autonomous inline high-throughput testing with automated cell sorting.",
+                }
+              : {
+                  tag: "PACK INTELLIGENCE",
+                  badgeColor: "border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400",
+                  metric: "Pack-Level Telemetry",
+                  desc: "Non-invasive module & pack analytics mapping cell variation to safety.",
+                };
 
           return (
             <button
               key={prod.id}
               onClick={() => setSelectedTab(prod.id)}
-              className={`group relative flex flex-col justify-between rounded-[12px] border p-4 text-left transition-all duration-300 ${
+              className={`group relative flex flex-col justify-between rounded-[20px] p-6 text-left transition-all duration-300 ${
                 isActive
-                  ? "border-[var(--signal)] bg-[var(--signal)]/10 shadow-xl shadow-[var(--signal)]/15 scale-[1.02]"
-                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--copper)]/60 hover:bg-[var(--secondary)]"
+                  ? "border-2 border-[#f97316] bg-[var(--card)] shadow-2xl scale-[1.02] ring-2 ring-[#f97316]/20"
+                  : "border border-[var(--border)] bg-[var(--card)] hover:border-[#f97316]/40 hover:-translate-y-1 shadow-lg"
               }`}
             >
-              {/* Top Row: Active Indicator / Glowing "CLICK TO VIEW" loader button */}
-              <div className="flex items-center justify-between w-full mb-3">
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`h-3 w-3 rounded-full transition-all ${
-                      isActive
-                        ? "bg-[var(--signal)] ring-4 ring-[var(--signal)]/25 animate-pulse"
-                        : "bg-[var(--graphite)]"
-                    }`}
-                  />
-                  <span className="font-mono text-[10px] font-bold tracking-wider text-[var(--copper)] uppercase">
-                    {prod.badge.split(",")[0]}
-                  </span>
-                </div>
+              {/* Top Row: Category Tag + Active Badge / Arrow */}
+              <div className="flex items-center justify-between w-full">
+                <span className={`rounded-full border px-3 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${badgeDetails.badgeColor}`}>
+                  {badgeDetails.tag}
+                </span>
 
-                {!isActive && (
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--copper)]/70 bg-[var(--copper)]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[var(--copper)] shadow-[0_0_14px_rgba(201,122,74,0.45)]">
-                    <div className="flex items-center gap-0.5 h-3">
-                      <span className="w-[3px] h-[8px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite]" />
-                      <span className="w-[3px] h-[12px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite_0.25s]" />
-                      <span className="w-[3px] h-[8px] bg-[var(--copper)] rounded-full animate-[scale-up4_1s_linear_infinite_0.5s]" />
-                    </div>
-                    <span>CLICK TO VIEW</span>
+                {isActive ? (
+                  <span className="rounded-full border border-[#f97316]/40 bg-[#f97316]/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#ea580c] dark:text-[#fb923c]">
+                    ACTIVE
+                  </span>
+                ) : (
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] transition-colors group-hover:border-[#f97316] group-hover:text-[#f97316]">
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
-                )}
-
-                {isActive && (
-                  <span className="rounded-full bg-[var(--signal)]/20 px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--signal)]">
-                    ACTIVE VIEW
-                  </span>
                 )}
               </div>
 
-              {/* Main Tab Content with Crisp Uncropped Hardware Thumbnail Image */}
-              <div className="flex items-center gap-3 w-full">
-                {thumbImg ? (
-                  <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-white dark:bg-[#111716] p-1 shadow-sm">
-                    <Image
-                      src={thumbImg}
-                      alt={prod.name}
-                      fill
-                      sizes="80px"
-                      className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[var(--copper)]/40 bg-[var(--copper)]/10 text-[var(--copper)] shadow-sm">
-                    <Layers className="h-6 w-6" />
-                  </div>
-                )}
+              {/* Middle: Product Name & Brief Desc */}
+              <div className="mt-5">
+                <h4 className="font-display text-lg sm:text-xl font-bold text-[var(--paper)] leading-tight">
+                  {prod.name}
+                </h4>
+                <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-[var(--graphite-on-dark)]">
+                  {badgeDetails.desc}
+                </p>
+              </div>
 
-                <div className="min-w-0">
-                  <div className={`font-display text-sm sm:text-base font-bold truncate transition-colors ${isActive ? "text-[var(--paper)]" : "text-[var(--graphite-on-dark)] group-hover:text-[var(--paper)]"}`}>
-                    {prod.name}
-                  </div>
-                  <div className="font-mono text-[11px] font-semibold text-[var(--copper)] truncate">
-                    {prod.badge}
-                  </div>
-                </div>
+              {/* Bottom Row: Highlight Metric */}
+              <div className="mt-6 pt-4 border-t border-[var(--border)] flex items-center justify-between">
+                <span className="inline-block font-mono text-xs sm:text-sm font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                  {badgeDetails.metric}
+                </span>
+                <span className="font-mono text-[11px] font-semibold text-[var(--graphite)] group-hover:text-[#f97316] transition-colors">
+                  {isActive ? "Viewing Specs" : "Select System →"}
+                </span>
               </div>
             </button>
           );
@@ -319,31 +310,34 @@ function ProductsNarrativeContent() {
 
       {/* Selected Product Detail Panel */}
       <div key={activeProduct.id} className="mt-8 sm:mt-10">
-        <div className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 shadow-2xl">
+        <div className="rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 shadow-2xl">
           
-          {/* 1. Header & System Image & Indicative Throughput directly below Narrative */}
+          {/* 1. Header & System Image & Indicative Throughput */}
           <AnimatedSection animation="fade-up" className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className={activeProduct.id !== "pack" ? "max-w-2xl" : "w-full"}>
-              <span className="inline-block rounded-[6px] border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
+              <span className="inline-block rounded-full border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3.5 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
                 {activeProduct.badge}
               </span>
               <h3 className="mt-4 font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
                 {activeProduct.name}
               </h3>
-              <p className="mt-2 font-display text-lg italic text-[var(--copper)]">
+              <p className="mt-2 inline-block font-display text-lg italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 &ldquo;{activeProduct.tagline}&rdquo;
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-[var(--graphite-on-dark)] sm:text-base">
+              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
                 {activeProduct.narrative}
               </p>
 
-              {/* BIG & BOLD Indicative Throughput directly below the description */}
+              {/* Indicative Throughput Box */}
               {activeProduct.throughput && (
-                <div className="mt-6 rounded-[12px] border border-[var(--signal)]/40 bg-[var(--secondary)] p-6 shadow-xl">
-                  <span className="font-mono text-xs font-bold tracking-widest text-[var(--signal)] uppercase">
-                    INDICATIVE THROUGHPUT
-                  </span>
-                  <div className="mt-3 flex flex-wrap items-baseline gap-3">
+                <div className="mt-6 rounded-[20px] border border-[var(--signal)]/30 bg-[var(--secondary)] p-6 sm:p-8 shadow-lg">
+                  <div className="flex items-center gap-2">
+                    <span className="h-px w-6 bg-[var(--signal)]" />
+                    <span className="font-mono text-xs font-bold tracking-widest text-[var(--signal)] uppercase">
+                      INDICATIVE THROUGHPUT
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap items-baseline gap-3">
                     <div className="font-mono text-4xl font-extrabold text-[var(--signal)] sm:text-5xl lg:text-6xl tracking-tight">
                       {activeProduct.throughput.shiftTotal}
                     </div>
@@ -358,19 +352,34 @@ function ProductsNarrativeContent() {
               )}
             </div>
 
-            {/* 100% FULLY VISIBLE UNCROPPED SYSTEM HARDWARE IMAGE (Manual & Automated ONLY) */}
+            {/* Hardware Image Showcase - Tight portrait fit with zero empty borders */}
             {activeProduct.id !== "pack" && (
-              <div className="relative h-72 sm:h-80 lg:h-96 w-full sm:w-80 lg:w-96 shrink-0 overflow-hidden rounded-[14px] border border-[var(--border)] bg-white dark:bg-[#111716] p-3 shadow-2xl group">
-                <Image
-                  src={activeProduct.id === "manual" ? benchtopImg : automatedImg}
-                  alt={activeProduct.name}
-                  fill
-                  sizes="400px"
-                  className="object-contain p-2 rounded-[10px] transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
-                <div className="absolute bottom-3 left-3 rounded-full border border-white/20 bg-black/80 px-3.5 py-1 font-mono text-xs font-bold text-white backdrop-blur-md shadow-md">
-                  {activeProduct.id === "manual" ? "Phase 3 Unit" : "Phase 4 Inline System"}
+              <div className="relative w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] aspect-[3/4] shrink-0 overflow-hidden rounded-[20px] border border-[var(--border)] bg-white dark:bg-[#0d1412] shadow-xl flex flex-col justify-between p-3 group mx-auto lg:mx-0">
+                {/* Image Container with tight fit */}
+                <div className="relative w-full h-[82%] overflow-hidden rounded-[14px]">
+                  <Image
+                    src={activeProduct.id === "manual" ? benchtopImg : automatedImg}
+                    alt={activeProduct.name}
+                    fill
+                    sizes="(max-width: 768px) 320px, 360px"
+                    className="object-contain p-1 transition-transform duration-700 group-hover:scale-105"
+                    priority
+                  />
+                </div>
+
+                {/* Grounded Floating Spec Bar */}
+                <div className="rounded-[14px] border border-[var(--border)] bg-[var(--secondary)]/90 backdrop-blur-sm px-3.5 py-2.5 flex items-center justify-between shadow-sm">
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-mono text-[9px] font-bold text-[var(--signal)] uppercase tracking-wider truncate">
+                      {activeProduct.id === "manual" ? "6-Channel Chamber" : "Inline Sort Array"}
+                    </span>
+                    <span className="font-display text-xs font-bold text-[var(--paper)] truncate">
+                      {activeProduct.id === "manual" ? "Benchtop Diagnostic Unit" : "Continuous Factory Unit"}
+                    </span>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--card)] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--paper)]">
+                    {activeProduct.id === "manual" ? "21700 Ready" : "High Speed"}
+                  </span>
                 </div>
               </div>
             )}
@@ -378,14 +387,17 @@ function ProductsNarrativeContent() {
 
           {/* 2. Diagnostics Section (What it measures) */}
           {activeProduct.measures && activeProduct.measures.length > 0 && (
-            <div className="mt-8 border-t border-[var(--border)] pt-6">
+            <div className="mt-10 border-t border-[var(--border)] pt-8">
               <AnimatedSection animation="fade-up">
-                <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                  What it measures: a complete health signature in seconds
-                </h4>
+                <div className="flex items-center gap-2">
+                  <span className="h-px w-6 bg-[var(--signal)]" />
+                  <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                    WHAT IT MEASURES: A COMPLETE HEALTH SIGNATURE IN SECONDS
+                  </h4>
+                </div>
               </AnimatedSection>
 
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {activeProduct.measures.map((m, i) => (
                   <AnimatedSection
                     key={m.name}
@@ -393,17 +405,17 @@ function ProductsNarrativeContent() {
                     animation="fade-up"
                     stagger
                     staggerIndex={i}
-                    className="rounded-[10px] border border-[var(--border)] bg-[var(--secondary)] p-5 shadow-sm transition-all duration-300 hover:border-[var(--signal)]/40"
+                    className="rounded-[20px] border border-[var(--border)] bg-[var(--secondary)] p-6 shadow-sm transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-display text-sm font-bold text-[var(--paper)]">{m.name}</span>
+                      <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">{m.name}</span>
                       {m.inDevelopment && (
-                        <span className="rounded-[4px] border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--copper)]">
-                          *In development
+                        <span className="rounded-full border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-[var(--copper)]">
+                          *In dev
                         </span>
                       )}
                     </div>
-                    <p className="mt-2 text-xs leading-relaxed text-[var(--graphite-on-dark)]">{m.desc}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{m.desc}</p>
                   </AnimatedSection>
                 ))}
               </div>
@@ -411,14 +423,17 @@ function ProductsNarrativeContent() {
           )}
 
           {/* 3. Specs & Features Grid */}
-          <div className="mt-8 border-t border-[var(--border)] pt-6">
+          <div className="mt-10 border-t border-[var(--border)] pt-8">
             <AnimatedSection animation="fade-up">
-              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                Key Specs &amp; Features
-              </h4>
+              <div className="flex items-center gap-2">
+                <span className="h-px w-6 bg-[var(--copper)]" />
+                <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
+                  KEY SPECS &amp; FEATURES
+                </h4>
+              </div>
             </AnimatedSection>
 
-            <div className="mt-5 grid gap-3.5 sm:grid-cols-2">
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {activeProduct.specs.map((spec, i) => (
                 <AnimatedSection
                   key={i}
@@ -426,7 +441,7 @@ function ProductsNarrativeContent() {
                   animation="fade-up"
                   stagger
                   staggerIndex={i}
-                  className="flex items-start gap-3 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] p-3.5 text-xs leading-relaxed text-[var(--paper)] shadow-sm sm:text-sm"
+                  className="flex items-start gap-3 rounded-[14px] border border-[var(--border)] bg-[var(--secondary)] p-4 text-sm leading-relaxed text-[var(--paper)] shadow-sm"
                 >
                   <span className="mt-0.5 font-bold text-[var(--signal)] shrink-0">✔</span>
                   <span>{spec}</span>
@@ -436,12 +451,15 @@ function ProductsNarrativeContent() {
           </div>
 
           {/* 4. Why It Wins & Best For */}
-          <div className="mt-8 grid gap-8 border-t border-[var(--border)] pt-6 lg:grid-cols-2">
+          <div className="mt-10 grid gap-8 border-t border-[var(--border)] pt-8 lg:grid-cols-2">
             <AnimatedSection animation="fade-up">
-              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                Why it wins customers
-              </h4>
-              <ul className="mt-4 space-y-2.5">
+              <div className="flex items-center gap-2">
+                <span className="h-px w-6 bg-[var(--signal)]" />
+                <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                  WHY IT WINS CUSTOMERS
+                </h4>
+              </div>
+              <ul className="mt-5 space-y-3">
                 {activeProduct.whyItWins.map((item, i) => (
                   <AnimatedSection
                     key={i}
@@ -449,7 +467,7 @@ function ProductsNarrativeContent() {
                     animation="fade-up"
                     stagger
                     staggerIndex={i}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed text-[var(--graphite-on-dark)]"
+                    className="flex items-start gap-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]"
                   >
                     <span className="text-[var(--copper)] text-sm select-none shrink-0 mt-0.5">✦</span>
                     <span>{item}</span>
@@ -459,10 +477,13 @@ function ProductsNarrativeContent() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={100}>
-              <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                Best For
-              </h4>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <span className="h-px w-6 bg-[var(--signal)]" />
+                <h4 className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+                  BEST FOR
+                </h4>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2.5">
                 {activeProduct.bestFor.map((item, i) => (
                   <AnimatedSection
                     key={item}
@@ -470,7 +491,7 @@ function ProductsNarrativeContent() {
                     animation="fade-up"
                     stagger
                     staggerIndex={i}
-                    className="rounded-[6px] border border-[var(--border)] bg-[var(--secondary)] px-3 py-1.5 font-mono text-xs font-semibold text-[var(--paper)]"
+                    className="rounded-full border border-[var(--border)] bg-[var(--secondary)] px-4 py-1.5 font-mono text-xs font-semibold text-[var(--paper)]"
                   >
                     {item}
                   </AnimatedSection>
@@ -480,10 +501,10 @@ function ProductsNarrativeContent() {
           </div>
 
           {/* 5. Product CTA Strip */}
-          <AnimatedSection animation="fade-up" delay={200} className="mt-8 flex flex-col items-center justify-between gap-6 rounded-[10px] border border-[var(--signal)]/30 bg-[var(--secondary)] p-6 sm:flex-row">
+          <AnimatedSection animation="fade-up" delay={200} className="mt-10 flex flex-col items-center justify-between gap-6 rounded-[20px] border border-purple-500/25 bg-[var(--secondary)] p-6 sm:p-8 sm:flex-row">
             <div>
-              <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase">{activeProduct.ctaHeadline}</span>
-              <p className="mt-1.5 font-display text-base text-[var(--paper)] font-semibold">
+              <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">{activeProduct.ctaHeadline}</span>
+              <p className="mt-2 font-display text-base sm:text-lg text-[var(--paper)] font-semibold">
                 {activeProduct.ctaText}
               </p>
             </div>
@@ -497,7 +518,7 @@ function ProductsNarrativeContent() {
 
 export function ProductsNarrative() {
   return (
-    <Suspense fallback={<div className="min-h-[400px] w-full animate-pulse rounded-[14px] bg-[var(--card)]" />}>
+    <Suspense fallback={<div className="min-h-[400px] w-full animate-pulse rounded-[20px] bg-[var(--card)]" />}>
       <ProductsNarrativeContent />
     </Suspense>
   );

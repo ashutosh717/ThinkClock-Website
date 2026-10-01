@@ -56,21 +56,24 @@ export default function ProductsPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16 border-b border-[var(--border)]">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
         </div>
         <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
-              <span className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                BatteryScope Ecosystem
+            <div className="flex items-center justify-center gap-2">
+              <span className="h-px w-6 bg-[var(--signal)]" />
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+                BATTERYSCOPE ECOSYSTEM
               </span>
             </div>
             <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
-              Non-Invasive Diagnostic Systems built for Speed, Precision, and Scale
+              Non-Invasive Diagnostic Systems built for{" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                Speed, Precision, and Scale
+              </span>
             </h1>
             <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
               From bench-top lab evaluation to fully autonomous production line sorting and pack-level intelligence: explore the complete BatteryScope product line.
@@ -80,41 +83,90 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 2. Interactive Products Narrative Showcase ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <ProductsNarrative />
         </div>
       </section>
 
       {/* ── 3. Technical Ecosystem Comparison Table ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
-              Specification Matrix
-            </p>
-            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
-              Compare BatteryScope Diagnostics
+            <div className="flex items-center justify-center gap-2">
+              <span className="h-px w-6 bg-[var(--copper)]" />
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+                SPECIFICATION MATRIX
+              </span>
+            </div>
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+              Compare BatteryScope{" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                Diagnostics
+              </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-8 sm:mt-10 overflow-x-auto rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl">
-            <table className="w-full min-w-[640px] text-left font-sans text-xs sm:text-sm">
+          <div className="mt-10 sm:mt-12 overflow-x-auto rounded-[20px] border border-[var(--border)] bg-[var(--card)] shadow-xl">
+            <table className="w-full min-w-[700px] text-left border-collapse">
               <thead>
-                <tr className="border-b border-[var(--border)] text-[var(--signal)] font-mono text-xs uppercase tracking-wider">
-                  <th className="py-3.5 px-4">Feature / Spec</th>
-                  <th className="py-3.5 px-4">BatteryScope-C Manual</th>
-                  <th className="py-3.5 px-4">BatteryScope-C Automated</th>
-                  <th className="py-3.5 px-4">BatteryScope-P</th>
+                <tr className="border-b border-[var(--border)] bg-[var(--secondary)]/60">
+                  <th className="py-5 px-6 font-mono text-xs font-bold text-[var(--graphite)] uppercase tracking-wider w-[28%]">
+                    SPECIFICATION
+                  </th>
+                  <th className="py-5 px-6 w-[24%] border-x border-[var(--border)]">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="inline-block w-fit rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider">
+                        BENCHTOP QC
+                      </span>
+                      <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
+                        BatteryScope-C Manual
+                      </span>
+                    </div>
+                  </th>
+                  <th className="py-5 px-6 w-[24%] border-r border-[var(--border)]">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="inline-block w-fit rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider">
+                        INLINE GIGAFACTORY
+                      </span>
+                      <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
+                        BatteryScope-C Automated
+                      </span>
+                    </div>
+                  </th>
+                  <th className="py-5 px-6 w-[24%]">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="inline-block w-fit rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider">
+                        PACK TELEMETRY
+                      </span>
+                      <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
+                        BatteryScope-P
+                      </span>
+                    </div>
+                  </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--border)] text-[var(--paper)]">
+              <tbody className="divide-y divide-[var(--border)]">
                 {comparisonFeatures.map((row, i) => (
-                  <tr key={i} className="hover:bg-[var(--secondary)]/40 transition-colors">
-                    <td className="py-3.5 px-4 font-semibold text-[var(--paper)]">{row.feature}</td>
-                    <td className="py-3.5 px-4 font-mono text-xs text-[var(--graphite-on-dark)]">{row.manual}</td>
-                    <td className="py-3.5 px-4 font-mono text-xs font-bold text-[var(--signal)]">{row.auto}</td>
-                    <td className="py-3.5 px-4 font-mono text-xs text-[var(--copper)]">{row.pack}</td>
+                  <tr key={i} className="hover:bg-[var(--secondary)]/50 transition-colors">
+                    <td className="py-4 px-6 font-display text-sm sm:text-base font-bold text-[var(--paper)]">
+                      {row.feature}
+                    </td>
+                    <td className="py-4 px-6 text-sm sm:text-base border-x border-[var(--border)]">
+                      <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
+                        {row.manual}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-sm sm:text-base border-r border-[var(--border)]">
+                      <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
+                        {row.auto}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-sm sm:text-base">
+                      <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
+                        {row.pack}
+                      </span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -124,18 +176,24 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 4. Technology Advantage ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-              Technology Advantage
-            </p>
-            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
-              Why BatteryScope Outperforms Traditional Cycling
+            <div className="flex items-center justify-center gap-2">
+              <span className="h-px w-6 bg-[var(--signal)]" />
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+                TECHNOLOGY ADVANTAGE
+              </span>
+            </div>
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+              Why BatteryScope Outperforms{" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                Traditional Cycling
+              </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-8 sm:mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {techAdvantages.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -143,17 +201,17 @@ export default function ProductsPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/50 flex flex-col justify-between"
+                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1 flex flex-col justify-between"
               >
                 <div>
                   <div
-                    className="flex h-12 w-12 items-center justify-center rounded-[10px] border shadow-sm transition-transform duration-300 group-hover:scale-105"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl border shadow-sm transition-transform duration-300 group-hover:scale-105"
                     style={{
                       borderColor: `${item.color}40`,
                       backgroundColor: `${item.color}15`,
                     }}
                   >
-                    <item.Icon className="h-6 w-6 stroke-[2.2]" style={{ color: item.color }} />
+                    <item.Icon className="h-5 w-5 stroke-[2.2]" style={{ color: item.color }} />
                   </div>
                   <h3 className="mt-5 font-display text-lg font-bold text-[var(--paper)]">{item.title}</h3>
                   <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
@@ -165,17 +223,23 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 5. Call to Action Banner ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[14px] border border-[var(--signal)]/40 bg-[var(--card)] p-8 sm:p-12 text-center shadow-2xl">
-            <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
-              Unsure which BatteryScope configuration fits your line?
-            </h3>
-            <p className="mt-4 text-sm text-[var(--graphite-on-dark)] sm:text-base">
-              Our engineering team can evaluate your throughput, cell chemistry, and form factor requirements to recommend the optimal setup.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <SendButton href="/contact" label="Schedule a Product Demo" />
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+            <div className="relative z-10">
+              <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
+                Unsure which BatteryScope configuration{" "}
+                <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                  fits your line?
+                </span>
+              </h3>
+              <p className="mt-4 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
+                Our engineering team can evaluate your throughput, cell chemistry, and form factor requirements to recommend the optimal setup.
+              </p>
+              <div className="mt-8 flex justify-center">
+                <SendButton href="/contact" label="Schedule a Product Demo" />
+              </div>
             </div>
           </div>
         </div>

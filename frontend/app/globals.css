@@ -50,8 +50,8 @@
 
 :root {
   --ink: #030504;
-  --signal: #5ce1c9;
-  --copper: #f97316;
+  --signal: #ff5722;
+  --copper: #f59e0b;
   --copper-ink: #fdba74;
   --paper: #ffffff;
   --graphite: #a1ada9;
@@ -87,6 +87,9 @@
   --sidebar-primary-foreground: var(--ink);
   --sidebar-accent: var(--copper);
   --sidebar-accent-foreground: var(--paper);
+  --purple: #f97316;
+  --purple-glow: rgba(249, 115, 22, 0.25);
+  --purple-light: #fb923c;
   --sidebar-border: rgb(255 255 255 / 13%);
   --sidebar-ring: var(--signal);
 }
@@ -94,7 +97,7 @@
 /* Dark Mode Premium Glassmorphic Card Styling */
 :root:not(.light) [class*="bg-\\[var\\(--card\\)\\]"],
 :root:not(.light) .bg-card {
-  background-color: rgba(10, 15, 13, 0.82) !important;
+  background-color: rgba(10, 15, 13, 0.85) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.09);
@@ -102,42 +105,45 @@
 
 :root:not(.light) [class*="bg-\\[var\\(--card\\)\\]"]:hover,
 :root:not(.light) .bg-card:hover {
-  box-shadow: 0 16px 40px -5px rgba(0, 0, 0, 0.85), 0 0 25px -2px rgba(92, 225, 201, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 40px -5px rgba(0, 0, 0, 0.85), 0 0 25px -2px rgba(249, 115, 22, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
 }
 
 .light {
-  --ink: #f8faf8;
+  --ink: #f8faf9;
   --paper: #09100d;
-  --graphite: #42524d;
-  --graphite-on-dark: #2c3b37;
-  --signal: #0d9488;
-  --copper: #c2410c;
+  --graphite: #4b5563;
+  --graphite-on-dark: #374151;
+  --signal: #ea580c;
+  --copper: #d97706;
   --copper-ink: #7c2d12;
-  --background: #f8faf8;
+  --purple: #ea580c;
+  --purple-glow: rgba(234, 88, 12, 0.15);
+  --purple-light: #f97316;
+  --background: #f8faf9;
   --foreground: #09100d;
   --card: #ffffff;
   --card-foreground: #09100d;
   --popover: #ffffff;
   --popover-foreground: #09100d;
-  --secondary: #eef2ee;
+  --secondary: #f3f4f6;
   --secondary-foreground: #09100d;
-  --muted: #eef2ee;
-  --muted-foreground: #42524d;
-  --border: rgb(0 0 0 / 10%);
-  --input: rgb(0 0 0 / 12%);
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.10);
   --sidebar: #ffffff;
   --sidebar-foreground: #09100d;
-  --sidebar-border: rgb(0 0 0 / 10%);
+  --sidebar-border: rgba(0, 0, 0, 0.08);
 }
 
 .light [class*="bg-\\[var\\(--card\\)\\]"],
 .light .bg-card {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
 }
 
 .light [class*="bg-\\[var\\(--card\\)\\]"]:hover,
 .light .bg-card:hover {
-  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
 }
 
 @layer base {

@@ -144,14 +144,17 @@ export default function AboutPage() {
         </div>
         <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
-              <span className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-                About ThinkClock
+            <div className="flex items-center justify-center gap-2">
+              <span className="h-px w-6 bg-[var(--signal)]" />
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+                ABOUT THINKCLOCK
               </span>
             </div>
             <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
-              Innovate UK Backed Battery Health Intelligence
+              Innovate UK Backed{" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                Battery Health Intelligence
+              </span>
             </h1>
             <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
               ThinkClock Battery Labs is an R&amp;D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy techniques, digital twins, AI, and machine learning. Our business is supported and funded by Innovate UK, the UK&apos;s national innovation agency for business-led innovation.
@@ -164,11 +167,15 @@ export default function AboutPage() {
       <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
-              Core Activities
-            </p>
+            <div className="flex items-center justify-center gap-2">
+              <span className="h-px w-6 bg-[var(--signal)]" />
+              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+                CORE ACTIVITIES
+              </span>
+            </div>
             <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
-              What We Do
+              What We{" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">Do</span>
             </h2>
           </AnimatedSection>
 
@@ -326,7 +333,7 @@ export default function AboutPage() {
       {/* ── 6. Partner CTA Banner ── */}
       <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[14px] border border-[var(--signal)]/40 bg-[var(--card)] p-8 sm:p-12 text-center shadow-2xl">
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-[var(--signal)]/30 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl">
             <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
               Partner with ThinkClock Battery Labs
             </h3>
