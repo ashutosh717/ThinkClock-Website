@@ -145,12 +145,14 @@ export function CurtainRevealIntro({
   const prefersReducedMotion = usePrefersReducedMotion();
   const [phase, setPhase] = useState<IntroPhase>("intro");
 
-  // Keep fresh callback references without re-running useEffect
+  // Keep fresh callback references without re-running animation useEffect
   const onRevealStartRef = useRef(onRevealStart);
-  onRevealStartRef.current = onRevealStart;
-
   const onRevealCompleteRef = useRef(onRevealComplete);
-  onRevealCompleteRef.current = onRevealComplete;
+
+  useEffect(() => {
+    onRevealStartRef.current = onRevealStart;
+    onRevealCompleteRef.current = onRevealComplete;
+  });
 
   // Determine panel configuration
   const panels = useMemo(() => {

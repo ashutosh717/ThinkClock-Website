@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useInView, motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { VideoStage } from "./video-stage";
 
 export const STAGES = [
@@ -26,7 +26,6 @@ export type SequenceState = "idle" | "loading" | "playing";
 
 export function VideoSequenceHero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { amount: 0.2, once: false });
 
   const [isOpen, setIsOpen] = useState(false);
   const [sequenceState, setSequenceState] = useState<SequenceState>("idle");
