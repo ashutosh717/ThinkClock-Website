@@ -122,13 +122,13 @@ export default function ContactPage() {
       </section>
 
       {/* ── 2. Full-Width Global Offices & R&D Hubs Section ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16 border-t border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-t border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="mx-auto max-w-3xl text-center mb-8 sm:mb-12" animation="fade-up">
+          <AnimatedSection className="mx-auto max-w-3xl text-center mb-5 sm:mb-6" animation="fade-up">
             <p className="font-mono text-xs tracking-[0.18em] font-semibold text-[var(--copper)] uppercase">
               Global Presence
             </p>
-            <h2 className="mt-3.5 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
+            <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
               Our Offices &amp; Engineering Centres
             </h2>
           </AnimatedSection>

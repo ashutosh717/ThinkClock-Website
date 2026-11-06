@@ -1,15 +1,19 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource/cooper-hewitt/400.css";
+@import "@fontsource/cooper-hewitt/500.css";
+@import "@fontsource/cooper-hewitt/600.css";
+@import "@fontsource/cooper-hewitt/700.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
+  --font-sans: "Cooper Hewitt", var(--font-body), sans-serif;
   --font-mono: var(--font-data);
-  --font-heading: var(--font-display);
+  --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -158,20 +162,49 @@
   .bg-\[var\(--ink\)\] {
     background-color: transparent !important;
   }
-  html, body, button, input, select, textarea {
-    font-family: var(--font-display), var(--font-body), sans-serif;
+  html, body, button, input, select, textarea, p, span, a, li, td, th, label, div {
+    font-family: "Cooper Hewitt", var(--font-body), sans-serif;
+  }
+
+  body {
+    font-weight: 400; /* Cooper Hewitt Book size / weight */
   }
 
   .font-display {
-    font-family: var(--font-display), sans-serif;
+    font-family: "Cooper Hewitt", var(--font-body), sans-serif;
   }
 
   .font-sans {
-    font-family: var(--font-body), var(--font-display), sans-serif;
+    font-family: "Cooper Hewitt", var(--font-body), sans-serif;
   }
 
   .font-mono {
-    font-family: var(--font-data), var(--font-display), sans-serif;
+    font-family: var(--font-data), monospace, sans-serif;
+  }
+
+  /* ── All Major Headings across all pages in Playfair Display font ── */
+  h1, h2, h3, h4, h5, h6,
+  h1.font-display, h2.font-display, h3.font-display, h4.font-display, h5.font-display, h6.font-display,
+  .font-heading,
+  .font-playfair {
+    font-family: var(--font-heading), "Playfair Display", Georgia, serif !important;
+    letter-spacing: -0.015em;
+  }
+
+  /* ── Footer Styling: Background #f8e7d0, Black Text & Trebuchet MS ── */
+  footer,
+  footer.site-footer {
+    background-color: #f8e7d0 !important;
+    color: #000000 !important;
+  }
+
+  footer,
+  footer *,
+  footer h1, footer h2, footer h3, footer h4, footer h5, footer h6,
+  footer .font-display,
+  footer .font-mono,
+  footer .font-sans {
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif !important;
   }
 
   .nyquist-path {

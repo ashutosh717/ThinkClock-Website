@@ -68,7 +68,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── 2. Open Roles ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-2">
@@ -77,14 +77,14 @@ export default function CareersPage() {
                 OPEN ROLES
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Help us make the{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 invisible measurable.
               </span>
             </h2>
           </div>
-          <div className="mt-12 sm:mt-16 space-y-6 max-w-4xl mx-auto">
+          <div className="mt-5 sm:mt-6 space-y-6 max-w-4xl mx-auto">
             {openRoles.map((role, i) => (
               <AnimatedSection
                 key={role.title}
@@ -130,9 +130,9 @@ export default function CareersPage() {
       </section>
 
       {/* ── 3. Spontaneous Applications ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-8 text-center shadow-xl relative overflow-hidden">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2">
@@ -141,7 +141,7 @@ export default function CareersPage() {
                   NOT SEEING THE RIGHT FIT?
                 </span>
               </div>
-              <h2 className="mt-4 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
+              <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
                 We are always open to hearing from{" "}
                 <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                   talented people.

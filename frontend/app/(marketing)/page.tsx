@@ -112,7 +112,7 @@ export default function MarketingHome() {
       <HeroVideo videoSrc="/videos/THINKCLOCKv2.mp4" />
 
       {/* ── 2. Opening Brand Story & Aesthetic Work Cards ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           {/* Section Header */}
           <AnimatedSection className="max-w-4xl" animation="fade-up">
@@ -122,19 +122,19 @@ export default function MarketingHome() {
                 BRAND STORY
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
               Batteries don&apos;t fail randomly.{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 They fail because of what we don&apos;t measure.
               </span>
             </h2>
-            <p className="mt-5 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)] max-w-3xl">
+            <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)] max-w-3xl">
               A pack built from mismatched, under-graded, or silently degraded cells is a pack that underperforms, ages early, or — worse — becomes a safety risk. ThinkClock exists to close that blind spot. We&apos;re an R&amp;D-driven organization focused on Battery Health Analytics, using non-invasive spectroscopy, digital twins, AI, and machine learning to read the internal state of a cell — without disassembly, without damage, and without a single charge-discharge cycle.
             </p>
           </AnimatedSection>
 
           {/* Aesthetic Metric Cards Grid */}
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {trustStats.map((stat, i) => (
               <AnimatedSection
                 key={stat.value}
@@ -162,18 +162,18 @@ export default function MarketingHome() {
                   </div>
 
                   {/* Large Hero Metric */}
-                  <div className="mt-7">
+                  <div className="mt-4 sm:mt-5">
                     <p className={`inline-block font-display text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r ${stat.color} bg-clip-text text-transparent pr-2`}>
                       {stat.value}
                     </p>
-                    <span className="mt-1.5 block font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--graphite)]">
+                    <span className="mt-1 block font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--graphite)]">
                       {stat.metricLabel}
                     </span>
                   </div>
                 </div>
 
                 {/* Description Body */}
-                <p className="mt-6 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-4">
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-3">
                   {stat.label}
                 </p>
               </AnimatedSection>
@@ -183,7 +183,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 3. Problem & Positioning ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -192,18 +192,18 @@ export default function MarketingHome() {
                 PROBLEM &amp; POSITIONING
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
               Sorting cells shouldn&apos;t be{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 a bottleneck or a guess.
               </span>
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[var(--graphite-on-dark)]">
+            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
               Manufacturers today are stuck choosing between slow testing, missing defects, or risking early pack failure.
             </p>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
             {problemComparisons.map((item, i) => (
               <AnimatedSection
                 key={item.method}
@@ -228,9 +228,9 @@ export default function MarketingHome() {
                       {item.tag}
                     </span>
                   </div>
-                  <h3 className="mt-6 font-display text-xl font-bold text-[var(--paper)]">{item.method}</h3>
+                  <h3 className="mt-3 font-display text-xl font-bold text-[var(--paper)]">{item.method}</h3>
                 </div>
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-4">
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-3">
                   {item.cost}
                 </p>
               </AnimatedSection>
@@ -241,7 +241,7 @@ export default function MarketingHome() {
           <AnimatedSection
             animation="fade-up"
             delay={200}
-            className="mt-10 sm:mt-12 rounded-[20px] border border-[#f97316]/25 bg-[var(--card)] p-8 sm:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden"
+            className="mt-5 sm:mt-6 rounded-[20px] border border-[#f97316]/25 bg-[var(--card)] p-6 sm:p-8 shadow-xl dark:shadow-2xl relative overflow-hidden"
           >
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#f97316]/10 blur-3xl" />
             <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#f59e0b]/10 blur-3xl" />
@@ -253,13 +253,13 @@ export default function MarketingHome() {
                   THINKCLOCK&apos;S ANSWER: BATTERYSCOPE
                 </span>
               </div>
-              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl lg:text-4xl text-[var(--paper)]">
+              <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl lg:text-4xl text-[var(--paper)]">
                 Non-invasive spectroscopy + AI digital twins ={" "}
                 <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                   lab-grade health in seconds.
                 </span>
               </h3>
-              <p className="mt-4 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+              <p className="mt-2 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
                 Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 4. Product Ecosystem ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -277,18 +277,18 @@ export default function MarketingHome() {
                 PRODUCT ECOSYSTEM
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
               The BatteryScope{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Diagnostic Family
               </span>
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[var(--graphite-on-dark)]">
+            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
               From lab benchtop testing to Gigafactory inline sorting and pack-level intelligence.
             </p>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
             {homeProductPreviews.map((prod, i) => (
               <AnimatedSection
                 key={prod.title}
@@ -296,7 +296,7 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-lg transition-all duration-300 hover:border-[#f97316]/40 hover:-translate-y-1"
+                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[#f97316]/40 hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -308,12 +308,12 @@ export default function MarketingHome() {
                     </div>
                   </div>
 
-                  <h3 className="mt-5 font-display text-2xl font-bold text-[var(--paper)]">{prod.title}</h3>
-                  <p className="mt-2 font-display text-sm italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
-                  <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
+                  <h3 className="mt-3 font-display text-2xl font-bold text-[var(--paper)]">{prod.title}</h3>
+                  <p className="mt-1 font-display text-sm italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[var(--border)] flex items-center justify-between">
+                <div className="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between">
                   <span className="font-mono text-xs sm:text-sm font-bold text-[var(--paper)]">{prod.throughput}</span>
                   <Link
                     href={prod.link}
@@ -326,14 +326,14 @@ export default function MarketingHome() {
             ))}
           </div>
 
-          <AnimatedSection animation="fade-up" delay={250} className="mt-12 sm:mt-16 flex justify-center">
+          <AnimatedSection animation="fade-up" delay={250} className="mt-5 sm:mt-6 flex justify-center">
             <SendButton href="/products" label="Explore Detailed Product Specs" />
           </AnimatedSection>
         </div>
       </section>
 
       {/* ── 5. Credibility Timeline ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -342,18 +342,18 @@ export default function MarketingHome() {
                 CREDIBILITY TIMELINE
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
               From Proof of Concept to Production:{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Built in the Open
               </span>
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[var(--graphite-on-dark)]">
+            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
               Iterating from lab prototype to manufactured, customer-deployable diagnostic systems in under a year.
             </p>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {credibilityTimeline.map((step, i) => (
               <AnimatedSection
                 key={step.phase}
@@ -364,15 +364,15 @@ export default function MarketingHome() {
                 className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3">
                     <span className="font-mono text-[10px] tracking-widest font-semibold px-2.5 py-0.5 rounded-full border border-[var(--signal)]/30 bg-[var(--signal)]/10 text-[var(--signal)] uppercase">
                       {step.tag}
                     </span>
                   </div>
                   <span className="font-mono text-xs font-semibold text-[var(--copper)]">{step.phase}</span>
-                  <h3 className="mt-2 font-display text-xl font-bold text-[var(--paper)]">{step.title}</h3>
+                  <h3 className="mt-1 font-display text-xl font-bold text-[var(--paper)]">{step.title}</h3>
                 </div>
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-4">
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-3">
                   {step.desc}
                 </p>
               </AnimatedSection>
@@ -382,13 +382,12 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 6. Backed by Innovate UK CTA Banner ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection
             animation="fade-up"
-            className="mx-auto flex max-w-[1400px] flex-col gap-8 rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 shadow-xl dark:shadow-2xl lg:flex-row lg:items-center lg:justify-between relative overflow-hidden"
+            className="mx-auto flex max-w-[1400px] flex-col gap-5 rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-8 shadow-xl dark:shadow-2xl lg:flex-row lg:items-center lg:justify-between relative overflow-hidden"
           >
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
             <div className="max-w-3xl relative z-10">
               <div className="flex items-center gap-2">
                 <span className="h-px w-6 bg-[var(--copper)]" />
@@ -396,10 +395,10 @@ export default function MarketingHome() {
                   BACKED BY INNOVATE UK
                 </span>
               </div>
-              <h3 className="mt-3 font-display text-3xl font-bold text-[var(--paper)] sm:text-4xl">
+              <h3 className="mt-2 font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
                 ThinkClock Battery Labs
               </h3>
-              <p className="mt-3 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+              <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
                 An R&amp;D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy, digital twins, AI, and machine learning. Supported and funded by Innovate UK, the UK&apos;s national innovation agency.
               </p>
             </div>

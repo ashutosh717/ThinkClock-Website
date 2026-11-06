@@ -83,14 +83,14 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 2. Interactive Products Narrative Showcase ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <ProductsNarrative />
         </div>
       </section>
 
       {/* ── 3. Technical Ecosystem Comparison Table ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -99,7 +99,7 @@ export default function ProductsPage() {
                 SPECIFICATION MATRIX
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Compare BatteryScope{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Diagnostics
@@ -107,7 +107,7 @@ export default function ProductsPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-10 sm:mt-12 overflow-x-auto rounded-[20px] border border-[var(--border)] bg-[var(--card)] shadow-xl">
+          <div className="mt-5 sm:mt-6 overflow-x-auto rounded-[20px] border border-[var(--border)] bg-[var(--card)] shadow-xl">
             <table className="w-full min-w-[700px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-[var(--border)] bg-[var(--secondary)]/60">
@@ -176,7 +176,7 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 4. Technology Advantage ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -185,7 +185,7 @@ export default function ProductsPage() {
                 TECHNOLOGY ADVANTAGE
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Why BatteryScope Outperforms{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Traditional Cycling
@@ -193,7 +193,7 @@ export default function ProductsPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {techAdvantages.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -213,8 +213,8 @@ export default function ProductsPage() {
                   >
                     <item.Icon className="h-5 w-5 stroke-[2.2]" style={{ color: item.color }} />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-bold text-[var(--paper)]">{item.title}</h3>
-                  <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold text-[var(--paper)]">{item.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -223,9 +223,9 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 5. Call to Action Banner ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 text-center shadow-xl relative overflow-hidden">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
             <div className="relative z-10">
               <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
@@ -234,10 +234,10 @@ export default function ProductsPage() {
                   fits your line?
                 </span>
               </h3>
-              <p className="mt-4 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
+              <p className="mt-3 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
                 Our engineering team can evaluate your throughput, cell chemistry, and form factor requirements to recommend the optimal setup.
               </p>
-              <div className="mt-8 flex justify-center">
+              <div className="mt-6 sm:mt-7 flex justify-center">
                 <SendButton href="/contact" label="Schedule a Product Demo" />
               </div>
             </div>

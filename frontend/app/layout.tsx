@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bai_Jamjuree } from "next/font/google";
+import { Bai_Jamjuree, Playfair_Display } from "next/font/google";
 
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -7,24 +7,38 @@ import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { AiAssistant } from "@/components/marketing/ai-assistant";
 import { StarBackground } from "@/components/marketing/star-background";
+import "@fontsource/cooper-hewitt/400.css";
+import "@fontsource/cooper-hewitt/500.css";
+import "@fontsource/cooper-hewitt/600.css";
+import "@fontsource/cooper-hewitt/700.css";
 import "./globals.css";
 
 const bodySans = Bai_Jamjuree({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const display = Bai_Jamjuree({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 const dataMono = Bai_Jamjuree({
   variable: "--font-data",
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -41,7 +55,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bodySans.variable} ${display.variable} ${dataMono.variable} h-full antialiased`}
+      className={`${bodySans.variable} ${display.variable} ${dataMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <head>
         <script
