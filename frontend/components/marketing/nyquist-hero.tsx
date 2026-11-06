@@ -50,7 +50,6 @@ export function NyquistHero({
   const [slider, setSlider] = useState(0.5);
   const [tiltX, setTiltX] = useState(0);
   const [tiltY, setTiltY] = useState(0);
-  const [svgParallaxY, setSvgParallaxY] = useState(0);
   const isDragging = useRef(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
@@ -63,16 +62,6 @@ export function NyquistHero({
       : slider < 0.66
       ? "Digital Twin State Estimation & AI"
       : "Predictive SoH, RUL, Micro-Fault Diagnostics";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setSvgParallaxY(scrollY * 0.05);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     isDragging.current = true;
@@ -136,9 +125,9 @@ export function NyquistHero({
         </div>
 
         <div
-          className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl backdrop-blur-md transition-all duration-1000 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60 touch-pan-y"
+          className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl backdrop-blur-md transition-transform duration-200 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60 touch-pan-y transform-gpu"
           style={{
-            transform: `perspective(1200px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(${svgParallaxY}px)`,
+            transform: `perspective(1200px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`,
           }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}

@@ -38,7 +38,7 @@ export default function FaqPage() {
       </section>
 
       {/* ── 2. FAQ Accordion Section ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection animation="fade-up" delay={150} className="mx-auto max-w-4xl">
             <FaqAccordion />
@@ -47,10 +47,10 @@ export default function FaqPage() {
       </section>
 
       {/* ── 3. Bottom CTA ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection animation="scale-in" delay={300} className="text-center mx-auto max-w-3xl">
-            <div className="rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 shadow-xl relative overflow-hidden">
+            <div className="rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 shadow-xl relative overflow-hidden">
               <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
               <div className="relative z-10">
                 <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl">

@@ -7,7 +7,7 @@ import benchtopImg from "@/images/UNITS/Benchtop.png";
 import automatedImg from "@/images/UNITS/Automated.jpg";
 import { SendButton } from "@/components/ui/send-button";
 import { AnimatedSection } from "@/components/marketing/animated-section";
-import { Layers, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface Measure {
   name: string;

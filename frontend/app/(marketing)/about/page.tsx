@@ -137,7 +137,7 @@ export default function AboutPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-8 lg:pt-16 lg:pb-10 border-b border-[var(--border)]">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
@@ -150,13 +150,13 @@ export default function AboutPage() {
                 ABOUT THINKCLOCK
               </span>
             </div>
-            <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-2 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
               Innovate UK Backed{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Battery Health Intelligence
               </span>
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+            <p className="mt-2 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
               ThinkClock Battery Labs is an R&amp;D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy techniques, digital twins, AI, and machine learning. Our business is supported and funded by Innovate UK, the UK&apos;s national innovation agency for business-led innovation.
             </p>
           </AnimatedSection>
@@ -164,7 +164,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 2. Core Activities Grid ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -173,13 +173,13 @@ export default function AboutPage() {
                 CORE ACTIVITIES
               </span>
             </div>
-            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               What We{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">Do</span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-8 sm:mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
             {coreActivities.map((act, i) => (
               <AnimatedSection
                 key={act.title}
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
+                className="group flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
               >
                 <div>
                   <div
@@ -199,8 +199,8 @@ export default function AboutPage() {
                   >
                     <act.Icon className="h-6 w-6 stroke-[2]" style={{ color: act.color }} />
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-bold leading-snug text-[var(--paper)]">{act.title}</h3>
-                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{act.desc}</p>
+                  <h3 className="mt-3 font-display text-xl font-bold leading-snug text-[var(--paper)]">{act.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{act.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -209,58 +209,58 @@ export default function AboutPage() {
       </section>
 
       {/* ── 3. Inside ThinkClock: Labs, Expos & Engineering Gallery ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="mx-auto max-w-3xl text-center mb-8 sm:mb-12" animation="fade-up">
+          <AnimatedSection className="mx-auto max-w-3xl text-center mb-5 sm:mb-6" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
               ThinkClock In Action
             </p>
-            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Inside Our Labs, Expos &amp; Field Engagements
             </h2>
-            <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
+            <p className="mt-2 text-base text-[var(--graphite-on-dark)] sm:text-lg">
               From lab-bench spectroscopy validation to live international exhibitions and industrial partner trials.
             </p>
           </AnimatedSection>
 
           {/* Interactive 3D Book Gallery */}
-          <AnimatedSection animation="fade-up" className="mt-4">
+          <AnimatedSection animation="fade-up" className="mt-3">
             <InteractiveBookGallery items={companyGallery} />
           </AnimatedSection>
         </div>
       </section>
 
       {/* ── 4. Phase Journey (R&D Timeline) ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
               Development Roadmap
             </p>
-            <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               From Fundamental R&D to Production Deployments
             </h2>
           </AnimatedSection>
 
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-5 sm:mt-6">
             <PhaseJourney />
           </div>
         </div>
       </section>
 
       {/* ── 5. Leadership ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="mx-auto max-w-3xl text-center mb-10 sm:mb-12" animation="fade-up">
+          <AnimatedSection className="mx-auto max-w-3xl text-center mb-6 sm:mb-8" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
               Leadership
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-5xl">
               The team behind the signal.
             </h2>
           </AnimatedSection>
 
-          <div className="space-y-12 sm:space-y-14">
+          <div className="space-y-8 sm:space-y-10">
             {leaders.map((leader, i) => (
               <AnimatedSection
                 key={leader.name}
@@ -331,16 +331,16 @@ export default function AboutPage() {
       </section>
 
       {/* ── 6. Partner CTA Banner ── */}
-      <section className="px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-[var(--signal)]/30 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl">
+          <div className="mx-auto max-w-4xl rounded-[20px] border border-[var(--signal)]/30 bg-[var(--card)] p-6 sm:p-8 text-center shadow-xl">
             <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
               Partner with ThinkClock Battery Labs
             </h3>
-            <p className="mt-4 text-sm text-[var(--graphite-on-dark)] sm:text-base">
+            <p className="mt-2 text-sm text-[var(--graphite-on-dark)] sm:text-base">
               Learn how non-invasive spectroscopy can transform your cell grading, second-life evaluation, or production line QA.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-5 sm:mt-6 flex justify-center">
               <SendButton href="/contact" label="Contact Our Team" />
             </div>
           </div>

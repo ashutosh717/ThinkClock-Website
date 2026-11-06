@@ -167,7 +167,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 2. Core Capabilities ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -176,7 +176,7 @@ export default function TechnologyPage() {
                 CORE CAPABILITIES
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Precision battery diagnostics in{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 75 seconds.
@@ -184,7 +184,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {coreCapabilities.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -209,8 +209,8 @@ export default function TechnologyPage() {
                       {item.badge}
                     </span>
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-bold leading-snug text-[var(--paper)]">{item.title}</h3>
-                  <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold leading-snug text-[var(--paper)]">{item.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -219,7 +219,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 3. Diagnostic Signature Metrics ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -228,18 +228,18 @@ export default function TechnologyPage() {
                 HEALTH SIGNATURE MODALITIES
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Complete Cell Diagnostic Profile in{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Seconds
               </span>
             </h2>
-            <p className="mt-4 text-base text-[var(--graphite-on-dark)] sm:text-lg">
+            <p className="mt-2 text-base text-[var(--graphite-on-dark)] sm:text-lg">
               Six key health metrics captured during every run without a single charge-discharge cycle.
             </p>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {diagnosticSignatureMetrics.map((metric) => (
               <div
                 key={metric.name}
@@ -264,7 +264,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 4. Chemistries Supported ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -273,7 +273,7 @@ export default function TechnologyPage() {
                 CHEMISTRY VERSATILITY
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Next-Gen Diagnostics Across{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 Chemistries
@@ -281,7 +281,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {chemistryFormFactors.map((item) => (
               <div
                 key={item.chemistry}
@@ -304,7 +304,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 5. Laboratory Services & Infrastructure ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -313,7 +313,7 @@ export default function TechnologyPage() {
                 R&D & LAB INFRASTRUCTURE
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Advanced laboratory services &{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 testing infrastructure.
@@ -321,7 +321,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {labCapabilities.map((lab, i) => (
               <AnimatedSection
                 key={lab.title}
@@ -341,8 +341,8 @@ export default function TechnologyPage() {
                   >
                     <lab.Icon className="h-5 w-5 stroke-[2]" style={{ color: lab.color }} />
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-bold leading-snug text-[var(--paper)]">{lab.title}</h3>
-                  <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{lab.desc}</p>
+                  <h3 className="mt-4 font-display text-lg font-bold leading-snug text-[var(--paper)]">{lab.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{lab.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -351,7 +351,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 6. Supporting Platforms ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -360,7 +360,7 @@ export default function TechnologyPage() {
                 SUPPORTING PLATFORMS
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Benchmarking database &{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 CellScope e-waste portal.
@@ -368,7 +368,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-12 sm:mt-16 grid gap-8 md:grid-cols-2">
+          <div className="mt-5 sm:mt-6 grid gap-8 md:grid-cols-2">
             {supportingPlatforms.map((platform, i) => (
               <AnimatedSection
                 key={platform.name}
@@ -376,7 +376,7 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-8 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--signal)]/30 bg-[var(--signal)]/10 transition-transform duration-300 group-hover:scale-105">
@@ -389,7 +389,7 @@ export default function TechnologyPage() {
                     <h3 className="font-display text-xl font-bold text-[var(--paper)]">{platform.name}</h3>
                   </div>
                 </div>
-                <p className="mt-5 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
                   {platform.desc}
                 </p>
               </AnimatedSection>
@@ -399,7 +399,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 7. Target Ecosystem & Call to Action ── */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -408,18 +408,18 @@ export default function TechnologyPage() {
                 TARGET ECOSYSTEM
               </span>
             </div>
-            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
               Built for the entire{" "}
               <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                 battery value chain.
               </span>
             </h2>
-            <p className="mt-4 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+            <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
               Serves battery developers, researchers, product teams, cell OEMs, battery pack manufacturers, fleet operators, recyclers, system integrators, and financial partners.
             </p>
           </AnimatedSection>
 
-          <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
             {applications.map((app) => (
               <span
                 key={app}
@@ -430,7 +430,7 @@ export default function TechnologyPage() {
             ))}
           </div>
 
-          <div className="mx-auto mt-14 max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+          <div className="mx-auto mt-10 max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 text-center shadow-xl relative overflow-hidden">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
             <div className="relative z-10">
               <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
@@ -439,10 +439,10 @@ export default function TechnologyPage() {
                   for your program?
                 </span>
               </h3>
-              <p className="mt-4 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
+              <p className="mt-3 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
                 Connect with our engineering team to discuss EIS, acoustic, and RF integration.
               </p>
-              <div className="mt-8 flex justify-center">
+              <div className="mt-6 flex justify-center">
                 <SendButton href="/contact" label="Discuss your application" variant="lab" />
               </div>
             </div>

@@ -35,7 +35,6 @@ export function VideoSequenceHero() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
-  const [blurAmount, setBlurAmount] = useState(0);
 
   const openScrollY = useRef(0);
   const isTransitioningRef = useRef(false);
@@ -49,36 +48,28 @@ export function VideoSequenceHero() {
     }
   };
 
-  // Auto-close on scroll down
+  // Auto-close on scroll down using lightweight requestAnimationFrame (zero layout thrashing)
   useEffect(() => {
+    if (!isOpen) return;
+
+    let rafId: number | null = null;
     const handleScroll = () => {
-      if (isOpen) {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
         const scrolledDistance = Math.abs(window.scrollY - openScrollY.current);
-        if (scrolledDistance > 150) {
+        if (scrolledDistance > 180) {
           setIsOpen(false);
         }
-      }
-
-      // Calculate dynamic blur effect when video is open
-      if (isInView && containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const winH = window.innerHeight;
-        const elementCenter = rect.top + rect.height / 2;
-        const viewportCenter = winH / 2;
-        const distanceFromCenter = Math.abs(elementCenter - viewportCenter) / winH;
-
-        if (distanceFromCenter < 0.2) {
-          setBlurAmount(0);
-        } else {
-          const calculatedBlur = Math.min(16, Math.max(0, (distanceFromCenter - 0.2) * 28));
-          setBlurAmount(calculatedBlur);
-        }
-      }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen, isInView]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [isOpen]);
 
   // Check prefers-reduced-motion
   useEffect(() => {
@@ -190,11 +181,7 @@ export function VideoSequenceHero() {
             >
               {/* Borderless Video Canvas with Ambient Background Aura Shadow */}
               <div
-                className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-black border border-[rgba(91,102,99,0.45)] shadow-2xl shadow-black/80 transition-all duration-400 ease-out"
-                style={{
-                  filter: `blur(${blurAmount}px)`,
-                  transition: "filter 0.4s ease-out",
-                }}
+                className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-black border border-[rgba(91,102,99,0.45)] shadow-2xl shadow-black/80 transform-gpu"
               >
                 {prefersReducedMotion ? (
                   <div className="flex h-full w-full items-center justify-center p-6 text-center">

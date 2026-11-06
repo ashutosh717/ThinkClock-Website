@@ -24,12 +24,12 @@ export function VideoStage({
 }: VideoStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Play/pause & playback speed control (slow motion 0.65x for cinematic clarity)
+  // Play/pause & playback speed control (smooth 0.75x slow motion for cinematic clarity)
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.playbackRate = 0.65; // Cinematic slow motion
+    video.playbackRate = 0.75; // Smooth cinematic frame rate
 
     if (isActive) {
       video.currentTime = 0;
@@ -59,18 +59,18 @@ export function VideoStage({
         isActive ? "pointer-events-auto opacity-100 z-10" : "pointer-events-none opacity-0 z-0"
       }`}
     >
-      {/* Video Element with High Visibility (opacity-85) and Slow Motion (0.65x) */}
+      {/* Video Element with High Visibility (opacity-85) and Hardware-Accelerated Decoding */}
       <video
         ref={videoRef}
         src={src}
         muted
         playsInline
-        preload="auto"
+        preload={isActive ? "auto" : "metadata"}
         onLoadedData={onLoaded}
         onTimeUpdate={handleTimeUpdate}
         onEnded={onFinished}
         aria-label={overlayText}
-        className="h-full w-full object-contain opacity-85 transition-opacity duration-500"
+        className="h-full w-full object-contain opacity-85 transition-opacity duration-500 transform-gpu will-change-transform"
       />
 
       {/* Subtle Backdrop Darkening for Text Contrast */}
