@@ -3,19 +3,25 @@
 import Lenis from "lenis";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion, useScroll } from "framer-motion";
+
+const smoothScrollPaths = new Set(["/", "/about", "/technology", "/products", "/contact", "/faq"]);
 
 export function LenisProvider() {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const isMarketingPage = smoothScrollPaths.has(pathname);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) return;
+    if (!isMarketingPage || reducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      syncTouch: false,
       autoRaf: true,
     });
 
@@ -40,10 +46,10 @@ export function LenisProvider() {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, []);
+  }, [isMarketingPage, reducedMotion]);
 
-  // Reset scroll and recalculate layout dimensions on route changes
   useEffect(() => {
+    if (!isMarketingPage) return;
     const lenis = lenisRef.current;
     if (!lenis) return;
 
@@ -56,8 +62,15 @@ export function LenisProvider() {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, [pathname]);
+  }, [isMarketingPage, pathname]);
 
-  return null;
+  if (!isMarketingPage) return null;
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[100] h-0.5 origin-left bg-[var(--signal)]"
+      style={{ scaleX: scrollYProgress }}
+    />
+  );
 }
-

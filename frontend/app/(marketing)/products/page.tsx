@@ -56,7 +56,7 @@ export default function ProductsPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16 border-b border-[var(--border)]">
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
@@ -83,14 +83,14 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 2. Interactive Products Narrative Showcase ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <ProductsNarrative />
         </div>
       </section>
 
       {/* ── 3. Technical Ecosystem Comparison Table ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -107,8 +107,8 @@ export default function ProductsPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 overflow-x-auto rounded-[20px] border border-[var(--border)] bg-[var(--card)] shadow-xl">
-            <table className="w-full min-w-[700px] text-left border-collapse">
+          <div className="tc-card tc-card-flush mt-5 sm:mt-6">
+            <table className="hidden w-full min-w-[700px] border-collapse text-left lg:table">
               <thead>
                 <tr className="border-b border-[var(--border)] bg-[var(--secondary)]/60">
                   <th className="py-5 px-6 font-mono text-xs font-bold text-[var(--graphite)] uppercase tracking-wider w-[28%]">
@@ -171,12 +171,33 @@ export default function ProductsPage() {
                 ))}
               </tbody>
             </table>
+            <div className="divide-y divide-[var(--border)] p-5 sm:p-7 lg:hidden">
+              {comparisonFeatures.map((row) => (
+                <div key={row.feature} className="space-y-3 py-5 first:pt-0 last:pb-0">
+                  <h3 className="font-display font-bold text-[var(--paper)]">{row.feature}</h3>
+                  <dl className="space-y-2.5 text-sm">
+                    <div className="space-y-0.5">
+                      <dt className="text-[var(--graphite)]">BatteryScope-C Manual</dt>
+                      <dd className="break-words font-semibold text-[var(--signal)]">{row.manual}</dd>
+                    </div>
+                    <div className="space-y-0.5">
+                      <dt className="text-[var(--graphite)]">BatteryScope-C Automated</dt>
+                      <dd className="break-words font-semibold text-[var(--signal)]">{row.auto}</dd>
+                    </div>
+                    <div className="space-y-0.5">
+                      <dt className="text-[var(--graphite)]">BatteryScope-P</dt>
+                      <dd className="break-words font-semibold text-[var(--signal)]">{row.pack}</dd>
+                    </div>
+                  </dl>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── 4. Technology Advantage ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -193,7 +214,7 @@ export default function ProductsPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
             {techAdvantages.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -201,7 +222,7 @@ export default function ProductsPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1 flex flex-col justify-between"
+                className="tc-card group flex h-full flex-col justify-between"
               >
                 <div>
                   <div
@@ -225,7 +246,7 @@ export default function ProductsPage() {
       {/* ── 5. Call to Action Banner ── */}
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 text-center shadow-xl relative overflow-hidden">
+          <div className="tc-card relative mx-auto max-w-4xl text-center">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
             <div className="relative z-10">
               <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">

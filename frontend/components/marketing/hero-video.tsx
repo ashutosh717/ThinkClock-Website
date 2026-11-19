@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useShouldPlayHomeCurtain } from "@/components/providers/home-curtain-provider";
 import { CurtainRevealIntro } from "@/components/marketing/curtain-reveal-intro";
 
 interface HeroVideoProps {
@@ -17,7 +24,11 @@ export function HeroVideo({
 }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [introComplete, setIntroComplete] = useState(false);
+  const shouldPlayCurtain = useShouldPlayHomeCurtain();
+  const [introComplete, setIntroComplete] = useState(!shouldPlayCurtain);
+  const reducedMotion = useReducedMotion();
+  const { scrollY } = useScroll();
+  const mediaY = useTransform(scrollY, [0, 1000], [0, reducedMotion ? 0 : 30]);
 
   // Keep video strictly muted and ready on mount
   useEffect(() => {
@@ -64,10 +75,10 @@ export function HeroVideo({
   return (
     <section
       ref={containerRef}
-      className={`relative w-full h-[100dvh] min-h-[100dvh] overflow-hidden bg-[#101010] ${className}`}
+      className={`home-video-hero relative flex min-h-[100svh] w-full items-end justify-center overflow-hidden bg-[#101010] ${className}`}
     >
       {/* ── 1. Full-Screen Cinematic Background Video (Always Muted) ── */}
-      <video
+      <motion.video
         ref={videoRef}
         src={videoSrc}
         autoPlay
@@ -75,30 +86,32 @@ export function HeroVideo({
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none transform-gpu will-change-transform"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none transform-gpu"
+        style={{ y: mediaY }}
       />
 
       {/* ── 2. Cinematic Orange Curtain Reveal Intro ── */}
-      <CurtainRevealIntro
-        onRevealStart={() => {
-          const video = videoRef.current;
-          if (video && video.paused) {
-            video.muted = true;
-            video.play().catch(() => {});
-          }
-        }}
-        onRevealComplete={() => {
-          setIntroComplete(true);
-        }}
-      />
+      {shouldPlayCurtain && (
+        <CurtainRevealIntro
+          onRevealStart={() => {
+            const video = videoRef.current;
+            if (video && video.paused) {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+          }}
+          onRevealComplete={() => {
+            setIntroComplete(true);
+          }}
+        />
+      )}
 
       {/* ── 3. Subtle Ambient Gradients for header contrast & seamless bottom blend ── */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/90" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.4)_100%)]" />
 
       {/* ── 4. Final Hero Section — Revealed with Subtle Upward Motion ── */}
-      <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 inset-x-0 mx-auto z-20 flex flex-col items-center text-center px-4 max-w-4xl pointer-events-auto">
+      <div className="pointer-events-auto relative z-20 mx-auto flex w-full max-w-4xl flex-col items-center px-4 pb-8 pt-28 text-center sm:pb-12 md:pb-16">
         <AnimatePresence>
           {introComplete ? (
             <motion.div
@@ -106,7 +119,7 @@ export function HeroVideo({
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.85,
+                duration: reducedMotion ? 0 : 0.6,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="flex flex-col items-center w-full"
@@ -122,40 +135,60 @@ export function HeroVideo({
               {/* Core Throughput Metric Grid */}
               <div className="flex items-center justify-center gap-4 sm:gap-8 md:gap-12">
                 {/* Metric 1 - Manual Unit */}
-                <div className="flex flex-col items-center sm:items-end text-center sm:text-right">
+                <motion.div
+                  initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reducedMotion ? 0 : 0.45, delay: reducedMotion ? 0 : 0.08 }}
+                  className="flex flex-col items-center sm:items-end text-center sm:text-right"
+                >
                   <span className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-md">
                     1,920 Cells
                   </span>
                   <span className="text-xs sm:text-sm md:text-base font-medium text-white/80 mt-0.5 tracking-wide">
                     Per 8-hr Shift (Manual Unit)
                   </span>
-                </div>
+                </motion.div>
 
                 {/* Divider */}
                 <div className="w-[1px] h-10 sm:h-12 md:h-14 bg-gradient-to-b from-transparent via-[#ff6a00]/50 to-transparent shrink-0" />
 
                 {/* Metric 2 - Automated Unit */}
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <motion.div
+                  initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reducedMotion ? 0 : 0.45, delay: reducedMotion ? 0 : 0.16 }}
+                  className="flex flex-col items-center sm:items-start text-center sm:text-left"
+                >
                   <span className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-md">
                     2,880 Cells
                   </span>
                   <span className="text-xs sm:text-sm md:text-base font-medium text-white/80 mt-0.5 tracking-wide">
                     Per 8-hr Shift (Automated Unit)
                   </span>
-                </div>
+                </motion.div>
               </div>
 
               {/* Tagline Subtext */}
-              <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-sans text-white/85 max-w-lg tracking-wide drop-shadow">
+              <motion.p
+                initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.45, delay: reducedMotion ? 0 : 0.24 }}
+                className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-sans text-white/85 max-w-lg tracking-wide drop-shadow"
+              >
                 75-second lab-grade cell characterization —{" "}
                 <span className="font-semibold text-[#ff9f1c]">zero cycle damage</span>
-              </p>
+              </motion.p>
 
               {/* Call-to-Action Buttons */}
-              <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
+              <motion.div
+                initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.45, delay: reducedMotion ? 0 : 0.32 }}
+                className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3"
+              >
                 <Link
                   href="/products"
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-white text-black font-sans font-semibold text-sm sm:text-base px-8 py-3.5 sm:px-10 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,106,0,0.25)] transition-all duration-300 hover:bg-gradient-to-r hover:from-[#ff5722] hover:to-[#ff9f1c] hover:text-black hover:shadow-[0_0_35px_rgba(255,106,0,0.6)] hover:scale-105 active:scale-95 cursor-pointer select-none"
+                  className="tc-button group inline-flex items-center justify-center gap-2.5 rounded-full bg-white text-black font-sans font-semibold text-sm sm:text-base px-8 py-3.5 sm:px-10 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,106,0,0.25)] transition-all duration-300 hover:bg-gradient-to-r hover:from-[#ff5722] hover:to-[#ff9f1c] hover:text-black hover:shadow-[0_0_35px_rgba(255,106,0,0.6)] hover:scale-105 active:scale-95 cursor-pointer select-none"
                 >
                   <span className="font-semibold text-black">Explore Products</span>
                   <ArrowRight className="h-4 w-4 text-black transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -163,11 +196,11 @@ export function HeroVideo({
 
                 <Link
                   href="/technology"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white font-sans font-medium text-sm sm:text-base px-6 py-3.5 sm:px-8 sm:py-4 transition-all duration-300 hover:border-[#ff6a00] hover:bg-black/70 hover:text-[#ff9f1c] hover:scale-105 active:scale-95 cursor-pointer select-none"
+                  className="tc-button group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white font-sans font-medium text-sm sm:text-base px-6 py-3.5 sm:px-8 sm:py-4 transition-all duration-300 hover:border-[#ff6a00] hover:bg-black/70 hover:text-[#ff9f1c] hover:scale-105 active:scale-95 cursor-pointer select-none"
                 >
                   <span>Our Technology</span>
                 </Link>
-              </div>
+              </motion.div>
             </motion.div>
           ) : (
             // Initial placeholder during curtain reveal to preserve layout

@@ -56,7 +56,7 @@ export function CellConfigurator() {
 
   return (
     <>
-      <div className="rounded-[10px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-xl">
+      <div className="tc-card">
         <h2 className="font-display text-2xl font-bold text-[var(--paper)]">Battery Pack Builder</h2>
         <p className="mt-1.5 text-sm text-[var(--graphite-on-dark)]">
           Select pack voltage, capacity, chemistry, and cell format.
@@ -75,7 +75,7 @@ export function CellConfigurator() {
                   onClick={() => setPackVoltage(v)}
                   className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packVoltage === v
-                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
@@ -97,7 +97,7 @@ export function CellConfigurator() {
                   onClick={() => setPackCapacity(c)}
                   className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packCapacity === c
-                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
@@ -119,7 +119,7 @@ export function CellConfigurator() {
                   onClick={() => setChemistry(key)}
                   className={`rounded-[6px] px-3 py-2 text-center text-xs transition-all ${
                     chemistry === key
-                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20 font-bold"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20 font-bold"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >
@@ -142,7 +142,7 @@ export function CellConfigurator() {
                   onClick={() => setCellType(key)}
                   className={`rounded-[6px] px-3 py-2 text-center text-xs transition-all ${
                     cellType === key
-                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20 font-bold"
+                      ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20 font-bold"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
                   }`}
                 >

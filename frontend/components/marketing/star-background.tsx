@@ -63,17 +63,17 @@ export function StarBackground() {
     let particles: Particle[] = [];
 
     const colorsDark = [
-      "255, 255, 255", // Crisp White
-      "92, 225, 201",  // Brand Cyan (#5ce1c9)
-      "201, 122, 74",  // Brand Copper (#c97a4a)
-      "140, 235, 215", // Bright Mint
+      "255, 90, 31",
+      "255, 122, 69",
+      "180, 188, 198",
+      "124, 133, 145",
     ];
 
     const colorsLight = [
-      "13, 148, 136",  // Vibrant Signal Teal (#0d9488)
-      "194, 65, 12",   // Warm Hardware Copper (#c2410c)
-      "15, 118, 110",  // Deep Cyan Teal (#0f766e)
-      "30, 41, 38",    // Deep Obsidian Charcoal (#1e2926)
+      "232, 89, 12",
+      "194, 65, 12",
+      "107, 115, 128",
+      "201, 65, 12",
     ];
 
     function initParticles() {
@@ -84,7 +84,7 @@ export function StarBackground() {
       for (let i = 0; i < particleCount; i++) {
         const color = currentColors[Math.floor(Math.random() * currentColors.length)];
         const size = isLight ? Math.random() * 0.8 + 0.6 : Math.random() * 0.8 + 0.5;
-        const baseAlpha = isLight ? Math.random() * 0.35 + 0.3 : Math.random() * 0.4 + 0.2;
+        const baseAlpha = isLight ? Math.random() * 0.06 + 0.1 : Math.random() * 0.4 + 0.2;
 
         particles.push({
           x: Math.random() * width,
@@ -125,18 +125,7 @@ export function StarBackground() {
       const isLight = document.documentElement.classList.contains("light");
 
       if (isLight) {
-        // Light laboratory background gradient
-        const bgGradient = ctx.createRadialGradient(
-          width / 2,
-          height,
-          10,
-          width / 2,
-          height / 2,
-          Math.max(width, height)
-        );
-        bgGradient.addColorStop(0, "#f8faf8");
-        bgGradient.addColorStop(1, "#f2f4f1");
-        ctx.fillStyle = bgGradient;
+        ctx.fillStyle = "#fafaf8";
         ctx.fillRect(0, 0, width, height);
 
         if (mouse.active) {
@@ -148,27 +137,16 @@ export function StarBackground() {
             mouse.y,
             200
           );
-          auraGradient.addColorStop(0, "rgba(13, 148, 136, 0.14)");
-          auraGradient.addColorStop(0.5, "rgba(194, 65, 12, 0.06)");
-          auraGradient.addColorStop(1, "rgba(242, 244, 241, 0)");
+          auraGradient.addColorStop(0, "rgba(232, 89, 12, 0.08)");
+          auraGradient.addColorStop(0.5, "rgba(194, 65, 12, 0.04)");
+          auraGradient.addColorStop(1, "rgba(250, 250, 248, 0)");
           ctx.fillStyle = auraGradient;
           ctx.beginPath();
           ctx.arc(mouse.x, mouse.y, 200, 0, Math.PI * 2);
           ctx.fill();
         }
       } else {
-        // Dark space observatory background gradient
-        const bgGradient = ctx.createRadialGradient(
-          width / 2,
-          height,
-          10,
-          width / 2,
-          height / 2,
-          Math.max(width, height)
-        );
-        bgGradient.addColorStop(0, "#050807");
-        bgGradient.addColorStop(1, "#010302");
-        ctx.fillStyle = bgGradient;
+        ctx.fillStyle = "#0a0b0d";
         ctx.fillRect(0, 0, width, height);
 
         if (mouse.active) {
@@ -180,9 +158,9 @@ export function StarBackground() {
             mouse.y,
             200
           );
-          auraGradient.addColorStop(0, "rgba(92, 225, 201, 0.18)");
-          auraGradient.addColorStop(0.5, "rgba(201, 122, 74, 0.08)");
-          auraGradient.addColorStop(1, "rgba(9, 10, 15, 0)");
+          auraGradient.addColorStop(0, "rgba(255, 90, 31, 0.12)");
+          auraGradient.addColorStop(0.5, "rgba(255, 122, 69, 0.06)");
+          auraGradient.addColorStop(1, "rgba(10, 11, 13, 0)");
           ctx.fillStyle = auraGradient;
           ctx.beginPath();
           ctx.arc(mouse.x, mouse.y, 200, 0, Math.PI * 2);
@@ -196,9 +174,12 @@ export function StarBackground() {
         const p = particles[i];
 
         // Twinkle oscillation
-        p.alpha = p.baseAlpha + Math.sin(time + i * 1.5) * 0.18;
+        p.alpha =
+          p.baseAlpha + Math.sin(time + i * 1.5) * (isLight ? 0.04 : 0.18);
         if (p.alpha < 0.1) p.alpha = 0.1;
-        if (p.alpha > 0.95) p.alpha = 0.95;
+        if (p.alpha > (isLight ? 0.2 : 0.95)) {
+          p.alpha = isLight ? 0.2 : 0.95;
+        }
 
         if (mouse.active) {
           const dx = mouse.x - p.x;
@@ -227,7 +208,7 @@ export function StarBackground() {
 
         if (isLight) {
           ctx.shadowBlur = 2;
-          ctx.shadowColor = `rgba(${p.color}, 0.25)`;
+          ctx.shadowColor = `rgba(${p.color}, 0.15)`;
         } else {
           ctx.shadowBlur = 4;
           ctx.shadowColor = `rgba(${p.color}, 0.6)`;

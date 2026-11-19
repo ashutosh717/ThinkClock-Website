@@ -20,75 +20,74 @@ export interface CurtainRevealIntroProps {
   className?: string;
 }
 
-// Rich sunset-to-near-black architectural gradient palette
-// Features Deep Orange (#FF6A00), Burnt Orange (#C94B00), Amber (#FF9F1C), and Near-Black (#101010)
+// Curtain shades follow the site's coral, orange, and amber headline gradient.
 const DESKTOP_PANEL_PRESETS = [
   {
-    bg: "linear-gradient(180deg, #101010 0%, #301000 30%, #7A2600 70%, #101010 100%)",
-    glow: "rgba(122, 38, 0, 0.25)",
+    bg: "linear-gradient(180deg, #101010 0%, #30130D 30%, #702615 70%, #101010 100%)",
+    glow: "rgba(255, 87, 34, 0.18)",
   },
   {
-    bg: "linear-gradient(180deg, #101010 0%, #4D1800 28%, #A83800 68%, #140600 100%)",
-    glow: "rgba(168, 56, 0, 0.3)",
+    bg: "linear-gradient(180deg, #101010 0%, #40170C 28%, #853018 68%, #140600 100%)",
+    glow: "rgba(249, 115, 22, 0.2)",
   },
   {
-    bg: "linear-gradient(180deg, #120500 0%, #752500 25%, #C94B00 65%, #1a0800 100%)",
-    glow: "rgba(201, 75, 0, 0.35)",
+    bg: "linear-gradient(180deg, #120500 0%, #662410 25%, #A84018 65%, #1a0800 100%)",
+    glow: "rgba(255, 87, 34, 0.24)",
   },
   {
-    bg: "linear-gradient(180deg, #140600 0%, #9E3300 22%, #E85700 60%, #FF6A00 82%, #220a00 100%)",
-    glow: "rgba(232, 87, 0, 0.4)",
+    bg: "linear-gradient(180deg, #140600 0%, #843012 22%, #C44917 60%, #F97316 82%, #220a00 100%)",
+    glow: "rgba(249, 115, 22, 0.28)",
   },
   {
-    bg: "linear-gradient(180deg, #170800 0%, #BD4200 20%, #FF6A00 55%, #FF7F0A 80%, #280d00 100%)",
-    glow: "rgba(255, 106, 0, 0.45)",
+    bg: "linear-gradient(180deg, #170800 0%, #A83D19 20%, #FF5722 55%, #F97316 80%, #280d00 100%)",
+    glow: "rgba(255, 87, 34, 0.32)",
   },
   {
-    bg: "linear-gradient(180deg, #170800 0%, #C94B00 20%, #FF7E0C 50%, #FF9F1C 80%, #2c0e00 100%)",
-    glow: "rgba(255, 159, 28, 0.45)",
+    bg: "linear-gradient(180deg, #170800 0%, #A43D15 20%, #F97316 50%, #F59E0B 80%, #2c0e00 100%)",
+    glow: "rgba(245, 158, 11, 0.34)",
   },
   {
-    bg: "linear-gradient(180deg, #150700 0%, #A83800 22%, #EB5B00 58%, #FF8510 82%, #250b00 100%)",
-    glow: "rgba(235, 91, 0, 0.4)",
+    bg: "linear-gradient(180deg, #150700 0%, #823012 22%, #E3561B 58%, #F59E0B 82%, #250b00 100%)",
+    glow: "rgba(249, 115, 22, 0.3)",
   },
   {
-    bg: "linear-gradient(180deg, #130500 0%, #802B00 25%, #C94B00 65%, #1c0800 100%)",
-    glow: "rgba(201, 75, 0, 0.35)",
+    bg: "linear-gradient(180deg, #130500 0%, #5E2110 25%, #B34418 65%, #1c0800 100%)",
+    glow: "rgba(255, 87, 34, 0.24)",
   },
   {
-    bg: "linear-gradient(180deg, #101010 0%, #571C00 28%, #9E3500 70%, #150600 100%)",
-    glow: "rgba(158, 53, 0, 0.3)",
+    bg: "linear-gradient(180deg, #101010 0%, #451B0F 28%, #903419 70%, #150600 100%)",
+    glow: "rgba(249, 115, 22, 0.2)",
   },
   {
-    bg: "linear-gradient(180deg, #101010 0%, #301000 30%, #6E2200 70%, #101010 100%)",
-    glow: "rgba(110, 34, 0, 0.25)",
+    bg: "linear-gradient(180deg, #101010 0%, #30130D 30%, #682515 70%, #101010 100%)",
+    glow: "rgba(245, 158, 11, 0.18)",
   },
 ];
 
 const MOBILE_PANEL_PRESETS = [
   {
-    bg: "linear-gradient(180deg, #101010 0%, #381300 25%, #8C2E00 70%, #101010 100%)",
-    glow: "rgba(140, 46, 0, 0.3)",
+    bg: "linear-gradient(180deg, #101010 0%, #35150F 25%, #7C2C18 70%, #101010 100%)",
+    glow: "rgba(255, 87, 34, 0.2)",
   },
   {
-    bg: "linear-gradient(180deg, #120500 0%, #6E2300 22%, #C94B00 65%, #180700 100%)",
-    glow: "rgba(201, 75, 0, 0.35)",
+    bg: "linear-gradient(180deg, #120500 0%, #5C2110 22%, #B34418 65%, #180700 100%)",
+    glow: "rgba(249, 115, 22, 0.24)",
   },
   {
-    bg: "linear-gradient(180deg, #160700 0%, #B84000 20%, #FF6A00 55%, #FF7F0A 80%, #260c00 100%)",
-    glow: "rgba(255, 106, 0, 0.45)",
+    bg: "linear-gradient(180deg, #160700 0%, #A33B18 20%, #FF5722 55%, #F97316 80%, #260c00 100%)",
+    glow: "rgba(255, 87, 34, 0.3)",
   },
   {
-    bg: "linear-gradient(180deg, #160700 0%, #C94B00 20%, #FF7E0C 50%, #FF9F1C 80%, #280d00 100%)",
-    glow: "rgba(255, 159, 28, 0.45)",
+    bg: "linear-gradient(180deg, #160700 0%, #A43D15 20%, #F97316 50%, #F59E0B 80%, #280d00 100%)",
+    glow: "rgba(245, 158, 11, 0.32)",
   },
   {
-    bg: "linear-gradient(180deg, #130500 0%, #802B00 22%, #C94B00 65%, #1c0800 100%)",
-    glow: "rgba(201, 75, 0, 0.35)",
+    bg: "linear-gradient(180deg, #130500 0%, #5E2110 22%, #B34418 65%, #1c0800 100%)",
+    glow: "rgba(249, 115, 22, 0.24)",
   },
   {
-    bg: "linear-gradient(180deg, #101010 0%, #381300 25%, #752500 70%, #101010 100%)",
-    glow: "rgba(117, 37, 0, 0.3)",
+    bg: "linear-gradient(180deg, #101010 0%, #35150F 25%, #702615 70%, #101010 100%)",
+    glow: "rgba(255, 87, 34, 0.2)",
   },
 ];
 
@@ -144,6 +143,7 @@ export function CurtainRevealIntro({
   const isMobile = useIsMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
   const [phase, setPhase] = useState<IntroPhase>("intro");
+  const visiblePhase = prefersReducedMotion ? "complete" : phase;
 
   // Keep fresh callback references without re-running animation useEffect
   const onRevealStartRef = useRef(onRevealStart);
@@ -190,18 +190,9 @@ export function CurtainRevealIntro({
     if (!mounted) return;
 
     if (prefersReducedMotion) {
-      const t1 = setTimeout(() => {
-        setPhase("revealing");
-        onRevealStartRef.current?.();
-      }, 800);
-      const t2 = setTimeout(() => {
-        setPhase("complete");
-        onRevealCompleteRef.current?.();
-      }, 1500);
-      return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-      };
+      onRevealStartRef.current?.();
+      onRevealCompleteRef.current?.();
+      return;
     }
 
     // 1) After 1.0s on black background, curtains sweep in to cover logo
@@ -237,8 +228,7 @@ export function CurtainRevealIntro({
     };
   }, [mounted, panelCount, staggerTime, slideDuration, prefersReducedMotion]);
 
-  // If SSR or completed, remove overlay entirely from DOM
-  if (!mounted || phase === "complete") {
+  if (visiblePhase === "complete") {
     return null;
   }
 
@@ -246,11 +236,11 @@ export function CurtainRevealIntro({
     <div
       aria-hidden="true"
       onClick={handleSkip}
-      className={`fixed inset-0 z-50 overflow-hidden select-none cursor-pointer ${className}`}
+      className={`curtain-reveal-intro fixed inset-0 z-50 overflow-hidden select-none cursor-pointer ${className}`}
     >
       {/* ── 1. Pure Black Background Stage with Centered Logo (Z-index 10) ── */}
       <AnimatePresence>
-        {(phase === "intro" || phase === "covering") && (
+        {(visiblePhase === "intro" || visiblePhase === "covering") && (
           <motion.div
             key="black-stage"
             initial={{ opacity: 1 }}
@@ -261,12 +251,12 @@ export function CurtainRevealIntro({
               className="flex flex-col items-center gap-4 sm:gap-5 max-w-2xl pointer-events-none"
               initial={{ opacity: 0, scale: 0.94, y: 12 }}
               animate={
-                phase === "intro"
+                visiblePhase === "intro"
                   ? { opacity: 1, scale: 1, y: 0 }
                   : { opacity: 0, scale: 0.92, y: -24 }
               }
               transition={
-                phase === "intro"
+                visiblePhase === "intro"
                   ? { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
                   : { duration: 0.4, ease: [0.76, 0, 0.24, 1] }
               }
@@ -287,13 +277,13 @@ export function CurtainRevealIntro({
                 <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
                   ThinkClock Battery Labs
                 </h1>
-                <p className="font-mono text-xs sm:text-sm md:text-base lg:text-lg font-semibold tracking-wider text-[#ff9f1c] drop-shadow-md">
+                <p className="font-mono text-xs sm:text-sm md:text-base lg:text-lg font-semibold tracking-wider text-[#f59e0b] drop-shadow-md">
                   Sensing, Modeling and Analytics
                 </p>
               </div>
 
               {/* Architectural accent separator */}
-              <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#ff6a00] to-transparent mt-1" />
+              <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#f97316] to-transparent mt-1" />
             </motion.div>
           </motion.div>
         )}
@@ -323,20 +313,20 @@ export function CurtainRevealIntro({
                   x: "-102%",
                 }}
                 animate={
-                  phase === "intro"
+                  visiblePhase === "intro"
                     ? { x: "-102%" }
-                    : phase === "covering"
+                    : visiblePhase === "covering"
                     ? { x: "0%" }
                     : { x: "102%" }
                 }
                 transition={
-                  phase === "covering"
+                  visiblePhase === "covering"
                     ? {
                         duration: coverDuration,
                         delay: i * coverStagger,
                         ease: easeCurve,
                       }
-                    : phase === "revealing"
+                    : visiblePhase === "revealing"
                     ? {
                         duration: slideDuration,
                         delay: i * staggerTime,

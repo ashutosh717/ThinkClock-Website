@@ -131,7 +131,7 @@ export default function TechnologyPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16 border-b border-[var(--border)]">
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
@@ -167,7 +167,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 2. Core Capabilities ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -184,7 +184,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {coreCapabilities.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -192,7 +192,7 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1 flex flex-col justify-between"
+                className="tc-card group flex h-full flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -219,7 +219,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 3. Diagnostic Signature Metrics ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -239,11 +239,14 @@ export default function TechnologyPage() {
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {diagnosticSignatureMetrics.map((metric) => (
-              <div
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {diagnosticSignatureMetrics.map((metric, i) => (
+              <AnimatedSection
                 key={metric.name}
-                className="rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                as="article"
+                stagger
+                staggerIndex={i}
+                className="tc-card h-full"
               >
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="font-display text-base font-bold text-[var(--paper)]">{metric.name}</h3>
@@ -257,14 +260,14 @@ export default function TechnologyPage() {
                   </span>
                 </div>
                 <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{metric.desc}</p>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── 4. Chemistries Supported ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -281,11 +284,14 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {chemistryFormFactors.map((item) => (
-              <div
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+            {chemistryFormFactors.map((item, i) => (
+              <AnimatedSection
                 key={item.chemistry}
-                className="group flex items-center gap-4 rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-5 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                as="article"
+                stagger
+                staggerIndex={i}
+                className="tc-card group flex h-full items-center gap-4"
               >
                 <div
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border shadow-sm transition-transform duration-300 group-hover:scale-105"
@@ -297,14 +303,14 @@ export default function TechnologyPage() {
                   <item.Icon className="h-5 w-5 stroke-[2]" style={{ color: item.color }} />
                 </div>
                 <span className="font-mono text-xs font-semibold text-[var(--paper)]">{item.chemistry}</span>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── 5. Laboratory Services & Infrastructure ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -321,7 +327,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {labCapabilities.map((lab, i) => (
               <AnimatedSection
                 key={lab.title}
@@ -329,7 +335,7 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1 flex flex-col justify-between"
+                className="tc-card group flex h-full flex-col justify-between"
               >
                 <div>
                   <div
@@ -351,7 +357,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 6. Supporting Platforms ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -368,7 +374,7 @@ export default function TechnologyPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-8 md:grid-cols-2">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-2">
             {supportingPlatforms.map((platform, i) => (
               <AnimatedSection
                 key={platform.name}
@@ -376,7 +382,7 @@ export default function TechnologyPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                className="tc-card group h-full"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--signal)]/30 bg-[var(--signal)]/10 transition-transform duration-300 group-hover:scale-105">
@@ -430,8 +436,7 @@ export default function TechnologyPage() {
             ))}
           </div>
 
-          <div className="mx-auto mt-10 max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 text-center shadow-xl relative overflow-hidden">
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+          <div className="tc-card relative mx-auto mt-10 max-w-4xl text-center">
             <div className="relative z-10">
               <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
                 Ready to evaluate BatteryScope-C{" "}

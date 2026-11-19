@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 
@@ -98,31 +98,24 @@ const phases: Phase[] = [
 function PhaseItem({
   phase,
   index,
-  scrollYProgress,
+  reducedMotion,
 }: {
   phase: Phase;
   index: number;
-  scrollYProgress: MotionValue<number>;
+  reducedMotion: boolean;
 }) {
   const isLeft = index % 2 === 0;
-
-  const start = Math.max(0, phase.threshold - 0.1);
-  const end = phase.threshold;
-
-  const cardOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-  const cardScale = useTransform(scrollYProgress, [start, end], [0.9, 1]);
-  const cardY = useTransform(scrollYProgress, [start, end], [40, 0]);
-  const pinScale = useTransform(scrollYProgress, [start, end], [0, 1]);
+  const entranceX = isLeft ? -32 : 32;
 
   return (
     <div className="relative">
       {/* Center Number Pin */}
       <motion.div
         className="absolute top-1/2 left-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:flex"
-        style={{
-          scale: pinScale,
-          opacity: cardOpacity,
-        }}
+        initial={reducedMotion ? false : { scale: 0.85, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="group flex items-center justify-center">
           <div
@@ -140,14 +133,13 @@ function PhaseItem({
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-14">
         {/* Phase Image Card */}
         <motion.div
-          style={{
-            opacity: cardOpacity,
-            scale: cardScale,
-            y: cardY,
-          }}
+          initial={reducedMotion ? false : { opacity: 0, x: entranceX }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: reducedMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`w-full ${isLeft ? "md:order-1 md:pr-12 lg:pr-16" : "md:order-2 md:pl-12 lg:pl-16"}`}
         >
-          <div className="group relative mx-auto w-full max-w-md overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-3 shadow-xl transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
+          <div className="tc-card tc-card-media group relative mx-auto w-full max-w-md">
             <Image
               src={phase.image}
               alt={`${phase.phaseLabel} ${phase.title}`}
@@ -159,20 +151,13 @@ function PhaseItem({
 
         {/* Phase Content Card */}
         <motion.div
-          style={{
-            opacity: cardOpacity,
-            scale: cardScale,
-            y: cardY,
-          }}
+          initial={reducedMotion ? false : { opacity: 0, x: -entranceX }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
           className={`w-full ${isLeft ? "md:order-2 md:pl-12 lg:pl-16" : "md:order-1 md:pr-12 lg:pr-16"}`}
         >
-          <div
-            className="space-y-3 sm:space-y-4 rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-5 sm:p-8 shadow-xl transition-all duration-500 hover:border-[var(--signal)]/50"
-            style={{
-              borderLeftColor: phase.pinColorLight,
-              borderLeftWidth: "5px",
-            }}
-          >
+          <div className="tc-card space-y-3 sm:space-y-4">
             <div className="flex items-center gap-3">
               <span
                 className="inline-block rounded-full px-3.5 py-1 font-mono text-xs font-bold tracking-wider uppercase border"
@@ -222,6 +207,7 @@ function PhaseItem({
 
 export function PhaseJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -237,7 +223,7 @@ export function PhaseJourney() {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden bg-transparent text-[var(--paper)]"
+      className="relative bg-transparent text-[var(--paper)]"
     >
       <div className="relative mx-auto w-full max-w-6xl">
         <div className="relative mt-4">
@@ -260,14 +246,14 @@ export function PhaseJourney() {
                 stroke="url(#roadGradient)"
                 strokeWidth="8"
                 strokeLinecap="round"
-                style={{ pathLength }}
+                style={{ pathLength: reducedMotion ? 1 : pathLength }}
               />
               <motion.path
                 d="M 400,40 L 400,1560"
                 stroke="#0d9488"
                 strokeWidth="4"
                 strokeLinecap="round"
-                style={{ pathLength }}
+                style={{ pathLength: reducedMotion ? 1 : pathLength }}
               />
 
               <defs>
@@ -287,7 +273,7 @@ export function PhaseJourney() {
                 key={phase.id}
                 phase={phase}
                 index={index}
-                scrollYProgress={scrollYProgress}
+                reducedMotion={Boolean(reducedMotion)}
               />
             ))}
           </div>

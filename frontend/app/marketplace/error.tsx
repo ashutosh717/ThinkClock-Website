@@ -17,7 +17,7 @@ export default function MarketplaceError({
         <button
           type="button"
           onClick={reset}
-          className="mt-5 rounded-md bg-[var(--signal)] px-5 py-2 font-semibold text-[var(--ink)]"
+          className="mt-5 rounded-md bg-[var(--signal)] px-5 py-2 font-semibold text-[var(--signal-foreground)]"
         >
           Retry
         </button>

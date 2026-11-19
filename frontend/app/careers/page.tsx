@@ -42,7 +42,7 @@ export default function CareersPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16 border-b border-[var(--border)]">
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--copper)]/15 blur-3xl" />
         </div>
@@ -68,7 +68,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── 2. Open Roles ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-2">
@@ -84,7 +84,7 @@ export default function CareersPage() {
               </span>
             </h2>
           </div>
-          <div className="mt-5 sm:mt-6 space-y-6 max-w-4xl mx-auto">
+          <div className="mx-auto mt-5 sm:mt-6 max-w-4xl space-y-4 sm:space-y-6">
             {openRoles.map((role, i) => (
               <AnimatedSection
                 key={role.title}
@@ -92,7 +92,7 @@ export default function CareersPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                className="tc-card group"
               >
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex-1">
@@ -132,8 +132,7 @@ export default function CareersPage() {
       {/* ── 3. Spontaneous Applications ── */}
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-8 text-center shadow-xl relative overflow-hidden">
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+          <div className="tc-card relative mx-auto max-w-4xl text-center">
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2">
                 <span className="h-px w-6 bg-[var(--copper)]" />
@@ -153,7 +152,7 @@ export default function CareersPage() {
               <div className="mt-8 flex justify-center">
                 <Link
                   href="mailto:careers@thinkclock.com"
-                  className="inline-flex items-center gap-2 rounded-[10px] border border-[var(--copper)] bg-[var(--copper)]/10 px-6 py-3 font-mono text-xs font-semibold text-[var(--paper)] transition-all hover:bg-[var(--copper)] hover:text-white shadow-lg shadow-[var(--copper)]/10"
+                  className="tc-button inline-flex items-center gap-2 rounded-[10px] border border-[var(--copper)] bg-[var(--copper)]/10 px-6 py-3 font-mono text-xs font-semibold text-[var(--paper)] transition-all hover:bg-[var(--copper)] hover:text-white"
                 >
                   careers@thinkclock.com
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -137,7 +137,7 @@ export default function AboutPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-8 lg:pt-16 lg:pb-10 border-b border-[var(--border)]">
+      <section className="relative overflow-hidden px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-8 lg:pt-16 lg:pb-10">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
@@ -164,7 +164,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 2. Core Activities Grid ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
@@ -179,7 +179,7 @@ export default function AboutPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-3">
             {coreActivities.map((act, i) => (
               <AnimatedSection
                 key={act.title}
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
+                className="tc-card group flex h-full flex-col justify-between"
               >
                 <div>
                   <div
@@ -209,7 +209,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 3. Inside ThinkClock: Labs, Expos & Engineering Gallery ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center mb-5 sm:mb-6" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
@@ -231,7 +231,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 4. Phase Journey (R&D Timeline) ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.18em] text-[var(--copper)] uppercase">
@@ -249,7 +249,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 5. Leadership ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center mb-6 sm:mb-8" animation="fade-up">
             <p className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
@@ -277,7 +277,7 @@ export default function AboutPage() {
                 <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:items-stretch">
                   {/* Left: Leader Image */}
                   <div className="flex flex-col items-center">
-                    <div className="group relative w-full max-w-[240px] flex-1 overflow-hidden rounded-[14px] border border-[var(--border)] bg-[var(--card)] shadow-2xl transition-all duration-500 hover:border-[var(--copper)] hover:shadow-[0_0_35px_rgba(201,122,74,0.25)]">
+                    <div className="tc-card tc-card-media group relative w-full max-w-[240px] flex-1">
                       <Image
                         src={leader.image}
                         alt={leader.name}
@@ -333,7 +333,7 @@ export default function AboutPage() {
       {/* ── 6. Partner CTA Banner ── */}
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="mx-auto max-w-4xl rounded-[20px] border border-[var(--signal)]/30 bg-[var(--card)] p-6 sm:p-8 text-center shadow-xl">
+          <div className="tc-card mx-auto max-w-4xl text-center">
             <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
               Partner with ThinkClock Battery Labs
             </h3>

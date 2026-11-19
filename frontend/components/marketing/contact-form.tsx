@@ -62,7 +62,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="h-full flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-2xl transition-all duration-300">
+    <div className="tc-card h-full flex flex-col justify-between">
       <div>
         <div className="mb-5">
           <h3 className="font-display text-xl sm:text-2xl font-bold text-[var(--paper)]">
@@ -132,7 +132,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-[8px] border border-[var(--signal)]/50 bg-[var(--signal)] px-6 py-3.5 font-sans text-sm font-bold text-white shadow-lg transition-all duration-300 hover:brightness-110 hover:shadow-[var(--signal)]/25 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+            className="tc-button group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-[8px] border border-[var(--signal)]/50 bg-[var(--signal)] px-6 py-3.5 font-sans text-sm font-bold text-white shadow-lg transition-all duration-300 hover:brightness-110 hover:shadow-[var(--signal)]/25 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
           >
             <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

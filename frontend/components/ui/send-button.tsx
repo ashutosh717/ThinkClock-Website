@@ -99,7 +99,7 @@ export function SendButton({
       <a
         href={href}
         onClick={handleClick}
-        className={`sb-button ${className} ${isFlying ? "sb-button--flying" : ""}`}
+        className={`tc-button sb-button ${className} ${isFlying ? "sb-button--flying" : ""}`}
       >
         {inner}
       </a>
@@ -112,7 +112,7 @@ export function SendButton({
       type={type}
       disabled={disabled || isFlying}
       onClick={handleClick}
-      className={`sb-button ${className} ${disabled ? "sb-button--disabled" : ""} ${
+      className={`tc-button sb-button ${className} ${disabled ? "sb-button--disabled" : ""} ${
         isFlying ? "sb-button--flying" : ""
       }`}
     >

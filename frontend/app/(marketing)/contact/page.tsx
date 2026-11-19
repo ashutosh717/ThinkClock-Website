@@ -71,7 +71,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="mt-8 divide-y divide-[var(--border)] rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6 shadow-xl">
+            <div className="tc-card mt-8 divide-y divide-[var(--border)]">
               {contactChannels.map((info) => (
                 <div
                   key={info.label}
@@ -122,7 +122,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── 2. Full-Width Global Offices & R&D Hubs Section ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-t border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="mx-auto max-w-3xl text-center mb-5 sm:mb-6" animation="fade-up">
             <p className="font-mono text-xs tracking-[0.18em] font-semibold text-[var(--copper)] uppercase">
@@ -133,7 +133,7 @@ export default function ContactPage() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid items-stretch gap-4 sm:grid-cols-3 sm:gap-6">
             {offices.map((office, i) => (
               <AnimatedSection
                 key={office.title + office.country}
@@ -141,7 +141,7 @@ export default function ContactPage() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="flex flex-col justify-between rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/60"
+                className="tc-card flex h-full flex-col justify-between"
               >
                 <div>
                   <span className="font-mono text-[11px] font-semibold tracking-wider text-[var(--signal)] uppercase">
