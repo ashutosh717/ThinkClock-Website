@@ -125,7 +125,7 @@ export function NyquistHero({
         </div>
 
         <div
-          className="rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-6 shadow-2xl backdrop-blur-md transition-transform duration-200 ease-out cursor-grab active:cursor-grabbing select-none hover:border-[var(--signal)]/60 touch-pan-y transform-gpu"
+          className="tc-card cursor-grab select-none touch-pan-y transform-gpu active:cursor-grabbing"
           style={{
             transform: `perspective(1200px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`,
           }}

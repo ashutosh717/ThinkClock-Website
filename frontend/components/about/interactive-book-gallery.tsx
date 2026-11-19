@@ -3,7 +3,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image, { StaticImageData } from "next/image";
 import { ChevronLeft, ChevronRight, BookOpen, Sparkles } from "lucide-react";
-import { motion, useMotionValue, useTransform, useMotionValueEvent, animate } from "framer-motion";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useTransform,
+} from "framer-motion";
 import thinkclockLogo from "@/images/thinkclock_logo.png";
 
 export interface GalleryItem {
@@ -29,6 +36,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const totalPages = items.length;
+  const reducedMotion = useReducedMotion();
 
   // Motion value for page turn progress: 0 (flat open on right) to 1 (flat open on left)
   const turnProgress = useMotionValue(0);
@@ -48,7 +56,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
   const dragStartProgress = useRef<number>(0);
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>, side: "left" | "right") => {
-    if (isFlipping) return;
+    if (isFlipping || reducedMotion) return;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
 
     const dir = side === "right" ? "next" : "prev";
@@ -121,6 +129,12 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
         ? (displayedIndex + 1) % totalPages
         : (displayedIndex - 1 + totalPages) % totalPages;
 
+      if (reducedMotion) {
+        setDisplayedIndex(tIdx);
+        setTargetIndex(tIdx);
+        return;
+      }
+
       setDragDir(dir);
       setTargetIndex(tIdx);
       setIsFlipping(true);
@@ -143,7 +157,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
         },
       });
     },
-    [displayedIndex, isDragging, isFlipping, totalPages, turnProgress]
+    [displayedIndex, isDragging, isFlipping, reducedMotion, totalPages, turnProgress]
   );
 
   // Keyboard navigation

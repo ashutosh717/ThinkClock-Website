@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AlertTriangle, Clock, FileQuestion, ArrowUpRight, Zap, Cpu, Gauge, ShieldCheck } from "lucide-react";
 import { HeroVideo } from "@/components/marketing/hero-video";
 import { AnimatedSection } from "@/components/marketing/animated-section";
+import { CountUp } from "@/components/marketing/count-up";
 import { SendButton } from "@/components/ui/send-button";
 
 const trustStats = [
@@ -112,7 +113,7 @@ export default function MarketingHome() {
       <HeroVideo videoSrc="/videos/THINKCLOCKv2.mp4" />
 
       {/* ── 2. Opening Brand Story & Aesthetic Work Cards ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           {/* Section Header */}
           <AnimatedSection className="max-w-4xl" animation="fade-up">
@@ -134,7 +135,7 @@ export default function MarketingHome() {
           </AnimatedSection>
 
           {/* Aesthetic Metric Cards Grid */}
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {trustStats.map((stat, i) => (
               <AnimatedSection
                 key={stat.value}
@@ -142,16 +143,16 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1 hover:shadow-xl"
+                className="tc-card tc-stat-card group relative flex h-full flex-col justify-between"
               >
                 <div>
                   {/* Top Header: Category + Arrow Icon */}
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="tc-stat-heading flex items-start justify-between gap-3">
                     <div className="flex flex-col min-w-0">
-                      <span className="font-display text-sm font-bold text-[var(--paper)] truncate">
+                      <span className="font-display text-sm font-bold text-[var(--paper)]">
                         {stat.name}
                       </span>
-                      <span className="font-mono text-[10px] tracking-wider text-[var(--graphite)] uppercase truncate mt-0.5">
+                      <span className="mt-0.5 font-mono text-[10px] tracking-wider text-[var(--graphite)] uppercase">
                         {stat.category}
                       </span>
                     </div>
@@ -163,8 +164,8 @@ export default function MarketingHome() {
 
                   {/* Large Hero Metric */}
                   <div className="mt-4 sm:mt-5">
-                    <p className={`inline-block font-display text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r ${stat.color} bg-clip-text text-transparent pr-2`}>
-                      {stat.value}
+                    <p className="inline-block font-mono text-4xl font-bold tracking-tight text-[var(--signal)] sm:text-5xl">
+                      <CountUp value={stat.value} />
                     </p>
                     <span className="mt-1 block font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--graphite)]">
                       {stat.metricLabel}
@@ -183,7 +184,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 3. Problem & Positioning ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -203,7 +204,7 @@ export default function MarketingHome() {
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-3">
             {problemComparisons.map((item, i) => (
               <AnimatedSection
                 key={item.method}
@@ -211,7 +212,7 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                className="tc-card group relative flex h-full flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -241,11 +242,8 @@ export default function MarketingHome() {
           <AnimatedSection
             animation="fade-up"
             delay={200}
-            className="mt-5 sm:mt-6 rounded-[20px] border border-[#f97316]/25 bg-[var(--card)] p-6 sm:p-8 shadow-xl dark:shadow-2xl relative overflow-hidden"
+            className="tc-card relative mt-5 sm:mt-6"
           >
-            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#f97316]/10 blur-3xl" />
-            <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#f59e0b]/10 blur-3xl" />
-
             <div className="relative z-10">
               <div className="flex items-center gap-2">
                 <span className="h-px w-6 bg-[#f97316]" />
@@ -268,7 +266,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 4. Product Ecosystem ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -288,7 +286,7 @@ export default function MarketingHome() {
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-3">
             {homeProductPreviews.map((prod, i) => (
               <AnimatedSection
                 key={prod.title}
@@ -296,7 +294,7 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[#f97316]/40 hover:-translate-y-1"
+                className="tc-card group relative flex h-full flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -333,7 +331,7 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 5. Credibility Timeline ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
@@ -353,7 +351,7 @@ export default function MarketingHome() {
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {credibilityTimeline.map((step, i) => (
               <AnimatedSection
                 key={step.phase}
@@ -361,7 +359,7 @@ export default function MarketingHome() {
                 animation="fade-up"
                 stagger
                 staggerIndex={i}
-                className="group relative flex flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-7 shadow-lg transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                className="tc-card group relative flex h-full flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -382,11 +380,11 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 6. Backed by Innovate UK CTA Banner ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
+      <section className="home-cta px-4 pt-6 pb-24 sm:px-6 sm:pt-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection
             animation="fade-up"
-            className="mx-auto flex max-w-[1400px] flex-col gap-5 rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-8 shadow-xl dark:shadow-2xl lg:flex-row lg:items-center lg:justify-between relative overflow-hidden"
+            className="tc-card mx-auto flex max-w-[1400px] flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
           >
             <div className="max-w-3xl relative z-10">
               <div className="flex items-center gap-2">

@@ -3,10 +3,12 @@ import { Bai_Jamjuree, Playfair_Display } from "next/font/google";
 
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { HomeCurtainProvider } from "@/components/providers/home-curtain-provider";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { AiAssistant } from "@/components/marketing/ai-assistant";
 import { StarBackground } from "@/components/marketing/star-background";
+import { LenisProvider } from "@/components/marketing/lenis-provider";
 import "@fontsource/cooper-hewitt/400.css";
 import "@fontsource/cooper-hewitt/500.css";
 import "@fontsource/cooper-hewitt/600.css";
@@ -77,10 +79,13 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-transparent text-[var(--paper)] relative">
         <StarBackground />
+        <LenisProvider />
         <ThemeProvider>
           <QueryProvider>
             <SiteHeader />
-            <div className="flex-1 flex flex-col">{children}</div>
+            <HomeCurtainProvider>
+              <div className="flex-1 flex flex-col">{children}</div>
+            </HomeCurtainProvider>
             <AiAssistant />
             <SiteFooter />
           </QueryProvider>

@@ -141,7 +141,7 @@ export function VideoSequenceHero() {
                 className="group relative inline-flex items-center gap-4 rounded-[10px] border border-[var(--border)] bg-[var(--card)] px-6 py-3.5 shadow-xl transition-all duration-300 hover:border-[var(--signal)]/70 hover:shadow-[0_0_25px_rgba(92,225,201,0.15)] focus:outline-none focus:ring-2 focus:ring-[var(--signal)]/50"
               >
                 {/* Glowing Play Icon Badge */}
-                <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-[var(--signal)] text-[var(--ink)] shadow-md transition-transform duration-300 group-hover:scale-105">
+                <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md transition-transform duration-300 group-hover:scale-105">
                   <svg className="ml-0.5 h-4 w-4 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
@@ -180,7 +180,7 @@ export function VideoSequenceHero() {
             >
               {/* Borderless Video Canvas with Ambient Background Aura Shadow */}
               <div
-                className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-black border border-[rgba(91,102,99,0.45)] shadow-2xl shadow-black/80 transform-gpu"
+                className="tc-card tc-card-media relative aspect-video w-full bg-black transform-gpu"
               >
                 {prefersReducedMotion ? (
                   <div className="flex h-full w-full items-center justify-center p-6 text-center">

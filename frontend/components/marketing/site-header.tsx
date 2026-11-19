@@ -55,6 +55,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { theme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -79,9 +80,11 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 right-0 left-0 z-50 transition-all duration-150 ${
           scrolled
-            ? "bg-[var(--ink)]/90 shadow-lg shadow-black/30 backdrop-blur-xl"
+            ? theme === "light"
+              ? "border-b border-[#E4E2DD] bg-[rgba(250,250,248,0.85)] shadow-[0_2px_12px_rgba(20,20,20,0.06)] backdrop-blur-xl"
+              : "border-b border-white/[0.08] bg-[#0A0B0D]/85 shadow-[0_2px_12px_rgba(0,0,0,0.24)] backdrop-blur-xl"
             : "bg-transparent"
         }`}
       >
@@ -94,7 +97,7 @@ export function SiteHeader() {
               priority
             />
             <div className="flex flex-col min-w-0">
-              <span className="font-display text-base sm:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] truncate transition-colors duration-300 group-hover:text-[var(--signal)]">
+              <span className="font-display text-base sm:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] truncate transition-colors duration-150 group-hover:text-[var(--signal)]">
                 ThinkClock Battery Labs
               </span>
               <span className="font-mono text-[10px] sm:text-xs lg:text-[13px] font-semibold leading-tight text-[var(--copper)] truncate">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export interface FaqItem {
   id: number;
@@ -88,6 +88,7 @@ const faqs: FaqItem[] = [
 const categories = ["All", "Overview", "Products", "Technology", "Deployment"] as const;
 
 export function FaqAccordion() {
+  const reducedMotion = useReducedMotion();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [openId, setOpenId] = useState<number | null>(1);
 
@@ -112,7 +113,7 @@ export function FaqAccordion() {
               onClick={() => setSelectedCategory(cat)}
               className={`rounded-full px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                 isActive
-                  ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--ink)] shadow-md shadow-[var(--signal)]/20"
+                  ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                   : "border border-[var(--border)] bg-[var(--card)] text-[var(--paper)] hover:border-[var(--signal)]/40"
               }`}
             >
@@ -130,17 +131,17 @@ export function FaqAccordion() {
           return (
             <div
               key={faq.id}
-              className={`overflow-hidden rounded-[20px] border transition-all duration-300 ${
+              className={`tc-card tc-card-flush ${
                 isOpen
-                  ? "border-[var(--signal)]/50 bg-[var(--card)] shadow-xl"
-                  : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--signal)]/30"
+                  ? "border-[var(--signal)]"
+                  : ""
               }`}
             >
               <button
                 onClick={() => toggleFaq(faq.id)}
                 aria-expanded={isOpen}
                 aria-controls={contentId}
-                className="flex w-full items-center justify-between p-6 text-left focus:outline-none"
+                className="flex w-full items-center justify-between p-5 text-left focus:outline-none sm:p-7"
               >
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="rounded-full border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-3 py-0.5 font-mono text-[10px] font-bold text-[var(--copper)] uppercase tracking-wider">
@@ -152,7 +153,7 @@ export function FaqAccordion() {
                 </div>
                 <div
                   className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-sm transition-all duration-300 ${
-                    isOpen ? "rotate-180 bg-[var(--signal)] text-[var(--ink)] border-[var(--signal)]" : "text-[var(--paper)] bg-[var(--secondary)]"
+                    isOpen ? "rotate-180 bg-[var(--signal)] text-[var(--signal-foreground)] border-[var(--signal)]" : "text-[var(--paper)] bg-[var(--secondary)]"
                   }`}
                 >
                   ↓
@@ -163,10 +164,13 @@ export function FaqAccordion() {
                 {isOpen && (
                   <motion.div
                     id={contentId}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    initial={reducedMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: reducedMotion ? 0 : 0.25,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   >
                     <div className="border-t border-[var(--border)] px-6 pb-6 pt-4 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
                       {faq.answer}

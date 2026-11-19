@@ -10,7 +10,7 @@ export const metadata = {
 export default function FaqPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16 border-b border-[var(--border)]">
+      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -right-20 top-1/4 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute -left-20 bottom-1/4 h-72 w-72 rounded-full bg-[var(--copper)]/15 blur-3xl" />
@@ -38,7 +38,7 @@ export default function FaqPage() {
       </section>
 
       {/* ── 2. FAQ Accordion Section ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8 border-b border-[var(--border)]">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection animation="fade-up" delay={150} className="mx-auto max-w-4xl">
             <FaqAccordion />
@@ -50,8 +50,7 @@ export default function FaqPage() {
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           <AnimatedSection animation="scale-in" delay={300} className="text-center mx-auto max-w-3xl">
-            <div className="rounded-[20px] border border-purple-500/25 bg-[var(--card)] p-6 sm:p-10 shadow-xl relative overflow-hidden">
-              <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+            <div className="tc-card relative mx-auto max-w-3xl text-center">
               <div className="relative z-10">
                 <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl">
                   Have a specific{" "}

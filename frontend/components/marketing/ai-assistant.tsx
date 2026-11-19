@@ -157,7 +157,7 @@ export function AiAssistant() {
                   <button
                     type="submit"
                     disabled={!input.trim()}
-                    className="shrink-0 rounded-lg bg-[var(--signal)] px-3.5 py-2 text-xs font-semibold text-[var(--ink)] transition-all hover:brightness-110 disabled:opacity-40"
+                    className="shrink-0 rounded-lg bg-[var(--signal)] px-3.5 py-2 text-xs font-semibold text-[var(--signal-foreground)] transition-all hover:brightness-110 disabled:opacity-40"
                   >
                     Ask
                   </button>

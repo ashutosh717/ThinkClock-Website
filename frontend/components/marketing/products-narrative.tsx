@@ -232,7 +232,7 @@ function ProductsNarrativeContent() {
   return (
     <div id="product-detail" className="w-full scroll-mt-28">
       {/* Product Selector Tabs */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div className="grid items-stretch grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         {products.map((prod) => {
           const isActive = prod.id === activeTab;
           const badgeDetails =
@@ -261,10 +261,10 @@ function ProductsNarrativeContent() {
             <button
               key={prod.id}
               onClick={() => setSelectedTab(prod.id)}
-              className={`group relative flex flex-col justify-between rounded-[20px] p-6 text-left transition-all duration-300 ${
+              className={`tc-card group relative flex h-full flex-col justify-between text-left ${
                 isActive
-                  ? "border-2 border-[#f97316] bg-[var(--card)] shadow-2xl scale-[1.02] ring-2 ring-[#f97316]/20"
-                  : "border border-[var(--border)] bg-[var(--card)] hover:border-[#f97316]/40 hover:-translate-y-1 shadow-lg"
+                  ? "border-[var(--signal)]"
+                  : ""
               }`}
             >
               {/* Top Row: Category Tag + Active Badge / Arrow */}
@@ -310,11 +310,14 @@ function ProductsNarrativeContent() {
 
       {/* Selected Product Detail Panel */}
       <div key={activeProduct.id} className="mt-8 sm:mt-10">
-        <div className="rounded-[20px] border border-[var(--border)] bg-[var(--card)] p-6 sm:p-10 shadow-2xl">
+        <div>
           
           {/* 1. Header & System Image & Indicative Throughput */}
-          <AnimatedSection animation="fade-up" className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className={activeProduct.id !== "pack" ? "max-w-2xl" : "w-full"}>
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <AnimatedSection
+              animation="fade-right"
+              className={`product-directional-reveal ${activeProduct.id !== "pack" ? "max-w-2xl" : "w-full"}`}
+            >
               <span className="inline-block rounded-full border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3.5 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
                 {activeProduct.badge}
               </span>
@@ -330,7 +333,7 @@ function ProductsNarrativeContent() {
 
               {/* Indicative Throughput Box */}
               {activeProduct.throughput && (
-                <div className="mt-6 rounded-[20px] border border-[var(--signal)]/30 bg-[var(--secondary)] p-6 sm:p-8 shadow-lg">
+                <div className="mt-6 border-t border-[var(--border)] pt-6">
                   <div className="flex items-center gap-2">
                     <span className="h-px w-6 bg-[var(--signal)]" />
                     <span className="font-mono text-xs font-bold tracking-widest text-[var(--signal)] uppercase">
@@ -350,11 +353,16 @@ function ProductsNarrativeContent() {
                   </div>
                 </div>
               )}
-            </div>
+            </AnimatedSection>
 
             {/* Hardware Image Showcase - Tight portrait fit with zero empty borders */}
             {activeProduct.id !== "pack" && (
-              <div className="relative w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] aspect-[3/4] shrink-0 overflow-hidden rounded-[20px] border border-[var(--border)] bg-white dark:bg-[#0d1412] shadow-xl flex flex-col justify-between p-3 group mx-auto lg:mx-0">
+              <AnimatedSection
+                as="div"
+                animation="fade-left"
+                className="product-directional-reveal mx-auto w-full max-w-[320px] sm:max-w-[340px] lg:mx-0 lg:max-w-[360px] lg:shrink-0 lg:basis-[360px]"
+              >
+                <div className="tc-card tc-card-media group relative flex aspect-[3/4] w-full flex-col justify-between">
                 {/* Image Container with tight fit */}
                 <div className="relative w-full h-[82%] overflow-hidden rounded-[14px]">
                   <Image
@@ -370,10 +378,10 @@ function ProductsNarrativeContent() {
                 {/* Grounded Floating Spec Bar */}
                 <div className="rounded-[14px] border border-[var(--border)] bg-[var(--secondary)]/90 backdrop-blur-sm px-3.5 py-2.5 flex items-center justify-between shadow-sm">
                   <div className="flex flex-col min-w-0">
-                    <span className="font-mono text-[9px] font-bold text-[var(--signal)] uppercase tracking-wider truncate">
+                    <span className="break-words font-mono text-[9px] font-bold text-[var(--signal)] uppercase tracking-wider">
                       {activeProduct.id === "manual" ? "6-Channel Chamber" : "Inline Sort Array"}
                     </span>
-                    <span className="font-display text-xs font-bold text-[var(--paper)] truncate">
+                    <span className="break-words font-display text-xs font-bold text-[var(--paper)]">
                       {activeProduct.id === "manual" ? "Benchtop Diagnostic Unit" : "Continuous Factory Unit"}
                     </span>
                   </div>
@@ -381,9 +389,10 @@ function ProductsNarrativeContent() {
                     {activeProduct.id === "manual" ? "21700 Ready" : "High Speed"}
                   </span>
                 </div>
-              </div>
+                </div>
+              </AnimatedSection>
             )}
-          </AnimatedSection>
+          </div>
 
           {/* 2. Diagnostics Section (What it measures) */}
           {activeProduct.measures && activeProduct.measures.length > 0 && (
@@ -397,7 +406,7 @@ function ProductsNarrativeContent() {
                 </div>
               </AnimatedSection>
 
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                 {activeProduct.measures.map((m, i) => (
                   <AnimatedSection
                     key={m.name}
@@ -405,7 +414,7 @@ function ProductsNarrativeContent() {
                     animation="fade-up"
                     stagger
                     staggerIndex={i}
-                    className="rounded-[20px] border border-[var(--border)] bg-[var(--secondary)] p-6 shadow-sm transition-all duration-300 hover:border-[var(--signal)]/40 hover:-translate-y-1"
+                    className="tc-card h-full"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">{m.name}</span>
@@ -433,7 +442,7 @@ function ProductsNarrativeContent() {
               </div>
             </AnimatedSection>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6">
               {activeProduct.specs.map((spec, i) => (
                 <AnimatedSection
                   key={i}
@@ -441,7 +450,7 @@ function ProductsNarrativeContent() {
                   animation="fade-up"
                   stagger
                   staggerIndex={i}
-                  className="flex items-start gap-3 rounded-[14px] border border-[var(--border)] bg-[var(--secondary)] p-4 text-sm leading-relaxed text-[var(--paper)] shadow-sm"
+                  className="tc-card flex h-full items-start gap-3 text-sm leading-relaxed text-[var(--paper)]"
                 >
                   <span className="mt-0.5 font-bold text-[var(--signal)] shrink-0">✔</span>
                   <span>{spec}</span>
@@ -501,7 +510,7 @@ function ProductsNarrativeContent() {
           </div>
 
           {/* 5. Product CTA Strip */}
-          <AnimatedSection animation="fade-up" delay={200} className="mt-10 flex flex-col items-center justify-between gap-6 rounded-[20px] border border-purple-500/25 bg-[var(--secondary)] p-6 sm:p-8 sm:flex-row">
+          <AnimatedSection animation="fade-up" delay={200} className="tc-card mt-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div>
               <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">{activeProduct.ctaHeadline}</span>
               <p className="mt-2 font-display text-base sm:text-lg text-[var(--paper)] font-semibold">
