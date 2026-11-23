@@ -3,6 +3,7 @@ import { AlertTriangle, Clock, FileQuestion, ArrowUpRight, Zap, Cpu, Gauge, Shie
 import { HeroVideo } from "@/components/marketing/hero-video";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { CountUp } from "@/components/marketing/count-up";
+import { ScrollColorReveal } from "@/components/marketing/scroll-color-reveal";
 import { SendButton } from "@/components/ui/send-button";
 
 const trustStats = [
@@ -110,10 +111,10 @@ export default function MarketingHome() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Full-Width Video Hero ── */}
-      <HeroVideo videoSrc="/videos/THINKCLOCKv2.mp4" />
+      <HeroVideo videoSrc="/videos/THINKCLOCK-Product-Sequence.mp4" />
 
       {/* ── 2. Opening Brand Story & Aesthetic Work Cards ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
+      <section className="px-4 pb-6 pt-20 sm:px-6 sm:pb-8 lg:pb-8 lg:pt-20">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
           {/* Section Header */}
           <AnimatedSection className="max-w-4xl" animation="fade-up">
@@ -264,6 +265,8 @@ export default function MarketingHome() {
           </AnimatedSection>
         </div>
       </section>
+
+      <ScrollColorReveal />
 
       {/* ── 4. Product Ecosystem ── */}
       <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
