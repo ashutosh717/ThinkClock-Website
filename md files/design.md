@@ -10,29 +10,33 @@ Audience: battery pack engineers, EV fleet technical buyers, recyclers, and job 
 
 **An animated EIS Nyquist-plot line as the hero visual** — the actual semicircular impedance curve ThinkClock's own tech produces, redrawn as a live, subtly animated SVG trace (not a stock chart). As the user scrolls, the curve can shift shape slightly (representing a "degrading" vs "healthy" cell), tying motion directly to what the company measures rather than using motion as decoration. This is the one bold, unmistakable element — everything else on the page stays quiet so this reads clearly.
 
-## 3. Color — 4-6 named tokens
+## 3. Color — theme roles
 
-| Token | Hex | Use |
+| Role | Dark | Light |
 |---|---|---|
-| `ink` | `#0B0F0E` | Primary background — near-black with a faint green undertone, evoking an oscilloscope/lab display, not flat black |
-| `signal` | `#5CE1C9` | Primary accent — a cool teal/cyan, standing in for the "signal trace" on an impedance readout. Used sparingly: the Nyquist line, links, key CTAs |
-| `copper` | `#C97A4A` | Secondary accent — evokes the physical cell/copper terminal material. Used for small warm highlights, never as a dominant color (avoid it reading as a generic "warm terracotta AI" palette by keeping it a minor accent only) |
-| `paper` | `#F2F4F1` | Light surface for content-dense sections (technology explainers, tables) where a dark background would hurt readability |
-| `graphite` | `#5B6663` | Secondary text, hairlines, dividers on dark backgrounds |
-| `alert` | `#E8574A` | Errors/warnings only — never decorative |
+| Page background | `#0A0B0D` | `#FAFAF8` |
+| Alternate section | `#0F1114` | `#F2F1EE` |
+| Card background | `#14171B` | `#FFFFFF` |
+| Card border | `rgba(255,255,255,0.08)` | `#E4E2DD` |
+| Headings | `#F5F7FA` | `#111418` |
+| Body text | `#B4BCC6` | `#3B424C` |
+| Muted text | `#7C8591` | `#6B7380` |
+| Large accent | `#FF5A1F` | `#E8590C` |
+| Small accent / hover | `#FF7A45` | `#C2410C` |
+| Error / warning | `#F87171` | `#B91C1C` |
 
-This avoids the current AI-design defaults directly: not the cream-and-terracotta look (terracotta here is a minor accent, not the base), not a generic acid-green-on-black tech look (teal instead of neon green, and it's derived from the EIS signal concept, not chosen for "looking techy"), not a broadsheet layout.
+Use the orange family for emphasis and keep the warm-white light background neutral. Light-mode body copy uses a readable 400–500 weight, and small orange labels use the darker accent for contrast.
 
 ## 4. Typography
 
-- **Display**: a technical grotesque with some personality — e.g. **Space Grotesk** or **General Sans** — used at large sizes for headlines, set fairly tight, always sentence case (not shouting).
-- **Body**: a clean humanist sans with strong legibility at small sizes — e.g. **Inter** or **IBM Plex Sans** — since the audience will read genuinely technical paragraphs (spectroscopy explainers), not skim marketing fluff.
+- **Display**: **Playfair Display** carries the editorial engineering headlines, used at large sizes and kept in sentence case.
+- **Body**: **Cooper Hewitt** provides the condensed sans voice; use weight 400 or 500 for readable technical copy, especially in light mode.
 - **Utility/data**: a monospace — e.g. **IBM Plex Mono** or **JetBrains Mono** — reserved for anything that reads as instrument output: cell IDs, SoH percentages, capacity/voltage figures in the configurator, code-like labels. This is what makes the "lab readout" feeling real rather than implied.
 
 ## 5. Layout concept
 
 - **Hero**: full-bleed dark (`ink`) section, the animated Nyquist curve as the dominant visual (not a screenshot, not a stock photo of a battery), headline stating the actual thesis — battery health is invisible until measured — set in the display face, a single clear CTA.
-- **Technology section**: switches to `paper` background — this is the dense, explanatory content (EIS/Acoustic/RF), and a light, high-contrast surface reads better for paragraphs and diagrams than dark mode does. The section transition itself (dark hero → light technical body) mirrors "raw signal → interpreted insight," which is literally ThinkClock's value proposition.
+- **Technology section**: use the theme's alternate section surface for dense explanatory content (EIS/Acoustic/RF), keeping diagrams and paragraphs readable in both themes.
 - **Cell Store / configurator**: table-and-form-dense, monospace for all numeric data (voltage, capacity, SoH%, price) so it reads like real instrument output rather than a marketing card.
 - **Careers**: warmer, more human — team photos, `copper` accent used more generously here than anywhere else on the site, since this is the one section that's about people rather than instrumentation.
 - Avoid numbered-marker sequences (01/02/03) unless the content is a genuine ordered process (e.g. the actual "configure → analyze → build → order" flow on the homepage is a real sequence — fine there; job listing cards or team bios are not sequences — don't number them).

@@ -67,11 +67,14 @@ export default function RootLayout({
                 var saved = localStorage.getItem('thinkclock-theme');
                 if (saved === 'dark') {
                   document.documentElement.classList.remove('light');
+                  document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
                 }
               } catch (e) {
                 document.documentElement.classList.add('light');
+                document.documentElement.classList.remove('dark');
               }
             `,
           }}

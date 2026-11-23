@@ -83,10 +83,10 @@ export function SiteHeader() {
         className={`fixed top-0 right-0 left-0 z-50 transition-all duration-150 ${
           scrolled
             ? theme === "light"
-              ? "border-b border-[#E4E2DD] bg-[rgba(250,250,248,0.85)] shadow-[0_2px_12px_rgba(20,20,20,0.06)] backdrop-blur-xl"
-              : "border-b border-white/[0.08] bg-[#0A0B0D]/85 shadow-[0_2px_12px_rgba(0,0,0,0.24)] backdrop-blur-xl"
+              ? "border-b border-[#E4E2DD] bg-[rgba(250,250,248,0.85)] shadow-[0_2px_12px_rgba(20,20,20,0.06)]"
+              : "border-b border-white/[0.08] bg-[#0A0B0D]/85 shadow-[0_2px_12px_rgba(0,0,0,0.24)]"
             : "bg-transparent"
-        }`}
+        } ${scrolled && pathname !== "/" ? "backdrop-blur-xl" : ""}`}
       >
         <div className="flex w-full items-center justify-between px-4 py-2.5 sm:px-8 sm:py-3 lg:px-16">
           <Link href="/" className="group flex items-center gap-2.5 sm:gap-4 transition-all duration-300 hover:scale-[1.02] max-w-[75%] sm:max-w-none">
