@@ -1,13 +1,16 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 
 import phase1Img from "@/images/Phase1.png";
 import phase2Img from "@/images/Phase2.png";
 import phase3Img from "@/images/Phase3.png";
+import cylindricalImg from "@/images/Home_page/cylinderical.png";
+import prismaticImg from "@/images/Home_page/Battery Testing Lab Machine Cutout.png";
 import phase4Img from "@/images/Phase4.png";
 
 interface Phase {
@@ -20,7 +23,6 @@ interface Phase {
   pinColorDark: string;
   pinColorLight: string;
   accentGlow: string;
-  threshold: number;
   details: string[];
 }
 
@@ -35,7 +37,6 @@ const phases: Phase[] = [
     pinColorDark: "#facc15",
     pinColorLight: "#d97706",
     accentGlow: "rgba(217, 119, 6, 0.35)",
-    threshold: 0.12,
     details: [
       "Built and tested entirely in-house as a proof-of-concept platform",
       "Validated core non-invasive spectroscopy for battery health assessment",
@@ -52,7 +53,6 @@ const phases: Phase[] = [
     pinColorDark: "#5ce1c9",
     pinColorLight: "#0d9488",
     accentGlow: "rgba(13, 148, 136, 0.35)",
-    threshold: 0.38,
     details: [
       "Compact, field-deployable form factor for on-site demonstrations",
       "Enabled early customer feedback and real-world validation",
@@ -69,7 +69,6 @@ const phases: Phase[] = [
     pinColorDark: "#c97a4a",
     pinColorLight: "#c2410c",
     accentGlow: "rgba(194, 65, 12, 0.35)",
-    threshold: 0.62,
     details: [
       "Production-ready, customer-deployable diagnostic system",
       "Currently supports 21700 cells with ongoing format expansion",
@@ -79,18 +78,49 @@ const phases: Phase[] = [
   {
     id: 4,
     phaseLabel: "Phase 4 :",
-    title: "Automated System",
-    date: "Target: Q3 2026",
+    title: "BatteryScope-C Cylindrical",
+    date: "May 2026",
+    tagline: "Bench-deployable multi-channel diagnostic unit profiling 21700 & 18650 cells in 75 seconds.",
+    image: cylindricalImg,
+    pinColorDark: "#f97316",
+    pinColorLight: "#ea580c",
+    accentGlow: "rgba(234, 88, 12, 0.35)",
+    details: [
+      "Operator-led multi-channel unit for lab characterization & incoming QC",
+      "Non-invasive spectroscopy delivering comprehensive health signatures with zero cycle loss",
+      "High-throughput capacity: profiles up to 1,920 cells per 8-hour shift",
+    ],
+  },
+  {
+    id: 5,
+    phaseLabel: "Phase 5 :",
+    title: "BatteryScope-C Prismatic",
+    date: "September 2026",
+    tagline: "High-capacity non-invasive diagnostic intelligence for large-format prismatic cells and pack lines.",
+    image: prismaticImg,
+    pinColorDark: "#38bdf8",
+    pinColorLight: "#0284c7",
+    accentGlow: "rgba(2, 132, 199, 0.35)",
+    details: [
+      "Engineered for prismatic form-factors, module assemblies, and pack line diagnostics",
+      "Rapid impedance and degradation mapping without destructive teardown or cycle loss",
+      "Direct MES and PLC connectivity for automated quality gates and pack triage",
+    ],
+  },
+  {
+    id: 6,
+    phaseLabel: "Phase 6 :",
+    title: "BatteryScope-C Automated",
+    date: "Target: Q4 2026",
     tagline: "Fully automated, inline, hands-free diagnostics integrated into production workflows.",
     image: phase4Img,
     pinColorDark: "#ff3a5c",
     pinColorLight: "#e11d48",
     accentGlow: "rgba(225, 29, 72, 0.35)",
-    threshold: 0.86,
     details: [
-      "Next milestone: a fully automated inline diagnostic system",
-      "Hands-free operation integrated directly into battery production lines",
-      "What is showcased today is the evolving concept as we progress toward full industrial design",
+      "Next milestone: a fully automated inline diagnostic system for gigafactories",
+      "Hands-free operation integrated directly into battery production lines with 2,880+ cells/shift",
+      "Autonomous cell feeding, automated multi-channel testing, and robotic bin sorting",
     ],
   },
 ];
@@ -99,34 +129,84 @@ function PhaseItem({
   phase,
   index,
   reducedMotion,
+  pathLength,
+  threshold,
+  setPinRef,
 }: {
   phase: Phase;
   index: number;
   reducedMotion: boolean;
+  pathLength: MotionValue<number>;
+  threshold: number;
+  setPinRef: (el: HTMLDivElement | null) => void;
 }) {
   const isLeft = index % 2 === 0;
   const entranceX = isLeft ? -32 : 32;
+
+  // Back orange glow triggers smoothly precisely as the moving line reaches this pin's top edge
+  const startGlow = Math.max(0, threshold - 0.012);
+
+  const glowOpacity = useTransform(
+    pathLength,
+    [startGlow, threshold, threshold + 0.02],
+    [0, 1, 1]
+  );
+
+  const glowScale = useTransform(
+    pathLength,
+    [startGlow, threshold, threshold + 0.02],
+    [0.75, 1.25, 1.1]
+  );
+
+  const pinShadow = useTransform(
+    pathLength,
+    [startGlow, threshold],
+    [
+      "0 0 10px rgba(0, 0, 0, 0.4)",
+      "0 0 28px 8px rgba(249, 115, 22, 0.9), 0 0 50px 16px rgba(255, 90, 31, 0.55), 0 0 75px 22px rgba(234, 88, 12, 0.35)",
+    ]
+  );
 
   return (
     <div className="relative">
       {/* Center Number Pin */}
       <motion.div
+        ref={setPinRef}
         className="absolute top-1/2 left-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:flex"
         initial={reducedMotion ? false : { scale: 0.85, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="group flex items-center justify-center">
-          <div
-            className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-white font-mono text-base font-extrabold text-white shadow-2xl transition-all duration-300 group-hover:scale-110"
+        <div className="group relative flex items-center justify-center">
+          {/* Back Orange Glow Aura when moving line reaches this pin */}
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-5 rounded-full bg-gradient-to-r from-[#ff5a1f] to-[#f97316] blur-xl"
+            style={{
+              opacity: reducedMotion ? 1 : glowOpacity,
+              scale: reducedMotion ? 1.1 : glowScale,
+            }}
+          />
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-2.5 rounded-full bg-[#f97316] blur-md"
+            style={{
+              opacity: reducedMotion ? 1 : glowOpacity,
+            }}
+          />
+
+          <motion.div
+            className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-white font-mono text-base font-extrabold text-white transition-transform duration-300 group-hover:scale-110"
             style={{
               backgroundColor: phase.pinColorLight,
-              boxShadow: `0 0 20px ${phase.accentGlow}`,
+              boxShadow: reducedMotion
+                ? "0 0 28px 8px rgba(249, 115, 22, 0.9), 0 0 50px 16px rgba(255, 90, 31, 0.55)"
+                : pinShadow,
             }}
           >
             0{phase.id}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
@@ -139,17 +219,17 @@ function PhaseItem({
           transition={{ duration: reducedMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`w-full ${isLeft ? "md:order-1 md:pr-12 lg:pr-16" : "md:order-2 md:pl-12 lg:pl-16"}`}
         >
-          <div className="tc-card tc-card-media group relative mx-auto w-full max-w-md">
+          <div className="tc-card tc-card-media group relative mx-auto flex min-h-[260px] sm:min-h-[300px] w-full max-w-md items-center justify-center p-4">
             <Image
               src={phase.image}
               alt={`${phase.phaseLabel} ${phase.title}`}
-              className="h-auto w-full rounded-[10px] object-cover transition-all duration-700 group-hover:scale-[1.03]"
+              className="h-auto max-h-[340px] w-auto max-w-full rounded-[10px] object-contain transition-all duration-700 group-hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 450px"
             />
           </div>
         </motion.div>
 
-        {/* Phase Content Card */}
+        {/* Phase Content */}
         <motion.div
           initial={reducedMotion ? false : { opacity: 0, x: -entranceX }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +237,7 @@ function PhaseItem({
           transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
           className={`w-full ${isLeft ? "md:order-2 md:pl-12 lg:pl-16" : "md:order-1 md:pr-12 lg:pr-16"}`}
         >
-          <div className="tc-card space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-4 py-2">
             <div className="flex items-center gap-3">
               <span
                 className="inline-block rounded-full px-3.5 py-1 font-mono text-xs font-bold tracking-wider uppercase border"
@@ -207,7 +287,69 @@ function PhaseItem({
 
 export function PhaseJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pinElementsRef = useRef<(HTMLDivElement | null)[]>([]);
   const reducedMotion = useReducedMotion();
+
+  // Baseline calibrated thresholds for 6 phases
+  const [thresholds, setThresholds] = useState<number[]>([
+    0.08,
+    0.25,
+    0.42,
+    0.58,
+    0.75,
+    0.92,
+  ]);
+
+  useEffect(() => {
+    const updateThresholds = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const containerRect = container.getBoundingClientRect();
+      const containerTop = containerRect.top;
+      const containerHeight = containerRect.height;
+      if (containerHeight <= 0) return;
+
+      // The line runs from y=40 to y=1560 in an 800x1600 viewBox
+      const lineStart = containerHeight * 0.025; // 40 / 1600
+      const lineEnd = containerHeight * 0.975;   // 1560 / 1600
+      const lineLength = lineEnd - lineStart;
+      if (lineLength <= 0) return;
+
+      const measured = pinElementsRef.current.map((el, idx) => {
+        if (!el) {
+          return (idx + 0.5) / phases.length;
+        }
+        const pinRect = el.getBoundingClientRect();
+        const pinCenterY = pinRect.top + pinRect.height / 2 - containerTop;
+        const ratio = (pinCenterY - lineStart) / lineLength;
+        return Math.max(0.01, Math.min(0.99, ratio));
+      });
+
+      setThresholds((prev) => {
+        const hasChanged =
+          prev.length !== measured.length ||
+          measured.some((val, i) => Math.abs(val - prev[i]) > 0.005);
+        return hasChanged ? measured : prev;
+      });
+    };
+
+    updateThresholds();
+
+    // ResizeObserver recalculates dynamically as images load or layout shifts
+    const ro = new ResizeObserver(() => {
+      updateThresholds();
+    });
+
+    if (containerRef.current) {
+      ro.observe(containerRef.current);
+    }
+
+    window.addEventListener("resize", updateThresholds);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateThresholds);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -250,7 +392,7 @@ export function PhaseJourney() {
               />
               <motion.path
                 d="M 400,40 L 400,1560"
-                stroke="#0d9488"
+                stroke="#f97316"
                 strokeWidth="4"
                 strokeLinecap="round"
                 style={{ pathLength: reducedMotion ? 1 : pathLength }}
@@ -258,10 +400,9 @@ export function PhaseJourney() {
 
               <defs>
                 <linearGradient id="roadGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#d97706" />
-                  <stop offset="35%" stopColor="#0d9488" />
-                  <stop offset="70%" stopColor="#c2410c" />
-                  <stop offset="100%" stopColor="#e11d48" />
+                  <stop offset="0%" stopColor="#ff7a45" stopOpacity="0.6" />
+                  <stop offset="50%" stopColor="#f97316" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#ea580c" stopOpacity="0.6" />
                 </linearGradient>
               </defs>
             </svg>
@@ -274,6 +415,11 @@ export function PhaseJourney() {
                 phase={phase}
                 index={index}
                 reducedMotion={Boolean(reducedMotion)}
+                pathLength={pathLength}
+                threshold={thresholds[index] ?? (index + 0.5) / phases.length}
+                setPinRef={(el) => {
+                  pinElementsRef.current[index] = el;
+                }}
               />
             ))}
           </div>

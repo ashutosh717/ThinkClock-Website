@@ -1,22 +1,21 @@
 import { Zap, RefreshCw, Cpu, Gauge, TrendingUp } from "lucide-react";
 import { ProductsNarrative } from "@/components/marketing/products-narrative";
 import { AnimatedSection } from "@/components/marketing/animated-section";
-import { SendButton } from "@/components/ui/send-button";
 
 export const metadata = {
-  title: "Battery Diagnostic Systems | BatteryScope-C & BatteryScope-P | ThinkClock",
+  title: "Battery Diagnostic Systems | BatteryScope-C Cylindrical, Prismatic & Automated | ThinkClock",
   description:
-    "Explore ThinkClock's non-invasive battery diagnostic systems: BatteryScope-C Manual (1,920 cells/shift), BatteryScope-C Automated (2,880 cells/shift), and BatteryScope-P for multi-module pack intelligence.",
+    "Explore ThinkClock's non-invasive battery diagnostic systems: BatteryScope-C Cylindrical (1,920 cells/shift), BatteryScope-C Prismatic for module & pack lines, and BatteryScope-C Automated (2,880 cells/shift) for gigafactories.",
 };
 
 const comparisonFeatures = [
-  { feature: "Primary Deployment", manual: "Lab QC / Operator-Led", auto: "Inline Production / Autonomous", pack: "Pack Assembly & Fleet Integration" },
-  { feature: "Shift Capacity (8 hrs)", manual: "1,920 cells", auto: "2,880+ cells", pack: "Scalable Pack Modules" },
-  { feature: "Diagnostic Time", manual: "75 seconds / run", auto: "75 seconds inline", pack: "Continuous Pack Telemetry" },
-  { feature: "Cycle Loss", manual: "0 (Non-Invasive)", auto: "0 (Non-Invasive)", pack: "0 (Non-Invasive)" },
-  { feature: "Simultaneous Channels", manual: "6 Channels", auto: "6 Channels Inline", pack: "Multi-Module Telemetry" },
-  { feature: "Sorting Mechanism", manual: "Manual / Operator Sorting", auto: "Automated Multi-Channel Sorting", pack: "Software Pack Grading" },
-  { feature: "Cell Format Support", manual: "21700 (18650 Ready)", auto: "21700 / Prismatic Ready", pack: "Module & Pack Formats" },
+  { feature: "Primary Deployment", cylindrical: "Lab QC / Operator-Led", auto: "Inline Production / Autonomous", prismatic: "Module & Pack Lines / Heavy Duty" },
+  { feature: "Shift Capacity (8 hrs)", cylindrical: "1,920 cells", auto: "2,880+ cells", prismatic: "Module & Pack Line Throughput" },
+  { feature: "Diagnostic Time", cylindrical: "75 seconds / run", auto: "75 seconds inline", prismatic: "Rapid EIS Spectroscopy Sweep" },
+  { feature: "Cycle Loss", cylindrical: "0 (Non-Invasive)", auto: "0 (Non-Invasive)", prismatic: "0 (Non-Invasive)" },
+  { feature: "Simultaneous Channels", cylindrical: "6 Channels", auto: "6 Channels Inline", prismatic: "High-Capacity Contact Array" },
+  { feature: "Sorting Mechanism", cylindrical: "Manual / Operator Sorting", auto: "Automated Multi-Channel Sorting", prismatic: "Automated Module Grading" },
+  { feature: "Cell Format Support", cylindrical: "18650, 21700 & beyond", auto: "21700 / High-Throughput Formats", prismatic: "Prismatic Cells & Modules" },
 ];
 
 const techAdvantages = [
@@ -120,27 +119,27 @@ export default function ProductsPage() {
                         BENCHTOP QC
                       </span>
                       <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
-                        BatteryScope-C Manual
+                        BatteryScope-C Cylindrical
                       </span>
                     </div>
                   </th>
                   <th className="py-5 px-6 w-[24%] border-r border-[var(--border)]">
                     <div className="flex flex-col gap-1.5">
                       <span className="inline-block w-fit rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider">
-                        INLINE GIGAFACTORY
+                        PRISMATIC &amp; PACK
                       </span>
                       <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
-                        BatteryScope-C Automated
+                        BatteryScope-C Prismatic
                       </span>
                     </div>
                   </th>
                   <th className="py-5 px-6 w-[24%]">
                     <div className="flex flex-col gap-1.5">
                       <span className="inline-block w-fit rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider">
-                        PACK TELEMETRY
+                        INLINE GIGAFACTORY
                       </span>
                       <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">
-                        BatteryScope-P
+                        BatteryScope-C Automated
                       </span>
                     </div>
                   </th>
@@ -154,17 +153,17 @@ export default function ProductsPage() {
                     </td>
                     <td className="py-4 px-6 text-sm sm:text-base border-x border-[var(--border)]">
                       <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
-                        {row.manual}
+                        {row.cylindrical}
                       </span>
                     </td>
                     <td className="py-4 px-6 text-sm sm:text-base border-r border-[var(--border)]">
                       <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
-                        {row.auto}
+                        {row.prismatic}
                       </span>
                     </td>
                     <td className="py-4 px-6 text-sm sm:text-base">
                       <span className="inline-block font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1.5">
-                        {row.pack}
+                        {row.auto}
                       </span>
                     </td>
                   </tr>
@@ -177,16 +176,16 @@ export default function ProductsPage() {
                   <h3 className="font-display font-bold text-[var(--paper)]">{row.feature}</h3>
                   <dl className="space-y-2.5 text-sm">
                     <div className="space-y-0.5">
-                      <dt className="text-[var(--graphite)]">BatteryScope-C Manual</dt>
-                      <dd className="break-words font-semibold text-[var(--signal)]">{row.manual}</dd>
+                      <dt className="text-[var(--graphite)]">BatteryScope-C Cylindrical</dt>
+                      <dd className="break-words font-semibold text-[var(--signal)]">{row.cylindrical}</dd>
+                    </div>
+                    <div className="space-y-0.5">
+                      <dt className="text-[var(--graphite)]">BatteryScope-C Prismatic</dt>
+                      <dd className="break-words font-semibold text-[var(--signal)]">{row.prismatic}</dd>
                     </div>
                     <div className="space-y-0.5">
                       <dt className="text-[var(--graphite)]">BatteryScope-C Automated</dt>
                       <dd className="break-words font-semibold text-[var(--signal)]">{row.auto}</dd>
-                    </div>
-                    <div className="space-y-0.5">
-                      <dt className="text-[var(--graphite)]">BatteryScope-P</dt>
-                      <dd className="break-words font-semibold text-[var(--signal)]">{row.pack}</dd>
                     </div>
                   </dl>
                 </div>
@@ -239,29 +238,6 @@ export default function ProductsPage() {
                 </div>
               </AnimatedSection>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Call to Action Banner ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <div className="tc-card relative mx-auto max-w-4xl text-center">
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
-            <div className="relative z-10">
-              <h3 className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
-                Unsure which BatteryScope configuration{" "}
-                <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
-                  fits your line?
-                </span>
-              </h3>
-              <p className="mt-3 text-sm sm:text-base text-[var(--graphite-on-dark)] max-w-2xl mx-auto">
-                Our engineering team can evaluate your throughput, cell chemistry, and form factor requirements to recommend the optimal setup.
-              </p>
-              <div className="mt-6 sm:mt-7 flex justify-center">
-                <SendButton href="/contact" label="Schedule a Product Demo" />
-              </div>
-            </div>
           </div>
         </div>
       </section>

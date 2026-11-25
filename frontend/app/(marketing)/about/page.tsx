@@ -274,9 +274,16 @@ export default function AboutPage() {
                   {leader.roleHeader}
                 </h3>
 
-                <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:items-stretch">
-                  {/* Left: Leader Image */}
-                  <div className="flex flex-col items-center">
+                <div className="grid gap-8 lg:grid-cols-[1fr_240px] lg:items-stretch">
+                  {/* Left on desktop / Below on mobile: Bio Text */}
+                  <div className="order-2 flex flex-col justify-center lg:order-1">
+                    <p className="text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
+                      {leader.summary}
+                    </p>
+                  </div>
+
+                  {/* Right on desktop / Centered above on mobile: Leader Image */}
+                  <div className="order-1 flex flex-col items-center lg:order-2">
                     <div className="tc-card tc-card-media group relative w-full max-w-[240px] flex-1">
                       <Image
                         src={leader.image}
@@ -315,13 +322,6 @@ export default function AboutPage() {
                         </a>
                       )}
                     </div>
-                  </div>
-
-                  {/* Right: Bio Text */}
-                  <div className="flex flex-col justify-center">
-                    <p className="text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
-                      {leader.summary}
-                    </p>
                   </div>
                 </div>
               </AnimatedSection>

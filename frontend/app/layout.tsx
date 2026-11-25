@@ -46,6 +46,15 @@ const dataMono = Bai_Jamjuree({
 export const metadata: Metadata = {
   title: "ThinkClock Battery Labs",
   description: "BatteryScope, CellScope, and signal-driven battery diagnostics.",
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+    ],
+  },
 };
 
 export default function RootLayout({

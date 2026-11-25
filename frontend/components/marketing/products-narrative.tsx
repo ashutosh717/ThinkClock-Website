@@ -2,8 +2,9 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
-import benchtopImg from "@/images/UNITS/Benchtop.png";
+import Image, { StaticImageData } from "next/image";
+import cylindricalImg from "@/images/Home_page/cylinderical.png";
+import prismaticImg from "@/images/Home_page/Battery Testing Lab Machine Cutout.png";
 import automatedImg from "@/images/UNITS/Automated.jpg";
 import { SendButton } from "@/components/ui/send-button";
 import { AnimatedSection } from "@/components/marketing/animated-section";
@@ -32,20 +33,24 @@ interface Product {
   bestFor: string[];
   ctaHeadline: string;
   ctaText: string;
+  image: StaticImageData;
+  chamberLabel: string;
+  chamberType: string;
+  chamberFormat: string;
 }
 
 const products: Product[] = [
   {
-    id: "manual",
-    name: "BatteryScope-C Manual",
+    id: "cylindrical",
+    name: "BatteryScope-C Cylindrical",
     badge: "Bench-Deployable, Operator-Led",
     tagline: "Battery characteristics in seconds. Not hours.",
     narrative:
-      "BatteryScope-C Manual is a bench-deployable diagnostic unit built for testing labs, QA teams, and development environments. It characterizes cylindrical cells in seconds using non-invasive multi-physics spectroscopy, replacing hours of charge-discharge cycling with an instant, comprehensive health signature.",
+      "BatteryScope-C Cylindrical is a bench-deployable diagnostic unit built for testing labs, QA teams, and development environments. It characterizes cylindrical cells in seconds using non-invasive multi-physics spectroscopy, replacing hours of charge-discharge cycling with an instant, comprehensive health signature.",
     throughput: {
       rate: "4 cells / minute",
       shiftTotal: "1,920 cells",
-      details: "per 8-hour shift (manual operation, 21700 cells)",
+      details: "per 8-hour shift (manual operation, 18650 & 21700 cells)",
     },
     measures: [
       {
@@ -76,7 +81,7 @@ const products: Product[] = [
       },
     ],
     specs: [
-      "Supported cell format: LG 21700 supported today (rapidly adaptable for 18650 and other cylindrical formats)",
+      "Supported cell format: LG 21700 and 18650 supported (rapidly adaptable for all cylindrical formats)",
       "Non-destructive testing: zero cycle loss, no degradation during characterisation",
       "Six-channel simultaneous testing: test up to 6 cells concurrently",
       "Fast report generation: full diagnostic report in 75 seconds",
@@ -98,7 +103,79 @@ const products: Product[] = [
       "Warranty claim verification",
     ],
     ctaHeadline: "For labs & QA teams",
-    ctaText: "See what's really inside your cells in 75 seconds. Book a BatteryScope-C Manual demo.",
+    ctaText: "See what's really inside your cells in 75 seconds. Book a BatteryScope-C Cylindrical demo.",
+    image: cylindricalImg,
+    chamberLabel: "6-Channel Chamber",
+    chamberType: "Benchtop Diagnostic Unit",
+    chamberFormat: "21700 / 18650 Ready",
+  },
+  {
+    id: "prismatic",
+    name: "BatteryScope-C Prismatic",
+    badge: "Prismatic & Pack Diagnostics",
+    tagline: "Bigger cells. Bigger answers.",
+    narrative:
+      "BatteryScope-C Prismatic delivers high-capacity non-invasive diagnostic intelligence for large-format prismatic cells, modules, and pack production lines. Profiling core internal impedance and degradation markers without teardown.",
+    throughput: {
+      rate: "Line-Speed Profiling",
+      shiftTotal: "Continuous Lines",
+      details: "Configurable multi-channel contact arrays for high-volume module & pack lines",
+    },
+    measures: [
+      {
+        name: "State of Health (SoH)",
+        desc: "Direct multi-point SoH inspection on large prismatic form-factors",
+      },
+      {
+        name: "Internal resistance (DCIR & AC-IR)",
+        desc: "Ultra-precise non-invasive impedance signature across prismatic foil layers",
+      },
+      {
+        name: "Module & Pack Telemetry",
+        desc: "Detect cell-to-cell variance across interconnected battery strings",
+      },
+      {
+        name: "Thermal & Electrochemical Mapping",
+        desc: "Identify localized hot-spots and contact degradation without teardown",
+      },
+      {
+        name: "Remaining Useful Life (RUL)",
+        desc: "Digital twin degradation models calibrated for stationary & EV duty cycles",
+      },
+      {
+        name: "Micro-fault detection",
+        desc: "Sensitive detection of electrode delamination and internal micro-shorts",
+        inDevelopment: true,
+      },
+    ],
+    specs: [
+      "Supported cell format: Universal pneumatic fixture for all standard prismatic battery form-factors",
+      "Non-destructive testing: zero cycle loss, test cells before module assembly or in warranty triage",
+      "High-current contact probes: low-contact resistance clamps ensuring sub-milliohm precision",
+      "Fast report generation: complete prismatic health diagnostic signature in minutes",
+      "Direct pack-line integration: compatible with MES, PLC automation, and automated test fixtures",
+      "Safety interlocks: continuous thermal and over-voltage monitoring during characterization",
+      "Heavy-duty mobile chassis: industrial castor base for flexible cell line and lab positioning",
+      "Power: standard 230V / 380V industrial connection",
+    ],
+    whyItWins: [
+      "Profiles high-capacity prismatic cells without destructive testing or slow multi-day cycling",
+      "Zero capacity loss: inspected cells or packs proceed immediately to pack integration",
+      "Flags cell-to-cell variability before assembly to prevent premature pack warranty failures",
+      "Replaces bulky cycler channels with compact, rapid spectroscopy",
+    ],
+    bestFor: [
+      "Prismatic cell incoming inspection",
+      "EV module and pack assembly lines",
+      "Stationary Energy Storage (BESS) QC",
+      "Warranty triage & second-life grading",
+    ],
+    ctaHeadline: "For module & pack manufacturing",
+    ctaText: "Scale diagnostic intelligence across large-format cells. Book a BatteryScope-C Prismatic demo.",
+    image: prismaticImg,
+    chamberLabel: "Contact Probe Array",
+    chamberType: "Module & Pack Diagnostic Unit",
+    chamberFormat: "Large Format Ready",
   },
   {
     id: "automated",
@@ -163,56 +240,10 @@ const products: Product[] = [
     ],
     ctaHeadline: "For manufacturing & high-throughput operations",
     ctaText: "Ready to move from 1,920 to 2,880+ cells a shift? Talk to us about BatteryScope-C Automated.",
-  },
-  {
-    id: "pack",
-    name: "BatteryScope-P",
-    badge: "Pack-Level Intelligence, Built on Cell-Level Truth",
-    tagline: "Pack-level insight, built on cell-level truth.",
-    narrative:
-      "BatteryScope-P extends non-invasive diagnostics beyond individual cells to complete modules and battery packs. By combining multi-physics spectroscopy with AI-driven digital twin models, BatteryScope-P evaluates pack-level health, identifies weak or degrading cells within an assembled pack, and predicts remaining pack life: without taking the pack apart.",
-    throughput: null,
-    measures: [
-      {
-        name: "Pack-level SoH",
-        desc: "Overall pack health assessment without teardown or extensive discharge testing",
-      },
-      {
-        name: "Cell-to-cell variation mapping",
-        desc: "Identifies outlier cells that limit total pack performance",
-      },
-      {
-        name: "Module-level impedance profiling",
-        desc: "Characterizes interconnects, busbars, and cell group resistances",
-      },
-      {
-        name: "Thermal & electrochemical anomaly detection",
-        desc: "Early warning for hot spots and localized accelerated aging",
-      },
-      {
-        name: "Pack degradation prediction",
-        desc: "AI digital twin model predicting remaining pack life under load",
-      },
-    ],
-    specs: [
-      "Pack-level spectroscopic intelligence scaling cell diagnostics to multi-module packs",
-      "Physics-aware digital twin modelling mapping cell-to-cell variability to total pack life",
-      "Safety risk identification & early fault cascade warnings for module/pack assemblies",
-      "Seamless integration with fleet management systems and EV/ESS diagnostics",
-    ],
-    whyItWins: [
-      "Extends non-invasive accuracy from individual cells to complete pack architectures",
-      "Prevents premature pack retirement by pin-pointing specific degrading cell groups",
-      "Supports warranty claim verification and second-life pack grading",
-    ],
-    bestFor: [
-      "Pack Integrators",
-      "EV and ESS OEMs",
-      "Fleet operators",
-      "Second-life pack aggregators",
-    ],
-    ctaHeadline: "For pack builders & integrators",
-    ctaText: "Bring cell-level certainty to your pack designs. Contact us to explore BatteryScope-P.",
+    image: automatedImg,
+    chamberLabel: "Inline Sort Array",
+    chamberType: "Continuous Factory Unit",
+    chamberFormat: "High Speed Automated",
   },
 ];
 
@@ -220,9 +251,11 @@ function ProductsNarrativeContent() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const initialTab =
-    tabParam === "manual" || tabParam === "automated" || tabParam === "pack"
-      ? tabParam
-      : "manual";
+    tabParam === "prismatic" || tabParam === "pack"
+      ? "prismatic"
+      : tabParam === "automated"
+      ? "automated"
+      : "cylindrical";
 
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
 
@@ -236,70 +269,78 @@ function ProductsNarrativeContent() {
         {products.map((prod) => {
           const isActive = prod.id === activeTab;
           const badgeDetails =
-            prod.id === "manual"
+            prod.id === "cylindrical"
               ? {
                   tag: "BENCHTOP QC",
                   badgeColor: "border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400",
                   metric: "1,920 Cells / Shift",
                   desc: "Operator-led multi-channel unit for lab characterization & incoming QC.",
                 }
-              : prod.id === "automated"
+              : prod.id === "prismatic"
               ? {
+                  tag: "PRISMATIC QC",
+                  badgeColor: "border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400",
+                  metric: "Module & Pack Lines",
+                  desc: "Non-invasive module & pack analytics mapping cell variation to safety.",
+                }
+              : {
                   tag: "INLINE GIGAFACTORY",
                   badgeColor: "border-amber-500/30 bg-amber-50 text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-400",
                   metric: "2,880 Cells / Shift",
                   desc: "Autonomous inline high-throughput testing with automated cell sorting.",
-                }
-              : {
-                  tag: "PACK INTELLIGENCE",
-                  badgeColor: "border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400",
-                  metric: "Pack-Level Telemetry",
-                  desc: "Non-invasive module & pack analytics mapping cell variation to safety.",
                 };
 
           return (
             <button
               key={prod.id}
+              type="button"
               onClick={() => setSelectedTab(prod.id)}
-              className={`tc-card group relative flex h-full flex-col justify-between text-left ${
-                isActive
-                  ? "border-[var(--signal)]"
-                  : ""
+              className={`tc-rotating-selector group relative flex h-full flex-col justify-between text-left cursor-pointer transition-all duration-300 ${
+                isActive ? "is-active scale-[1.01]" : ""
               }`}
             >
               {/* Top Row: Category Tag + Active Badge / Arrow */}
-              <div className="flex items-center justify-between w-full">
-                <span className={`rounded-full border px-3 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${badgeDetails.badgeColor}`}>
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <span className={`rounded-full border px-3.5 py-1 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider ${badgeDetails.badgeColor}`}>
                   {badgeDetails.tag}
                 </span>
 
                 {isActive ? (
-                  <span className="rounded-full border border-[#f97316]/40 bg-[#f97316]/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#ea580c] dark:text-[#fb923c]">
-                    ACTIVE
-                  </span>
+                  <div
+                    className="flex items-center gap-1.5 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-2.5 py-1 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
+                    title="Currently viewing"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 duration-1000" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+                    </span>
+                    <span className="font-mono text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
+                      Viewing
+                    </span>
+                  </div>
                 ) : (
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] transition-colors group-hover:border-[#f97316] group-hover:text-[#f97316]">
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] transition-colors group-hover:border-[#f97316] group-hover:text-[#f97316]">
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 )}
               </div>
 
               {/* Middle: Product Name & Brief Desc */}
-              <div className="mt-5">
-                <h4 className="font-display text-lg sm:text-xl font-bold text-[var(--paper)] leading-tight">
+              <div className="relative z-10 my-auto py-2">
+                <h4 className="font-display text-2xl sm:text-[1.75rem] lg:text-[1.9rem] font-bold text-[var(--paper)] leading-tight tracking-tight">
                   {prod.name}
                 </h4>
-                <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-2 text-xs sm:text-[13.5px] leading-relaxed text-[var(--graphite-on-dark)]">
                   {badgeDetails.desc}
                 </p>
               </div>
 
               {/* Bottom Row: Highlight Metric */}
-              <div className="mt-6 pt-4 border-t border-[var(--border)] flex items-center justify-between">
-                <span className="inline-block font-mono text-xs sm:text-sm font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <div className="relative z-10 pt-4 border-t border-[var(--border)] flex items-center justify-between">
+                <span className="inline-block font-mono text-sm sm:text-base font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
                   {badgeDetails.metric}
                 </span>
-                <span className="font-mono text-[11px] font-semibold text-[var(--graphite)] group-hover:text-[#f97316] transition-colors">
+                <span className="font-mono text-xs sm:text-sm font-semibold text-[var(--graphite)] group-hover:text-[#f97316] transition-colors">
                   {isActive ? "Viewing Specs" : "Select System →"}
                 </span>
               </div>
@@ -311,12 +352,11 @@ function ProductsNarrativeContent() {
       {/* Selected Product Detail Panel */}
       <div key={activeProduct.id} className="mt-8 sm:mt-10">
         <div>
-          
           {/* 1. Header & System Image & Indicative Throughput */}
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <AnimatedSection
               animation="fade-right"
-              className={`product-directional-reveal ${activeProduct.id !== "pack" ? "max-w-2xl" : "w-full"}`}
+              className="product-directional-reveal max-w-2xl"
             >
               <span className="inline-block rounded-full border border-[var(--signal)]/30 bg-[var(--signal)]/10 px-3.5 py-1 font-mono text-xs font-semibold text-[var(--signal)] uppercase tracking-wider">
                 {activeProduct.badge}
@@ -356,39 +396,39 @@ function ProductsNarrativeContent() {
             </AnimatedSection>
 
             {/* Hardware Image Showcase - Tight portrait fit with zero empty borders */}
-            {activeProduct.id !== "pack" && (
+            {activeProduct.image && (
               <AnimatedSection
                 as="div"
                 animation="fade-left"
                 className="product-directional-reveal mx-auto w-full max-w-[320px] sm:max-w-[340px] lg:mx-0 lg:max-w-[360px] lg:shrink-0 lg:basis-[360px]"
               >
                 <div className="tc-card tc-card-media group relative flex aspect-[3/4] w-full flex-col justify-between">
-                {/* Image Container with tight fit */}
-                <div className="relative w-full h-[82%] overflow-hidden rounded-[14px]">
-                  <Image
-                    src={activeProduct.id === "manual" ? benchtopImg : automatedImg}
-                    alt={activeProduct.name}
-                    fill
-                    sizes="(max-width: 768px) 320px, 360px"
-                    className="object-contain p-1 transition-transform duration-700 group-hover:scale-105"
-                    priority
-                  />
-                </div>
+                  {/* Image Container with tight fit */}
+                  <div className="relative w-full h-[82%] overflow-hidden rounded-[14px]">
+                    <Image
+                      src={activeProduct.image}
+                      alt={activeProduct.name}
+                      fill
+                      sizes="(max-width: 768px) 320px, 360px"
+                      className="object-contain p-1 transition-transform duration-700 group-hover:scale-105"
+                      priority
+                    />
+                  </div>
 
-                {/* Grounded Floating Spec Bar */}
-                <div className="rounded-[14px] border border-[var(--border)] bg-[var(--secondary)]/90 backdrop-blur-sm px-3.5 py-2.5 flex items-center justify-between shadow-sm">
-                  <div className="flex flex-col min-w-0">
-                    <span className="break-words font-mono text-[9px] font-bold text-[var(--signal)] uppercase tracking-wider">
-                      {activeProduct.id === "manual" ? "6-Channel Chamber" : "Inline Sort Array"}
-                    </span>
-                    <span className="break-words font-display text-xs font-bold text-[var(--paper)]">
-                      {activeProduct.id === "manual" ? "Benchtop Diagnostic Unit" : "Continuous Factory Unit"}
+                  {/* Grounded Floating Spec Bar */}
+                  <div className="rounded-[14px] border border-[var(--border)] bg-[var(--secondary)]/90 backdrop-blur-sm px-3.5 py-2.5 flex items-center justify-between shadow-sm">
+                    <div className="flex flex-col min-w-0">
+                      <span className="break-words font-mono text-[9px] font-bold text-[var(--signal)] uppercase tracking-wider">
+                        {activeProduct.chamberLabel}
+                      </span>
+                      <span className="break-words font-display text-xs font-bold text-[var(--paper)]">
+                        {activeProduct.chamberType}
+                      </span>
+                    </div>
+                    <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--card)] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--paper)]">
+                      {activeProduct.chamberFormat}
                     </span>
                   </div>
-                  <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--card)] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[var(--paper)]">
-                    {activeProduct.id === "manual" ? "21700 Ready" : "High Speed"}
-                  </span>
-                </div>
                 </div>
               </AnimatedSection>
             )}
@@ -406,7 +446,7 @@ function ProductsNarrativeContent() {
                 </div>
               </AnimatedSection>
 
-              <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+              <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
                 {activeProduct.measures.map((m, i) => (
                   <AnimatedSection
                     key={m.name}
@@ -414,17 +454,29 @@ function ProductsNarrativeContent() {
                     animation="fade-up"
                     stagger
                     staggerIndex={i}
-                    className="tc-card h-full"
+                    className="group relative flex items-start gap-3.5"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-display text-sm sm:text-base font-bold text-[var(--paper)]">{m.name}</span>
-                      {m.inDevelopment && (
-                        <span className="rounded-full border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-[var(--copper)]">
-                          *In dev
+                    {/* Glowing Bullet Point */}
+                    <span className="relative flex h-2.5 w-2.5 shrink-0 mt-1.5 items-center justify-center">
+                      <span className="absolute inline-flex h-4 w-4 rounded-full bg-[#f97316] opacity-40 blur-[4px] group-hover:opacity-75 transition-opacity" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-[#f97316] shadow-[0_0_8px_#f97316]" />
+                    </span>
+
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-display text-base font-bold text-[var(--paper)] leading-tight">
+                          {m.name}
                         </span>
-                      )}
+                        {m.inDevelopment && (
+                          <span className="rounded-full border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--copper)]">
+                            *In dev
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1.5 text-sm leading-relaxed text-[var(--graphite-on-dark)]">
+                        {m.desc}
+                      </p>
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--graphite-on-dark)]">{m.desc}</p>
                   </AnimatedSection>
                 ))}
               </div>
@@ -442,7 +494,7 @@ function ProductsNarrativeContent() {
               </div>
             </AnimatedSection>
 
-            <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6">
+            <div className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2">
               {activeProduct.specs.map((spec, i) => (
                 <AnimatedSection
                   key={i}
@@ -450,10 +502,14 @@ function ProductsNarrativeContent() {
                   animation="fade-up"
                   stagger
                   staggerIndex={i}
-                  className="tc-card flex h-full items-start gap-3 text-sm leading-relaxed text-[var(--paper)]"
+                  className="group relative flex items-start gap-3.5 text-sm sm:text-[15px] leading-relaxed text-[var(--paper)]"
                 >
-                  <span className="mt-0.5 font-bold text-[var(--signal)] shrink-0">✔</span>
-                  <span>{spec}</span>
+                  {/* Glowing Bullet Point */}
+                  <span className="relative flex h-2.5 w-2.5 shrink-0 mt-1.5 items-center justify-center">
+                    <span className="absolute inline-flex h-4 w-4 rounded-full bg-[#f97316] opacity-40 blur-[4px] group-hover:opacity-75 transition-opacity" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#f97316] shadow-[0_0_8px_#f97316]" />
+                  </span>
+                  <span className="flex-1 text-[var(--paper)]">{spec}</span>
                 </AnimatedSection>
               ))}
             </div>

@@ -17,7 +17,7 @@ interface HeroVideoProps {
 }
 
 export function HeroVideo({
-  videoSrc = "/videos/THINKCLOCKv2.mp4",
+  videoSrc = "/videos/thinkclock-hero-combined.mp4",
   className = "",
 }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
