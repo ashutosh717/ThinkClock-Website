@@ -13,10 +13,10 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "light";
+    if (typeof window === "undefined") return "dark";
     const saved = localStorage.getItem("thinkclock-theme") as Theme | null;
     if (saved === "dark" || saved === "light") return saved;
-    return "light"; // Default on first open is Light mode
+    return "dark"; // Default on first open is Dark mode
   });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
-    return { theme: "light" as Theme, toggle: () => {} };
+    return { theme: "dark" as Theme, toggle: () => {} };
   }
   return context;
 }
