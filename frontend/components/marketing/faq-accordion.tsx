@@ -111,7 +111,7 @@ export function FaqAccordion() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+              className={`min-h-[44px] rounded-full px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                 isActive
                   ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                   : "border border-[var(--border)] bg-[var(--card)] text-[var(--paper)] hover:border-[var(--signal)]/40"
@@ -141,7 +141,7 @@ export function FaqAccordion() {
                 onClick={() => toggleFaq(faq.id)}
                 aria-expanded={isOpen}
                 aria-controls={contentId}
-                className="flex w-full items-center justify-between p-5 text-left focus:outline-none sm:p-7"
+                className="flex min-h-[48px] w-full items-center justify-between gap-3 p-5 text-left focus:outline-none sm:p-7"
               >
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="rounded-full border border-[var(--copper)]/30 bg-[var(--copper)]/10 px-3 py-0.5 font-mono text-[10px] font-bold text-[var(--copper)] uppercase tracking-wider">

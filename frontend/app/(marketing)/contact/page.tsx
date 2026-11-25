@@ -45,13 +45,13 @@ export default function ContactPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Header & Contact Form Grid ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden tc-section-hero">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 top-1/3 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-[1400px] gap-12 px-6 sm:px-12 lg:px-16 lg:grid-cols-[1.1fr_1fr] lg:items-stretch">
+        <div className="tc-container relative grid gap-10 lg:gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-stretch">
           {/* Left Column: Intro & Direct Channels */}
           <AnimatedSection animation="fade-left" className="flex flex-col justify-between h-full">
             <div>
@@ -62,11 +62,11 @@ export default function ContactPage() {
                 </span>
               </div>
 
-              <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 font-display tc-h1 font-bold text-[var(--paper)]">
                 Tell us what battery decision is blocking you.
               </h1>
 
-              <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg">
+              <p className="mt-6 tc-body text-[var(--graphite-on-dark)]">
                 Share your cell grading, battery pack QA, second-life evaluation, or prototyping challenge and our engineering team will get back to you with actionable insights.
               </p>
             </div>
@@ -122,18 +122,18 @@ export default function ContactPage() {
       </section>
 
       {/* ── 2. Full-Width Global Offices & R&D Hubs Section ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center mb-5 sm:mb-6" animation="fade-up">
-            <p className="font-mono text-xs tracking-[0.18em] font-semibold text-[var(--copper)] uppercase">
+            <p className="tc-label font-mono tracking-[0.18em] font-semibold text-[var(--copper)] uppercase">
               Global Presence
             </p>
-            <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Our Offices &amp; Engineering Centres
             </h2>
           </AnimatedSection>
 
-          <div className="grid items-stretch gap-4 sm:grid-cols-3 sm:gap-6">
+          <div className="grid items-stretch gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {offices.map((office, i) => (
               <AnimatedSection
                 key={office.title + office.country}

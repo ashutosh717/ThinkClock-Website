@@ -78,29 +78,29 @@ export default function MarketingHome() {
       <HeroVideo videoSrc="/videos/thinkclock-hero-combined.mp4" />
 
       {/* ── 2. Opening Brand Story & Aesthetic Work Cards ── */}
-      <section className="px-4 pb-6 pt-20 sm:px-6 sm:pb-8 lg:pb-8 lg:pt-20">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section pt-16 sm:pt-20">
+        <div className="tc-container">
           {/* Section Header */}
           <AnimatedSection className="max-w-4xl" animation="fade-up">
             <div className="flex items-center gap-2">
               <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                 BRAND STORY
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Batteries don&apos;t fail randomly.{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 They fail because of what we don&apos;t measure.
               </span>
             </h2>
-            <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)] max-w-3xl">
+            <p className="mt-3 tc-body text-[var(--graphite-on-dark)]">
               A pack built from mismatched, under-graded, or silently degraded cells is a pack that underperforms, ages early, or — worse — becomes a safety risk. ThinkClock exists to close that blind spot. We&apos;re an R&amp;D-driven organization focused on Battery Health Analytics, using non-invasive spectroscopy, digital twins, AI, and machine learning to read the internal state of a cell — without disassembly, without damage, and without a single charge-discharge cycle.
             </p>
           </AnimatedSection>
 
           {/* Aesthetic Metric Cards Grid */}
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             {trustStats.map((stat, i) => (
               <AnimatedSection
                 key={stat.value}
@@ -129,7 +129,7 @@ export default function MarketingHome() {
 
                   {/* Large Hero Metric */}
                   <div className="mt-4 sm:mt-5">
-                    <p className="inline-block font-mono text-4xl font-bold tracking-tight text-[var(--signal)] sm:text-5xl">
+                    <p className="inline-block font-mono tc-stat-value font-bold tracking-tight text-[var(--signal)]">
                       <CountUp value={stat.value} />
                     </p>
                     <span className="mt-1 block font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--graphite)]">
@@ -149,27 +149,27 @@ export default function MarketingHome() {
       </section>
 
       {/* ── 3. Problem & Positioning ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="max-w-3xl" animation="fade-up">
             <div className="flex items-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 PROBLEM &amp; POSITIONING
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Sorting cells shouldn&apos;t be{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 a bottleneck or a guess.
               </span>
             </h2>
-            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
+            <p className="mt-3 tc-body text-[var(--graphite-on-dark)]">
               Manufacturers today are stuck choosing between slow testing, missing defects, or risking early pack failure.
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-3">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {problemComparisons.map((item, i) => (
               <AnimatedSection
                 key={item.method}
@@ -215,13 +215,13 @@ export default function MarketingHome() {
                 THINKCLOCK&apos;S ANSWER: BATTERYSCOPE
               </span>
             </div>
-            <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl lg:text-4xl text-[var(--paper)]">
+            <h3 className="mt-2 font-display tc-h3-lg font-bold text-[var(--paper)]">
               Non-invasive spectroscopy + AI digital twins ={" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 lab-grade health in seconds.
               </span>
             </h3>
-            <p className="mt-2 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+            <p className="mt-3 tc-body text-[var(--graphite-on-dark)]">
               Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
             </p>
           </AnimatedSection>

@@ -81,8 +81,8 @@ export function AiAssistant() {
       data-ai-assistant-root
       className="fixed z-50 select-none"
       style={{
-        left: 16,
-        bottom: 16,
+        left: "max(16px, env(safe-area-inset-left))",
+        bottom: "max(16px, env(safe-area-inset-bottom))",
       }}
     >
       {!open ? (
@@ -90,13 +90,13 @@ export function AiAssistant() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="flex items-center justify-center transition-all duration-300 hover:scale-110"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Open ThinkClock AI Assistant"
           >
-            <ThinkClockLoader size="h-22 w-22" />
+            <ThinkClockLoader size="h-14 w-14 sm:h-20 sm:w-20" />
           </button>
 
-          <div className="pointer-events-none absolute left-24 whitespace-nowrap rounded-xl border border-[var(--border)] bg-[var(--card)] px-3.5 py-2 shadow-2xl backdrop-blur-2xl opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+          <div className="pointer-events-none hidden sm:block absolute left-24 whitespace-nowrap rounded-xl border border-[var(--border)] bg-[var(--card)] px-3.5 py-2 shadow-2xl backdrop-blur-2xl opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--signal)] opacity-75" />
@@ -109,19 +109,19 @@ export function AiAssistant() {
           </div>
         </div>
       ) : (
-        <div className="w-80 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl backdrop-blur-2xl">
-          <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full">
+        <div className="w-[min(20rem,calc(100vw-32px))] overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-2xl backdrop-blur-2xl">
+          <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-2.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full">
                 <ThinkClockLoader size="h-7 w-7" isHeader />
               </div>
-              <span className="text-sm font-semibold text-[var(--paper)]">Ask about ThinkClock</span>
+              <span className="text-sm font-semibold text-[var(--paper)] truncate">Ask about ThinkClock</span>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close AI Assistant"
-              className="flex h-6 w-6 items-center justify-center rounded-md text-[var(--graphite-on-dark)] transition-colors hover:bg-[var(--secondary)] hover:text-[var(--paper)]"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-[var(--graphite-on-dark)] transition-colors hover:bg-[var(--secondary)] hover:text-[var(--paper)]"
             >
               <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -152,12 +152,12 @@ export function AiAssistant() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type your question..."
-                    className="min-w-0 flex-1 rounded-lg border border-[var(--border)] bg-[var(--ink)] px-3 py-2 text-xs text-[var(--paper)] placeholder-[var(--graphite-on-dark)] outline-none transition-all focus:border-[var(--signal)]"
+                    className="min-w-0 min-h-[44px] flex-1 rounded-lg border border-[var(--border)] bg-[var(--ink)] px-3 py-2 text-base sm:text-xs text-[var(--paper)] placeholder-[var(--graphite-on-dark)] outline-none transition-all focus:border-[var(--signal)]"
                   />
                   <button
                     type="submit"
                     disabled={!input.trim()}
-                    className="shrink-0 rounded-lg bg-[var(--signal)] px-3.5 py-2 text-xs font-semibold text-[var(--signal-foreground)] transition-all hover:brightness-110 disabled:opacity-40"
+                    className="min-h-[44px] shrink-0 rounded-lg bg-[var(--signal)] px-3.5 py-2 text-xs font-semibold text-[var(--signal-foreground)] transition-all hover:brightness-110 disabled:opacity-40"
                   >
                     Ask
                   </button>

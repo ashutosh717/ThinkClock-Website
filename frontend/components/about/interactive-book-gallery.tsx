@@ -174,12 +174,12 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
   const targetItem = items[targetIndex];
 
   return (
-    <div className="relative mx-auto w-full max-w-5xl py-8 sm:py-12 px-2 sm:px-6 select-none">
+    <div className="relative mx-auto w-full max-w-5xl py-6 sm:py-12 px-2 sm:px-6 select-none">
       {/* ── Outer Floating Side Navigation Arrows ── */}
       <button
         onClick={() => triggerTurn("prev")}
         disabled={isFlipping || isDragging}
-        className="absolute left-0 sm:-left-4 top-1/2 -translate-y-1/2 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-neutral-900/95 text-neutral-800 dark:text-neutral-100 backdrop-blur-md shadow-xl transition-all duration-300 hover:scale-110 hover:border-[#c97a4a] hover:text-[#c97a4a] active:scale-95 disabled:opacity-40"
+        className="absolute left-1 sm:-left-4 top-1/2 -translate-y-1/2 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-neutral-900/95 text-neutral-800 dark:text-neutral-100 backdrop-blur-md shadow-xl transition-all duration-300 hover:scale-110 hover:border-[#c97a4a] hover:text-[#c97a4a] active:scale-95 disabled:opacity-40"
         title="Previous Page"
         aria-label="Previous Page"
       >
@@ -189,7 +189,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
       <button
         onClick={() => triggerTurn("next")}
         disabled={isFlipping || isDragging}
-        className="absolute right-0 sm:-right-4 top-1/2 -translate-y-1/2 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-neutral-900/95 text-neutral-800 dark:text-neutral-100 backdrop-blur-md shadow-xl transition-all duration-300 hover:scale-110 hover:border-[#c97a4a] hover:text-[#c97a4a] active:scale-95 disabled:opacity-40"
+        className="absolute right-1 sm:-right-4 top-1/2 -translate-y-1/2 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-neutral-900/95 text-neutral-800 dark:text-neutral-100 backdrop-blur-md shadow-xl transition-all duration-300 hover:scale-110 hover:border-[#c97a4a] hover:text-[#c97a4a] active:scale-95 disabled:opacity-40"
         title="Next Page"
         aria-label="Next Page"
       >
@@ -199,7 +199,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
       {/* ── Book Frame Wrapper with Perspective ── */}
       <div
         ref={containerRef}
-        className="relative mx-auto w-full min-h-[460px] sm:min-h-[500px] transition-all duration-300"
+        className="relative mx-auto w-full min-h-[280px] sm:min-h-[440px] md:min-h-[500px] transition-all duration-300"
         style={{ perspective: "2400px" }}
       >
         {/* Soft Ambient Contact Shadow */}
@@ -215,10 +215,10 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
         <div className="pointer-events-none absolute -bottom-[2.5px] left-[1.5px] right-[1.5px] top-[2.5px] rounded-[17px] bg-[#f7ede0] dark:bg-[#2c2621] border border-neutral-300/70 dark:border-neutral-700/70 -z-10 shadow-sm" />
 
         {/* ── LAYER 1: MAIN TOP OPEN BOOK PAGES ── */}
-        <div className="relative flex h-full min-h-[460px] sm:min-h-[500px] w-full flex-col md:flex-row overflow-hidden rounded-[16px] bg-[#faf8f4] text-[#1c2220] border border-neutral-300/80 shadow-[0_12px_35px_rgba(0,0,0,0.18)]">
+        <div className="relative flex h-full min-h-[280px] sm:min-h-[440px] md:min-h-[500px] w-full flex-row overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#faf8f4] text-[#1c2220] border border-neutral-300/80 shadow-[0_12px_35px_rgba(0,0,0,0.18)]">
           
-          {/* Natural Center Book Spine / Narrow Clean Crease Line (Matching Image 2 Exactly) */}
-          <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden md:block w-3 -translate-x-1/2 z-20">
+          {/* Natural Center Book Spine / Narrow Clean Crease Line */}
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 block w-2 sm:w-3 -translate-x-1/2 z-20">
             <div className="h-full w-full bg-gradient-to-r from-black/8 via-black/2 to-black/8 opacity-60" />
             <div className="absolute inset-y-0 left-1/2 w-[1px] -translate-x-1/2 bg-neutral-300/60" />
           </div>
@@ -230,7 +230,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
             onPointerUp={handlePointerUp}
             onMouseEnter={() => setHoverSide("left")}
             onMouseLeave={() => setHoverSide(null)}
-            className={`relative flex h-1/2 md:h-auto md:w-1/2 flex-col justify-between p-6 sm:p-8 lg:p-9 transition-all duration-300 ${
+            className={`relative flex w-1/2 flex-col justify-between p-2.5 sm:p-6 md:p-8 lg:p-9 transition-all duration-300 ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
           >
@@ -238,13 +238,13 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-black/[0.02] via-transparent to-black/[0.06] pointer-events-none" />
 
             {/* Printed Photo Card pasted onto page */}
-            <div className="relative flex flex-col items-center w-full max-w-sm rounded-xl bg-white p-3 sm:p-4 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-neutral-200/90 transition-transform duration-300 hover:rotate-0.5 my-auto">
+            <div className="relative flex flex-col items-center w-full max-w-sm rounded-lg sm:rounded-xl bg-white p-1.5 sm:p-3 md:p-4 shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-neutral-200/90 transition-transform duration-300 hover:rotate-0.5 my-auto">
               {/* Corner photo tape accents */}
-              <div className="absolute -top-2.5 left-4 w-8 h-4 bg-amber-100/70 border border-amber-200/60 backdrop-blur-sm transform -rotate-12 shadow-sm pointer-events-none" />
-              <div className="absolute -top-2.5 right-4 w-8 h-4 bg-amber-100/70 border border-amber-200/60 backdrop-blur-sm transform rotate-12 shadow-sm pointer-events-none" />
+              <div className="absolute -top-1.5 sm:-top-2.5 left-2 sm:left-4 w-5 sm:w-8 h-2.5 sm:h-4 bg-amber-100/70 border border-amber-200/60 backdrop-blur-sm transform -rotate-12 shadow-sm pointer-events-none" />
+              <div className="absolute -top-1.5 sm:-top-2.5 right-2 sm:right-4 w-5 sm:w-8 h-2.5 sm:h-4 bg-amber-100/70 border border-amber-200/60 backdrop-blur-sm transform rotate-12 shadow-sm pointer-events-none" />
 
               {/* 100% Uncropped Fully Visible Photo */}
-              <div className="relative w-full h-[220px] sm:h-[250px] md:h-[270px] overflow-hidden rounded-lg bg-neutral-50 flex items-center justify-center border border-neutral-200/60">
+              <div className="relative w-full h-[120px] sm:h-[220px] md:h-[270px] overflow-hidden rounded-md sm:rounded-lg bg-neutral-50 flex items-center justify-center border border-neutral-200/60">
                 <Image
                   src={isDragging || isFlipping ? (dragDir === "prev" ? targetItem.image : currentItem.image) : currentItem.image}
                   alt={currentItem.title}
@@ -256,20 +256,20 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
               </div>
 
               {/* Caption under photo */}
-              <div className="mt-2.5 text-center">
-                <span className="font-display text-xs font-semibold tracking-wider text-[#b45d27] uppercase flex items-center justify-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-[#c97a4a]" />
+              <div className="mt-1.5 sm:mt-2.5 text-center">
+                <span className="font-display text-[9px] sm:text-xs font-semibold tracking-wider text-[#b45d27] uppercase flex items-center justify-center gap-1 sm:gap-1.5">
+                  <Sparkles className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 text-[#c97a4a]" />
                   {isDragging || isFlipping ? (dragDir === "prev" ? targetItem.tag : currentItem.tag) : currentItem.tag}
                 </span>
               </div>
             </div>
 
             {/* Left Page Bottom Center Publisher Brand Mark */}
-            <div className="relative z-10 w-full pt-3 mt-auto border-t border-neutral-300/60 flex items-center justify-center">
+            <div className="relative z-10 w-full pt-2 sm:pt-3 mt-auto border-t border-neutral-300/60 flex items-center justify-center">
               <Image
                 src={thinkclockLogo}
                 alt="ThinkClock Battery Labs"
-                className="h-6 w-auto object-contain"
+                className="h-4 sm:h-6 w-auto object-contain"
                 priority
               />
             </div>
@@ -289,7 +289,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
             onPointerUp={handlePointerUp}
             onMouseEnter={() => setHoverSide("right")}
             onMouseLeave={() => setHoverSide(null)}
-            className={`relative flex h-1/2 md:h-auto md:w-1/2 flex-col justify-between p-6 sm:p-8 lg:p-9 transition-all duration-300 ${
+            className={`relative flex w-1/2 flex-col justify-between p-2.5 sm:p-6 md:p-8 lg:p-9 transition-all duration-300 ${
               isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
           >
@@ -297,45 +297,45 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
             <div className="absolute inset-0 bg-gradient-to-l from-black/[0.02] via-transparent to-black/[0.06] pointer-events-none" />
 
             {/* Header Markings */}
-            <div className="relative z-10 space-y-3.5">
-              <div className="flex items-center justify-between border-b border-neutral-300/60 pb-3.5">
-                <div className="flex items-center gap-2">
-                  <BookOpen className="h-4 w-4 text-[#b45d27]" />
-                  <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#b45d27] uppercase">
+            <div className="relative z-10 space-y-2 sm:space-y-3.5">
+              <div className="flex flex-wrap items-center justify-between gap-1 border-b border-neutral-300/60 pb-2 sm:pb-3.5">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <BookOpen className="h-3 w-3 sm:h-4 sm:w-4 text-[#b45d27] shrink-0" />
+                  <span className="font-mono text-[8px] sm:text-[11px] font-bold tracking-[0.12em] sm:tracking-[0.2em] text-[#b45d27] uppercase">
                     THINKCLOCK IN ACTION
                   </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-neutral-300/80 bg-white px-3.5 py-1 shadow-sm">
+                <div className="flex items-center gap-1 sm:gap-2 rounded-full border border-neutral-300/80 bg-white px-2 sm:px-3.5 py-0.5 sm:py-1 shadow-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0d9488] animate-pulse" />
-                  <span className="font-mono text-xs font-bold text-[#0f1715]">
+                  <span className="font-mono text-[9px] sm:text-xs font-bold text-[#0f1715]">
                     {String(((isDragging || isFlipping) && dragDir === "next" ? targetIndex : displayedIndex) + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}
                   </span>
                 </div>
               </div>
 
               {/* Tag Badge */}
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-[#0d9488]/30 bg-[#f0fdfa] px-3.5 py-1 text-xs font-semibold text-[#0d9488] shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0d9488]" />
+              <div className="inline-flex items-center gap-1 rounded-full border border-[#0d9488]/30 bg-[#f0fdfa] px-2 sm:px-3.5 py-0.5 sm:py-1 text-[9px] sm:text-xs font-semibold text-[#0d9488] shadow-sm">
+                <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[#0d9488]" />
                 <span>{(isDragging || isFlipping) && dragDir === "next" ? targetItem.tag : currentItem.tag}</span>
               </div>
             </div>
 
             {/* Main Heading & Description */}
-            <div className="relative z-10 my-auto py-2 space-y-4">
-              <h3 className="font-display text-2xl sm:text-3xl font-bold leading-[1.25] text-[#0f1715] tracking-tight">
+            <div className="relative z-10 my-auto py-1.5 sm:py-2 space-y-1.5 sm:space-y-4">
+              <h3 className="font-display text-xs sm:text-xl md:text-2xl lg:text-3xl font-bold leading-[1.2] sm:leading-[1.25] text-[#0f1715] tracking-tight">
                 {(isDragging || isFlipping) && dragDir === "next" ? targetItem.title : currentItem.title}
               </h3>
-              <p className="font-sans text-sm sm:text-base leading-relaxed text-[#374151] max-w-lg">
+              <p className="font-sans text-[10px] sm:text-sm md:text-base leading-snug sm:leading-relaxed text-[#374151] max-w-lg">
                 {(isDragging || isFlipping) && dragDir === "next" ? targetItem.desc : currentItem.desc}
               </p>
             </div>
 
             {/* Right Page Bottom Center Publisher Brand Mark */}
-            <div className="relative z-10 w-full pt-3 mt-auto border-t border-neutral-300/60 flex items-center justify-center">
+            <div className="relative z-10 w-full pt-2 sm:pt-3 mt-auto border-t border-neutral-300/60 flex items-center justify-center">
               <Image
                 src={thinkclockLogo}
                 alt="ThinkClock Battery Labs"
-                className="h-6 w-auto object-contain"
+                className="h-4 sm:h-6 w-auto object-contain"
                 priority
               />
             </div>
@@ -358,7 +358,7 @@ export function InteractiveBookGallery({ items }: InteractiveBookGalleryProps) {
                 left: "50%",
                 skewY: cornerCurl,
               }}
-              className="pointer-events-none absolute inset-y-0 w-1/2 z-30 hidden md:block overflow-hidden bg-[#faf8f4] text-[#1c2220] shadow-[0_15px_35px_rgba(0,0,0,0.25)]"
+              className="pointer-events-none absolute inset-y-0 w-1/2 z-30 block overflow-hidden bg-[#faf8f4] text-[#1c2220] shadow-[0_15px_35px_rgba(0,0,0,0.25)]"
             >
               {/* Dynamic Fold Shadow Overlay */}
               <motion.div

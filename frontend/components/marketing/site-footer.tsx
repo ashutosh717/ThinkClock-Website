@@ -34,7 +34,7 @@ export function SiteFooter() {
         fontFamily: '"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif',
       }}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-12 py-8 sm:py-10">
+      <div className="tc-container pt-8 pb-24 sm:pt-10 sm:pb-12">
         {/* ── Top Grid: Brand | Products | Company | Locations ── */}
         <div className="grid gap-6 sm:gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-12">
 
@@ -124,15 +124,24 @@ export function SiteFooter() {
                   3rd floor, Confident Square Mall, Unit-301,<br />
                   Varthur–Sarjapur Rd, Dommasandra, Yamare, Bengaluru 562125
                 </p>
-                <a
-                  href="tel:+919461160122"
-                  className="mt-1 inline-flex items-center gap-1.5 text-[12px] sm:text-[12.5px] font-bold text-[#B3300A] transition-colors hover:text-[#1A1A1A]"
-                >
-                  <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  +91 9461160122 · +91 9148104639
-                </a>
+                <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] sm:text-[12.5px] font-bold text-[#B3300A]">
+                  <a
+                    href="tel:+919461160122"
+                    className="inline-flex min-h-[36px] items-center gap-1.5 transition-colors hover:text-[#1A1A1A]"
+                  >
+                    <svg className="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    +91 9461160122
+                  </a>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    href="tel:+919148104639"
+                    className="inline-flex min-h-[36px] items-center transition-colors hover:text-[#1A1A1A]"
+                  >
+                    +91 9148104639
+                  </a>
+                </div>
               </div>
 
               {/* UK Office */}
