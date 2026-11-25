@@ -22,3 +22,5 @@ frontend/public/videos/THINKCLOCK.mp4
 frontend/public/videos/thinkclock-1.mp4
 *.mov
 *.avi
+.aider-desk/
+frontend/.aider-desk/
