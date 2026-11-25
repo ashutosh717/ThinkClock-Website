@@ -66,7 +66,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bodySans.variable} ${display.variable} ${dataMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${bodySans.variable} ${display.variable} ${dataMono.variable} ${playfair.variable} dark h-full antialiased`}
     >
       <head>
         <script
@@ -74,16 +74,16 @@ export default function RootLayout({
             __html: `
               try {
                 var saved = localStorage.getItem('thinkclock-theme');
-                if (saved === 'dark') {
-                  document.documentElement.classList.remove('light');
-                  document.documentElement.classList.add('dark');
-                } else {
+                if (saved === 'light') {
                   document.documentElement.classList.add('light');
                   document.documentElement.classList.remove('dark');
+                } else {
+                  document.documentElement.classList.remove('light');
+                  document.documentElement.classList.add('dark');
                 }
               } catch (e) {
-                document.documentElement.classList.add('light');
-                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
               }
             `,
           }}
