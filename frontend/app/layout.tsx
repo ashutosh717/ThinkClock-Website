@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bai_Jamjuree, Playfair_Display } from "next/font/google";
 
 import { QueryProvider } from "@/components/providers/query-provider";
@@ -42,6 +42,12 @@ const dataMono = Bai_Jamjuree({
   weight: ["200", "300", "400", "500", "600", "700"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "ThinkClock Battery Labs",

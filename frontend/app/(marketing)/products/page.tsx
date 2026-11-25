@@ -55,26 +55,26 @@ export default function ProductsPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden tc-section-hero">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
         </div>
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+        <div className="tc-container relative">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 BATTERYSCOPE ECOSYSTEM
               </span>
             </div>
-            <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-display tc-h1 font-bold text-[var(--paper)]">
               Non-Invasive Diagnostic Systems built for{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 Speed, Precision, and Scale
               </span>
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+            <p className="mx-auto mt-6 tc-body text-[var(--graphite-on-dark)]">
               From bench-top lab evaluation to fully autonomous production line sorting and pack-level intelligence: explore the complete BatteryScope product line.
             </p>
           </AnimatedSection>
@@ -82,32 +82,32 @@ export default function ProductsPage() {
       </section>
 
       {/* ── 2. Interactive Products Narrative Showcase ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <ProductsNarrative />
         </div>
       </section>
 
       {/* ── 3. Technical Ecosystem Comparison Table ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                 SPECIFICATION MATRIX
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Compare BatteryScope{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 Diagnostics
               </span>
             </h2>
           </AnimatedSection>
 
-          <div className="tc-card tc-card-flush mt-5 sm:mt-6">
-            <table className="hidden w-full min-w-[700px] border-collapse text-left lg:table">
+          <div className="tc-card tc-card-flush mt-6 sm:mt-8 overflow-x-auto">
+            <table className="table w-full min-w-[640px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-[var(--border)] bg-[var(--secondary)]/60">
                   <th className="py-5 px-6 font-mono text-xs font-bold text-[var(--graphite)] uppercase tracking-wider w-[28%]">
@@ -170,50 +170,29 @@ export default function ProductsPage() {
                 ))}
               </tbody>
             </table>
-            <div className="divide-y divide-[var(--border)] p-5 sm:p-7 lg:hidden">
-              {comparisonFeatures.map((row) => (
-                <div key={row.feature} className="space-y-3 py-5 first:pt-0 last:pb-0">
-                  <h3 className="font-display font-bold text-[var(--paper)]">{row.feature}</h3>
-                  <dl className="space-y-2.5 text-sm">
-                    <div className="space-y-0.5">
-                      <dt className="text-[var(--graphite)]">BatteryScope-C Cylindrical</dt>
-                      <dd className="break-words font-semibold text-[var(--signal)]">{row.cylindrical}</dd>
-                    </div>
-                    <div className="space-y-0.5">
-                      <dt className="text-[var(--graphite)]">BatteryScope-C Prismatic</dt>
-                      <dd className="break-words font-semibold text-[var(--signal)]">{row.prismatic}</dd>
-                    </div>
-                    <div className="space-y-0.5">
-                      <dt className="text-[var(--graphite)]">BatteryScope-C Automated</dt>
-                      <dd className="break-words font-semibold text-[var(--signal)]">{row.auto}</dd>
-                    </div>
-                  </dl>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
       {/* ── 4. Technology Advantage ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 TECHNOLOGY ADVANTAGE
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Why BatteryScope Outperforms{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 Traditional Cycling
               </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {techAdvantages.map((item, i) => (
               <AnimatedSection
                 key={item.title}

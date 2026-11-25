@@ -81,7 +81,7 @@ export function ContactForm() {
           <input
             id="name"
             {...register("name")}
-            className="w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-sm text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
+            className="min-h-[48px] w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-base text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
             placeholder="e.g. Alex Rivera"
           />
           {errors.name && <p className="mt-1 font-mono text-xs text-red-500">{errors.name.message}</p>}
@@ -95,7 +95,7 @@ export function ContactForm() {
             id="email"
             type="email"
             {...register("email")}
-            className="w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-sm text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
+            className="min-h-[48px] w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-base text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
             placeholder="e.g. alex@oem.com"
           />
           {errors.email && <p className="mt-1 font-mono text-xs text-red-500">{errors.email.message}</p>}
@@ -108,7 +108,7 @@ export function ContactForm() {
           <input
             id="company"
             {...register("company")}
-            className="w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-sm text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
+            className="min-h-[48px] w-full rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-base text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
             placeholder="e.g. EV Fleet Inc."
           />
           {errors.company && <p className="mt-1 font-mono text-xs text-red-500">{errors.company.message}</p>}
@@ -122,7 +122,7 @@ export function ContactForm() {
             id="message"
             {...register("message")}
             rows={4}
-            className="w-full resize-none rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-sm text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
+            className="min-h-[120px] w-full resize-none rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-4 py-3 text-base text-[var(--paper)] placeholder:text-[var(--graphite-on-dark)]/50 focus:border-[var(--signal)] focus:outline-none focus:ring-1 focus:ring-[var(--signal)] transition-colors"
             placeholder="Tell us about your battery cell grading, diagnostics, or throughput requirements..."
           />
           {errors.message && <p className="mt-1 font-mono text-xs text-red-500">{errors.message.message}</p>}
@@ -132,7 +132,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="tc-button group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-[8px] border border-[var(--signal)]/50 bg-[var(--signal)] px-6 py-3.5 font-sans text-sm font-bold text-white shadow-lg transition-all duration-300 hover:brightness-110 hover:shadow-[var(--signal)]/25 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+            className="tc-button group relative flex min-h-[48px] w-full items-center justify-center gap-2 overflow-hidden rounded-[8px] border border-[var(--signal)]/50 bg-[var(--signal)] px-6 py-3.5 font-sans text-sm font-bold text-white shadow-lg transition-all duration-300 hover:brightness-110 hover:shadow-[var(--signal)]/25 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
           >
             <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

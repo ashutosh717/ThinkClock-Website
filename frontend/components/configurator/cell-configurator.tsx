@@ -73,7 +73,7 @@ export function CellConfigurator() {
                   key={v}
                   type="button"
                   onClick={() => setPackVoltage(v)}
-                  className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
+                  className={`min-h-[44px] rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packVoltage === v
                       ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
@@ -95,7 +95,7 @@ export function CellConfigurator() {
                   key={c}
                   type="button"
                   onClick={() => setPackCapacity(c)}
-                  className={`rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
+                  className={`min-h-[44px] rounded-[6px] px-3.5 py-1.5 font-mono text-xs font-semibold transition-all ${
                     packCapacity === c
                       ? "border border-[var(--signal)] bg-[var(--signal)] text-[var(--signal-foreground)] shadow-md shadow-[var(--signal)]/20"
                       : "border border-[var(--border)] bg-[var(--secondary)] text-[var(--paper)] hover:border-[var(--signal)]/60"
@@ -111,7 +111,7 @@ export function CellConfigurator() {
             <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               Battery Chemistry
             </legend>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {(Object.entries(CHEMISTRIES) as [Chemistry, (typeof CHEMISTRIES)[Chemistry]][]).map(([key, val]) => (
                 <button
                   key={key}
@@ -134,7 +134,7 @@ export function CellConfigurator() {
             <legend className="mb-2.5 font-mono text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
               Cell Format
             </legend>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {(Object.entries(CELL_TYPES) as [CellType, (typeof CELL_TYPES)[CellType]][]).map(([key, val]) => (
                 <button
                   key={key}

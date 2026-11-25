@@ -265,7 +265,7 @@ function ProductsNarrativeContent() {
   return (
     <div id="product-detail" className="w-full scroll-mt-28">
       {/* Product Selector Tabs */}
-      <div className="grid items-stretch grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+      <div className="grid items-stretch grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
         {products.map((prod) => {
           const isActive = prod.id === activeTab;
           const badgeDetails =
@@ -295,53 +295,53 @@ function ProductsNarrativeContent() {
               key={prod.id}
               type="button"
               onClick={() => setSelectedTab(prod.id)}
-              className={`tc-rotating-selector group relative flex h-full flex-col justify-between text-left cursor-pointer transition-all duration-300 ${
+              className={`tc-rotating-selector group relative flex h-full min-w-0 flex-col justify-between text-left cursor-pointer transition-all duration-300 !p-2.5 sm:!p-5 ${
                 isActive ? "is-active scale-[1.01]" : ""
               }`}
             >
               {/* Top Row: Category Tag + Active Badge / Arrow */}
-              <div className="relative z-10 flex items-center justify-between w-full">
-                <span className={`rounded-full border px-3.5 py-1 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider ${badgeDetails.badgeColor}`}>
+              <div className="relative z-10 flex flex-wrap items-center justify-between gap-1 w-full">
+                <span className={`rounded-full border px-1.5 sm:px-3.5 py-0.5 sm:py-1 font-mono text-[8px] sm:text-xs font-bold uppercase tracking-wider ${badgeDetails.badgeColor}`}>
                   {badgeDetails.tag}
                 </span>
 
                 {isActive ? (
                   <div
-                    className="flex items-center gap-1.5 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-2.5 py-1 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
+                    className="flex items-center gap-1 sm:gap-1.5 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-1.5 sm:px-2.5 py-0.5 sm:py-1 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
                     title="Currently viewing"
                   >
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 duration-1000" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+                      <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
                     </span>
-                    <span className="font-mono text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
+                    <span className="font-mono text-[8px] sm:text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
                       Viewing
                     </span>
                   </div>
                 ) : (
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] transition-colors group-hover:border-[#f97316] group-hover:text-[#f97316]">
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] transition-colors group-hover:border-[#f97316] group-hover:text-[#f97316]">
+                    <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 )}
               </div>
 
               {/* Middle: Product Name & Brief Desc */}
-              <div className="relative z-10 my-auto py-2">
-                <h4 className="font-display text-2xl sm:text-[1.75rem] lg:text-[1.9rem] font-bold text-[var(--paper)] leading-tight tracking-tight">
+              <div className="relative z-10 my-auto py-1.5 sm:py-2">
+                <h4 className="font-display text-xs sm:text-xl md:text-[1.6rem] lg:text-[1.9rem] font-bold text-[var(--paper)] leading-tight tracking-tight">
                   {prod.name}
                 </h4>
-                <p className="mt-2 text-xs sm:text-[13.5px] leading-relaxed text-[var(--graphite-on-dark)]">
+                <p className="mt-1 sm:mt-2 text-[10px] sm:text-[13.5px] leading-snug sm:leading-relaxed text-[var(--graphite-on-dark)]">
                   {badgeDetails.desc}
                 </p>
               </div>
 
               {/* Bottom Row: Highlight Metric */}
-              <div className="relative z-10 pt-4 border-t border-[var(--border)] flex items-center justify-between">
-                <span className="inline-block font-mono text-sm sm:text-base font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <div className="relative z-10 pt-2 sm:pt-4 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <span className="inline-block font-mono text-[10px] sm:text-sm md:text-base font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                   {badgeDetails.metric}
                 </span>
-                <span className="font-mono text-xs sm:text-sm font-semibold text-[var(--graphite)] group-hover:text-[#f97316] transition-colors">
-                  {isActive ? "Viewing Specs" : "Select System →"}
+                <span className="font-mono text-[9px] sm:text-xs md:text-sm font-semibold text-[var(--graphite)] group-hover:text-[#f97316] transition-colors">
+                  {isActive ? "Viewing Specs" : "Select →"}
                 </span>
               </div>
             </button>
@@ -566,14 +566,14 @@ function ProductsNarrativeContent() {
           </div>
 
           {/* 5. Product CTA Strip */}
-          <AnimatedSection animation="fade-up" delay={200} className="tc-card mt-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <AnimatedSection animation="fade-up" delay={200} className="tc-card mt-10 flex flex-col items-stretch sm:items-center justify-between gap-6 sm:flex-row">
             <div>
               <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">{activeProduct.ctaHeadline}</span>
               <p className="mt-2 font-display text-base sm:text-lg text-[var(--paper)] font-semibold">
                 {activeProduct.ctaText}
               </p>
             </div>
-            <SendButton href="/contact" label="Get Started" />
+            <SendButton href="/contact" label="Get Started" className="w-full sm:w-auto" />
           </AnimatedSection>
         </div>
       </div>

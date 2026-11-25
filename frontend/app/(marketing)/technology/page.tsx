@@ -124,33 +124,33 @@ export default function TechnologyPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden tc-section-hero">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[var(--signal)]/15 blur-3xl" />
           <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-[var(--copper)]/10 blur-3xl" />
         </div>
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+        <div className="tc-container relative">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 TECHNOLOGY PLATFORM
               </span>
             </div>
-            <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-display tc-h1 font-bold text-[var(--paper)]">
               BatteryScope-C:{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 Signal-First Battery Diagnostics
               </span>
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+            <p className="mx-auto mt-6 tc-body text-[var(--graphite-on-dark)]">
               BatteryScope-C combines non-invasive spectroscopy (EIS, acoustic, and RF) with AI-driven digital twin modelling to deliver a complete battery health assessment in <span className="font-mono font-semibold text-[var(--paper)]">75 seconds</span>: without opening, damaging, or interrupting production flow.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <SendButton href="/contact" label="Discuss Your Application" />
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+              <SendButton href="/contact" label="Discuss Your Application" className="w-full sm:w-auto" />
               <a
                 href="/products"
-                className="inline-flex items-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                className="inline-flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-[8px] border border-[var(--border)] bg-[var(--secondary)] px-5 py-3 font-sans text-sm font-semibold text-[var(--paper)] transition-all hover:border-[var(--signal)] hover:text-[var(--signal)]"
               >
                 Explore Product Ecosystem →
               </a>
@@ -160,24 +160,24 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 2. Core Capabilities ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 CORE CAPABILITIES
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Precision battery diagnostics in{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 75 seconds.
               </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             {coreCapabilities.map((item, i) => (
               <AnimatedSection
                 key={item.title}
@@ -212,27 +212,27 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 3. Diagnostic Signature Metrics ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                 HEALTH SIGNATURE MODALITIES
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Complete Cell Diagnostic Profile in{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 Seconds
               </span>
             </h2>
-            <p className="mt-2 text-base text-[var(--graphite-on-dark)] sm:text-lg">
+            <p className="mx-auto mt-3 tc-body text-[var(--graphite-on-dark)]">
               Six key health metrics captured during every run without a single charge-discharge cycle.
             </p>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {diagnosticSignatureMetrics.map((metric, i) => (
               <AnimatedSection
                 key={metric.name}
@@ -260,24 +260,24 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 5. Laboratory Services & Infrastructure ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 R&D & LAB INFRASTRUCTURE
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Advanced laboratory services &{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 testing infrastructure.
               </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
             {labCapabilities.map((lab, i) => (
               <AnimatedSection
                 key={lab.title}
@@ -307,24 +307,24 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 6. Supporting Platforms ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 SUPPORTING PLATFORMS
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Benchmarking database &{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 CellScope e-waste portal.
               </span>
             </h2>
           </AnimatedSection>
 
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-2">
+          <div className="mt-6 sm:mt-8 grid items-stretch gap-4 sm:gap-6 md:grid-cols-2">
             {supportingPlatforms.map((platform, i) => (
               <AnimatedSection
                 key={platform.name}
@@ -355,22 +355,22 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── 7. Target Ecosystem & Call to Action ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                 TARGET ECOSYSTEM
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Built for the entire{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 battery value chain.
               </span>
             </h2>
-            <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+            <p className="mx-auto mt-3 tc-body text-[var(--graphite-on-dark)]">
               Serves battery developers, researchers, product teams, cell OEMs, battery pack manufacturers, fleet operators, recyclers, system integrators, and financial partners.
             </p>
           </AnimatedSection>
@@ -398,7 +398,7 @@ export default function TechnologyPage() {
                 Connect with our engineering team to discuss EIS, acoustic, and RF integration.
               </p>
               <div className="mt-6 flex justify-center">
-                <SendButton href="/contact" label="Discuss your application" variant="lab" />
+                <SendButton href="/contact" label="Discuss your application" variant="lab" className="w-full sm:w-auto" />
               </div>
             </div>
           </div>

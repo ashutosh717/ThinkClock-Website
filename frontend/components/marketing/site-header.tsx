@@ -77,6 +77,15 @@ export function SiteHeader() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return (
     <>
       <header
@@ -88,19 +97,19 @@ export function SiteHeader() {
             : "bg-transparent"
         } ${scrolled && pathname !== "/" ? "backdrop-blur-xl" : ""}`}
       >
-        <div className="flex w-full items-center justify-between px-4 py-2.5 sm:px-8 sm:py-3 lg:px-16">
-          <Link href="/" className="group flex items-center gap-2.5 sm:gap-4 transition-all duration-300 hover:scale-[1.02] max-w-[75%] sm:max-w-none">
+        <div className="tc-container flex items-center justify-between py-2.5 sm:py-3">
+          <Link href="/" className="group flex min-w-0 items-center gap-2 sm:gap-4 transition-all duration-300 hover:scale-[1.02]">
             <Image
               src={thinkclockIcon}
               alt="ThinkClock"
-              className="h-10 sm:h-14 lg:h-16 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+              className="h-8 sm:h-12 lg:h-14 w-auto object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
               priority
             />
             <div className="flex flex-col min-w-0">
-              <span className="font-display text-base sm:text-xl lg:text-2xl font-bold leading-tight tracking-tight text-[var(--paper)] truncate transition-colors duration-150 group-hover:text-[var(--signal)]">
+              <span className="font-display text-[clamp(0.875rem,3.4vw,1.5rem)] font-bold leading-tight tracking-tight text-[var(--paper)] transition-colors duration-150 group-hover:text-[var(--signal)]">
                 ThinkClock Battery Labs
               </span>
-              <span className="font-mono text-[10px] sm:text-xs lg:text-[13px] font-semibold leading-tight text-[var(--copper)] truncate">
+              <span className="font-mono text-[clamp(0.625rem,2.3vw,0.8125rem)] font-semibold leading-tight text-[var(--copper)]">
                 Sensing, Modelling, Analytics
               </span>
             </div>
@@ -152,13 +161,15 @@ export function SiteHeader() {
           </nav>
 
           {/* Mobile & Tablet Hamburger Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden shrink-0">
             <ThemeToggleButton />
             <button
               type="button"
-              className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-[8px] border border-[var(--border)] bg-[var(--card)] p-2 transition-colors hover:border-[var(--signal)]"
+              className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-[8px] border border-[var(--border)] bg-[var(--card)] p-2 transition-colors hover:border-[var(--signal)]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-drawer"
             >
               <span
                 className={`block h-0.5 w-5 bg-[var(--paper)] transition-all duration-300 ${mobileOpen ? "translate-y-[5px] rotate-45" : ""}`}
@@ -174,17 +185,33 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col bg-[var(--ink)]/98 backdrop-blur-2xl lg:hidden">
-          <nav className="flex flex-1 flex-col items-center justify-center gap-5 px-6 pt-16 pb-8" aria-label="Mobile navigation">
+      {/* Mobile Slide-in Drawer */}
+      <div
+        id="mobile-nav-drawer"
+        aria-hidden={!mobileOpen}
+        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+          mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        {/* Backdrop for outside tap to close */}
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+        <nav
+          className={`relative ml-auto flex h-full w-full max-w-sm flex-col justify-between overflow-y-auto bg-[var(--ink)]/98 border-l border-[var(--border)] px-6 pt-20 pb-8 backdrop-blur-2xl transition-transform duration-300 ease-out ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          aria-label="Mobile navigation"
+        >
+          <div className="flex flex-col items-center gap-2 my-auto">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`font-display text-2xl font-bold transition-colors ${
-                  isActive(link.href) ? "text-[var(--signal)]" : "text-[var(--paper)] hover:text-[var(--signal)]"
+                className={`flex min-h-[44px] w-full items-center justify-center rounded-lg px-4 font-display text-xl font-bold transition-colors ${
+                  isActive(link.href) ? "text-[var(--signal)] bg-[var(--secondary)]" : "text-[var(--paper)] hover:text-[var(--signal)]"
                 }`}
               >
                 {link.label}
@@ -193,12 +220,22 @@ export function SiteHeader() {
             <Link
               href="/faq"
               onClick={() => setMobileOpen(false)}
-              className="font-display text-2xl font-bold text-[var(--paper)] transition-colors hover:text-[var(--signal)]"
+              className={`flex min-h-[44px] w-full items-center justify-center rounded-lg px-4 font-display text-xl font-bold transition-colors ${
+                isActive("/faq") ? "text-[var(--signal)] bg-[var(--secondary)]" : "text-[var(--paper)] hover:text-[var(--signal)]"
+              }`}
             >
               FAQ
             </Link>
+          </div>
 
-            <div className="mt-6 flex items-center gap-4 pt-6 border-t border-[var(--border)] w-full max-w-xs justify-center">
+          <div className="mt-6 flex flex-col items-center gap-4 pt-6 border-t border-[var(--border)] w-full">
+            <div className="flex items-center justify-center gap-3">
+              <span className="font-mono text-xs font-semibold text-[var(--graphite-on-dark)] uppercase tracking-wider">
+                Theme
+              </span>
+              <ThemeToggleButton />
+            </div>
+            <div className="flex items-center gap-4 justify-center">
               <a
                 href="https://www.linkedin.com/company/thinkclock"
                 target="_blank"
@@ -222,9 +259,9 @@ export function SiteHeader() {
                 </svg>
               </a>
             </div>
-          </nav>
-        </div>
-      )}
+          </div>
+        </nav>
+      </div>
     </>
   );
 }

@@ -42,25 +42,25 @@ export default function CareersPage() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Hero ── */}
-      <section className="relative overflow-hidden px-4 pt-16 pb-12 sm:px-6 sm:pt-20 sm:pb-14 lg:pt-24 lg:pb-16">
+      <section className="relative overflow-hidden tc-section-hero">
         <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true">
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[var(--copper)]/15 blur-3xl" />
         </div>
-        <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+        <div className="tc-container relative">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                 CAREERS AT THINKCLOCK
               </span>
             </div>
-            <h1 className="mt-5 font-display text-3xl font-bold leading-[1.15] text-[var(--paper)] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-display tc-h1 font-bold text-[var(--paper)]">
               Build the future of{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 battery diagnostics.
               </span>
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-[var(--graphite-on-dark)] sm:text-lg lg:text-xl">
+            <p className="mx-auto mt-6 tc-body text-[var(--graphite-on-dark)]">
               We are looking for engineers, scientists, and operators who want to make battery health measurable, predictable, and actionable.
             </p>
           </AnimatedSection>
@@ -68,18 +68,18 @@ export default function CareersPage() {
       </section>
 
       {/* ── 2. Open Roles ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="h-px w-6 bg-[var(--signal)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
+              <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--signal)] uppercase">
                 OPEN ROLES
               </span>
             </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
               Help us make the{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+              <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                 invisible measurable.
               </span>
             </h2>
@@ -119,8 +119,8 @@ export default function CareersPage() {
                       </span>
                     </div>
                   </div>
-                  <div className="shrink-0">
-                    <ApplyButton href="mailto:careers@thinkclock.com" label="Apply" />
+                  <div className="shrink-0 w-full sm:w-auto">
+                    <ApplyButton href="mailto:careers@thinkclock.com" label="Apply" className="min-h-[44px] w-full sm:w-auto" />
                   </div>
                 </div>
               </AnimatedSection>
@@ -130,29 +130,29 @@ export default function CareersPage() {
       </section>
 
       {/* ── 3. Spontaneous Applications ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
+      <section className="tc-section">
+        <div className="tc-container">
           <div className="tc-card relative mx-auto max-w-4xl text-center">
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2">
                 <span className="h-px w-6 bg-[var(--copper)]" />
-                <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
+                <span className="tc-label font-mono font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
                   NOT SEEING THE RIGHT FIT?
                 </span>
               </div>
-              <h2 className="mt-2 font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl lg:text-4xl">
+              <h2 className="mt-2 font-display tc-h2 font-bold text-[var(--paper)]">
                 We are always open to hearing from{" "}
-                <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                <span className="inline italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-1">
                   talented people.
                 </span>
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">
+              <p className="mx-auto mt-4 tc-body text-[var(--graphite-on-dark)]">
                 Send your CV and a note about what you do best. If there is a match, we will find it.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="mailto:careers@thinkclock.com"
-                  className="tc-button inline-flex items-center gap-2 rounded-[10px] border border-[var(--copper)] bg-[var(--copper)]/10 px-6 py-3 font-mono text-xs font-semibold text-[var(--paper)] transition-all hover:bg-[var(--copper)] hover:text-white"
+                  className="tc-button inline-flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-[10px] border border-[var(--copper)] bg-[var(--copper)]/10 px-6 py-3 font-mono text-xs font-semibold text-[var(--paper)] transition-all hover:bg-[var(--copper)] hover:text-white"
                 >
                   careers@thinkclock.com
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -172,7 +172,7 @@ function PhaseItem({
       {/* Center Number Pin */}
       <motion.div
         ref={setPinRef}
-        className="absolute top-1/2 left-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:flex"
+        className="absolute top-1/2 left-1/2 z-30 flex -translate-x-1/2 -translate-y-1/2"
         initial={reducedMotion ? false : { scale: 0.85, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -197,7 +197,7 @@ function PhaseItem({
           />
 
           <motion.div
-            className="relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-white font-mono text-base font-extrabold text-white transition-transform duration-300 group-hover:scale-110"
+            className="relative flex h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-full border-2 border-white font-mono text-xs sm:text-sm md:text-base font-extrabold text-white transition-transform duration-300 group-hover:scale-110"
             style={{
               backgroundColor: phase.pinColorLight,
               boxShadow: reducedMotion
@@ -210,21 +210,21 @@ function PhaseItem({
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-14">
+      <div className="grid grid-cols-2 items-center gap-4 sm:gap-8 md:gap-14">
         {/* Phase Image Card */}
         <motion.div
           initial={reducedMotion ? false : { opacity: 0, x: entranceX }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: reducedMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className={`w-full ${isLeft ? "md:order-1 md:pr-12 lg:pr-16" : "md:order-2 md:pl-12 lg:pl-16"}`}
+          className={`w-full ${isLeft ? "order-1 pr-5 sm:pr-8 md:pr-12 lg:pr-16" : "order-2 pl-5 sm:pl-8 md:pl-12 lg:pl-16"}`}
         >
-          <div className="tc-card tc-card-media group relative mx-auto flex min-h-[260px] sm:min-h-[300px] w-full max-w-md items-center justify-center p-4">
+          <div className="tc-card tc-card-media group relative mx-auto flex min-h-[140px] sm:min-h-[240px] md:min-h-[300px] w-full max-w-md items-center justify-center p-2 sm:p-4">
             <Image
               src={phase.image}
               alt={`${phase.phaseLabel} ${phase.title}`}
-              className="h-auto max-h-[340px] w-auto max-w-full rounded-[10px] object-contain transition-all duration-700 group-hover:scale-[1.03]"
-              sizes="(max-width: 768px) 100vw, 450px"
+              className="h-auto max-h-[160px] sm:max-h-[260px] md:max-h-[340px] w-auto max-w-full rounded-[10px] object-contain transition-all duration-700 group-hover:scale-[1.03]"
+              sizes="(max-width: 768px) 45vw, 450px"
             />
           </div>
         </motion.div>
@@ -235,12 +235,12 @@ function PhaseItem({
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className={`w-full ${isLeft ? "md:order-2 md:pl-12 lg:pl-16" : "md:order-1 md:pr-12 lg:pr-16"}`}
+          className={`w-full ${isLeft ? "order-2 pl-5 sm:pl-8 md:pl-12 lg:pl-16" : "order-1 pr-5 sm:pr-8 md:pr-12 lg:pr-16"}`}
         >
-          <div className="space-y-3 sm:space-y-4 py-2">
-            <div className="flex items-center gap-3">
+          <div className="space-y-1.5 sm:space-y-3 py-1 sm:py-2">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span
-                className="inline-block rounded-full px-3.5 py-1 font-mono text-xs font-bold tracking-wider uppercase border"
+                className="inline-block rounded-full px-2 sm:px-3.5 py-0.5 sm:py-1 font-mono text-[9px] sm:text-xs font-bold tracking-wider uppercase border"
                 style={{
                   backgroundColor: `${phase.pinColorLight}18`,
                   borderColor: `${phase.pinColorLight}40`,
@@ -251,24 +251,24 @@ function PhaseItem({
               </span>
             </div>
 
-            <div className="space-y-1">
-              <div className="font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl">
+            <div className="space-y-0.5 sm:space-y-1">
+              <div className="font-display text-sm sm:text-2xl md:text-3xl font-bold text-[var(--paper)]">
                 {phase.phaseLabel}
               </div>
-              <h3 className="font-display text-2xl font-bold leading-tight text-[var(--paper)] sm:text-3xl">
+              <h3 className="font-display text-sm sm:text-2xl md:text-3xl font-bold leading-tight text-[var(--paper)]">
                 {phase.title}
               </h3>
             </div>
 
-            <p className="text-sm leading-relaxed text-[var(--graphite-on-dark)]">
+            <p className="text-[11px] sm:text-sm leading-snug sm:leading-relaxed text-[var(--graphite-on-dark)]">
               {phase.tagline}
             </p>
 
-            <ul className="space-y-3 pt-3">
+            <ul className="space-y-1.5 sm:space-y-3 pt-1.5 sm:pt-3">
               {phase.details.map((d, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[var(--paper)]">
+                <li key={idx} className="flex items-start gap-2 sm:gap-3 text-[10px] sm:text-xs md:text-sm text-[var(--paper)]">
                   <span
-                    className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
+                    className="mt-1 sm:mt-1.5 h-1.5 w-1.5 sm:h-2 sm:w-2 shrink-0 rounded-full"
                     style={{
                       backgroundColor: phase.pinColorLight,
                       boxShadow: `0 0 6px ${phase.pinColorLight}`,
@@ -369,7 +369,7 @@ export function PhaseJourney() {
     >
       <div className="relative mx-auto w-full max-w-6xl">
         <div className="relative mt-4">
-          <div className="pointer-events-none absolute inset-0 hidden h-full w-full justify-center md:flex">
+          <div className="pointer-events-none absolute inset-0 flex h-full w-full justify-center">
             <svg
               className="h-full w-full max-w-4xl"
               viewBox="0 0 800 1600"
