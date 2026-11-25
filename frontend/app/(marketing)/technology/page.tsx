@@ -1,4 +1,4 @@
-import { Zap, Cpu, ShieldCheck, Activity, Battery, BarChart3, Shield, BatteryCharging, Database, Recycle, Layers, Sparkles, FlaskConical } from "lucide-react";
+import { Zap, Cpu, ShieldCheck, Activity, Battery, BarChart3, Shield, Database, Recycle, Layers } from "lucide-react";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { SendButton } from "@/components/ui/send-button";
 
@@ -64,13 +64,6 @@ const diagnosticSignatureMetrics = [
     desc: "Detects internal short circuits and electrolyte leaks",
     status: "In Development",
   },
-];
-
-const chemistryFormFactors = [
-  { chemistry: "LFP (Lithium Iron Phosphate)", Icon: Zap, color: "#c2410c" },
-  { chemistry: "NMC (Nickel Manganese Cobalt)", Icon: BatteryCharging, color: "#0d9488" },
-  { chemistry: "Solid-State Chemistries", Icon: Sparkles, color: "#7c3aed" },
-  { chemistry: "Sodium-Ion Chemistries", Icon: FlaskConical, color: "#0d9488" },
 ];
 
 const labCapabilities = [
@@ -260,49 +253,6 @@ export default function TechnologyPage() {
                   </span>
                 </div>
                 <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{metric.desc}</p>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. Chemistries Supported ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="mx-auto max-w-3xl text-center" animation="fade-up">
-            <div className="flex items-center justify-center gap-2">
-              <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
-                CHEMISTRY VERSATILITY
-              </span>
-            </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight text-[var(--paper)] sm:text-4xl lg:text-5xl">
-              Next-Gen Diagnostics Across{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
-                Chemistries
-              </span>
-            </h2>
-          </AnimatedSection>
-
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-            {chemistryFormFactors.map((item, i) => (
-              <AnimatedSection
-                key={item.chemistry}
-                as="article"
-                stagger
-                staggerIndex={i}
-                className="tc-card group flex h-full items-center gap-4"
-              >
-                <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border shadow-sm transition-transform duration-300 group-hover:scale-105"
-                  style={{
-                    borderColor: `${item.color}40`,
-                    backgroundColor: `${item.color}15`,
-                  }}
-                >
-                  <item.Icon className="h-5 w-5 stroke-[2]" style={{ color: item.color }} />
-                </div>
-                <span className="font-mono text-xs font-semibold text-[var(--paper)]">{item.chemistry}</span>
               </AnimatedSection>
             ))}
           </div>

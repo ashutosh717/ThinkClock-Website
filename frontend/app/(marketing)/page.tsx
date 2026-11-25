@@ -1,10 +1,8 @@
-import Link from "next/link";
 import { AlertTriangle, Clock, FileQuestion, ArrowUpRight, Zap, Cpu, Gauge, ShieldCheck } from "lucide-react";
 import { HeroVideo } from "@/components/marketing/hero-video";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { CountUp } from "@/components/marketing/count-up";
 import { ScrollColorReveal } from "@/components/marketing/scroll-color-reveal";
-import { SendButton } from "@/components/ui/send-button";
 
 const trustStats = [
   {
@@ -73,45 +71,11 @@ const problemComparisons = [
   },
 ];
 
-const homeProductPreviews = [
-  {
-    title: "BatteryScope-C Manual",
-    badge: "Benchtop / Operator-Led",
-    tagline: "Battery characteristics in seconds. Not hours.",
-    desc: "Production-ready diagnostic unit supporting LG 21700 profiling with 75-second comprehensive reports and zero cycle loss.",
-    throughput: "1,920 cells / shift",
-    link: "/products?tab=manual#product-detail",
-  },
-  {
-    title: "BatteryScope-C Automated",
-    badge: "Inline / High-Throughput",
-    tagline: "Everything the manual unit does: now at production speed.",
-    desc: "Autonomous cell feeding, automated 6-channel testing, and smart sorting by SoH & capacity for gigafactories.",
-    throughput: "2,880 cells / shift",
-    link: "/products?tab=automated#product-detail",
-  },
-  {
-    title: "BatteryScope-P",
-    badge: "Pack-Level Intelligence",
-    tagline: "Pack-level insight, built on cell-level truth.",
-    desc: "Extends non-invasive spectroscopy & digital twin AI to map cell-to-cell variability into pack performance & safety.",
-    throughput: "Pack Diagnostics",
-    link: "/products?tab=pack#product-detail",
-  },
-];
-
-const credibilityTimeline = [
-  { phase: "Phase 1 • June 2025", title: "Proof of Concept", desc: "Handmade unit validating core spectroscopy technology in lab conditions.", tag: "LAB VALIDATED" },
-  { phase: "Phase 2 • Dec 2025", title: "Portable Prototype", desc: "Refined portable unit enabling field demos and early customer trials.", tag: "FIELD READY" },
-  { phase: "Phase 3 • April 2026", title: "Manufactured Unit", desc: "Production-ready device, customer-deployable, 21700 supported today.", tag: "IN PRODUCTION" },
-  { phase: "Phase 4 • Q3 2026", title: "Automated System", desc: "Inline, hands-free diagnostics integrated into production workflows.", tag: "GIGAFACTORY SCALE" },
-];
-
 export default function MarketingHome() {
   return (
     <main className="bg-[var(--ink)] text-[var(--paper)]">
       {/* ── 1. Full-Width Video Hero ── */}
-      <HeroVideo videoSrc="/videos/THINKCLOCK-Product-Sequence.mp4" />
+      <HeroVideo videoSrc="/videos/thinkclock-hero-combined.mp4" />
 
       {/* ── 2. Opening Brand Story & Aesthetic Work Cards ── */}
       <section className="px-4 pb-6 pt-20 sm:px-6 sm:pb-8 lg:pb-8 lg:pt-20">
@@ -239,176 +203,32 @@ export default function MarketingHome() {
             ))}
           </div>
 
-          {/* ThinkClock's Answer Banner */}
+          {/* ThinkClock's Answer */}
           <AnimatedSection
             animation="fade-up"
             delay={200}
-            className="tc-card relative mt-5 sm:mt-6"
+            className="mt-8 sm:mt-12"
           >
-            <div className="relative z-10">
-              <div className="flex items-center gap-2">
-                <span className="h-px w-6 bg-[#f97316]" />
-                <span className="font-mono text-xs font-semibold text-[#f97316] uppercase tracking-widest">
-                  THINKCLOCK&apos;S ANSWER: BATTERYSCOPE
-                </span>
-              </div>
-              <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl lg:text-4xl text-[var(--paper)]">
-                Non-invasive spectroscopy + AI digital twins ={" "}
-                <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
-                  lab-grade health in seconds.
-                </span>
-              </h3>
-              <p className="mt-2 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
-                Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
-              </p>
+            <div className="flex items-center gap-2">
+              <span className="h-px w-6 bg-[#f97316]" />
+              <span className="font-mono text-xs font-semibold text-[#f97316] uppercase tracking-widest">
+                THINKCLOCK&apos;S ANSWER: BATTERYSCOPE
+              </span>
             </div>
+            <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl lg:text-4xl text-[var(--paper)]">
+              Non-invasive spectroscopy + AI digital twins ={" "}
+              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
+                lab-grade health in seconds.
+              </span>
+            </h3>
+            <p className="mt-2 max-w-4xl text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
+              Where traditional cyclers demand hours of charge-discharge cycling, BatteryScope delivers a complete cell health picture in seconds: built specifically for Gigafactories, battery pack manufacturers, resellers, and recyclers who need fast, accurate, actionable battery intelligence at scale.
+            </p>
           </AnimatedSection>
         </div>
       </section>
 
       <ScrollColorReveal />
-
-      {/* ── 4. Product Ecosystem ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="max-w-3xl" animation="fade-up">
-            <div className="flex items-center gap-2">
-              <span className="h-px w-6 bg-[#f97316]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[#f97316] uppercase">
-                PRODUCT ECOSYSTEM
-              </span>
-            </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
-              The BatteryScope{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
-                Diagnostic Family
-              </span>
-            </h2>
-            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
-              From lab benchtop testing to Gigafactory inline sorting and pack-level intelligence.
-            </p>
-          </AnimatedSection>
-
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:gap-6 md:grid-cols-3">
-            {homeProductPreviews.map((prod, i) => (
-              <AnimatedSection
-                key={prod.title}
-                as="article"
-                animation="fade-up"
-                stagger
-                staggerIndex={i}
-                className="tc-card group relative flex h-full flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] tracking-widest font-semibold px-2.5 py-1 rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400 uppercase">
-                      {prod.badge}
-                    </span>
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--secondary)] text-[var(--graphite)] group-hover:border-[#f97316] group-hover:text-[#f97316]">
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                  </div>
-
-                  <h3 className="mt-3 font-display text-2xl font-bold text-[var(--paper)]">{prod.title}</h3>
-                  <p className="mt-1 font-display text-sm italic text-[var(--signal)]">&ldquo;{prod.tagline}&rdquo;</p>
-                  <p className="mt-2 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)]">{prod.desc}</p>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between">
-                  <span className="font-mono text-xs sm:text-sm font-bold text-[var(--paper)]">{prod.throughput}</span>
-                  <Link
-                    href={prod.link}
-                    className="font-mono text-xs sm:text-sm font-semibold text-[var(--signal)] transition-colors hover:text-[var(--paper)] inline-flex items-center gap-1"
-                  >
-                    View Specs →
-                  </Link>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          <AnimatedSection animation="fade-up" delay={250} className="mt-5 sm:mt-6 flex justify-center">
-            <SendButton href="/products" label="Explore Detailed Product Specs" />
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── 5. Credibility Timeline ── */}
-      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:py-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection className="max-w-3xl" animation="fade-up">
-            <div className="flex items-center gap-2">
-              <span className="h-px w-6 bg-[var(--copper)]" />
-              <span className="font-mono text-xs font-semibold tracking-[0.2em] text-[var(--copper)] uppercase">
-                CREDIBILITY TIMELINE
-              </span>
-            </div>
-            <h2 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl text-[var(--paper)]">
-              From Proof of Concept to Production:{" "}
-              <span className="inline-block italic font-bold bg-gradient-to-r from-[#ff5722] via-[#f97316] to-[#f59e0b] bg-clip-text text-transparent pr-2">
-                Built in the Open
-              </span>
-            </h2>
-            <p className="mt-2 text-base sm:text-lg text-[var(--graphite-on-dark)]">
-              Iterating from lab prototype to manufactured, customer-deployable diagnostic systems in under a year.
-            </p>
-          </AnimatedSection>
-
-          <div className="mt-5 sm:mt-6 grid items-stretch gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-            {credibilityTimeline.map((step, i) => (
-              <AnimatedSection
-                key={step.phase}
-                as="div"
-                animation="fade-up"
-                stagger
-                staggerIndex={i}
-                className="tc-card group relative flex h-full flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="font-mono text-[10px] tracking-widest font-semibold px-2.5 py-0.5 rounded-full border border-[var(--signal)]/30 bg-[var(--signal)]/10 text-[var(--signal)] uppercase">
-                      {step.tag}
-                    </span>
-                  </div>
-                  <span className="font-mono text-xs font-semibold text-[var(--copper)]">{step.phase}</span>
-                  <h3 className="mt-1 font-display text-xl font-bold text-[var(--paper)]">{step.title}</h3>
-                </div>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[var(--graphite-on-dark)] border-t border-[var(--border)] pt-3">
-                  {step.desc}
-                </p>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. Backed by Innovate UK CTA Banner ── */}
-      <section className="home-cta px-4 pt-6 pb-24 sm:px-6 sm:pt-8">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-12 lg:px-16">
-          <AnimatedSection
-            animation="fade-up"
-            className="tc-card mx-auto flex max-w-[1400px] flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
-          >
-            <div className="max-w-3xl relative z-10">
-              <div className="flex items-center gap-2">
-                <span className="h-px w-6 bg-[var(--copper)]" />
-                <span className="font-mono text-xs font-semibold text-[var(--copper)] uppercase tracking-wider">
-                  BACKED BY INNOVATE UK
-                </span>
-              </div>
-              <h3 className="mt-2 font-display text-2xl font-bold text-[var(--paper)] sm:text-3xl lg:text-4xl">
-                ThinkClock Battery Labs
-              </h3>
-              <p className="mt-2 text-base sm:text-lg leading-relaxed text-[var(--graphite-on-dark)]">
-                An R&amp;D-driven organization focused on Battery Health Analytics using non-invasive spectroscopy, digital twins, AI, and machine learning. Supported and funded by Innovate UK, the UK&apos;s national innovation agency.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-4 shrink-0 relative z-10">
-              <SendButton href="/contact" label="Book a BatteryScope Demo" />
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
     </main>
   );
 }

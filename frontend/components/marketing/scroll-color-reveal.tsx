@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import cylindricalImg from "@/images/Home_page/cylinderical.png";
+import prismaticImg from "@/images/Home_page/Battery Testing Lab Machine Cutout.png";
+import { SendButton } from "@/components/ui/send-button";
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(max, Math.max(min, value));
@@ -12,27 +16,39 @@ const smoothstep = (value: number) => value * value * (3 - 2 * value);
 
 export function ScrollColorReveal() {
   const trackRef = useRef<HTMLElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const patternRef = useRef<HTMLDivElement>(null);
   const firstHeadlineRef = useRef<HTMLHeadingElement>(null);
   const secondLineRef = useRef<HTMLSpanElement>(null);
   const batteryHeadlineRef = useRef<HTMLHeadingElement>(null);
+  const cylindricalRef = useRef<HTMLDivElement>(null);
+  const cylindricalTextRef = useRef<HTMLDivElement>(null);
+  const prismaticRef = useRef<HTMLDivElement>(null);
+  const prismaticTextRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const track = trackRef.current;
-    const blob = blobRef.current;
-    const overlay = overlayRef.current;
+    const pattern = patternRef.current;
     const firstHeadline = firstHeadlineRef.current;
     const secondLine = secondLineRef.current;
     const batteryHeadline = batteryHeadlineRef.current;
+    const cylindrical = cylindricalRef.current;
+    const cylindricalText = cylindricalTextRef.current;
+    const prismatic = prismaticRef.current;
+    const prismaticText = prismaticTextRef.current;
+    const buttonContainer = buttonRef.current;
 
     if (
       !track ||
-      !blob ||
-      !overlay ||
+      !pattern ||
       !firstHeadline ||
       !secondLine ||
-      !batteryHeadline
+      !batteryHeadline ||
+      !cylindrical ||
+      !cylindricalText ||
+      !prismatic ||
+      !prismaticText ||
+      !buttonContainer
     ) {
       return;
     }
@@ -46,29 +62,100 @@ export function ScrollColorReveal() {
     let isAnimating = false;
 
     const render = (progress: number) => {
-      const viewportHeight = window.innerHeight;
+      const isDesktop = window.innerWidth >= 768;
 
-      // BatteryScope begins as the second line finishes and uses the same reveal duration.
-      const blobProgress = smoothstep(map(progress, 0, 0.7));
-      const textProgress = smoothstep(map(progress, 0.2, 0.55));
-      const overlayProgress = smoothstep(map(progress, 0.6, 0.8));
-      const headlineExit = smoothstep(map(progress, 0.55, 0.65));
-      const batteryProgress = smoothstep(map(progress, 0.55, 0.9));
-      const blobStart = viewportHeight;
-      const blobEnd = -blob.offsetHeight / 2;
+      // Stage 1: Aurora pattern evolution & "Stop guessing, start deciding." -> "BatteryScope"
+      const patternProgress = smoothstep(map(progress, 0, 0.28));
+      const textProgress = smoothstep(map(progress, 0.08, 0.22));
+      const headlineExit = smoothstep(map(progress, 0.22, 0.27));
+      const batteryEnter = smoothstep(map(progress, 0.22, 0.36));
 
-      blob.style.top = `${blobStart + (blobEnd - blobStart) * blobProgress}px`;
-      overlay.style.opacity = `${overlayProgress}`;
+      // Stage 2: BatteryScope blurs out as user scrolls further
+      const batteryExit = smoothstep(map(progress, 0.38, 0.5));
+      const batteryOpacity = batteryEnter * (1 - batteryExit);
+      const batteryBlur = 14 * (1 - batteryEnter) + 20 * batteryExit;
+      const batteryScale = 1 + 0.08 * batteryExit;
+
+      const patternStyle = pattern.style as CSSStyleDeclaration & {
+        webkitMaskImage?: string;
+      };
+
+      if (patternProgress <= 0.005) {
+        pattern.style.opacity = "0";
+      } else if (patternProgress >= 0.98) {
+        pattern.style.opacity = "1";
+        patternStyle.webkitMaskImage = "none";
+        pattern.style.maskImage = "none";
+      } else {
+        const maskY = 250 - patternProgress * 200;
+        const mask = `radial-gradient(ellipse 180% 140% at 50% ${maskY.toFixed(1)}%, #000 40%, transparent 68%)`;
+        pattern.style.opacity = "1";
+        patternStyle.webkitMaskImage = mask;
+        pattern.style.maskImage = mask;
+      }
+
       firstHeadline.style.opacity = `${1 - headlineExit}`;
       firstHeadline.style.transform = `translate3d(0, ${-12 * headlineExit}px, 0)`;
       secondLine.style.opacity = `${textProgress}`;
       secondLine.style.filter = `blur(${14 * (1 - textProgress)}px)`;
       secondLine.style.transform = `translate3d(0, ${24 * (1 - textProgress)}px, 0)`;
-      batteryHeadline.style.opacity = `${batteryProgress}`;
-      batteryHeadline.style.filter = `blur(${14 * (1 - batteryProgress)}px)`;
-      batteryHeadline.style.transform = `translate3d(0, ${24 * (1 - batteryProgress)}px, 0)`;
-      firstHeadline.setAttribute("aria-hidden", `${batteryProgress >= 0.5}`);
-      batteryHeadline.setAttribute("aria-hidden", `${batteryProgress < 0.5}`);
+
+      batteryHeadline.style.opacity = `${batteryOpacity}`;
+      batteryHeadline.style.filter = `blur(${batteryBlur}px)`;
+      batteryHeadline.style.transform = `translate3d(0, ${24 * (1 - batteryEnter)}px, 0) scale(${batteryScale})`;
+      firstHeadline.setAttribute("aria-hidden", `${batteryEnter >= 0.5}`);
+      batteryHeadline.setAttribute(
+        "aria-hidden",
+        `${batteryEnter < 0.5 || batteryExit >= 0.5}`,
+      );
+
+      // Stage 3: Cylindrical unit rises from left and sets on right
+      const cylMove = smoothstep(map(progress, 0.42, 0.62));
+      const cylFadeIn = smoothstep(map(progress, 0.42, 0.5));
+      const cylExit = smoothstep(map(progress, 0.64, 0.74));
+      const cylOpacity = cylFadeIn * (1 - cylExit);
+      const cylStartX = isDesktop ? -32 : -20;
+      const cylEndX = isDesktop ? 23 : 0;
+      const cylX = cylStartX + (cylEndX - cylStartX) * cylMove;
+      const cylY = 44 * (1 - cylMove);
+      const cylBlur = 12 * (1 - cylFadeIn) + 14 * cylExit;
+      const cylScale = 0.82 + 0.18 * cylMove - 0.06 * cylExit;
+
+      cylindrical.style.opacity = `${cylOpacity}`;
+      cylindrical.style.filter = `blur(${cylBlur}px)`;
+      cylindrical.style.transform = `translate3d(${cylX}vw, ${cylY}vh, 0) scale(${cylScale})`;
+
+      const cylTextIn = smoothstep(map(progress, 0.56, 0.64));
+      const cylTextOpacity = cylTextIn * (1 - cylExit);
+      cylindricalText.style.opacity = `${cylTextOpacity}`;
+      cylindricalText.style.transform = `translate3d(0, ${20 * (1 - cylTextIn)}px, 0)`;
+
+      // Stage 4: Opposite flow — Prismatic rises from right and sets on left
+      const prisMove = smoothstep(map(progress, 0.62, 0.84));
+      const prisFadeIn = smoothstep(map(progress, 0.62, 0.7));
+      const prisStartX = isDesktop ? 32 : 20;
+      const prisEndX = isDesktop ? -23 : 0;
+      const prisX = prisStartX + (prisEndX - prisStartX) * prisMove;
+      const prisY = 44 * (1 - prisMove);
+      const prisBlur = 12 * (1 - prisFadeIn);
+      const prisScale = 0.82 + 0.18 * prisMove;
+
+      prismatic.style.opacity = `${prisFadeIn}`;
+      prismatic.style.filter = `blur(${prisBlur}px)`;
+      prismatic.style.transform = `translate3d(${prisX}vw, ${prisY}vh, 0) scale(${prisScale})`;
+
+      const prisTextIn = smoothstep(map(progress, 0.78, 0.86));
+      prismaticText.style.opacity = `${prisTextIn}`;
+      prismaticText.style.transform = `translate3d(0, ${20 * (1 - prisTextIn)}px, 0)`;
+
+      // Stage 5: Final CTA button pops up at the very end when full animation completes
+      const buttonProgress = smoothstep(map(progress, 0.88, 0.98));
+      const buttonScale = 0.85 + 0.15 * buttonProgress;
+      const buttonY = 24 * (1 - buttonProgress);
+      const buttonOffsetX = isDesktop ? 48 : 0;
+      buttonContainer.style.opacity = `${buttonProgress}`;
+      buttonContainer.style.transform = `translate3d(calc(-50% + ${buttonOffsetX}px), ${buttonY}px, 0) scale(${buttonScale})`;
+      buttonContainer.style.pointerEvents = buttonProgress > 0.5 ? "auto" : "none";
     };
 
     const animate = () => {
@@ -131,18 +218,13 @@ export function ScrollColorReveal() {
       <section
         ref={trackRef}
         aria-label="ThinkClock statement and product reveal"
-        className="relative h-[300svh] bg-[#f8f4ec] dark:bg-black [html:not(.light)_&]:bg-black motion-reduce:h-svh"
+        className="relative h-[560svh] bg-[#f8f4ec] dark:bg-black [html:not(.light)_&]:bg-black motion-reduce:h-svh"
       >
         <div className="sticky top-0 isolate h-svh overflow-hidden bg-[#f8f4ec] dark:bg-black [html:not(.light)_&]:bg-black motion-reduce:static">
           <div
-            ref={blobRef}
+            ref={patternRef}
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-[100svh] size-[240vmax] -translate-x-1/2 rounded-full blur-[40px] [background:radial-gradient(circle,#d9480f_0%,#d9480f_36%,rgba(217,72,15,0.82)_52%,rgba(217,72,15,0.4)_68%,transparent_76%)] [will-change:top] motion-reduce:hidden"
-          />
-          <div
-            ref={overlayRef}
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[#d9480f] opacity-0 [will-change:opacity] motion-reduce:opacity-100"
+            className="tc-aurora-pattern pointer-events-none absolute inset-0 opacity-0 [will-change:mask-image,-webkit-mask-image,opacity] motion-reduce:opacity-100"
           />
           <h2
             ref={firstHeadlineRef}
@@ -164,12 +246,123 @@ export function ScrollColorReveal() {
             style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif" }}
             className="absolute inset-0 z-10 flex items-center justify-center gap-0 px-4 text-center font-bold leading-none tracking-[-0.03em] opacity-0 blur-[14px] [font-family:var(--font-heading),'Playfair_Display',Georgia,serif] text-[clamp(3rem,13vw,14rem)] sm:text-[clamp(3.75rem,14.5vw,15rem)] [will-change:opacity,filter,transform] motion-reduce:translate-y-0 motion-reduce:blur-0 motion-reduce:opacity-100"
           >
-            <span style={{ fontFamily: "inherit" }} className="whitespace-nowrap text-[#150c07] dark:text-black [html:not(.light)_&]:text-black">Battery</span>
-            <span style={{ fontFamily: "inherit" }} className="whitespace-nowrap text-white">Scope</span>
+            <span style={{ fontFamily: "inherit" }} className="whitespace-nowrap text-white">Battery</span>
+            <span style={{ fontFamily: "inherit" }} className="whitespace-nowrap text-[#FA8128]">Scope</span>
           </h2>
+
+          {/* Cylindrical Unit Reveal */}
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 md:px-16">
+            <div
+              ref={cylindricalTextRef}
+              className="hidden md:block absolute left-8 lg:left-14 xl:left-20 w-[43%] max-w-xl opacity-0 [will-change:opacity,transform]"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="h-0.5 w-8 bg-[#FA8128]" />
+                <span className="font-mono text-sm lg:text-base font-extrabold tracking-[0.2em] text-[#FA8128] uppercase">
+                  01 · CYLINDRICAL DIAGNOSTICS
+                </span>
+              </div>
+              <h3
+                style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif" }}
+                className="mt-3 text-4xl lg:text-[3.4rem] xl:text-[4rem] font-bold leading-[1.04] tracking-tight text-white"
+              >
+                One cell. One minute. Zero guesswork.
+              </h3>
+              <p className="mt-4 max-w-xl text-base lg:text-lg font-medium leading-relaxed text-white/90">
+                Scan any cylindrical cell format and get a complete health report in about a minute. Non-invasive, multi-channel, and built for 21700, 18650, Gotion/Nash, and Beyond.
+              </p>
+
+              {/* Report Chips */}
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                {["OCV", "DC-IR", "Capacity", "SOH", "Cell Grade"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-3.5 py-1 font-mono text-xs font-bold tracking-wider text-white shadow-sm"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 max-w-xl border-l-2 border-[#FA8128] pl-3.5 text-base lg:text-lg font-semibold leading-snug text-white">
+                Every scan ends with a clear Grade, so you know instantly which cells to use, pair, or reject.
+              </p>
+            </div>
+
+            <div
+              ref={cylindricalRef}
+              className="relative flex max-w-[82vw] md:max-w-[44vw] items-center justify-center opacity-0 [will-change:opacity,filter,transform] motion-reduce:hidden"
+            >
+              <Image
+                src={cylindricalImg}
+                alt="BatteryScope Cylindrical Cell Diagnostic System"
+                className="h-[46svh] md:h-[58svh] lg:h-[64svh] w-auto max-w-full object-contain drop-shadow-[0_28px_48px_rgba(0,0,0,0.65)]"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Prismatic Unit Reveal */}
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 md:px-16">
+            <div
+              ref={prismaticTextRef}
+              className="hidden md:block absolute right-8 lg:right-14 xl:right-20 w-[43%] max-w-xl opacity-0 [will-change:opacity,transform]"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="h-0.5 w-8 bg-[#FA8128]" />
+                <span className="font-mono text-sm lg:text-base font-extrabold tracking-[0.2em] text-[#FA8128] uppercase">
+                  02 · PRISMATIC &amp; PACK DIAGNOSTICS
+                </span>
+              </div>
+              <h3
+                style={{ fontFamily: "var(--font-heading), 'Playfair Display', Georgia, serif" }}
+                className="mt-3 text-4xl lg:text-[3.6rem] xl:text-[4.25rem] font-bold leading-[1.04] tracking-tight text-white"
+              >
+                Big cells. Bigger answers.
+              </h3>
+              <p className="mt-4 max-w-xl text-base lg:text-lg font-medium leading-relaxed text-white/90">
+                Scan any prismatic cell format and get a complete health report in minutes. High-precision diagnostics built for module and pack lines.
+              </p>
+
+              {/* Report Chips */}
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                {["OCV", "DC-IR", "Capacity", "SOH", "Cell Grade"].map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-3.5 py-1 font-mono text-xs font-bold tracking-wider text-white shadow-sm"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 max-w-xl border-l-2 border-[#FA8128] pl-3.5 text-base lg:text-lg font-semibold leading-snug text-white">
+                Every scan ends with a clear Grade, so you know instantly which cells to use, pair, or reject.
+              </p>
+            </div>
+
+            <div
+              ref={prismaticRef}
+              className="relative flex max-w-[82vw] md:max-w-[44vw] items-center justify-center opacity-0 [will-change:opacity,filter,transform] motion-reduce:opacity-100 motion-reduce:blur-0"
+            >
+              <Image
+                src={prismaticImg}
+                alt="BatteryScope Prismatic Cell Diagnostic System"
+                className="h-[46svh] md:h-[58svh] lg:h-[64svh] w-auto max-w-full object-contain drop-shadow-[0_28px_48px_rgba(0,0,0,0.65)]"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Final Pop-up CTA Button (Centered at bottom on the orange aurora at animation end) */}
+          <div
+            ref={buttonRef}
+            className="absolute bottom-6 sm:bottom-8 left-1/2 md:translate-x-[calc(-50%+48px)] -translate-x-1/2 z-30 w-max opacity-0 pointer-events-none [will-change:opacity,transform] motion-reduce:opacity-100 motion-reduce:pointer-events-auto motion-reduce:translate-y-0"
+          >
+            <SendButton href="/products" label="Explore Detailed Product Specs" />
+          </div>
         </div>
       </section>
-      <div aria-hidden="true" className="h-[18svh] bg-[#d9480f]" />
     </>
   );
 }
